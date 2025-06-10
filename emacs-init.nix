@@ -56,7 +56,7 @@ let
         type = types.attrsOf types.str;
         default = { };
         example = {
-          "[remap describe-variable]" = "helpful-variable";
+          "[remap describe-variable]" = "'helpful-variable";
         };
         description = ''
           The entries to use for global keys in <option>:general</option>.
@@ -68,7 +68,7 @@ let
         type = types.attrsOf (types.attrsOf types.str);
         default = { };
         example = {
-          "'normal" = { "/" = "consult-line"; };
+          "'normal" = { "/" = "'consult-line"; };
         };
         description = ''
           The entries to use for keymaps with 1 argument in <option>:general</option>.
@@ -583,6 +583,8 @@ in {
           allowSubstitutes = false;
         })
       ] ++ optionals hasGeneral [epkgs.general]
+      ++ optionals hasDiminish [epkgs.diminish]
+      ++ optionals hasChords [epkgs.use-package-chords]
       ++ optionals hasDoom [
         (epkgs.callPackage ./emacs-packages/doom-utils.nix {
           inherit inputs;

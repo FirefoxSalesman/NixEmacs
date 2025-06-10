@@ -1,0 +1,447 @@
+aAdapted from: [[https://gitlab.com/rycee/nur-expressions][Rycee's NUR Expressions]]
+
+* Installation
+Add this module to your nix flake
+
+Example:
+#+begin_src nix
+  {
+    description = "Home manager config flake";
+
+    inputs = {
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+      emacs-init.url = "github:firefoxsalesman/NixEmacs";
+      
+      home-manager = {
+        url = "github:nix-community/home-manager";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    outputs = { self, home-manager, nixpkgs, emacs-init, ... }@inputs:
+      let
+        system = "x86_64-linux";
+        
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      in
+        {
+          homeConfigurations."holschcc" = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            extraSpecialArgs = {
+              inherit self;
+              inherit inputs;
+              inherit system;
+            };
+            modules = [
+              ./home.nix
+              emacs-init.homeModules.emacs-init
+            ];
+          } ;
+        } ;
+  }
+
+#+end_src
+
+* Usage
+All options are found under =programs.emacs.init=
+
+You will need to set =programs.emacs.init.enable= to true in order for this module to do anything
+
+* Options
+** Optimizations
+*** =programs.emacs.init.packageQuickstart=
+If set to false, package.el will be disabled.
+
+Type: Boolean
+
+Default: true
+
+*** =programs.emacs.init.recommendedGcSettings=
+If set to true, emacs will wait until it has started to do garbage collections
+
+Type: Boolean
+
+Default: false
+
+*** =programs.emacs.init.largeFileHandling=
+If set to true, will optimize the opening of large files (as seen in [[https://github.com/doomemacs/doomemacs][Doom Emacs]])
+
+Type: Boolean
+
+Default: false
+
+** =programs.emacs.init.earlyInit=
+The contents of early-init.el
+
+Type: String
+
+Default: ""
+
+** =programs.emacs.init.prelude=
+Configuration to put at the start of init.el
+
+Type: String
+
+Default: ""
+
+** =programs.emacs.init.postlude=
+Configuration to put at the end of init.el
+
+Type: String
+
+Default: ""
+
+** =programs.emacs.init.usePackageVerbose=
+Type: Boolean
+
+Sets =use-package-verbose= to the appropriate value
+
+Default: False
+
+** =programs.emacs.init.usePackage=
+Contains all the different packages you want to configure.
+
+Some things of note:
++ Nix will sort your packages alphabetically when it generates your init.el. There is no way around this, so if you need to specify load order, you'll need to use keywords like =after=
++ NixEmacs will automatically install the packages specified in these use package statements
++ Don't forget to set =enable= to true for each package.
+
+*** An example
+#+begin_src nix
+  programs.emacs.init.usePackage.mpv = {
+      enable = true;
+      command = ["efs/mpv-browse-url" "efs/mpv-eww-url"];
+      config = ''
+        (defun efs/mpv-browse-url (url &optional single)
+          (mpv-play-url url))
+      
+        (defun efs/mpv-eww-url ()
+          (interactive)
+          (mpv-play-url (eww-current-url)))
+      '';
+  };
+#+end_src
+
+*** Options
+**** =package=
+The emacs package to install
+
+Defaults to the name of the package being configured & loaded, so you won't need to set this unless the name of the package being loaded differs from its name in the repository
+
+**** =chords=
+Sets the =:chords= option for [[https://github.com/waymondo/use-package-chords][Use Package Chords]]
+
+If you use this option, Use Package Chords will be installed & loaded for you
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.ace-jump-mode.chords = {
+    "jj" = "ace-jump-char-mode";
+    "jk" = "ace-jump-word-mode";
+  };
+#+end_src
+
+**** =bind=
+Sets the =:bind= option.
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.ace-jump-mode.bind = {
+    "c" = "ace-jump-char-mode";
+    "w" = "ace-jump-word-mode";
+  };
+#+end_src
+
+**** =bind-local=
+Sets the =:bind= option with local keymaps
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.helm = {
+    enable = true;
+    bindLocal = {
+      helm-command-map = { "C-c h" = "helm-execute-persistent-action"; };
+    };
+  };
+#+end_src
+
+**** =bind-keymap=
+The entries to use for =:bind-keymap=
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.projectile = {
+    enable = true;
+    bindKeyMap = {
+      "C-c p" = "projectile-command-map";
+    };
+  };
+#+end_src
+
+**** =mode=
+Entries for =:mode=. Don't forget to double quote each entry.
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.python-ts-mode = {
+      enable = true;
+      mode = [''"\\.py\\'"''];
+  };
+#+end_src
+
+**** =after=
+A list of packages to be used in use-package's =:after= keyword
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.evil-collection = {
+    enable = true;
+    after = ["evil"];
+  };
+#+end_src
+
+**** =afterCall=
+Entries to use for the =:after-call= option (as seen in [[https://github.com/doomemacs/doomemacs][Doom Emacs]])
+
+Basically, after call defers loading the package until the specified hook is run
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.eshell-git-prompt = {
+    enable = true;
+    afterCall = ["eshell-mode"];
+  };
+#+end_src
+
+**** =defer=
+The =:defer= option. Can be a boolean or a positive number
+
+**** =deferIncrementally=
+The =:defer-incrementally= option (as seen in [[https://github.com/doomemacs/doomemacs][Doom Emacs]])
+
+When emacs is done loading, incrementally deferred packages will start to load while emacs is idle.
+
+This option can be set to true, or to a list of package names.
++ If it's true, loading will behave as described above
++ If it's a list of package names, those packages will be incrementally loaded first (this is useful for breaking up large packages like org-mode)
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage = {
+    nxml = {
+      enable = true;
+      deferIncrementally = true;
+    };
+
+    org = {
+      enable = true;
+      deferIncrementally = ["calendar" "find-func" "format-spec" "org-macs" "org-compat" "org-faces" "org-entities" "org-list" "org-pcomplete" "org-src" "org-footnote" "org-macro" "ob" "org" "org-agenda" "org-capture" "evil-org-agenda"];
+    };
+  };
+#+end_src
+
+**** =command=
+The =:commands= keyword.
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.nerd-icons = {
+    enable = true;
+    command = [
+      "nerd-icons-octicon"
+      "nerd-icons-faicon"
+      "nerd-icons-flicon"
+      "nerd-icons-wicon"
+      "nerd-icons-mdicon"
+      "nerd-icons-codicon"
+      "nerd-icons-devicon"
+      "nerd-icons-ipsicon"
+      "nerd-icons-pomicon"
+      "nerd-icons-powerline"
+    ];
+  };
+#+end_src
+
+**** =hook=
+The =:hook= option for use-package.
+
+Example usage:
+#+begin_src nix
+  programs.emacs.usePackage.init.eglot = {
+    enable = true;
+    hook = ["(python-mode . eglot-ensure)"];
+  };
+#+end_src
+
+**** General.el
+Using any of these optins will automatically install & load general.
+***** =general=
+Used for global keys in the =:general= option.
+
+In order to facilitate remapping, keys are not quoted automatically.
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.helpful = {
+    enable = true;
+    general = {
+      "[remap describe-variable]" = "'helpful-variable";
+      ''"C-h f"'' = "'helpful-function";
+    };
+  };
+#+end_src
+
+***** =generalOne=
+Sets =:general= keybindings with one additional argument (such as evil state, keymap, or leader key)
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.consult = {
+    enable = true;
+    generalOne = {
+      "'normal" = {
+        "/" = "'consult-line";
+      };
+      "org-mode-map" = {
+        "M-a" = "'consult-org-heading";
+      };
+    };
+  };
+#+end_src
+
+***** =generalTwo=
+Sets =:general= options that take 2 arguments (such as evil state, keymap, or leader key)
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.vundo = {
+    enable = true;
+    generalTwo = "'normal".vundo-mode-map."C-e" = "'vundo-next";
+  };
+#+end_src
+
+***** =ghook=
+The =:ghook= option from general.el
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.envrc = {
+    enable = true;
+    ghook = ["('after-init-hook 'envrc-global-mode)"];
+  };
+#+end_src
+
+***** =gfhook=
+The =:gfhook= option from general.el
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.racket-mode = {
+      enable = true;
+      gfhook = ["('racket-mode-hook 'hs-minor-mode)"];
+  };
+#+end_src
+
+**** =defines=
+The =:defines= option from use-package.
+
+Takes a list of strings, which should be the names of the functions the package defines
+
+**** =eglot=
+Loads & starts eglot upon entering the package's major mode
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.racket-mode = {
+    enable = true;
+    eglot = true;
+  };
+#+end_src
+
+**** =symex=
+Binds =symex-mode-interface= to enter in evil's normal state for the package's major mode. This will also load symex if it isn't already loaded
+
+Setting this option will install symex automatically
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.racket-mode = {
+    enable = true;
+    symex = true;
+  };
+#+end_src
+
+**** =demand=
+The =:demand= option from use package.
+
+Type: boolean
+
+**** =diminish=
+A list of strings to be passed to the =:diminish= 
+
+If this option is set, diminish will be installed & loaded automatically
+
+**** =functions=
+The =:functions= option from use-package.
+
+Takes a list of strings, which should be the names of the functions the package defines
+
+**** =custom=
+The =:custom= option
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.dashboard = {
+    enable = true;
+    custom = {
+      dashboard-banner-logo-title = ''"Emacs: The one true desktop environment"'';
+      dashboard-center-content = "t";
+      dashboard-items = '''((recents   . 5)
+                            (bookmarks . 5)
+                            (projects  . 5)
+                            (agenda    . 5))'';
+      dashboard-icon-type = "'nerd-icons";
+      dashboard-set-heading-icons = "t";
+      dashboard-set-file-icons = "t";
+      dashboard-agenda-sort-strategy = "'(time-up)";
+    };
+  };
+#+end_src
+
+**** =config=
+Use package's =:config= option. Takes a string
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.elec-pair = {
+    enable = true;
+    config = ''
+      ;; < & > are not delimiters. Change my mind.
+      ;; Courtesy of DT. https://gitlab.com/dwt1/configuring-emacs/-/tree/main/07-the-final-touches?ref_type=heads
+      (gsetq electric-pair-inhibit-predicate `(lambda (c)
+        (if (or (char-equal c ?<) (char-equal c ?>))
+            t
+            (,electric-pair-inhibit-predicate c))))
+    '';
+  };
+#+end_src
+
+**** =extraConfig=
+A string containing any extra lines you want to put in your use-package statement. Good for using keywords not explicitly supported by this framework
+
+**** =init=
+A string containing all the text for use-package's =:init= option
+
+**** TODO =earlyInit=
+Does nothing (yet)
+
+**** =extraPackages=
+Additional nix packages to add to =home.packages= when this package is enabled
+
+* TODO
++ [ ] Create an overlay for symex & doom-utils
++ [ ] Add an option for lsp-mode
++ [ ] Fix the earlyInit use-package option
