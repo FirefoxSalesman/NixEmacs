@@ -483,8 +483,8 @@ let
   
     ${cfg.earlyInit}
 
-    ${map (p: p.earlyInit)
-        (filter (p: p.earlyInit != "") (builtins.attrValues cfg.usePackage))}
+    ${concatStrings (map (p: p.earlyInit)
+        (filter (p: p.earlyInit != "") (builtins.attrValues cfg.usePackage)))}
     (provide 'hm-early-init)
     ;; hm-early-init.el ends here
   '';
