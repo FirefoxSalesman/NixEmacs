@@ -482,6 +482,9 @@ let
     ${optionalString cfg.recommendedGcSettings gcSettings}
   
     ${cfg.earlyInit}
+
+    ${map (p: p.earlyInit)
+        (filter (p: p.earlyInit != "") (builtins.attrValues cfg.usePackage))}
     (provide 'hm-early-init)
     ;; hm-early-init.el ends here
   '';
