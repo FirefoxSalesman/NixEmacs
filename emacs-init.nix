@@ -186,6 +186,14 @@ let
           The entries to use for <option>:defines</option>.
         '';
       };
+
+      lsp = mkOption {
+        type = types.bool;
+        default = false;
+        description = ''
+          Starts lsp upon loading the major mode.
+        '';
+      };
     
       eglot = mkOption {
         type = types.bool;
@@ -331,6 +339,7 @@ let
         mkGfhook = vs: optional (vs != [ ]) ":gfhook ${toString vs}";
         transformName = name: let matches = p: n: match p n != null;
                               in if matches "tex-mode" name then "latex-mode" else if matches "latex" name then "LaTeX-mode" else if matches ".*-mode" name then name else "${name}-mode";
+        mkLsp = name: vs: optional vs [''(${transformName name} . (lambda () (require 'lsp-mode) (lsp-mode)))''];
         mkEglot = name: vs: optional vs [''(${transformName name} . (lambda () (require 'eglot) (eglot-ensure)))''];
         mkSymex = name: vs: optional vs '':general ('normal ${transformName name}-map "RET" '(lambda () (interactive) (require 'symex) (symex-mode-interface)))'';
         mkDefer = v:
@@ -351,7 +360,7 @@ let
                                   ++ mkDefer config.defer ++ mkDeferIncrementally config.deferIncrementally 
                                   ++ mkDefines config.defines
                                   ++ mkFunctions config.functions ++ mkDemand config.demand
-                                  ++ mkDiminish config.diminish ++ mkHook (config.hook ++ mkEglot name config.eglot)
+                                  ++ mkDiminish config.diminish ++ mkHook (config.hook ++ mkEglot name config.eglot ++ mkLsp name config.lsp)
                                   ++ mkGhook config.ghook
                                   ++ mkGfhook config.gfhook ++ mkCustom config.custom
                                   ++ buildGeneral config.general config.generalOne config.generalTwo ++ mkSymex name config.symex
@@ -422,6 +431,8 @@ let
   # Whether the configuration makes any use of general keywords.
   hasGeneral = any (p: p.symex != false || p.ghook != [ ] || p.gfhook != [ ] || p.generalOne != { } || p.generalTwo != { } || p.general != { }) (attrValues cfg.usePackage);
   
+  hasLsp = any (p: p.lsp != false) (attrValues cfg.usePackage);
+
   hasSymex = any (p: p.symex != false) (attrValues cfg.usePackage);
   
   # Whether the configuration makes use of `:bind`.
@@ -588,6 +599,7 @@ in {
       ] ++ optionals hasGeneral [epkgs.general]
       ++ optionals hasDiminish [epkgs.diminish]
       ++ optionals hasChords [epkgs.use-package-chords]
+      ++ optionals hasLsp [epkgs.lsp-mode]
       ++ optionals hasDoom [
         (epkgs.callPackage ./emacs-packages/doom-utils.nix {
           inherit inputs;
