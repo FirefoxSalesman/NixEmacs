@@ -1,4 +1,4 @@
-aAdapted from: [[https://gitlab.com/rycee/nur-expressions][Rycee's NUR Expressions]]
+Adapted from: [[https://gitlab.com/rycee/nur-expressions][Rycee's NUR Expressions]]
 
 * Installation
 Add this module to your nix flake
