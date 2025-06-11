@@ -600,18 +600,9 @@ in {
       ++ optionals hasDiminish [epkgs.diminish]
       ++ optionals hasChords [epkgs.use-package-chords]
       ++ optionals hasLsp [epkgs.lsp-mode]
-      ++ optionals hasDoom [
-        (epkgs.callPackage ./emacs-packages/doom-utils.nix {
-          inherit inputs;
-          inherit (epkgs) trivialBuild;
-        })
-      ] ++
-      optionals hasSymex [
-        (epkgs.callPackage ./emacs-packages/symex2.nix {
-          inherit inputs;
-          inherit (epkgs) trivialBuild tsc tree-sitter paredit evil evil-surround seq;
-        })
-      ] ++ packages ;
+      ++ optionals hasDoom [epkgs.doom-utils]
+      ++ optionals hasSymex [epkgs.symex]
+      ++ packages;
   
     # Collect the extra packages that should be included in the user profile.
     # These are typically tools called by Emacs packages.

@@ -13,11 +13,12 @@
     };
   };
 
-  outputs = { self, ... }:
+  outputs = { self, inputs, ... }:
     {
       homeModules = {
         emacs-init = import ./emacs-init.nix;
       };
       homeModule = self.homeModules.emacs-init;
+      overlay = (final: prev: import ./overlay.nix final prev inputs);
     };
 }
