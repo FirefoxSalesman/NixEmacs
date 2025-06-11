@@ -25,6 +25,9 @@ Example:
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
+          overlays = [
+            inputs.emacs-init.overlay
+          ];        
         };
       in
         {
