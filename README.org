@@ -456,4 +456,4 @@ Adds the string set in the option to the end of the early-init.el file
 Additional nix packages to add to =home.packages= when this package is enabled
 
 * TODO
-+ [ ] Create an overlay for symex & doom-utils
++ [ ] Add some modules for language support
