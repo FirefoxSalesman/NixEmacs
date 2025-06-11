@@ -13,7 +13,7 @@
     };
   };
 
-  outputs = { self, inputs, ... }:
+  outputs = { self, ... }@inputs:
     {
       homeModules = {
         emacs-init = import ./emacs-init.nix;
