@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  import = [
+  imports = [
     ./language-support
   ];
 }
