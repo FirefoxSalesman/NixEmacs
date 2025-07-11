@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  import = [
+    ./language-support
+  ];
+}

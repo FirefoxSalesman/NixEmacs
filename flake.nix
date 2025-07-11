@@ -17,6 +17,7 @@
     {
       homeModules = {
         emacs-init = import ./emacs-init.nix;
+        emacs-presets = import ./emacs-presets.nix;
       };
       homeModule = self.homeModules.emacs-init;
       overlay = final: prev: import ./overlay.nix final prev inputs;

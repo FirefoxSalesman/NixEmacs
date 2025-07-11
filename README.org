@@ -41,6 +41,7 @@ Example:
             modules = [
               ./home.nix
               emacs-init.homeModules.emacs-init
+              emacs-init.homeModules.emacs-presets # if you would like to use configuration presets
             ];
           } ;
         } ;
@@ -454,6 +455,8 @@ Adds the string set in the option to the end of the early-init.el file
 
 **** =extraPackages=
 Additional nix packages to add to =home.packages= when this package is enabled
+
+** Configuration Presets
 
 * TODO
 + [ ] Add some modules for language support
