@@ -696,4 +696,8 @@ Boolean option to enable zenscript support.
 Boolean option to enable zig support.
 
 * TODO
-+ [ ] Add some modules for language support
++ [ ] Add language support for
+  - [ ] Purescript
+  - [ ] Coffeescript
+  - [ ] Emacs lisp
++ [ ] Add presets for lsp clients
