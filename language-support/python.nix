@@ -29,6 +29,7 @@ in
               if (matches "pyright" ide.languages.python.languageServer) then [pkgs.pyright] else
                 if (matches "jedi" ide.languages.python.languageServer) then [pkgs.python313Packages.jedi-language-server] else []
                         else [];
+        # https://gregnewman.io/blog/emacs-take-two/
         config = "${if matches "basedpyright" ide.languages.python.languageServer then ''
           (add-to-list 'eglot-server-programs '(python-ts-mode . ("basedpyright-langserver" "--stdio" 
                                                                    :initializationOptions (:basedpyright (:plugins (

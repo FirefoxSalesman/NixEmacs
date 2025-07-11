@@ -54,6 +54,8 @@ All options are found under =programs.emacs.init=
 
 You will need to set =programs.emacs.init.enable= to true in order for this module to do anything
 
+You will need emacs 30 in order to take advantage of the presets, as many of them use new features introduced in that version
+
 * Options
 ** Optimizations
 *** =programs.emacs.init.packageQuickstart=
@@ -457,6 +459,241 @@ Adds the string set in the option to the end of the early-init.el file
 Additional nix packages to add to =home.packages= when this package is enabled
 
 ** Configuration Presets
+*** ide
+**** Eglot
+***** =programs.emacs.init.ide.eglot.enable= 
+A boolean that will enable eglot for all languages in the language support presets
+
+Default: =false=
+
+**** Lsp
+***** =programs.emacs.init.ide.lsp.enable= 
+A boolean that will enable lsp-mode for all languages in the language support presets
+
+Default: =false=
+
+**** =programs.emacs.init.ide.symex=
+A boolean that will enable symex for all languages in the language support presets
+
+Default: =false=
+
+**** Language Support
+Every option here can be found under =programs.emacs.init.ide.languages=
+
+If =programs.emacs.init.ide.eglot.enable= or =programs.emacs.init.ide.lsp.enable= are set to true, appropriate language servers will be installed automatically
+
+***** =bash.enable=
+Boolean value that enables bash support
+
+***** =clojure.enable=
+Boolean value that enables clojure support
+
+***** c
+****** =c.enable=
+Boolean value that enables c support
+
+****** =c.preferClangd=
+Boolean value that installs clangd when an language server client is enabled instead of ccls
+
+***** =common-lisp.enable=
+Boolean value that enables common-lisp support.
+
+sbcl is installed automatically for use with sly. Altering =programs.emacs.init.usePackage.sly.custom.inferior-lisp-program= will stop this behaviour, if it is unwanted.
+
+I stole this module from Doom Emacs
+
+***** =csharp.enable=
+Boolean value that enables c sharp support.
+
+Because I couldn't find a working copy of omnisharp in the nix repos, you're stuck with csharp ls
+
+This module was slightly stolen from doom, but I did trim it down quite a lot
+
+***** css
+****** =css.enable=
+Boolean value that enables css support
+
+****** =css.emmet=
+Boolean value that enables emmet in css buffers
+
+***** =erlang.enable=
+Boolean option that enables erlang support
+
+***** =fennel.enable=
+Boolean option that enables fennel support
+
+***** =forth.enable=
+Boolean option that enables forth support
+
+***** =go.enable=
+Boolean option that enables go support
+
+***** =gradle.enable=
+Boolean option that enables gradle support
+
+***** =haskell.enable=
+Boolean option that enables haskell support
+
+Due to crashes, symex is currently disabled
+
+***** html
+****** =html.enable=
+Boolean option that enables html support
+
+****** =html.emmet=
+Boolean value that enables emmet in css buffers
+
+***** =hy.enable=
+Boolean option that enables hy support
+
+***** =java.enable=
+Boolean option that enables java support
+
+***** =javascript.enable=
+Boolean option that enables javascript support
+
+***** =json.enable=
+Boolean option that enables json support
+
+***** =kotlin.enable=
+Boolean option that enables kotlin support
+
+***** latex
+Many thanks to David Wilson, who I took the original version of this config from. It's since changed quite a lot
+
+****** =latex.enable=
+Boolean option that enables latex support
+
+****** =latex.magicLatexBuffer=
+Boolean option that enables [[https://github.com/zk-phi/magic-latex-buffer][Magic Latex Buffer]], in order to make your latex buffers look pretty
+
+****** =latex.cdlatex=
+Boolean option that enables [[https://github.com/cdominik/cdlatex][cdlatex]] for fast completions
+
+****** =latex.preferTexlab=
+If an lsp client is enabled & this variable is set to true, install [[https://github.com/latex-lsp/texlab][texlab]] instead of [[https://ctan.org/pkg/digestif][digestif]]
+
+***** =lua.enable=
+Boolean value that enables lua support
+
+***** markdown
+****** =markdown.enable=
+Boolean that enables markdown support
+
+****** =markdown.evil=
+Sets up [[https://github.com/Somelauw/evil-markdown][evil-markdown]]
+
+***** =nix.enable=
+Boolean that enables nix support.
+
+A small portion was stolen from doom.
+
+***** =plantuml.enable=
+Boolean that enables plantuml support.
+
+Plantuml will be installed automatically. You can prevent this by altering =programs.emacs.init.usePackage.plantuml-mode.custom.plantuml-executable-path= & =programs.emacs.init.usePackage.plantuml-mode.custom.org-plantuml-executable-path=
+
+***** =prolog.enable=
+Boolean option that enables prolog support
+
+***** =pug.enable=
+Boolean option that enables pug support
+
+***** python
+****** =python.enable=
+Boolean option that enables python support
+
+****** =python.jupyter=
+Enables [[https://github.com/astoff/code-cells.el][code-cells]], allowing you to edit jupyter notebooks in
+emacs.
+
+This does not give you the ability to interact with jupyter from emacs.
+
+****** =python.language-server=
+A string determining what language server to install, if a language server client is enabled
+
+Options include:
++ basedpyright
++ pylsp
++ pyright
++ jedi
+
+Inputting any other text will result in no language server being installed
+
+Based pyright config originates from here: https://gregnewman.io/blog/emacs-take-two/
+
+***** =racket.enable=
+Boolean option to enable racket support.
+
+Note that you will need to install the language server yourself, since it's not in the nix repos
+
+***** =r.enable=
+Boolean option to enable r support.
+
+***** =ruby.enable=
+Boolean option to enable ruby support.
+
+The module is largely stolen from doom emacs, although a lot of packages were not included
+
+***** =rust.enable=
+Boolean option to enable rust support.
+
+***** =scala.enable=
+Boolean option to enable scala support.
+
+You will need to install sbt yourself in order to use [[https://github.com/hvesalai/emacs-sbt-mode][sbt-mode]]
+
+This module was largely stolen from doom emacs
+
+***** scheme
+This entire module is stolen from doom
+
+****** =scheme.enable=
+Boolean option to enable scheme support through [[https://gitlab.com/emacs-geiser/geiser/][geiser]]
+
+You will need to enable support for your chosen implementation of scheme in order for this to be useful
+
+****** =scheme.chez=
+Boolean option for chez scheme. Chez scheme will be installed outside your path unless you alter =programs.emacs.init.usePackage.geiser-chez.custom.geiser-chez-binary=.
+
+****** =scheme.chicken=
+Boolean option for chicken scheme. Chicken scheme will be installed outside your path unless you alter =programs.emacs.init.usePackage.geiser-chicken.custom.geiser-chicken-binary=.
+
+****** =scheme.gambit=
+Boolean option for gambit scheme. Gambit scheme will be installed outside your path unless you alter =programs.emacs.init.usePackage.geiser-gambit.custom.geiser-gambit-binary=.
+
+****** =scheme.guache=
+Boolean option for guache scheme. Guache scheme will be installed outside your path unless you alter =programs.emacs.init.usePackage.geiser-guache.custom.geiser-guache-binary=.
+
+****** =scheme.guile=
+Boolean option for guile scheme. Guile scheme will be installed outside your path unless you alter =programs.emacs.init.usePackage.geiser-guile.custom.geiser-guile-binary=.
+
+****** =scheme.kawa=
+Boolean option for kawa scheme.
+
+****** =scheme.mit=
+Boolean option for mit scheme. mit scheme will be installed outside your path unless you alter =programs.emacs.init.usePackage.geiser-mit.custom.geiser-mit-binary=.
+
+****** =scheme.stklos=
+Boolean option for stklos scheme.
+
+***** =sql.enable=
+Boolean option to enable sql support.
+
+***** =toml.enable=
+Boolean option to enable toml support.
+
+***** =typescript.enable=
+Boolean option to enable typescript support.
+
+***** =xml.enable=
+Boolean option to enable xml support.
+
+***** =zenscript.enable=
+Boolean option to enable zenscript support.
+
+***** =zig.enable=
+Boolean option to enable zig support.
 
 * TODO
 + [ ] Add some modules for language support

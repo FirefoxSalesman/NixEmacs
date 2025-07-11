@@ -12,7 +12,7 @@ in
   config = lib.mkIf ide.languages.css.enable {
     programs.emacs.init.usePackage = {
       emmet-mode = {
-        enable = ide.web.emmet;
+        enable = ide.css.emmet;
         hook = [
           "(css-ts-mode . emmet-mode)"
         ];

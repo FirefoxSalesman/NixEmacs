@@ -26,7 +26,7 @@ in
       };
 
       emmet-mode = {
-        enable = ide.web.emmet;
+        enable = ide.html.emmet;
         hook = [
           "(html-ts-mode . emmet-mode)"
         ];
