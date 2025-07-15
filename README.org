@@ -516,6 +516,17 @@ Boolean value that enables css support
 ****** =css.emmet=
 Boolean value that enables emmet in css buffers
 
+***** emacs lisp
+This module was borrowed from doom
+****** =emacs-lisp.enable=
+Enables additional tools to assist in writing emacs lisp packages.
+
+****** =emacs-lisp.hoverDoc=
+Uses [[https://github.com/casouri/eldoc-box][eldoc box]] to show documentation on hover
+
+****** =emacs-lisp.flymake=
+Activates flymake in emacs lisp buffers
+
 ***** =erlang.enable=
 Boolean option that enables erlang support
 
@@ -699,5 +710,4 @@ Boolean option to enable zig support.
 + [ ] Add language support for
   - [ ] Purescript
   - [ ] Coffeescript
-  - [ ] Emacs lisp
 + [ ] Add presets for lsp clients

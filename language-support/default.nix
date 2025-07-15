@@ -7,6 +7,7 @@
     ./python.nix
     ./hy.nix
     ./java.nix
+    ./emacs-lisp.nix
     ./gradle.nix
     ./clojure.nix
     ./scala.nix
