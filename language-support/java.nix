@@ -20,11 +20,7 @@ in {
       lsp-java = lib.mkIf ide.lsp.enable {
         enable = true;
         after = [ "lsp-mode" ];
-        extraPackages = [ pkgs.fernflower ];
-        custom = {
-          lsp-java-prefer-native-command = "t";
-          lsp-java-content-provider-preferred = "fernflower";
-        };
+        custom.lsp-java-prefer-native-command = "t";
         config = ''
               ;; https://github.com/emacs-lsp/lsp-java/issues/487
               (defun java-server-subdir-for-jar (orig &rest args)
