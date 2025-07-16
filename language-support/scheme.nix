@@ -12,7 +12,6 @@ in
     programs.emacs.init.usePackage = {
       scheme = {
         enable = true;
-        mode = [''"\\.scm\\'"'' ''"\\.sls\\'"''];
         extraPackages = [pkgs.akkuPackages.scheme-langserver];
         symex = ide.symex;
         eglot = ide.eglot.enable;
