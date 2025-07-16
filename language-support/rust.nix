@@ -11,8 +11,9 @@ in
       rust-ts-mode = {
         enable = true;
         defer = true;
-        extraPackages = if ide.lsp.enable || ide.eglot.enable then [pkgs.rust-analyzer] else [];
+        extraPackages = if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then [pkgs.rust-analyzer] else [];
         lsp = ide.lsp.enable;
+        lsp-bridge = ide.lsp-bridge.enable;
         eglot = ide.eglot.enable;
         symex = ide.symex;
       };

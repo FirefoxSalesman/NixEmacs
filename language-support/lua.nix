@@ -9,10 +9,11 @@ in
   config = lib.mkIf ide.languages.lua.enable {
     programs.emacs.init.usePackage.lua-ts-mode = {
       enable = true;
-      extraPackages = if ide.eglot.enable || ide.lsp.enable then [pkgs.lua-language-server] else [];
+      extraPackages = if ide.eglot.enable || ide.lsp.enable || ide.lsp-bridge.enable then [pkgs.lua-language-server] else [];
       mode = [''"\\.lua\\'"''];
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
+      lsp-bridge = ide.lsp-bridge.enable;
       config = ''
           (with-eval-after-load 'eglot
             (add-to-list 'eglot-server-programs '((lua-ts-mode) . ("lua-language-server"))))

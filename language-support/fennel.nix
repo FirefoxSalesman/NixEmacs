@@ -9,11 +9,12 @@ in
   config = lib.mkIf ide.languages.fennel.enable {
     programs.emacs.init.usePackage.fennel-mode = {
       enable = true;
-      extraPackages = if ide.eglot.enable || ide.lsp.enable then [pkgs.fennel-ls] else [];
+      extraPackages = if ide.eglot-bridge.enable || ide.eglot.enable || ide.lsp.enable then [pkgs.fennel-ls] else [];
       mode = [''"\\.fnl\\'"''];
       symex = ide.symex;
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
+      lsp-bridge = ide.lsp-bridge.enable;
       config = ''
         (with-eval-after-load 'eglot
           (add-to-list 'eglot-server-programs '(fennel-mode . ("fennel-ls"))))

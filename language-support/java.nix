@@ -10,9 +10,10 @@ in {
       java-ts-mode = {
         enable = true;
         extraPackages =
-          if ide.eglot.enable then with pkgs; [ jdt-language-server ] else [ ];
+          if ide.lsp-bridge.enable || ide.eglot.enable then with pkgs; [ jdt-language-server ] else [ ];
         mode = [ ''"\\.java\\'"'' ];
         lsp = ide.lsp.enable;
+        lsp-bridge = ide.lsp-bridge.enable;
         eglot = ide.eglot.enable;
         symex = ide.symex;
       };

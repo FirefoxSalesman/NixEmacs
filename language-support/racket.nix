@@ -11,6 +11,7 @@ in
       enable = ide.languages.scheme.racket;
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
+      lsp-bridge = ide.lsp-bridge.enable;
       symex = ide.symex;
       mode = [''"\\.rkt\\'"''];
       init = ''(setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';

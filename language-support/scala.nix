@@ -13,10 +13,11 @@ in
     programs.emacs.init.usePackage = {
       scala-ts-mode = {
         enable = true;
-        extraPackages = if ide.lsp.enable || ide.eglot.enable then [pkgs.metals] else [];
+        extraPackages = if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then [pkgs.metals] else [];
         mode = [''"\\.scala\\'"''];
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
+        lsp-bridge = ide.lsp-bridge.enable;
         symex = ide.symex;
         config = ''
           (with-eval-after-load 'eglot

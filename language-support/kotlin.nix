@@ -11,10 +11,11 @@ in
     programs.emacs.init.usePackage.kotlin-ts-mode = {
       enable = true;
       mode = [''"\\.kt\\'"''];
-      extraPackages = if ide.eglot.enable || ide.lsp.enable then [pkgs.kotlin-language-server] else [];
+      extraPackages = if ide.eglot.enable || ide.lsp-bridge.enable || ide.lsp.enable then [pkgs.kotlin-language-server] else [];
       symex = ide.symex;
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
+      lsp-bridge = ide.lsp-bridge.enable;
       # Kotlin's language server takes a very long time to initialize on a new project
       # https://github.com/fwcd/kotlin-language-server/issues/510
       custom.eglot-connect-timeout = lib.mkDefault "999999";

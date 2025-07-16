@@ -10,10 +10,11 @@ in
     programs.emacs.init.usePackage.ess-r-mode = {
       enable = true;
       package = epkgs: epkgs.ess;
-      extraPackages = if ide.eglot.enable || ide.lsp.enable then [pkgs.rPackages.languageserver] else [];
+      extraPackages = if ide.eglot.enable || ide.lsp.enable || ide.lsp-bridge.enable then [pkgs.rPackages.languageserver] else [];
       mode = [''"\\.R\\'"''];
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
+      lsp-bridge = ide.lsp-bridge.enable;
       symex = ide.symex;
       custom.ess-ask-for-ess-directory = lib.mkDefault "nil";
     };

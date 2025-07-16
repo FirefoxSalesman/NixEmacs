@@ -9,11 +9,12 @@ in
   config = lib.mkIf ide.languages.javascript.enable {
     programs.emacs.init.usePackage.js-ts-mode = {
       enable = true;
-      extraPackages = if ide.lsp.enable || ide.eglot.enable then with pkgs; [typescript-language-server] else [];
+      extraPackages = if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then with pkgs; [typescript-language-server] else [];
       mode = [''"\\.js\\'"''];
       eglot = ide.eglot.enable;
       symex = ide.symex;
       lsp = ide.lsp.enable;
+      lsp-bridge = ide.lsp-bridge.enable;
     };
   };
 }

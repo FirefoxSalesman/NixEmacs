@@ -11,9 +11,10 @@ in
       nix-mode = {
         enable = true;
         mode = [''"\\.nix\\'"''];
-        extraPackages = if ide.lsp.enable || ide.eglot.enable then with pkgs; [nixd nixfmt] else [];
+        extraPackages = if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then with pkgs; [nixd nixfmt] else [];
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
+        lsp-bridge = ide.lsp-bridge.enable;
         symex = ide.symex;
       };
 
@@ -22,6 +23,8 @@ in
         # stolen from doom
         mode = [''"/flake\\.lock\\'"''];
       };
+
+      lsp-bridge.custom.lsp-bridge-nix-lsp-server = lib.mkIf ide.lsp-bridge.enable ''"nixd"'';
     };
   };
 }

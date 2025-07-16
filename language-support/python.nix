@@ -68,6 +68,8 @@ in {
               ''"pyright"'';
         };
 
+      lsp-bridge.custom.lsp-bridge-python-lsp-server = lib.mkIf ide.lsp-bridge.enable ''${ide.languages.python.languageServer}'';
+
       code-cells = lib.mkIf ide.languages.python.jupyter {
         enable = true;
         demand = lib.mkDefault true;

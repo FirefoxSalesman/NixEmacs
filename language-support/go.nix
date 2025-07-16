@@ -12,8 +12,9 @@ in
       mode = [''"\\.go\\'"''];
       symex = ide.symex;
       lsp = ide.lsp.enable;
+      lsp-bridge = ide.lsp-bridge.enable;
       eglot = ide.eglot.enable;
-      extraPackages = if ide.lsp.enable || ide.eglot.enable then [pkgs.gopls pkgs.go] else [];
+      extraPackages = if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then [pkgs.gopls pkgs.go] else [];
     };
   };
 }

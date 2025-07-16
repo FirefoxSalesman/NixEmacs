@@ -10,9 +10,10 @@ in
     programs.emacs.init.usePackage = {
       clojure-mode = {
         enable = true;
-        extraPackages = if ide.lsp.enable || ide.eglot.enable then with pkgs; [clojure-lsp] else [];
+        extraPackages = if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then with pkgs; [clojure-lsp] else [];
         mode = [''"\\.clj\\'"''];
         lsp = ide.lsp.enable;
+        lsp-bridge = ide.lsp-bridge.enable;
         eglot = ide.eglot.enable;
         symex = ide.symex;
       };

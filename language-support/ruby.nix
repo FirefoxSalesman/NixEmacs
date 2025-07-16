@@ -12,9 +12,10 @@ in
       ruby-ts-mode = {
         enable = true;
         mode = [''"\\.\\(?:a?rb\\|aslsx\\)\\'"'' ''"/\\(?:Brew\\|Fast\\)file\\'"''];
-        extraPackages = if ide.eglot.enable || ide.lsp.enable then [pkgs.rubyPackages.solargraph] else [];
+        extraPackages = if ide.eglot.enable || ide.lsp.enable || ide.lsp-bridge.enable then [pkgs.rubyPackages.solargraph] else [];
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
+        lsp-bridge = ide.lsp-bridge.enable;
         symex = ide.symex;
         custom.ruby-insert-encoding-magic-comment = lib.mkDefault "nil";
       };

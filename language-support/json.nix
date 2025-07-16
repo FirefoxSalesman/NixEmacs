@@ -10,9 +10,10 @@ in
     programs.emacs.init.usePackage = {
       json-ts-mode = {
         enable = true;
-        extraPackages = if ide.lsp.enable || ide.eglot.enable then with pkgs; [vscode-langservers-extracted] else [];
+        extraPackages = if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then with pkgs; [vscode-langservers-extracted] else [];
         mode = [''"\\.json\\'"''];
         lsp = ide.lsp.enable;
+        lsp-bridge = ide.lsp-bridge.enable;
         eglot = ide.eglot.enable;
         symex = ide.symex;
       };

@@ -13,7 +13,7 @@ in
     programs.emacs.init.usePackage = {
       html-ts-mode = {
         enable = true;
-        extraPackages = if ide.lsp.enable || ide.eglot.enable then with pkgs; [vscode-langservers-extracted] else [];
+        extraPackages = if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then with pkgs; [vscode-langservers-extracted] else [];
         # many thanks to doom
         mode = [''"\\.[px]?html?\\'"''];
         config = ''
@@ -23,6 +23,7 @@ in
         eglot = ide.eglot.enable;
         symex = ide.symex;
         lsp = ide.lsp.enable;
+        lsp-bridge = ide.lsp-bridge.enable;
       };
 
       emmet-mode = {

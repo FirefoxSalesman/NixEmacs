@@ -50,6 +50,7 @@
       symex = lib.mkEnableOption "enables symex support in all languages that support it";
       lsp.enable = lib.mkEnableOption "enables lsp-mode support in all languages that support it";
       eglot.enable = lib.mkEnableOption "enables eglot support in all languages that support it";
+      lsp-bridge.enable = lib.mkEnableOption "enables lsp-bridge support in all languages that support it";
     };
   };
 }

@@ -10,9 +10,10 @@ in
     programs.emacs.init.usePackage.erlang-ts = {
       enable = true;
       mode = [''("\\.erl\\'" . erlang-ts-mode)''];
-      extraPackages = if ide.eglot.enable || ide.lsp.enable then [pkgs.beamMinimal28Packages.erlang-ls] else [];
+      extraPackages = if ide.eglot-bridge.enable || ide.eglot.enable || ide.lsp.enable then [pkgs.beamMinimal28Packages.erlang-ls] else [];
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
+      lsp-bridge = ide.lsp-bridge.enable;
       symex = ide.symex;
     };
   };

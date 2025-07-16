@@ -10,8 +10,8 @@ in
     programs.emacs.init.usePackage.nxml = {
       enable = true;
       mode = [''("\\.xml\\'" . nxml-mode)''];
-      extraPackages = if ide.eglot.enable || ide.lsp.enable then [pkgs.lemminx] else [];
-      lsp = ide.lsp.enable;
+      extraPackages = if ide.eglot.enable || ide.lsp-bridge.enable then [pkgs.lemminx] else [];
+      lsp-bridge = ide.lsp-bridge.enable;
       eglot = ide.eglot.enable;
       symex = ide.symex;
       init = ''
