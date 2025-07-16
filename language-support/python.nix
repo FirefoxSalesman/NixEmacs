@@ -57,12 +57,12 @@ in {
       };
 
       lsp-pyright =
-        lib.mkIf matches "basedpyright" ide.languages.python.languageServer
-        || lib.mkIf matches "pyright" ide.languages.python.languageServer {
+        lib.mkIf (matches "basedpyright" ide.languages.python.languageServer)
+        || (matches "pyright" ide.languages.python.languageServer) {
           enable = true;
           after = [ "lsp-mode" ];
           custom.lsp-pyright-langserver-command =
-            if matches "basedpyright" ide.languages.python.languageServer then
+            if (matches "basedpyright" ide.languages.python.languageServer) then
               ''"basedpyright"''
             else
               ''"pyright"'';
