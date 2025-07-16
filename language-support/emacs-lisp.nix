@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ config, lib, ... }:
 
 let
   ide = config.programs.emacs.init.ide;
@@ -6,7 +6,6 @@ in
 {
   options.programs.emacs.init.ide.languages.emacs-lisp = {
     enable = lib.mkEnableOption "Enables additional support for emacs lisp. Borrowed from doom, & highly reccommended";
-    hoverDoc = lib.mkEnableOption "Uses eldoc-box to give a documentation popup on hover";
     flymake = lib.mkEnableOption "Enable flymake.";
   };
 
@@ -32,7 +31,7 @@ in
         hook = ["(emacs-lisp-mode . highlight-quoted-mode)"];
       };
 
-      eldoc-box = lib.mkIf ide.languages.emacs-lisp.hoverDoc {
+      eldoc-box = lib.mkIf ide.hoverDoc {
         enable = true;
         hook = ["(emacs-lisp-mode . eldoc-box-hover-at-point-mode)"];
       };

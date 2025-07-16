@@ -17,6 +17,8 @@
     ./css.nix
     ./javascript.nix
     ./typescript.nix
+    ./purescript.nix
+    ./coffeescript.nix
     ./pug.nix
     ./json.nix
     ./toml.nix
@@ -45,12 +47,11 @@
     ./xml.nix
   ];
 
-  options = {
-    programs.emacs.init.ide = {
-      symex = lib.mkEnableOption "enables symex support in all languages that support it";
-      lsp.enable = lib.mkEnableOption "enables lsp-mode support in all languages that support it";
-      eglot.enable = lib.mkEnableOption "enables eglot support in all languages that support it";
-      lsp-bridge.enable = lib.mkEnableOption "enables lsp-bridge support in all languages that support it";
-    };
+  options.programs.emacs.init.ide = {
+    hoverDoc = lib.mkEnableOption "Enables hover documentation";
+    symex = lib.mkEnableOption "enables symex support in all languages that support it";
+    lsp.enable = lib.mkEnableOption "enables lsp-mode support in all languages that support it";
+    eglot.enable = lib.mkEnableOption "enables eglot support in all languages that support it";
+    lsp-bridge.enable = lib.mkEnableOption "enables lsp-bridge support in all languages that support it";
   };
 }

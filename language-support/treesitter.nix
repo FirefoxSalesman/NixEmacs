@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... } :
+{ lib, config, ... } :
 
 let
   lang = config.programs.emacs.init.ide.languages;

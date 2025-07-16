@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 # This module is blatantly stolen from doom emacs
 
 let

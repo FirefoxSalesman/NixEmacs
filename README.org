@@ -462,13 +462,23 @@ Additional nix packages to add to =home.packages= when this package is enabled
 *** ide
 **** Eglot
 ***** =programs.emacs.init.ide.eglot.enable= 
-A boolean that will enable eglot for all languages in the language support presets
+A boolean that will enable eglot for all languages in the language support presets.
+
+This is the language server client that will receive the most support
 
 Default: =false=
 
 **** Lsp
 ***** =programs.emacs.init.ide.lsp.enable= 
 A boolean that will enable lsp-mode for all languages in the language support presets
+
+Default: =false=
+
+**** Lsp Bridge
+***** =programs.emacs.init.ide.lsp.enable= 
+A boolean that will enable lsp-bridge-mode for most languages in the language support presets.
+
+No new language servers will be supported by this framework
 
 Default: =false=
 
@@ -495,6 +505,9 @@ Boolean value that enables c support
 ****** =c.preferClangd=
 Boolean value that installs clangd when an language server client is enabled instead of ccls
 
+***** =coffeescript.enable=
+Boolean value that enables coffeescript support.
+
 ***** =common-lisp.enable=
 Boolean value that enables common-lisp support.
 
@@ -520,9 +533,6 @@ Boolean value that enables emmet in css buffers
 This module was borrowed from doom
 ****** =emacs-lisp.enable=
 Enables additional tools to assist in writing emacs lisp packages.
-
-****** =emacs-lisp.hoverDoc=
-Uses [[https://github.com/casouri/eldoc-box][eldoc box]] to show documentation on hover
 
 ****** =emacs-lisp.flymake=
 Activates flymake in emacs lisp buffers
@@ -610,6 +620,9 @@ Boolean option that enables prolog support
 ***** =pug.enable=
 Boolean option that enables pug support
 
+***** =purescript.enable=
+Boolean option that enables purescript support
+
 ***** python
 ****** =python.enable=
 Boolean option that enables python support
@@ -659,6 +672,8 @@ This module was largely stolen from doom emacs
 ***** =scheme.enable=
 Boolean option to enable scheme support.
 
+Currently only works with eglot
+
 ***** =sql.enable=
 Boolean option to enable sql support.
 
@@ -678,7 +693,4 @@ Boolean option to enable zenscript support.
 Boolean option to enable zig support.
 
 * TODO
-+ [ ] Add language support for
-  - [ ] Purescript
-  - [ ] Coffeescript
 + [ ] Add presets for lsp clients
