@@ -378,7 +378,7 @@ let
                                   ++ mkDefer config.defer ++ mkDeferIncrementally config.deferIncrementally 
                                   ++ mkDefines config.defines
                                   ++ mkFunctions config.functions ++ mkDemand config.demand
-                                  ++ mkDiminish config.diminish ++ mkHook (config.hook ++ mkEglot name config.eglot ++ mkLsp name config.lsp ++ mkLspBridge config.lsp-bridge ++ mkLspCe config.lspce)
+                                  ++ mkDiminish config.diminish ++ mkHook (config.hook ++ mkEglot name config.eglot ++ mkLsp name config.lsp ++ mkLspBridge name config.lsp-bridge ++ mkLspCe name config.lspce)
                                   ++ mkGhook config.ghook
                                   ++ mkGfhook config.gfhook ++ mkCustom config.custom
                                   ++ buildGeneral config.general config.generalOne config.generalTwo ++ mkSymex name config.symex
