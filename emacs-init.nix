@@ -357,8 +357,8 @@ let
                               in if matches "tex-mode" name then "latex-mode" else if matches "latex" name then "LaTeX-mode" else if matches ".*-mode" name then name else "${name}-mode";
         mkLsp = name: vs: optional vs [''(${transformName name} . (lambda () (require 'lsp-mode) (lsp-mode)))''];
         mkEglot = name: vs: optional vs [''(${transformName name} . (lambda () (require 'eglot) (eglot-ensure)))''];
-        mkLspBridge = name: vs: optional vs [''(${transformName name} . (lambda () (require 'lsp-bridge) (lsp-bridge-mode))''];
-        mkLspCe = name: vs: optional vs [''(${transformName name} . (lambda () (require 'lspce) (lspce-mode))''];
+        mkLspBridge = name: vs: optional vs [''(${transformName name} . (lambda () (require 'lsp-bridge) (lsp-bridge-mode)))''];
+        mkLspCe = name: vs: optional vs [''(${transformName name} . (lambda () (require 'lspce) (lspce-mode)))''];
         mkSymex = name: vs: optional vs '':general ('normal ${transformName name}-map "RET" '(lambda () (interactive) (require 'symex) (symex-mode-interface)))'';
         mkDefer = v:
           if isBool v then
