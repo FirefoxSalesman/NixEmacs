@@ -656,37 +656,8 @@ You will need to install sbt yourself in order to use [[https://github.com/hvesa
 
 This module was largely stolen from doom emacs
 
-***** scheme
-This entire module is stolen from doom
-
-****** =scheme.enable=
-Boolean option to enable scheme support through [[https://gitlab.com/emacs-geiser/geiser/][geiser]]
-
-You will need to enable support for your chosen implementation of scheme in order for this to be useful
-
-****** =scheme.chez=
-Boolean option for chez scheme. Chez scheme will be installed outside your path unless you alter =programs.emacs.init.usePackage.geiser-chez.custom.geiser-chez-binary=.
-
-****** =scheme.chicken=
-Boolean option for chicken scheme. Chicken scheme will be installed outside your path unless you alter =programs.emacs.init.usePackage.geiser-chicken.custom.geiser-chicken-binary=.
-
-****** =scheme.gambit=
-Boolean option for gambit scheme. Gambit scheme will be installed outside your path unless you alter =programs.emacs.init.usePackage.geiser-gambit.custom.geiser-gambit-binary=.
-
-****** =scheme.guache=
-Boolean option for guache scheme. Guache scheme will be installed outside your path unless you alter =programs.emacs.init.usePackage.geiser-guache.custom.geiser-guache-binary=.
-
-****** =scheme.guile=
-Boolean option for guile scheme. Guile scheme will be installed outside your path unless you alter =programs.emacs.init.usePackage.geiser-guile.custom.geiser-guile-binary=.
-
-****** =scheme.kawa=
-Boolean option for kawa scheme.
-
-****** =scheme.mit=
-Boolean option for mit scheme. mit scheme will be installed outside your path unless you alter =programs.emacs.init.usePackage.geiser-mit.custom.geiser-mit-binary=.
-
-****** =scheme.stklos=
-Boolean option for stklos scheme.
+***** =scheme.enable=
+Boolean option to enable scheme support.
 
 ***** =sql.enable=
 Boolean option to enable sql support.
