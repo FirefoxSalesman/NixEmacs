@@ -468,15 +468,40 @@ This is the language server client that will receive the most support
 
 Default: =false=
 
+***** =programs.emacs.init.ide.eglot.preset= 
+A boolean that enables eglot's preset.
+
+Notable package additions:
++ [[https://github.com/jdtsmith/eglot-booster][eglot booster]]
++ [[https://github.com/nemethf/eglot-x][eglot-x]]
+
+Default: =false=
+
 **** Lsp
 ***** =programs.emacs.init.ide.lsp.enable= 
 A boolean that will enable lsp-mode for all languages in the language support presets
 
 Default: =false=
 
+***** =programs.emacs.init.ide.lsp.preset= 
+A boolean that enables lsp-mode's preset, which is largely borrowed from Doom
+
+Default: =false=
+
+**** Lspce
+***** =programs.emacs.init.ide.lspce.enable= 
+A boolean that will enable lspce-mode for all languages in the language support presets
+
+Default: =false=
+
+***** =programs.emacs.init.ide.lspce.preset= 
+A boolean that enables lspce's preset. Doesn't do anything too interesting on its own, but it will enable eldoc-box if you have hoverDoc enabled
+
+Default: =false=
+
 **** Lsp Bridge
-***** =programs.emacs.init.ide.lsp.enable= 
-A boolean that will enable lsp-bridge-mode for most languages in the language support presets.
+***** =programs.emacs.init.ide.lsp-bridge.enable= 
+A boolean that will enable lsp-bridge-mode for most languages in the language support presets. It also enables lsp-bridge's preset.
 
 No new language servers will be supported by this framework
 
@@ -490,7 +515,10 @@ Default: =false=
 **** =programs.emacs.init.ide.hoverDoc=
 A boolean that will enable hoverdoc whenever it's relevant.
 
-For eglot & emacs-lisp mode, this is done with [[https://github.com/casouri/eldoc-box][eldoc-box]]. For lsp-mode, this is done with lsp-ui
+For eglot, lspce, & emacs-lisp mode, this is done with [[https://github.com/casouri/eldoc-box][eldoc-box]]. For lsp-mode, this is done with lsp-ui
+
+**** =programs.emacs.init.ide.breadcrumb=
+A boolean that will enable breadcrumbs in emacs-lisp-mode, eglot-mode, lsp-mode, & lspce-mode
 
 **** Language Support
 Every option here can be found under =programs.emacs.init.ide.languages=
@@ -698,4 +726,10 @@ Boolean option to enable zenscript support.
 Boolean option to enable zig support.
 
 * TODO
-+ [ ] Add presets for lsp clients
++ [ ] Support for project management
++ [ ] Better support for flymake & flycheck
++ [ ] Support the following languages
+  - [ ] vimscript
+  - [ ] org
+  - [ ] julia
+  - [ ] fsharp

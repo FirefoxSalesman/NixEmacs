@@ -10,5 +10,13 @@ final: prev: inputs: {
           inherit inputs;
           inherit (prev.emacsPackages) trivialBuild tsc tree-sitter evil evil-surround seq paredit;
         });
+        eglot-x = (prev.emacsPackages.callPackage ./emacs-packages/eglot-x.nix {
+          inherit inputs;
+          inherit (prev.emacsPackages) trivialBuild eglot project xref;
+        });
+        eglot-booster = (prev.emacsPackages.callPackage ./emacs-packages/eglot-booster.nix {
+          inherit inputs;
+          inherit (prev.emacsPackages) trivialBuild eglot jsonrpc;
+        });
       }));
 }
