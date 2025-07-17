@@ -1,24 +1,33 @@
 { pkgs, config, lib, ... }:
 
-let
-  ide = config.programs.emacs.init.ide;
-in
-{
-  options.programs.emacs.init.ide.languages.purescript.enable = lib.mkEnableOption "Enables purescript support. Formatting is poorly tested at best";
+let ide = config.programs.emacs.init.ide;
+in {
+  options.programs.emacs.init.ide.languages.purescript.enable =
+    lib.mkEnableOption
+    "Enables purescript support. Formatting is poorly tested at best";
 
   config = lib.mkIf ide.languages.purescript.enable {
     programs.emacs.init.usePackage.purescript-mode = {
       enable = true;
       # borrowed from doom
-      hook = ["(purescript-mode . purescript-indentation-mode)"];
-      extraPackages = if ide.eglot.enable || ide.lsp.enable then [pkgs.nodePackages.purescript-language-server] else [];
+      hook = [ "(purescript-mode . purescript-indentation-mode)" ];
+      extraPackages =
+        if ide.eglot.enable || ide.lspce.enable || ide.lsp.enable then
+          [ pkgs.nodePackages.purescript-language-server ]
+        else
+          [ ];
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
+      lspce = ide.lspce.enable;
       symex = ide.symex;
-      config = ''
-        (with-eval-after-load 'eglot
-          (add-to-list 'eglot-server-programs '((purescript-mode) . ("purescript-language-server" "--stdio"
-                                                                     :initializationOptions (:purescript (:formatter "purs-tidy"))))))
+      config = lib.mkIf (ide.eglot.enable || ide.lspce.enable) ''
+        ${if ide.eglot.enable then ''
+          (with-eval-after-load 'eglot
+            (add-to-list 'eglot-server-programs '((purescript-mode) . ("purescript-language-server" "--stdio"
+                                                                       :initializationOptions (:purescript (:formatter "purs-tidy"))))))
+        '' else ''
+          (add-to-list 'lspce-server-programs '("purescript" "purescript-language-server" "--stdio"))
+        ''}
       '';
     };
   };

@@ -10,14 +10,7 @@ in
     programs.emacs.init.usePackage.nxml = {
       enable = true;
       mode = [''("\\.xml\\'" . nxml-mode)''];
-      extraPackages = if ide.eglot.enable || ide.lsp-bridge.enable then [pkgs.lemminx] else [];
-      lsp-bridge = ide.lsp-bridge.enable;
-      eglot = ide.eglot.enable;
       symex = ide.symex;
-      init = ''
-          (with-eval-after-load 'eglot
-            (add-to-list 'eglot-server-programs '((nxml-mode) . ("lemminx"))))
-        '';
     };
   };
 }

@@ -53,5 +53,6 @@
     lsp.enable = lib.mkEnableOption "enables lsp-mode support in all languages that support it";
     eglot.enable = lib.mkEnableOption "enables eglot support in all languages that support it";
     lsp-bridge.enable = lib.mkEnableOption "enables lsp-bridge support in all languages that support it";
+    lspce.enable = lib.mkEnableOption "enables lspce support in all languages that support it";
   };
 }

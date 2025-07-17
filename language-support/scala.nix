@@ -1,33 +1,40 @@
-{ pkgs, config, lib, ... } :
+{ pkgs, config, lib, ... }:
 # This module is blatantly stolen from doom emacs
 
-let
-  ide = config.programs.emacs.init.ide;
-in
-{
+let ide = config.programs.emacs.init.ide;
+in {
   options = {
-    programs.emacs.init.ide.languages.scala.enable = lib.mkEnableOption "Enables scala support. You will need to bring your own copy of sbt in order to use sbt-mode";
+    programs.emacs.init.ide.languages.scala.enable = lib.mkEnableOption
+      "Enables scala support. You will need to bring your own copy of sbt in order to use sbt-mode";
   };
 
   config = lib.mkIf ide.languages.scala.enable {
     programs.emacs.init.usePackage = {
       scala-ts-mode = {
         enable = true;
-        extraPackages = if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then [pkgs.metals] else [];
-        mode = [''"\\.scala\\'"''];
+        extraPackages = if ide.lsp-bridge.enable || ide.lspce.enable
+        || ide.lsp.enable || ide.eglot.enable then
+          [ pkgs.metals ]
+        else
+          [ ];
+        mode = [ ''"\\.scala\\'"'' ];
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
+        lspce = ide.lspce.enable;
         lsp-bridge = ide.lsp-bridge.enable;
         symex = ide.symex;
-        config = ''
-          (with-eval-after-load 'eglot
-            (add-to-list 'eglot-server-programs '((scala-ts-mode) . ("metals"))))
+        config = lib.mkIf (ide.eglot.enable || ide.lspce.enable) ''
+          ${if ide.eglot.enable then ''
+            (with-eval-after-load 'eglot
+                        (add-to-list 'eglot-server-programs '((scala-ts-mode) . ("metals"))))'' else
+            ''
+              (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("scala" "metals" "")))''}
         '';
       };
 
       sbt-mode = {
         enable = true;
-        after = ["scala-ts-mode"];
+        after = [ "scala-ts-mode" ];
       };
     };
   };

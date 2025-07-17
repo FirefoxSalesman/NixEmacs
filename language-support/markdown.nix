@@ -13,16 +13,23 @@ in {
       markdown = {
         enable = true;
         defer = true;
-        extraPackages = if ide.eglot.enable || ide.lsp.enable then
-          [ pkgs.marksman ]
-        else if ide.lsp-bridge.enable then
-          [ pkgs.vale-ls ]
-        else
-          [ ];
+        extraPackages =
+          if ide.eglot.enable || ide.lspce.enable || ide.lsp.enable then
+            [ pkgs.marksman ]
+          else if ide.lsp-bridge.enable then
+            [ pkgs.vale-ls ]
+          else
+            [ ];
         eglot = ide.eglot.enable;
+        lspce = ide.lspce.enable;
         lsp = ide.lsp.enable;
         lsp-bridge = ide.lsp-bridge.enable;
         mode = [ ''("\\.md\\'" . gfm-mode)'' ];
+        config = lib.mkIf ide.lspce.enable ''
+          (with-eval-after-load 'lspce
+                                (dolist (mode ("gfm" "markdown"))
+                                        (add-to-list 'lspce-server-programs (list mode "marksman" "server"))))
+        '';
       };
 
       evil-markdown = {

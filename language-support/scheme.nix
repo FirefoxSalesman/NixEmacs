@@ -1,9 +1,7 @@
 { pkgs, lib, config, ... }:
 
-let
-  ide = config.programs.emacs.init.ide;
-in
-{
+let ide = config.programs.emacs.init.ide;
+in {
   options.programs.emacs.init.ide.languages.scheme = {
     enable = lib.mkEnableOption "Enables scheme support, via scheme-langserver";
   };
@@ -12,16 +10,22 @@ in
     programs.emacs.init.usePackage = {
       scheme = {
         enable = true;
-        extraPackages = [pkgs.akkuPackages.scheme-langserver];
+        extraPackages = [ pkgs.akkuPackages.scheme-langserver ];
         symex = ide.symex;
         eglot = ide.eglot.enable;
-        init = ''(setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';
+        lspce = ide.lspce.enable;
+        init = ''
+          (setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';
         config = ''
           (setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))
           ${if ide.eglot.enable then ''
             (with-eval-after-load 'eglot
                                 (add-to-list 'eglot-server-programs '(scheme-mode . ("scheme-langserver"))))
-            '' else ""}
+          '' else if ide.lspce.enable then
+            ''
+              (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("scheme" "scheme-langserver" "")))''
+          else
+            ""}
         '';
       };
     };

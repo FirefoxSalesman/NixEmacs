@@ -44,19 +44,24 @@ in {
       latex = {
         enable = true;
         package = epkgs: epkgs.auctex;
-        extraPackages =
-          if ide.eglot.enable || ide.lsp.enable || ide.lsp-bridge.enable then
-            if ide.languages.latex.preferTexlab then
-              [ pkgs.texlab ]
-            else
-              [ pkgs.texlivePackages.digestif ]
+        extraPackages = if ide.eglot.enable || ide.lsp.enable
+        || ide.lspce.enable || ide.lsp-bridge.enable then
+          if ide.languages.latex.preferTexlab then
+            [ pkgs.texlab ]
           else
-            [ ];
+            [ pkgs.texlivePackages.digestif ]
+        else
+          [ ];
         mode = [ ''("\\.tex\\'" . LaTeX-mode)'' ];
         symex = ide.symex;
         lsp = ide.lsp.enable;
+        lspce = ide.lspce.enable;
         lsp-bridge = ide.lsp-bridge.enable;
         eglot = ide.eglot.enable;
+        config = lib.mkIf ide.lspce.enable ''
+          (with-eval-after-load 'lspce (dolist (mode '("plain-tex" "latex" "context" "texinfo" "bibtex" "tex"))
+                                                      (add-to-list 'lspce-server-programs (list mode ${if ide.languages.latex.preferTexlab then ''"texlab"'' else ''"digestif"''} ""))))
+        '';
       };
 
       magic-latex-buffer = {

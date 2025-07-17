@@ -487,6 +487,11 @@ A boolean that will enable symex for all languages in the language support prese
 
 Default: =false=
 
+**** =programs.emacs.init.ide.hoverDoc=
+A boolean that will enable hoverdoc whenever it's relevant.
+
+For eglot & emacs-lisp mode, this is done with [[https://github.com/casouri/eldoc-box][eldoc-box]]. For lsp-mode, this is done with lsp-ui
+
 **** Language Support
 Every option here can be found under =programs.emacs.init.ide.languages=
 

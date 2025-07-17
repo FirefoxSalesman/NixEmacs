@@ -23,8 +23,10 @@ in {
         eglot = ide.eglot.enable;
         symex = ide.symex;
         lsp = ide.lsp.enable;
+        lspce = ide.lspce.enable;
         mode = [ ''"\\.py\\'"'' ];
-        extraPackages = if ide.lsp.enable || ide.eglot.enable then
+        extraPackages = if ide.lsp-bridge.enable ide.lspce.enable
+        || ide.lsp.enable || ide.eglot.enable then
           if (matches "basedpyright" ide.languages.python.languageServer) then
             with pkgs; [ basedpyright ruff ]
           else if (matches "pylsp" ide.languages.python.languageServer) then
@@ -38,37 +40,50 @@ in {
         else
           [ ];
         # https://gregnewman.io/blog/emacs-take-two/
-        config = "${if matches "basedpyright"
-        ide.languages.python.languageServer then ''
-          (add-to-list 'eglot-server-programs '(python-ts-mode . ("basedpyright-langserver" "--stdio" 
-                                                                   :initializationOptions (:basedpyright (:plugins (
-                                                                   :ruff (:enabled t
-                                                                          :lineLength 88
-                                                                          :exclude ["E501"]  ; Disable line length warnings
-                                                                          :select ["E", "F", "I", "UP"])  ; Enable specific rule families
-                                                                   :pycodestyle (:enabled nil)  ; Disable other linters since we're using ruff
-                                                                   :pyflakes (:enabled nil)
-                                                                   :pylint (:enabled nil)
-                                                                   :rope_completion (:enabled t)
-                                                                   :autopep8 (:enabled nil)))))))
+        config = lib.mkIf (ide.eglot.enable || ide.lspce.enable)
+          "${if matches "basedpyright" ide.languages.python.languageServer then
+            if ide.eglot.enable then ''
+              (add-to-list 'eglot-server-programs '(python-ts-mode . ("basedpyright-langserver" "--stdio" 
+                                                                       :initializationOptions (:basedpyright (:plugins (
+                                                                       :ruff (:enabled t
+                                                                              :lineLength 88
+                                                                              :exclude ["E501"]  ; Disable line length warnings
+                                                                              :select ["E", "F", "I", "UP"])  ; Enable specific rule families
+                                                                       :pycodestyle (:enabled nil)  ; Disable other linters since we're using ruff
+                                                                       :pyflakes (:enabled nil)
+                                                                       :pylint (:enabled nil)
+                                                                       :rope_completion (:enabled t)
+                                                                       :autopep8 (:enabled nil)))))))
 
-        '' else
-          ""}";
+            '' else
+              ''
+                (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("python" "basedpyright-langserver" "--stdio")))''
+          else
+            ''
+              (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("python" ${
+                if matches "pyright" ide.languages.python.languageServer then
+                  ''"pyright-langserver" "--stdio"''
+                else if matches "pylsp" ide.languages.python.languageServer then
+                  ''"pylsp" ""''
+                else
+                  ''"jedi-language-server" ""''
+              })))''}";
       };
 
-      lsp-pyright =
-        lib.mkIf ((matches "basedpyright" ide.languages.python.languageServer)
-        || (matches "pyright" ide.languages.python.languageServer)) {
-          enable = true;
-          after = [ "lsp-mode" ];
-          custom.lsp-pyright-langserver-command =
-            if (matches "basedpyright" ide.languages.python.languageServer) then
+      lsp-pyright = lib.mkIf
+        ((matches "basedpyright" ide.languages.python.languageServer)
+          || (matches "pyright" ide.languages.python.languageServer)) {
+            enable = true;
+            after = [ "lsp-mode" ];
+            custom.lsp-pyright-langserver-command = if (matches "basedpyright"
+              ide.languages.python.languageServer) then
               ''"basedpyright"''
             else
               ''"pyright"'';
-        };
+          };
 
-      lsp-bridge.custom.lsp-bridge-python-lsp-server = lib.mkIf ide.lsp-bridge.enable ''${ide.languages.python.languageServer}'';
+      lsp-bridge.custom.lsp-bridge-python-lsp-server =
+        lib.mkIf ide.lsp-bridge.enable "${ide.languages.python.languageServer}";
 
       code-cells = lib.mkIf ide.languages.python.jupyter {
         enable = true;
