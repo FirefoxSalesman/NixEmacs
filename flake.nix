@@ -2,6 +2,16 @@
   description = "Emacs Home Manager Module Flake";
 
   inputs = {
+    eglot-booster = {
+      url = "github:jdtsmith/eglot-booster";
+      flake = false;
+    };
+
+    eglot-x = {
+      url = "github:nemethf/eglot-x";
+      flake = false;
+    };
+
     doom-utils = {
       url = "github:firefoxsalesman/doom-utils";
       flake = false;
