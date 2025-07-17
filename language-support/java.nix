@@ -17,7 +17,7 @@ in {
         lsp-bridge = ide.lsp-bridge.enable;
         eglot = ide.eglot.enable;
         symex = ide.symex;
-        config lib.mkIf ide.lspce.enable ''
+        config = lib.mkIf ide.lspce.enable ''
           (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("java" "jdtls" "")))
         '';
       };
