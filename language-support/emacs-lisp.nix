@@ -35,6 +35,11 @@ in
         enable = true;
         hook = ["(emacs-lisp-mode . eldoc-box-hover-at-point-mode)"];
       };
+      
+      breadcrumb = lib.mkIf ide.breadcrumb {
+        enable = true;
+        hook = ["(emacs-lisp-mode . breadcrumb-local-mode)"];
+      };
     };
   };
 }

@@ -10,12 +10,16 @@ in {
       java-ts-mode = {
         enable = true;
         extraPackages =
-          if ide.lsp-bridge.enable || ide.eglot.enable then with pkgs; [ jdt-language-server ] else [ ];
+          if ide.lspce.enable || ide.lsp-bridge.enable || ide.eglot.enable then with pkgs; [ jdt-language-server ] else [ ];
         mode = [ ''"\\.java\\'"'' ];
         lsp = ide.lsp.enable;
+        lspce = ide.lspce.enable;
         lsp-bridge = ide.lsp-bridge.enable;
         eglot = ide.eglot.enable;
         symex = ide.symex;
+        config lib.mkIf ide.lspce.enable ''
+          (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("java" "jdtls" "")))
+        '';
       };
 
       lsp-java = lib.mkIf ide.lsp.enable {
