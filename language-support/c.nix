@@ -23,7 +23,6 @@ in {
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
         lspce = ide.lspce.enable;
-        lsp-bridge = ide.lsp-bridge.enable;
         symex = ide.symex;
         config = lib.mkIf (ide.lspce.enable && !ide.languages.c.preferClangd) ''
           (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs (list "C" "ccls" ""))

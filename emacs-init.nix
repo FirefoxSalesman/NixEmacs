@@ -203,14 +203,6 @@ let
         '';
       };
       
-      lsp-bridge = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Starts lsp-bridge upon loading the major mode.
-        '';
-      };
-      
       lspce = mkOption {
         type = types.bool;
         default = false;
@@ -357,7 +349,6 @@ let
                               in if matches "tex-mode" name then "latex-mode" else if matches "latex" name then "LaTeX-mode" else if matches ".*-mode" name then name else "${name}-mode";
         mkLsp = name: vs: optional vs [''(${transformName name} . (lambda () (require 'lsp-mode) (lsp-mode)))''];
         mkEglot = name: vs: optional vs [''(${transformName name} . (lambda () (require 'eglot) (eglot-ensure)))''];
-        mkLspBridge = name: vs: optional vs [''(${transformName name} . (lambda () (require 'lsp-bridge) (lsp-bridge-mode)))''];
         mkLspCe = name: vs: optional vs [''(${transformName name} . (lambda () (require 'lspce) (lspce-mode)))''];
         mkSymex = name: vs: optional vs '':general ('normal ${transformName name}-map "RET" '(lambda () (interactive) (require 'symex) (symex-mode-interface)))'';
         mkDefer = v:
@@ -378,7 +369,7 @@ let
                                   ++ mkDefer config.defer ++ mkDeferIncrementally config.deferIncrementally 
                                   ++ mkDefines config.defines
                                   ++ mkFunctions config.functions ++ mkDemand config.demand
-                                  ++ mkDiminish config.diminish ++ mkHook (config.hook ++ mkEglot name config.eglot ++ mkLsp name config.lsp ++ mkLspBridge name config.lsp-bridge ++ mkLspCe name config.lspce)
+                                  ++ mkDiminish config.diminish ++ mkHook (config.hook ++ mkEglot name config.eglot ++ mkLsp name config.lsp ++ mkLspCe name config.lspce)
                                   ++ mkGhook config.ghook
                                   ++ mkGfhook config.gfhook ++ mkCustom config.custom
                                   ++ buildGeneral config.general config.generalOne config.generalTwo ++ mkSymex name config.symex
@@ -451,8 +442,6 @@ let
   
   hasLsp = any (p: p.lsp != false) (attrValues cfg.usePackage);
   
-  hasLspBridge = any (p: p.lsp-bridge != false) (attrValues cfg.usePackage);
-
   hasLspce = any (p: p.lspce != false) (attrValues cfg.usePackage);
 
   hasSymex = any (p: p.symex != false) (attrValues cfg.usePackage);
@@ -621,7 +610,7 @@ in {
       ] ++ optionals hasGeneral [epkgs.general]
       ++ optionals hasDiminish [epkgs.diminish]
       ++ optionals hasChords [epkgs.use-package-chords]
-      ++ optionals hasLsp [epkgs.lsp-mode] ++ optionals hasLspce [epkgs.lspce] ++ optionals hasLspBridge [epkgs.lsp-bridge]
+      ++ optionals hasLsp [epkgs.lsp-mode] ++ optionals hasLspce [epkgs.lspce]
       ++ optionals hasDoom [epkgs.doom-utils]
       ++ optionals hasSymex [epkgs.symex]
       ++ packages;

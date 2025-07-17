@@ -23,7 +23,6 @@ in {
         eglot = ide.eglot.enable;
         lspce = ide.lspce.enable;
         lsp = ide.lsp.enable;
-        lsp-bridge = ide.lsp-bridge.enable;
         mode = [ ''("\\.md\\'" . gfm-mode)'' ];
         config = lib.mkIf ide.lspce.enable ''
           (with-eval-after-load 'lspce

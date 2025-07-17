@@ -12,7 +12,6 @@ in {
       symex = ide.symex;
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
-      lsp-bridge = ide.lsp-bridge.enable;
       eglot = ide.eglot.enable;
       extraPackages = if ide.lsp-bridge.enable || ide.lspce.enable
       || ide.lsp.enable || ide.eglot.enable then [

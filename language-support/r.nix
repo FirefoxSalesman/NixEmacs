@@ -18,7 +18,6 @@ in {
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
-      lsp-bridge = ide.lsp-bridge.enable;
       symex = ide.symex;
       custom.ess-ask-for-ess-directory = lib.mkDefault "nil";
       config = lib.mkIf ide.lspce.enable ''

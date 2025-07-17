@@ -17,7 +17,6 @@ in {
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
-      lsp-bridge = ide.lsp-bridge.enable;
       config = lib.mkIf (ide.eglot.enable || ide.lspce.enable) ''
         ${if ide.eglot.enable then ''
           (with-eval-after-load 'eglot

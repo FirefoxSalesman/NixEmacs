@@ -21,7 +21,6 @@ in {
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
         lspce = ide.lspce.enable;
-        lsp-bridge = ide.lsp-bridge.enable;
         symex = ide.symex;
         config = lib.mkIf (ide.eglot.enable || ide.lspce.enable) ''
           ${if ide.eglot.enable then ''

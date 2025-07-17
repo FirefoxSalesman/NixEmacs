@@ -56,7 +56,6 @@ in {
         symex = ide.symex;
         lsp = ide.lsp.enable;
         lspce = ide.lspce.enable;
-        lsp-bridge = ide.lsp-bridge.enable;
         eglot = ide.eglot.enable;
         config = lib.mkIf ide.lspce.enable ''
           (with-eval-after-load 'lspce (dolist (mode '("plain-tex" "latex" "context" "texinfo" "bibtex" "tex"))

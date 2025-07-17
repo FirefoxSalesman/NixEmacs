@@ -18,7 +18,6 @@ in {
       symex = ide.symex;
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
-      lsp-bridge = ide.lsp-bridge.enable;
       config = lib.mkIf ide.lspce.enable ''
         (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("js" "typescript-language-server" "--stdio")))
       '';

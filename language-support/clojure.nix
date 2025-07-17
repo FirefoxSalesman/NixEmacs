@@ -16,7 +16,6 @@ in {
             [ ];
         mode = [ ''"\\.clj\\'"'' ];
         lsp = ide.lsp.enable;
-        lsp-bridge = ide.lsp-bridge.enable;
         eglot = ide.eglot.enable;
         symex = ide.symex;
         config = lib.mkIf ide.lspce.enable ''

@@ -16,7 +16,6 @@ in
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
-      lsp-bridge = ide.lsp-bridge.enable;
       # Kotlin's language server takes a very long time to initialize on a new project
       # https://github.com/fwcd/kotlin-language-server/issues/510
       custom.eglot-connect-timeout = lib.mkIf ide.eglot.enable (lib.mkDefault "999999");
