@@ -2,11 +2,7 @@
 
 let ide = config.programs.emacs.init.ide;
 in {
-  options.programs.emacs.init.ide.languages.markdown = {
-    enable = lib.mkEnableOption "Enables markdown support";
-    evil = lib.mkEnableOption
-      "Adds some evil keybinds. Symex support is behind this toggle";
-  };
+  options.programs.emacs.init.ide.languages.markdown.enable = lib.mkEnableOption "Enables markdown support";
 
   config = lib.mkIf ide.languages.markdown.enable {
     programs.emacs.init.usePackage = {
@@ -31,8 +27,8 @@ in {
         '';
       };
 
-      evil-markdown = {
-        enable = ide.languages.markdown.evil;
+      evil-markdown = lib.mkIf ide.evil {
+        enable = true;
         defer = true;
         symex = ide.symex;
         hook = [

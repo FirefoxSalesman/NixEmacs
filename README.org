@@ -512,6 +512,11 @@ A boolean that will enable symex for all languages in the language support prese
 
 Default: =false=
 
+**** =programs.emacs.init.ide.evil=
+A boolean that will enable evil compats where it's relevant
+
+Default: =false=
+
 **** =programs.emacs.init.ide.hoverDoc=
 A boolean that will enable hoverdoc whenever it's relevant.
 
@@ -630,12 +635,8 @@ If an lsp client is enabled & this variable is set to true, install [[https://gi
 ***** =lua.enable=
 Boolean value that enables lua support
 
-***** markdown
-****** =markdown.enable=
+***** =markdown.enable=
 Boolean that enables markdown support
-
-****** =markdown.evil=
-Sets up [[https://github.com/Somelauw/evil-markdown][evil-markdown]]
 
 ***** =nix.enable=
 Boolean that enables nix support.
