@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ config, lib, ... }:
 
 let ide = config.programs.emacs.init.ide;
 in {
@@ -7,7 +7,7 @@ in {
 
   config = lib.mkIf ide.lsp-bridge.enable {
     programs.emacs = {
-      extraPackages = [epkgs.on];
+      extraPackages = epkgs: with epkgs; [on];
       init.usePackage.lsp-bridge = {
         enable = true;
         init = "(require 'on)";
