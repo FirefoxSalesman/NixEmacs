@@ -12,7 +12,7 @@ in {
       emmet-mode = {
         enable = ide.css.emmet;
         hook = [ "(css-ts-mode . emmet-mode)" ];
-        custom.emmet-move-cursor-between-quotes = lib.mkDefault "t";
+        custom.emmet-move-cursor-between-quotes = lib.mkDefault true;
       };
 
       css-ts-mode = {

@@ -25,13 +25,13 @@ in {
         enable = true;
         mode = [ ''("\\.rs$" . rustic-mode)'' ];
         custom = {
-          rust-mode-treesitter-derive = lib.mkDefault "t";
+          rust-mode-treesitter-derive = lib.mkDefault true;
           rustic-lsp-client = lib.mkDefault (if ide.eglot.enable then
             "'eglot"
           else if ide.lsp.enable then
             "'lsp-mode"
           else
-            "nil");
+            false);
         };
         config = lib.mkIf (ide.eglot.enable || ide.lsp.enable) ''
           ${if ide.eglot.enable then ''

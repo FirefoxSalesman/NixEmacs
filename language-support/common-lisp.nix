@@ -13,7 +13,7 @@ in
         hook = ["(lisp-mode-local-vars . sly-editing-mode)"];
         custom = {
           inferior-lisp-program = lib.mkDefault ''"${pkgs.sbcl}/bin/sbcl"'';
-          sly-kill-without-query-p = lib.mkDefault "t";
+          sly-kill-without-query-p = lib.mkDefault true;
         };
       };
 

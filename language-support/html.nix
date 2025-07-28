@@ -35,7 +35,7 @@ in {
       emmet-mode = {
         enable = ide.html.emmet;
         hook = [ "(html-ts-mode . emmet-mode)" ];
-        custom.emmet-move-cursor-between-quotes = lib.mkDefault "t";
+        custom.emmet-move-cursor-between-quotes = lib.mkDefault true;
       };
     };
   };

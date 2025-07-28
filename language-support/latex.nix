@@ -27,9 +27,9 @@ in {
                        cite
                  (concat "~" cite)))))
           '';
-          TeX-auto-save = lib.mkDefault "t";
-          TeX-parse-self = lib.mkDefault "t";
-          reftex-plug-into-AUCTeX = lib.mkDefault "t";
+          TeX-auto-save = lib.mkDefault true;
+          TeX-parse-self = lib.mkDefault true;
+          reftex-plug-into-AUCTeX = lib.mkDefault true;
         };
       };
 

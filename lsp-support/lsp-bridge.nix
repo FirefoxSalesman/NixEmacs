@@ -13,7 +13,7 @@ in {
         init = "(require 'on)";
         custom = {
           lsp-bridge-get-workspace-folder = lib.mkDefault "'project-root";
-          lsp-bridge-enable-org-babel = lib.mkDefault "t";
+          lsp-bridge-enable-org-babel = lib.mkDefault true;
         };
         afterCall = [ "on-first-input-hook" ];
         config = "(global-lsp-bridge-mode)";

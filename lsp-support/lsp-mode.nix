@@ -13,10 +13,10 @@ in
         enable = true;
         defer = true;
         custom = {
-          lsp-enable-folding = lib.mkDefault "nil";
-          lsp-enable-text-document-color = lib.mkDefault "nil";
-          lsp-enable-on-type-formatting = lib.mkDefault "nil";
-          lsp-headerline-breadcrumb-enable = lib.mkDefault (if ide.breadcrumb then "t" else "nil");
+          lsp-enable-folding = lib.mkDefault false;
+          lsp-enable-text-document-color = lib.mkDefault false;
+          lsp-enable-on-type-formatting = lib.mkDefault false;
+          lsp-headerline-breadcrumb-enable = lib.mkDefault ide.breadcrumb;
         };
       };
 
@@ -24,11 +24,11 @@ in
         enable = true;
         hook = ["(lsp-mode . lsp-ui-mode)"];
         custom = {
-          lsp-ui-doc-show-with-mouse = lib.mkDefault "nil";
+          lsp-ui-doc-show-with-mouse = lib.mkDefault false;
           lsp-ui-doc-position = lib.mkDefault "'at-point";
-          lsp-ui-doc-show-with-cursor = lib.mkDefault "t";
-          lsp-ui-sideline-ignore-duplicate = lib.mkDefault "t";
-          lsp-ui-sideline-show-hover = lib.mkDefault "nil";
+          lsp-ui-doc-show-with-cursor = lib.mkDefault true;
+          lsp-ui-sideline-ignore-duplicate = lib.mkDefault true;
+          lsp-ui-sideline-show-hover = lib.mkDefault false;
           lsp-ui-sideline-actions-icon = lib.mkDefault "lsp-ui-sideline-actions-icon-default";
         };
       };

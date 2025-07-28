@@ -12,8 +12,8 @@ in
         enable = true;
         defer = true;
         custom = {
-          eglot-report-progress = "nil";
-          eglot-autoshutdown = "t";
+          eglot-report-progress = false;
+          eglot-autoshutdown = true;
           #borrowed from doom
           eglot-sync-connect = "1";
         };

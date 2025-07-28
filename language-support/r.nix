@@ -19,7 +19,7 @@ in {
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
       symex = ide.symex;
-      custom.ess-ask-for-ess-directory = lib.mkDefault "nil";
+      custom.ess-ask-for-ess-directory = lib.mkDefault false;
       config = lib.mkIf ide.lspce.enable ''
         (with-eval-after-load 'lspce
                               (dolist (mode ("R" "ess-r"))
