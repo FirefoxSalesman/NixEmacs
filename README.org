@@ -460,6 +460,25 @@ Adds the string set in the option to the end of the early-init.el file
 **** =extraPackages=
 Additional nix packages to add to =home.packages= when this package is enabled
 
+**** =babel=
+Lets the user specify a language to use =org-babel-do-load-languages= on.
+
+Example:
+#+begin_src nix
+  programs.emacs.init.usePackage.ob-hy = {
+    enable = true;
+    babel = "hy";
+  };
+#+end_src
+
+This is equivalent to:
+#+begin_src nix
+  programs.emacs.init.usePackage.ob-hy = {
+    enable = true;
+    init = "(org-babel-do-load-languages 'org-babel-load-languages '((hy . t)))";
+  };
+#+end_src
+
 ** Configuration Presets
 *** ide
 **** Eglot
