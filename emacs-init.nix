@@ -244,7 +244,7 @@ let
       };
     
       custom = mkOption {
-        type = types.attrsOf types.str;
+        type = types.attrsOf (types.either types.str types.bool);
         default = { };
         example = {
           "display-line-numbers-type" = "'relative";
@@ -322,7 +322,7 @@ let
         mkAfterCall = vs: optional (vs != [ ]) ":after-call (${toString vs})";
         mkCommand = vs: optional (vs != [ ]) ":commands (${toString vs})";
         # Having :custom before every statement grants better load times. No idea why
-        mkCustom = vs: optionals (vs != { }) (mapAttrsToList (n: v: ":custom (${n} ${v})") vs);
+        mkCustom = vs: optionals (vs != { }) (mapAttrsToList (n: v: ":custom (${n} ${if isBool v then if v then "t" else "nil" else v})") vs);
         mkDefines = vs: optional (vs != [ ]) ":defines (${toString vs})";
         mkDiminish = vs: optional (vs != [ ]) ":diminish (${toString vs})";
         mkMode = vs: optional (vs != [ ]) ":mode ${toString vs}";
