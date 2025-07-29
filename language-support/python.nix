@@ -36,7 +36,7 @@ in {
         lsp = ide.lsp.enable;
         lspce = ide.lspce.enable;
         mode = [ ''"\\.py\\'"'' ];
-        extraPackages = if ide.lsp-bridge.enable ide.lspce.enable
+        extraPackages = if ide.lsp-bridge.enable || ide.lspce.enable
         || ide.lsp.enable || ide.eglot.enable then
           if (matches "basedpyright" ide.languages.python.languageServer) then
             with pkgs; [ basedpyright ruff ]
