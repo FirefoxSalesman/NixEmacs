@@ -369,12 +369,12 @@ let
             } . (lambda () (require 'lsp-mode) (lsp-mode)))"
           ];
         mkEglot = name: vs:
-          optional (vs != false) [''
+          optional (vs != false) ''
             :hook (${
               transformName name
             } . (lambda () (require 'eglot) (eglot-ensure)))
                           ${if isString vs then ":eglot ${vs}" else ""}
-          ''];
+          '';
         mkLspCe = name: vs:
           optional vs [
             "(${
