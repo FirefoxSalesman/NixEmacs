@@ -378,6 +378,14 @@ Example usage:
   };
 #+end_src
 
+You can also use a string to configure the language server you want to use with [[https://gitlab.com/aidanhall/use-package-eglot][use-package-eglot]]
+#+begin_src nix
+  programs.emacs.init.usePackage.json5-ts-mode = {
+    enable = true;
+    eglot = ''("vscode-json-language-server" "--stdio")'';
+  };
+#+end_src
+
 **** =symex=
 Binds =symex-mode-interface= to enter in evil's normal state for the package's major mode. This will also load symex if it isn't already loaded
 
@@ -468,14 +476,6 @@ Example:
   programs.emacs.init.usePackage.ob-hy = {
     enable = true;
     babel = "hy";
-  };
-#+end_src
-
-This is equivalent to:
-#+begin_src nix
-  programs.emacs.init.usePackage.ob-hy = {
-    enable = true;
-    init = "(org-babel-do-load-languages 'org-babel-load-languages '((hy . t)))";
   };
 #+end_src
 
@@ -746,12 +746,3 @@ Boolean option to enable zenscript support.
 
 ***** =zig.enable=
 Boolean option to enable zig support.
-
-* TODO
-+ [ ] Support for project management
-+ [ ] Better support for flymake & flycheck
-+ [ ] Support the following languages
-  - [ ] vimscript
-  - [ ] org
-  - [ ] julia
-  - [ ] fsharp

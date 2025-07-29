@@ -197,10 +197,10 @@ let
       };
 
       eglot = mkOption {
-        type = types.bool;
+        type = types.either (types.bool types.str);
         default = false;
         description = ''
-          Starts eglot upon loading the major mode.
+          Starts eglot upon loading the major mode. Adding a string will configure the server using use-package-eglot.
         '';
       };
 
@@ -369,11 +369,12 @@ let
             } . (lambda () (require 'lsp-mode) (lsp-mode)))"
           ];
         mkEglot = name: vs:
-          optional vs [
-            "(${
+          optional vs [''
+            :hook (${
               transformName name
-            } . (lambda () (require 'eglot) (eglot-ensure)))"
-          ];
+            } . (lambda () (require 'eglot) (eglot-ensure)))
+                          ${if isString vs then ":eglot ${vs}" else ""}
+          ''];
         mkLspCe = name: vs:
           optional vs [
             "(${
@@ -404,13 +405,14 @@ let
         ++ mkDeferIncrementally config.deferIncrementally
         ++ mkDefines config.defines ++ mkFunctions config.functions
         ++ mkDemand config.demand ++ mkDiminish config.diminish ++ mkHook
-        (config.hook ++ mkEglot name config.eglot ++ mkLsp name config.lsp
-          ++ mkLspCe name config.lspce) ++ mkGhook config.ghook
+        (config.hook ++ mkLsp name config.lsp ++ mkLspCe name config.lspce)
+        ++ mkGhook config.ghook
+        ++ optionals (config.eglot != false) [ (mkEglot name config.eglot) ]
         ++ mkGfhook config.gfhook ++ mkCustom config.custom
         ++ buildGeneral config.general config.generalOne config.generalTwo
         ++ mkSymex name config.symex ++ mkMode config.mode
         ++ optionals (config.init != "") [ ":init" config.init ]
-        ++ optionals (config.babel != "") [(mkBabel config.babel)]
+        ++ optionals (config.babel != "") [ (mkBabel config.babel) ]
         ++ optionals (config.config != "") [ ":config" config.config ]
         ++ optional (config.extraConfig != "") config.extraConfig) + ")";
     };
@@ -480,6 +482,8 @@ let
     p.symex != false || p.ghook != [ ] || p.gfhook != [ ] || p.generalOne != { }
     || p.generalTwo != { } || p.general != { }) (attrValues cfg.usePackage);
 
+  hasEglot = any (p: p.eglot != false) (attrValues cfg.usePackage);
+
   hasLsp = any (p: p.lsp != false) (attrValues cfg.usePackage);
 
   hasLspce = any (p: p.lspce != false) (attrValues cfg.usePackage);
@@ -530,7 +534,9 @@ let
       (use-package use-package-chords
        :config (key-chord-mode 1))
   '' + optionalString hasBabel ''
-      (defvar org-babel-langs '())
+    (defvar org-babel-langs '())
+  '' + optionalString hasEglot ''
+    (require 'use-package-eglot)
   '';
   earlyInitFile = ''
     ;;; hm-early-init.el --- Emacs configuration à la Home Manager -*- lexical-binding: t; -*-
@@ -654,6 +660,7 @@ in {
       ] ++ optionals hasGeneral [ epkgs.general ]
       ++ optionals hasDiminish [ epkgs.diminish ]
       ++ optionals hasChords [ epkgs.use-package-chords ]
+      ++ optionals hasEglot [epkgs.eglot epkgs.use-package-eglot]
       ++ optionals hasLsp [ epkgs.lsp-mode ]
       ++ optionals hasLspce [ epkgs.lspce ]
       ++ optionals hasDoom [ epkgs.doom-utils ]
@@ -686,7 +693,10 @@ in {
         (filter (getAttr "enable") (attrValues cfg.usePackage))) + ''
 
           ${cfg.postlude}
-          ${if hasBabel then "(org-babel-do-load-languages 'org-babel-load-languages org-babel-langs)" else ""}
+          ${if hasBabel then
+            "(org-babel-do-load-languages 'org-babel-load-languages org-babel-langs)"
+          else
+            ""}
         '';
     };
   };

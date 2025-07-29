@@ -18,5 +18,9 @@ final: prev: inputs: {
           inherit inputs;
           inherit (prev.emacsPackages) trivialBuild eglot jsonrpc;
         });
+        use-package-eglot = (prev.emacsPackages.callPackage ./emacs-packages/use-package-eglot.nix {
+            inherit inputs;
+            inherit (prev.emacsPackages) trivialBuild use-package eglot;
+          });
       }));
 }
