@@ -197,7 +197,7 @@ let
       };
 
       eglot = mkOption {
-        type = types.either (types.bool types.str);
+        type = types.either types.bool types.str;
         default = false;
         description = ''
           Starts eglot upon loading the major mode. Adding a string will configure the server using use-package-eglot.
