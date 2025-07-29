@@ -1,4 +1,4 @@
-{ config, lib, inputs, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
@@ -686,7 +686,7 @@ in {
         (filter (getAttr "enable") (attrValues cfg.usePackage))) + ''
 
           ${cfg.postlude}
-          ${if hasBabel then "(org-babel-do-load-languages 'org-babel-load-languages org-babel-langs)"}
+          ${if hasBabel then "(org-babel-do-load-languages 'org-babel-load-languages org-babel-langs)" else ""}
         '';
     };
   };
