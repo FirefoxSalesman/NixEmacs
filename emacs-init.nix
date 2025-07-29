@@ -331,7 +331,7 @@ let
         mkMode = vs: optional (vs != [ ]) ":mode ${toString vs}";
         mkFunctions = vs: optional (vs != [ ]) ":functions (${toString vs})";
         mkBind = mkBindHelper "bind" "";
-        mkBabel = n: "(add-to-list 'org-babel-langs '(${n} . t))";
+        mkBabel = n: ":init (add-to-list 'org-babel-langs '(${n} . t))";
         mkGeneral = bs:
           optionals (bs != { })
           ([ "(" ] ++ mapAttrsToList (n: v: ''"${n}" ${v}'') bs ++ [ ")" ]);
