@@ -369,7 +369,7 @@ let
             } . (lambda () (require 'lsp-mode) (lsp-mode)))"
           ];
         mkEglot = name: vs:
-          optional vs [''
+          optional (vs != false) [''
             :hook (${
               transformName name
             } . (lambda () (require 'eglot) (eglot-ensure)))
@@ -407,7 +407,7 @@ let
         ++ mkDemand config.demand ++ mkDiminish config.diminish ++ mkHook
         (config.hook ++ mkLsp name config.lsp ++ mkLspCe name config.lspce)
         ++ mkGhook config.ghook
-        ++ optionals (config.eglot != false) (mkEglot name config.eglot)
+        ++ mkEglot name config.eglot
         ++ mkGfhook config.gfhook ++ mkCustom config.custom
         ++ buildGeneral config.general config.generalOne config.generalTwo
         ++ mkSymex name config.symex ++ mkMode config.mode
