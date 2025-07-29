@@ -65,8 +65,9 @@ in {
       };
 
       lsp-pyright = lib.mkIf
-        ((matches "basedpyright" ide.languages.python.languageServer)
-          || (matches "pyright" ide.languages.python.languageServer)) {
+        (((matches "basedpyright" ide.languages.python.languageServer)
+          || (matches "pyright" ide.languages.python.languageServer))
+          && ide.lsp.enable) {
             enable = true;
             after = [ "lsp-mode" ];
             custom.lsp-pyright-langserver-command = if (matches "basedpyright"
