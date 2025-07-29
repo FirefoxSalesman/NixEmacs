@@ -331,8 +331,7 @@ let
         mkMode = vs: optional (vs != [ ]) ":mode ${toString vs}";
         mkFunctions = vs: optional (vs != [ ]) ":functions (${toString vs})";
         mkBind = mkBindHelper "bind" "";
-        mkBabel = n:
-          ":init (with-eval-after-load 'org (org-babel-do-load-languages 'org-babel-load-languages '((${n} . t))))";
+        mkBabel = n: "(add-to-list 'org-babel-langs '(${n} . t))";
         mkGeneral = bs:
           optionals (bs != { })
           ([ "(" ] ++ mapAttrsToList (n: v: ''"${n}" ${v}'') bs ++ [ ")" ]);
@@ -487,6 +486,8 @@ let
 
   hasSymex = any (p: p.symex != false) (attrValues cfg.usePackage);
 
+  hasBabel = any (p: p.babel != "") (attrValues cfg.usePackage);
+
   # Whether the configuration makes use of `:bind`.
   hasBind = any (p: p.bind != { } || p.bindLocal != { } || p.bindKeyMap != { })
     (attrValues cfg.usePackage);
@@ -528,6 +529,8 @@ let
     ;; For :chords in (use-package).
       (use-package use-package-chords
        :config (key-chord-mode 1))
+  '' + optionalString hasBabel ''
+      (defvar org-babel-langs '())
   '';
   earlyInitFile = ''
     ;;; hm-early-init.el --- Emacs configuration à la Home Manager -*- lexical-binding: t; -*-
@@ -683,6 +686,7 @@ in {
         (filter (getAttr "enable") (attrValues cfg.usePackage))) + ''
 
           ${cfg.postlude}
+          ${if hasBabel then "(org-babel-do-load-languages 'org-babel-load-languages org-babel-langs)"}
         '';
     };
   };
