@@ -411,7 +411,7 @@ let
         ++ buildGeneral config.general config.generalOne config.generalTwo
         ++ mkSymex name config.symex ++ mkMode config.mode
         ++ optionals (config.init != "") [ ":init" config.init ]
-        ++ optionals (config.babel != "") [mkBabel config.babel]
+        ++ optionals (config.babel != "") [(mkBabel config.babel)]
         ++ optionals (config.config != "") [ ":config" config.config ]
         ++ optional (config.extraConfig != "") config.extraConfig) + ")";
     };
