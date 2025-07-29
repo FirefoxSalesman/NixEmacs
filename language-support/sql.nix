@@ -14,17 +14,12 @@ in {
         else
           [ ];
       mode = [ ''"\\.sql\\'"'' ];
-      eglot = ide.eglot.enable;
+      eglot = lib.mkIf ide.eglot.enable ''"sqls"'';
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
       symex = ide.symex;
-      config = lib.mkIf (ide.eglot.enable || ide.lspce.enable) ''
-        ${if ide.eglot.enable then ''
-          (with-eval-after-load 'eglot
-                    (add-to-list 'eglot-server-programs '((sql-mode) . ("sqls"))))'' else
-          ''
-            (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("sql" "sqls" "")))''}
-      '';
+      config = lib.mkIf ide.lspce.enable ''
+        (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("sql" "sqls" "")))'';
     };
   };
 }

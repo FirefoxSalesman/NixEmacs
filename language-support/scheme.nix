@@ -12,16 +12,14 @@ in {
         enable = true;
         extraPackages = [ pkgs.akkuPackages.scheme-langserver ];
         symex = ide.symex;
-        eglot = ide.eglot.enable;
+        eglot =
+          lib.mkIf ide.eglot.enable '''(scheme-mode . ("scheme-langserver"))'';
         lspce = ide.lspce.enable;
         init = ''
           (setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';
         config = ''
           (setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))
-          ${if ide.eglot.enable then ''
-            (with-eval-after-load 'eglot
-                                (add-to-list 'eglot-server-programs '(scheme-mode . ("scheme-langserver"))))
-          '' else if ide.lspce.enable then
+          ${if ide.lspce.enable then
             ''
               (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("scheme" "scheme-langserver" "")))''
           else

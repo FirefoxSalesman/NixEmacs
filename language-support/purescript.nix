@@ -16,19 +16,13 @@ in {
           [ pkgs.nodePackages.purescript-language-server ]
         else
           [ ];
-      eglot = ide.eglot.enable;
+      eglot = lib.mkIf ide.eglot.enable ''
+        ("purescript-language-server" "--stdio" :initializationOptions (:purescript (:formatter "purs-tidy")))'';
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
       symex = ide.symex;
-      config = lib.mkIf (ide.eglot.enable || ide.lspce.enable) ''
-        ${if ide.eglot.enable then ''
-          (with-eval-after-load 'eglot
-            (add-to-list 'eglot-server-programs '((purescript-mode) . ("purescript-language-server" "--stdio"
-                                                                       :initializationOptions (:purescript (:formatter "purs-tidy"))))))
-        '' else ''
-          (add-to-list 'lspce-server-programs '("purescript" "purescript-language-server" "--stdio"))
-        ''}
-      '';
+      config = lib.mkIf ide.lspce.enable ''
+        (add-to-list 'lspce-server-programs '("purescript" "purescript-language-server" "--stdio"))'';
     };
   };
 }

@@ -18,17 +18,12 @@ in {
         else
           [ ];
         mode = [ ''"\\.scala\\'"'' ];
-        eglot = ide.eglot.enable;
+        eglot = lib.mkIf ide.eglot.enable ''"metals"'';
         lsp = ide.lsp.enable;
         lspce = ide.lspce.enable;
         symex = ide.symex;
-        config = lib.mkIf (ide.eglot.enable || ide.lspce.enable) ''
-          ${if ide.eglot.enable then ''
-            (with-eval-after-load 'eglot
-                        (add-to-list 'eglot-server-programs '((scala-ts-mode) . ("metals"))))'' else
-            ''
-              (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("scala" "metals" "")))''}
-        '';
+        config = lib.mkIf ide.lspce.enable ''
+          (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("scala" "metals" "")))'';
       };
 
       sbt-mode = {

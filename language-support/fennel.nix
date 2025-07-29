@@ -15,17 +15,10 @@ in {
         [ ];
       mode = [ ''"\\.fnl\\'"'' ];
       symex = ide.symex;
-      eglot = ide.eglot.enable;
+      eglot = lib.mkIf ide.eglot.enable ''"fennel-ls"'';
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
-      config = lib.mkIf (ide.eglot.enable || ide.lspce.enable) ''
-        ${if ide.eglot.enable then ''
-          (with-eval-after-load 'eglot (add-to-list 'eglot-server-programs '(fennel-mode . ("fennel-ls"))))
-        '' else if ide.lspce.enable then ''
-          (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("fennel" "fennel-ls" "")))
-        '' else
-          ""}
-      '';
+      config = lib.mkIf ide.lspce.enable ''(with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("fennel" "fennel-ls" "")))'';
     };
   };
 }

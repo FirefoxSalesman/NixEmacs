@@ -18,15 +18,10 @@ in {
             [ ];
         # many thanks to doom
         mode = [ ''"\\.[px]?html?\\'"'' ];
-        config = lib.mkIf (ide.eglot.enable || ide.lspce.enable) ''
-          ${if ide.eglot.enable then ''
-            (with-eval-after-load 'eglot
-              (add-to-list 'eglot-server-programs '((html-ts-mode) . ("vscode-html-language-server" "--stdio"))))
-          '' else ''
-            (add-to-list 'lspce-server-programs '("html" "vscode-html-language-server" "--stdio"))
-          ''}
+        config = lib.mkIf ide.lspce.enable ''
+          (add-to-list 'lspce-server-programs '("html" "vscode-html-language-server" "--stdio"))
         '';
-        eglot = ide.eglot.enable;
+        eglot = lib.mkIf ide.eglot.enable ''("vscode-html-language-server" "--stdio")'';
         symex = ide.symex;
         lsp = ide.lsp.enable;
         lspce = ide.lspce.enable;

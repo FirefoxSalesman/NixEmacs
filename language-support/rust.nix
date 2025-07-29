@@ -17,7 +17,8 @@ in {
           [ ];
         lsp = ide.lsp.enable;
         lspce = ide.lspce.enable;
-        eglot = ide.eglot.enable;
+        eglot = lib.mkIf ide.eglot.enable ''
+          ("rust-analyzer" :initializationOptions (:check (:command "clippy")))'';
         symex = ide.symex;
       };
 
@@ -33,13 +34,8 @@ in {
           else
             false);
         };
-        config = lib.mkIf (ide.eglot.enable || ide.lsp.enable) ''
-          ${if ide.eglot.enable then ''
-            (with-eval-after-load 'eglot
-                        (add-to-list 'eglot-server-programs '((rust-ts-mode rust-mode) . ("rust-analyzer" :initializationOptions (:check (:command "clippy"))))))'' else ''
-              (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("rustic" "rust-analyzer" "")))
-            ''}
-        '';
+        config = lib.mkIf ide.lspce.enable ''
+          (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("rustic" "rust-analyzer" "")))'';
       };
     };
   };

@@ -14,15 +14,11 @@ in {
       else
         [ ];
       mode = [ ''"\\.lua\\'"'' ];
-      eglot = ide.eglot.enable;
+      eglot = lib.mkIf ide.eglot.enable ''"lua-language-server"'';
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
-      config = lib.mkIf (ide.eglot.enable || ide.lspce.enable) ''
-        ${if ide.eglot.enable then ''
-          (with-eval-after-load 'eglot
-                                (add-to-list 'eglot-server-programs '((lua-ts-mode) . ("lua-language-server"))))'' else ''
-            (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("lua" "lua-language-server" "")))
-          ''}
+      config = lib.mkIf ide.lspce.enable ''
+        (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("lua" "lua-language-server" "")))
       '';
     };
   };

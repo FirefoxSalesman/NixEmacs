@@ -23,6 +23,18 @@ in {
           (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("json" "vscode-json-language-server" "--stdio")))
         '';
       };
+
+      json5-ts-mode = {
+        enable = true;
+        extraPackages = [ pkgs.vscode-langservers-extracted ];
+        mode = [ ''"\\.json5\\'"'' ];
+        eglot = lib.mkIf ide.eglot.enable ''("vscode-json-language-server" "--stdio")'';
+        symex = ide.symex;
+        lspce = ide.lspce.enable;
+        config = lib.mkIf ide.lspce.enable ''
+          (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("json5" "vscode-json-language-server" "--stdio")))
+        '';
+      };
     };
   };
 }
