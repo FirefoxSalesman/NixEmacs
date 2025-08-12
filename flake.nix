@@ -23,7 +23,7 @@
     };
 
     use-package-eglot = {
-      url = "gitlab:aidanhall/use-package-eglot";
+      url = "github:firefoxsalesman/use-package-eglot";
       flake = false;
     };
   };
