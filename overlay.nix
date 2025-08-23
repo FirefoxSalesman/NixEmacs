@@ -2,6 +2,10 @@ final: prev: inputs: {
   emacsPackagesFor = emacs: (
     (prev.emacsPackagesFor emacs).overrideScope (
       nfinal: nprev: {
+        org-modern-indent = (prev.emacsPackages.callPackage ./emacs-packages/org-modern-indent.nix {
+          inherit inputs;
+          inherit (prev.emacsPackages) trivialBuild compat;
+        });
         doom-utils = (prev.emacsPackages.callPackage ./emacs-packages/doom-utils.nix {
           inherit inputs;
           inherit (prev.emacsPackages) trivialBuild;
@@ -19,8 +23,8 @@ final: prev: inputs: {
           inherit (prev.emacsPackages) trivialBuild eglot jsonrpc;
         });
         use-package-eglot = (prev.emacsPackages.callPackage ./emacs-packages/use-package-eglot.nix {
-            inherit inputs;
-            inherit (prev.emacsPackages) trivialBuild use-package eglot;
-          });
+          inherit inputs;
+          inherit (prev.emacsPackages) trivialBuild use-package eglot;
+        });
       }));
 }

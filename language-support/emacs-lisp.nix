@@ -4,10 +4,7 @@ let
   ide = config.programs.emacs.init.ide;
 in
 {
-  options.programs.emacs.init.ide.languages.emacs-lisp = {
-    enable = lib.mkEnableOption "Enables additional support for emacs lisp. Borrowed from doom, & highly reccommended";
-    flymake = lib.mkEnableOption "Enable flymake.";
-  };
+  options.programs.emacs.init.ide.languages.emacs-lisp.enable = lib.mkEnableOption "Enables additional support for emacs lisp. Borrowed from doom, & highly reccommended";
 
   config = lib.mkIf ide.languages.emacs-lisp.enable {
     programs.emacs.init.usePackage = {
@@ -15,7 +12,7 @@ in
         enable = true;
         symex = ide.symex;
         mode = [''("\\.Cask\\'" . emacs-lisp-mode)''];
-        hook = lib.mkIf ide.languages.emacs-lisp.flymake ["(emacs-lisp-mode . flymake-mode)"];
+        hook = lib.mkIf ide.flymake.enable ["(emacs-lisp-mode . flymake-mode)"];
       };
 
       elisp-demos = {

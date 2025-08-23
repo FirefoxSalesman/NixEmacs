@@ -546,6 +546,30 @@ For eglot, lspce, & emacs-lisp mode, this is done with [[https://github.com/caso
 **** =programs.emacs.init.ide.breadcrumb=
 A boolean that will enable breadcrumbs in emacs-lisp-mode, eglot-mode, lsp-mode, & lspce-mode
 
+**** Flymake
+***** =programs.emacs.init.ide.flymake.enable=
+Enables flymake in all languages where it's useful.
+
+***** =programs.emacs.init.ide.flymake.preset=
+Enables the flymake preset configuration (largely borrowed from doom)
+
+**** Flycheck
+***** =programs.emacs.init.ide.flycheck.enable=
+Enables flycheck in all languages where it's useful.
+
+***** =programs.emacs.init.ide.flycheck.preset=
+Enables the flycheck preset configuration (largely borrowed from doom)
+
+**** =programs.emacs.init.ide.project=
+Enables the preset for project.el.
+
+Notable additions:
++ a lot more project root markers
++ [[https://github.com/mohkale/projection][projection]]. =projection-multi-compile= is bound to enter in the =project-mode-map=
+
+**** =programs.emacs.init.ide.projectile=
+Enables the preset for projectile.
+
 **** Language Support
 Every option here can be found under =programs.emacs.init.ide.languages=
 
@@ -588,13 +612,10 @@ Boolean value that enables css support
 ****** =css.emmet=
 Boolean value that enables emmet in css buffers
 
-***** emacs lisp
-This module was borrowed from doom
-****** =emacs-lisp.enable=
-Enables additional tools to assist in writing emacs lisp packages.
+***** =emacs-lisp.enable=
+This module was borrowed from doom.
 
-****** =emacs-lisp.flymake=
-Activates flymake in emacs lisp buffers
+Enables additional tools to assist in writing emacs lisp packages.
 
 ***** =erlang.enable=
 Boolean option that enables erlang support
@@ -635,6 +656,9 @@ Boolean option that enables javascript support
 ***** =json.enable=
 Boolean option that enables json support
 
+***** =julia.enable=
+Boolean option that enables julia support. You will need to install julia yourself
+
 ***** =kotlin.enable=
 Boolean option that enables kotlin support
 
@@ -653,6 +677,9 @@ Boolean option that enables [[https://github.com/cdominik/cdlatex][cdlatex]] for
 ****** =latex.preferTexlab=
 If an lsp client is enabled & this variable is set to true, install [[https://github.com/latex-lsp/texlab][texlab]] instead of [[https://ctan.org/pkg/digestif][digestif]]
 
+***** =ledger.enable=
+Enables ledger support
+
 ***** =lua.enable=
 Boolean value that enables lua support
 
@@ -663,6 +690,27 @@ Boolean that enables markdown support
 Boolean that enables nix support.
 
 A small portion was stolen from doom.
+
+***** Org
+****** =org.enable=
+Boolean option that enables org support
+
+****** Aesthetics
+******* =org.aesthetics.enable=
+Enables [[https://github.com/minad/org-modern][org-modern]] & [[https://github.com/jdtsmith/org-modern-indent][org-modern-indent]]
+
+******* =org.aesthetics.headerFont=
+The font to use for org headers. Defaults to ="Liberation Serif"=.
+
+****** Capture Templates
+******* =org.captureTemplates.enables=
+Enables doom's org capture templates
+
+******* =org.captureTemplates.notesFile=
+The file in your org-directory to put your notes in. Defaults to ="notes.org"=
+
+******* =org.captureTemplates.journalFIle=
+The file in your org-directory to put your journal entries in. Defaults to ="journal.org"=
 
 ***** =plantuml.enable=
 Boolean that enables plantuml support.
@@ -737,6 +785,9 @@ Boolean option to enable toml support.
 
 ***** =typescript.enable=
 Boolean option to enable typescript support.
+
+***** =vimscript.enable=
+Boolean option to enable vimscript support.
 
 ***** =xml.enable=
 Boolean option to enable xml support.

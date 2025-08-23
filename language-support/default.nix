@@ -45,6 +45,10 @@
     ./scheme.nix
     ./racket.nix
     ./xml.nix
+    ./org.nix
+    ./vimscript.nix
+    ./ledger.nix
+    ./julia.nix
   ];
 
   options.programs.emacs.init.ide = {

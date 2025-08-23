@@ -2,6 +2,11 @@
   description = "Emacs Home Manager Module Flake";
 
   inputs = {
+    org-modern-indent = {
+      url = "github:alphapapa/org-modern-indent";
+      flake = false;
+    };
+
     eglot-booster = {
       url = "github:jdtsmith/eglot-booster";
       flake = false;

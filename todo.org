@@ -1,0 +1,18 @@
+* TODO Language support
+** TODO vimscript
++ Don't forget to add the treesitter grammar
+
+** DONE org
+** TODO julia
++ Don't forget to add the treesitter grammar
+  https://github.com/tree-sitter/tree-sitter-julia
+
+** DONE ledger
+
+* DONE Support syntax checkers
+** DONE flymake
+** DONE flycheck
+
+* DONE Support for project management
+** DONE project
+** DONE projectile
