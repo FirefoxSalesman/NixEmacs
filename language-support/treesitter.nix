@@ -4,7 +4,7 @@ let
   lang = config.programs.emacs.init.ide.languages;
 in
 {
-  config = lib.mkIf (lang.python.enable || lang.hy.enable || lang.java.enable || lang.gradle.enable || lang.clojure.enable || lang.scala.enable || lang.kotlin.enable || lang.nix.enable || lang.web.enable || lang.pug.enable || lang.javascript.enable || lang.typescript.enable || lang.json.enable || lang.toml.enable || lang.haskell.enable || lang.c.enable || lang.bash.enable || lang.r.enable || lang.prolog.enable || lang.zenscript.enable || lang.rust.enable || lang.lua.enable || lang.fennel.enable || lang.plantuml.enable || lang.erlang.enable || lang.sql.enable || lang.forth.enable || lang.go.enable || lang.markdown.enable || lang.zig.enable || lang.latex.enable || lang.csharp.enable || lang.ruby.enable || lang.common-lisp.enable || lang.scheme.enable || lang.racket.enable || lang.xml.enable) {
+  config = lib.mkIf (lang.python.enable || lang.hy.enable || lang.java.enable || lang.gradle.enable || lang.clojure.enable || lang.scala.enable || lang.kotlin.enable || lang.nix.enable || lang.web.enable || lang.pug.enable || lang.javascript.enable || lang.typescript.enable || lang.json.enable || lang.toml.enable || lang.haskell.enable || lang.c.enable || lang.bash.enable || lang.r.enable || lang.prolog.enable || lang.zenscript.enable || lang.rust.enable || lang.lua.enable || lang.fennel.enable || lang.plantuml.enable || lang.erlang.enable || lang.sql.enable || lang.forth.enable || lang.go.enable || lang.markdown.enable || lang.zig.enable || lang.latex.enable || lang.csharp.enable || lang.ruby.enable || lang.common-lisp.enable || lang.scheme.enable || lang.racket.enable || lang.xml.enable || lang.org.enable || lang.vimscript.enable || lang.julia.enable || lang.emacs-lisp.enable || lang.purescript.enable) {
     programs.emacs.init.usePackage = {
       treesit-auto = {
         enable = true;
@@ -22,6 +22,8 @@ in
                            (haskell "https://github.com/tree-sitter/tree-sitter-haskell")
                            (toml "https://github.com/ikatyang/tree-sitter-toml")
                            (json5 "https://github.com/Joakker/tree-sitter-json5")
+                           (julia "https://github.com/tree-sitter/tree-sitter-julia")
+                           (vim "https://github.com/tree-sitter-grammars/tree-sitter-vim")
                            (elisp "https://github.com/Wilfred/tree-sitter-elisp")))
                   (add-to-list 'treesit-language-source-alist grammar)
                   ;; Only install `grammar' if we don't already have it
