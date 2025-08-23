@@ -12,7 +12,7 @@ in
       mode = [''"\\.jl\\'"''];
       lsp = ide.lsp.enable;
       eglot = ide.eglot.enable;
-      symex = ide.symex.enable;
+      symex = ide.symex;
     };
 
     julia-repl = {
