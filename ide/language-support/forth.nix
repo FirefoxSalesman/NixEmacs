@@ -9,6 +9,7 @@ in
   config = lib.mkIf ide.languages.forth.enable {
     programs.emacs.init.usePackage.forth-mode = {
       enable = true;
+      babel = lib.mkIf ide.languages.org.enable "forth";
       mode = [''"\\.fs\\'"''];
       symex = ide.symex;
     };

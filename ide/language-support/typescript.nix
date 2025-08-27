@@ -8,6 +8,7 @@ in {
   config = lib.mkIf ide.languages.typescript.enable {
     programs.emacs.init.usePackage.typescript-ts-mode = {
       enable = true;
+      babel = lib.mkIf ide.languages.org.enable "typescript";
       extraPackages = if ide.lsp-bridge.enable || ide.lspce.enable
       || ide.lsp.enable || ide.eglot.enable then
         with pkgs; [ typescript-language-server ]

@@ -52,6 +52,7 @@ in {
             [ pkgs.texlivePackages.digestif ]
         else
           [ ];
+        babel = lib.mkIf ide.languages.org.enable "latex";
         mode = [ ''("\\.tex\\'" . LaTeX-mode)'' ];
         symex = ide.symex;
         lsp = ide.lsp.enable;

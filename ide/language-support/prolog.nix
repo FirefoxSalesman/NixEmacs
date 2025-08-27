@@ -19,6 +19,11 @@ in
         after = [ "prolog-mode" ];
         hook = [ "(prolog-mode . flymake-mode)" ];
       };
+
+      ob-prolog = lib.mkIf ide.languages.org.enable {
+        enable = true;
+        babel = ide.languages.org.enable "prolog";
+      };
     };
   };
 }

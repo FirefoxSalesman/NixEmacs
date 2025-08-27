@@ -10,10 +10,16 @@
         hook = ["(coffee-mode . coffee-cos-mode)"];
       };
 
-      flymake-coffee = {
+      flymake-coffee = lib.mkIf ide.flymake.enable {
         enable = true;
         extraPackages = [pkgs.coffeescript];
         hook = ["(coffee-mode . flymake-coffee-load)"];
+      };
+
+      ob-coffeescript = lib.mkIf ide.languages.org.enable {
+        enable = true;
+        after = [ "org" ];
+        babel = ide.languages.org.enable "coffeescript";
       };
     };
   };

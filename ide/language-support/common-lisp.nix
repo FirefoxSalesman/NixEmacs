@@ -1,16 +1,27 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 let
   ide = config.programs.emacs.init.ide;
 in
 {
-  options.programs.emacs.init.ide.languages.common-lisp.enable = lib.mkEnableOption "enables common lisp support, stolen from Doom Emacs";
+  options.programs.emacs.init.ide.languages.common-lisp.enable =
+    lib.mkEnableOption "enables common lisp support, stolen from Doom Emacs";
 
   config = lib.mkIf ide.languages.common-lisp.enable {
     programs.emacs.init.usePackage = {
+      lisp-mode = lib.mkIf ide.languages.org.enable {
+        enable = true;
+        babel = ide.languages.org.enable "lisp";
+      };
+
       sly = {
         enable = true;
-        hook = ["(lisp-mode-local-vars . sly-editing-mode)"];
+        hook = [ "(lisp-mode-local-vars . sly-editing-mode)" ];
         custom = {
           inferior-lisp-program = lib.mkDefault ''"${pkgs.sbcl}/bin/sbcl"'';
           sly-kill-without-query-p = lib.mkDefault true;

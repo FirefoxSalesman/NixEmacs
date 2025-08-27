@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
-let ide = config.programs.emacs.init.ide;
-in {
+let
+  ide = config.programs.emacs.init.ide;
+in
+{
   options.programs.emacs.init.ide.languages.css = {
     enable = lib.mkEnableOption "enables css support";
     emmet = lib.mkEnableOption "enables emmet for css";
@@ -17,11 +24,12 @@ in {
 
       css-ts-mode = {
         enable = true;
-        extraPackages = if ide.lsp-bridge.enable || ide.lspce.enable
-        || ide.lsp.enable || ide.eglot.enable then
-          with pkgs; [ vscode-langservers-extracted ]
-        else
-          [ ];
+        babel = lib.mkIf ide.languages.org.enable "css";
+        extraPackages =
+          if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
+            with pkgs; [ vscode-langservers-extracted ]
+          else
+            [ ];
         mode = [ ''"\\.css\\'"'' ];
         eglot = ide.eglot.enable;
         symex = ide.symex;

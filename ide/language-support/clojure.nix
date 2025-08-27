@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
-let ide = config.programs.emacs.init.ide;
-in {
+let
+  ide = config.programs.emacs.init.ide;
+in
+{
   options.programs.emacs.init.ide.languages.clojure.enable =
     lib.mkEnableOption "enables clojure support";
 
@@ -9,6 +16,7 @@ in {
     programs.emacs.init.usePackage = {
       clojure-mode = {
         enable = true;
+        babel = lib.mkIf ide.languages.org.enable "clojure";
         extraPackages =
           if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then
             with pkgs; [ clojure-lsp ]

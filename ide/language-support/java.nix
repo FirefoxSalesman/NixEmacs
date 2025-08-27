@@ -1,16 +1,26 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
-let ide = config.programs.emacs.init.ide;
-in {
-  options.programs.emacs.init.ide.languages.java.enable =
-    lib.mkEnableOption "enables java support";
+let
+  ide = config.programs.emacs.init.ide;
+in
+{
+  options.programs.emacs.init.ide.languages.java.enable = lib.mkEnableOption "enables java support";
 
   config = lib.mkIf ide.languages.java.enable {
     programs.emacs.init.usePackage = {
       java-ts-mode = {
         enable = true;
+        babel = lib.mkIf ide.languages.org.enable "java";
         extraPackages =
-          if ide.lspce.enable || ide.lsp-bridge.enable || ide.eglot.enable then with pkgs; [ jdt-language-server ] else [ ];
+          if ide.lspce.enable || ide.lsp-bridge.enable || ide.eglot.enable then
+            with pkgs; [ jdt-language-server ]
+          else
+            [ ];
         mode = [ ''"\\.java\\'"'' ];
         lsp = ide.lsp.enable;
         lspce = ide.lspce.enable;

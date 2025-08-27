@@ -52,7 +52,6 @@
   ];
 
   options.programs.emacs.init.ide = {
-    evil = lib.mkEnableOption "enables evil support in all languages that support it";
     breadcrumb = lib.mkEnableOption "Enables the breadcrumb header";
     hoverDoc = lib.mkEnableOption "Enables hover documentation";
     symex = lib.mkEnableOption "enables symex support in all languages that support it";

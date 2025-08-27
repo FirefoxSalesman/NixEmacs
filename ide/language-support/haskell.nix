@@ -7,6 +7,7 @@ in {
   config = lib.mkIf ide.languages.haskell.enable {
     programs.emacs.init.usePackage.haskell-ts-mode = {
       enable = true;
+      babel = lib.mkIf ide.languages.org.enable "haskell";
       mode = [ ''"\\.hs\\'"'' ];
       extraPackages = if ide.lsp-bridge.enable || ide.lspce.enable
       || ide.lsp.enable || ide.eglot.enable then

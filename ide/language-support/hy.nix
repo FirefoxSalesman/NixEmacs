@@ -8,11 +8,18 @@ in
   options.programs.emacs.init.ide.languages.hy.enable = lib.mkEnableOption "enables hy support";
 
   config = lib.mkIf ide.languages.hy.enable {
-    programs.emacs.init.usePackage.hy-mode = {
-      enable = true;
-      mode = [''"\\.hy\\'"''];
-      symex = ide.symex;
-      extraConfig = '':interpreter "hy"'';
+    programs.emacs.init.usePackage = {
+      hy-mode = {
+        enable = true;
+        mode = [ ''"\\.hy\\'"'' ];
+        symex = ide.symex;
+        extraConfig = '':interpreter "hy"'';
+      };
+
+      ob-hy = lib.mkIf ide.languages.org.enable {
+        enable = true;
+        babel = ide.languages.org.enable "hy";
+      };
     };
   };
 }

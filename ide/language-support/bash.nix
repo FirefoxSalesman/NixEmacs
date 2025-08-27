@@ -8,6 +8,7 @@ in {
   config = lib.mkIf ide.languages.bash.enable {
     programs.emacs.init.usePackage.bash-ts-mode = {
       enable = true;
+      babel = lib.mkIf ide.languages.org.enable "shell";
       extraPackages = if ide.lsp-bridge.enable || ide.lspce.enable
       || ide.lsp.enable || ide.eglot.enable then
         with pkgs; [ nodePackages.bash-language-server ]

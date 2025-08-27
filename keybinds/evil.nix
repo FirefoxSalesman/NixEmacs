@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ config, lib, ... }:
 
 let
   keybinds = config.programs.emacs.init.keybinds;

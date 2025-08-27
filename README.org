@@ -475,7 +475,7 @@ Example:
 #+begin_src nix
   programs.emacs.init.usePackage.ob-hy = {
     enable = true;
-    babel = "hy";
+    babel = lib.mkIf ide.org.enable "hy";
   };
 #+end_src
 
@@ -530,11 +530,6 @@ Default: =false=
 
 **** =programs.emacs.init.ide.symex=
 A boolean that will enable symex for all languages in the language support presets
-
-Default: =false=
-
-**** =programs.emacs.init.ide.evil=
-A boolean that will enable evil compats where it's relevant
 
 Default: =false=
 
@@ -797,3 +792,25 @@ Boolean option to enable zenscript support.
 
 ***** =zig.enable=
 Boolean option to enable zig support.
+
+*** keybinds
+**** evil
+***** =programs.emacs.init.keybinds.evil.enable=
+Boolean that enables support for evil mode.
+
+Because we're using =C-u= to scroll, =M-u= is the universal argument.
+
+***** keys
+These variables can be used to easily alter some of evil's motion keys, both for itself, & for other modules that use it
+****** =programs.emacs.init.keybinds.evil.up=
+Defaults to ="k"=.
+
+****** =programs.emacs.init.keybinds.evil.down=
+Defaults to ="j"=.
+
+****** =programs.emacs.init.keybinds.evil.forward=
+Defaults to ="l"=.
+
+****** =programs.emacs.init.keybinds.evil.backward=
+Defaults to ="h"=.
+

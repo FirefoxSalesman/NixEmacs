@@ -10,6 +10,7 @@ in
     programs.emacs.init.usePackage.plantuml-mode = {
       enable = true;
       mode = [''"\\.plantuml\\'"'' ''"\\.puml\\'"''];
+      babel = lib.mkIf ide.languages.org.enable "plantuml";
       custom = {
         org-plantuml-exec-mode = lib.mkDefault "'plantuml";
         plantuml-default-exec-mode = lib.mkDefault "'executable";

@@ -4,15 +4,17 @@ let
   ide = config.programs.emacs.init.ide;
 in
 {
-  options.programs.emacs.init.ide.languages.emacs-lisp.enable = lib.mkEnableOption "Enables additional support for emacs lisp. Borrowed from doom, & highly reccommended";
+  options.programs.emacs.init.ide.languages.emacs-lisp.enable =
+    lib.mkEnableOption "Enables additional support for emacs lisp. Borrowed from doom, & highly reccommended";
 
   config = lib.mkIf ide.languages.emacs-lisp.enable {
     programs.emacs.init.usePackage = {
       elisp-mode = {
         enable = true;
+        babel = lib.mkIf ide.languages.org.enable "emacs-lisp";
         symex = ide.symex;
-        mode = [''("\\.Cask\\'" . emacs-lisp-mode)''];
-        hook = lib.mkIf ide.flymake.enable ["(emacs-lisp-mode . flymake-mode)"];
+        mode = [ ''("\\.Cask\\'" . emacs-lisp-mode)'' ];
+        hook = lib.mkIf ide.flymake.enable [ "(emacs-lisp-mode . flymake-mode)" ];
       };
 
       elisp-demos = {
@@ -25,17 +27,17 @@ in
 
       highlight-quoted = {
         enable = true;
-        hook = ["(emacs-lisp-mode . highlight-quoted-mode)"];
+        hook = [ "(emacs-lisp-mode . highlight-quoted-mode)" ];
       };
 
       eldoc-box = lib.mkIf ide.hoverDoc {
         enable = true;
-        hook = ["(emacs-lisp-mode . eldoc-box-hover-at-point-mode)"];
+        hook = [ "(emacs-lisp-mode . eldoc-box-hover-at-point-mode)" ];
       };
-      
+
       breadcrumb = lib.mkIf ide.breadcrumb {
         enable = true;
-        hook = ["(emacs-lisp-mode . breadcrumb-local-mode)"];
+        hook = [ "(emacs-lisp-mode . breadcrumb-local-mode)" ];
       };
     };
   };

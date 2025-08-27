@@ -12,6 +12,7 @@ in
       ruby-ts-mode = {
         enable = true;
         mode = [''"\\.\\(?:a?rb\\|aslsx\\)\\'"'' ''"/\\(?:Brew\\|Fast\\)file\\'"''];
+        babel = lib.mkIf ide.languages.org.enable "ruby";
         extraPackages = if ide.eglot.enable || ide.lsp.enable || ide.lsp-bridge.enable then [pkgs.rubyPackages.solargraph] else [];
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;

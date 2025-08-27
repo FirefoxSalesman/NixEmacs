@@ -20,6 +20,7 @@ in {
     programs.emacs.init.usePackage = {
       python-ts-mode = {
         enable = true;
+        babel = lib.mkIf ide.languages.org.enable "python";
         eglot = lib.mkIf ide.eglot.enable ''
           ("basedpyright-langserver" "--stdio" 
                                                                                  :initializationOptions (:basedpyright (:plugins (

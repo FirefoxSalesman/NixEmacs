@@ -8,6 +8,7 @@ in {
   config = lib.mkIf ide.languages.r.enable {
     programs.emacs.init.usePackage.ess-r-mode = {
       enable = true;
+      babel = lib.mkIf ide.languages.org.enable "R";
       package = epkgs: epkgs.ess;
       extraPackages = if ide.eglot.enable || ide.lsp.enable || ide.lspce.enable
       || ide.lsp-bridge.enable then

@@ -1,8 +1,17 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
-let ide = config.programs.emacs.init.ide;
-in {
-  options.programs.emacs.init.ide.languages.markdown.enable = lib.mkEnableOption "Enables markdown support";
+let
+  ide = config.programs.emacs.init.ide;
+  keybinds = config.programs.emacs.init.keybinds;
+in
+{
+  options.programs.emacs.init.ide.languages.markdown.enable =
+    lib.mkEnableOption "Enables markdown support";
 
   config = lib.mkIf ide.languages.markdown.enable {
     programs.emacs.init.usePackage = {
@@ -27,7 +36,7 @@ in {
         '';
       };
 
-      evil-markdown = lib.mkIf ide.evil {
+      evil-markdown = lib.mkIf keybinds.evil.enable {
         enable = true;
         defer = true;
         symex = ide.symex;
@@ -35,6 +44,12 @@ in {
           "(markdown-mode . evil-markdown-mode)"
           "(markdown-mode . outline-minor-mode)"
         ];
+        custom.evil-markdown-movement-bindings = ''
+          '((up . "${keybinds.evil.keys.up}")
+            (down . "${keybinds.evil.keys.down}")
+            (left . "${keybinds.evil.keys.backward}")
+            (right . "${keybinds.evil.keys.forward}"))
+        '';
       };
     };
   };
