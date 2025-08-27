@@ -289,6 +289,14 @@ let
         '';
       };
 
+      preface = mkOption {
+        type = types.lines;
+        default = "";
+        description = ''
+          The entries to use for <option>:preface</option>.
+        '';
+      };
+
       extraPackages = mkOption {
         type = types.listOf types.package;
         default = [ ];
@@ -411,6 +419,7 @@ let
         ++ mkGfhook config.gfhook ++ mkCustom config.custom
         ++ buildGeneral config.general config.generalOne config.generalTwo
         ++ mkSymex name config.symex ++ mkMode config.mode
+        ++ optionals (config.preface != "") [ ":preface" config.preface ]
         ++ optionals (config.init != "") [ ":init" config.init ]
         ++ optionals (config.babel != "") [ (mkBabel config.babel) ]
         ++ optionals (config.config != "") [ ":config" config.config ]

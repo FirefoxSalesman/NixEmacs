@@ -2,15 +2,26 @@
 
 let
   keybinds = config.programs.emacs.init.keybinds;
-  mkBindOption = key: desc: lib.mkOption {
-    type = lib.types.string;
-    default = key;
-    description = "binding for evil-${desc}";
-  };
+  mkBindOption =
+    key: desc:
+    lib.mkOption {
+      type = lib.types.string;
+      default = key;
+      description = "binding for evil-${desc}";
+    };
   matches = p: n: lib.match p n != null;
-  generalDef = key: command: ''(general-def '(operator normal visual motion) "${key}" 'evil-${command})'';
-  mkBinding = key: original: command: if matches key original then "" else generalDef key command;
-  visualBinding = key: original: visCommand: altCommand: if keybinds.evil.keys.prefer-visual-line then generalDef key visCommand else mkBinding key original altCommand;
+  generalDef =
+    key: command: ''(general-def '(operator normal visual motion) "${key}" 'evil-${command})'';
+  mkBinding =
+    key: original: command:
+    if matches key original then "" else generalDef key command;
+  visualBinding =
+    key: original: visCommand: altCommand:
+    if keybinds.evil.keys.prefer-visual-line then
+      generalDef key visCommand
+    else
+      mkBinding key original altCommand;
+  swapBinding = key: original: if matches key original then "" else ''"${key}" "${orignal}"'';
 in
 {
   options.programs.emacs.init.keybinds.evil = {
@@ -64,6 +75,37 @@ in
           ${visualBinding keybinds.evil.keys.up "k" "previous-visual-line" "previous-line"}
           ${visualBinding keybinds.evil.keys.down "j" "next-visual-line" "next-line"}
         '';
+      };
+
+      evil-collection = {
+        enable = true;
+        gfhook = lib.mkIf (
+          !(
+            matches keybinds.evil.keys.up "k"
+            || matches keybinds.evil.keys.down "j"
+            || matches keybinds.evil.keys.forward "l"
+            || matches keybinds.evil.keys.backward "h"
+          )
+        ) [ "('evil-collection-setup-hook 'nix-emacs)-hjkl-rotation" ];
+        preface =
+          lib.mkIf
+            (
+              !(
+                matches keybinds.evil.keys.up "k"
+                || matches keybinds.evil.keys.down "j"
+                || matches keybinds.evil.keys.forward "l"
+                || matches keybinds.evil.keys.backward "h"
+              )
+            )
+            ''
+              (defun nix-emacs-hjkl-rotation (_mode mode-keymaps &rest _rest)
+                (evil-collection-translate-key 'normal mode-keymaps
+                  ${swapBinding keybinds.evil.keys.down "j"}
+                  ${swapBinding keybinds.evil.keys.up "k"}
+                  ${swapBinding keybinds.evil.keys.forward "l"}
+                  ${swapBinding keybinds.evil.keys.backward "h"}))
+            '';
+        config = "(evil-collection-init)";
       };
     };
   };
