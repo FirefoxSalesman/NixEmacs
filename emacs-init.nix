@@ -353,7 +353,7 @@ let
         mkGhook = vs: optional (vs != [ ]) ":ghook ${toString vs}";
         mkGfhook = vs: optional (vs != [ ]) ":gfhook ${toString vs}";
         transformName = name:
-          let matches = import matches.nix;
+          let matches = p: n: match p n != null;
           in if matches "tex-mode" name then
             "latex-mode"
           else if matches "latex" name then
