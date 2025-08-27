@@ -86,7 +86,7 @@ in
             || matches keybinds.evil.keys.forward "l"
             || matches keybinds.evil.keys.backward "h"
           )
-        ) [ "('evil-collection-setup-hook 'nix-emacs)-hjkl-rotation" ];
+        ) [ "('evil-collection-setup-hook 'nix-emacs-hjkl-rotation)" ];
         preface =
           lib.mkIf
             (
