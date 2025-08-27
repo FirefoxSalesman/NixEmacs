@@ -22,7 +22,7 @@ in
 
       ob-prolog = lib.mkIf ide.languages.org.enable {
         enable = true;
-        babel = ide.languages.org.enable "prolog";
+        babel = lib.mkIf ide.languages.org.enable "prolog";
       };
     };
   };

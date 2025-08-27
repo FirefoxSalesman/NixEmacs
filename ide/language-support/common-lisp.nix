@@ -16,7 +16,7 @@ in
     programs.emacs.init.usePackage = {
       lisp-mode = lib.mkIf ide.languages.org.enable {
         enable = true;
-        babel = ide.languages.org.enable "lisp";
+        babel = lib.mkIf ide.languages.org.enable "lisp";
       };
 
       sly = {

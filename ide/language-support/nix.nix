@@ -35,7 +35,7 @@ in {
 
       ob-nix = lib.mkIf ide.languages.org.enable {
         enable = true;
-        babel = ide.languages.org.enable "nix";
+        babel = lib.mkIf ide.languages.org.enable "nix";
       };
     };
   };

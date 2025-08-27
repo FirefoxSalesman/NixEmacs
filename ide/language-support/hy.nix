@@ -18,7 +18,7 @@ in
 
       ob-hy = lib.mkIf ide.languages.org.enable {
         enable = true;
-        babel = ide.languages.org.enable "hy";
+        babel = lib.mkIf ide.languages.org.enable "hy";
       };
     };
   };

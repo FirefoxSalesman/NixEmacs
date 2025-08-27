@@ -28,7 +28,7 @@ in
       ob-coffeescript = lib.mkIf ide.languages.org.enable {
         enable = true;
         after = [ "org" ];
-        babel = ide.languages.org.enable "coffeescript";
+        babel = lib.mkIf ide.languages.org.enable "coffeescript";
       };
     };
   };

@@ -37,7 +37,7 @@ in
 
       ob-kotlin = lib.mkIf ide.languages.org.enable {
         enable = true;
-        babel = ide.languages.org.enable "kotlin";
+        babel = lib.mkIf ide.languages.org.enable "kotlin";
       };
     };
   };
