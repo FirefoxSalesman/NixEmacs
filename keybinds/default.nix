@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./ide
-    ./keybinds
+    ./evil.nix
   ];
 }
