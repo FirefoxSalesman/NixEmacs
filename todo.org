@@ -1,18 +1,27 @@
 * TODO Language support
-** TODO vimscript
-+ Don't forget to add the treesitter grammar
+** TODO Ada
+** TODO Dart
+** TODO Flutter
 
-** DONE org
-** TODO julia
-+ Don't forget to add the treesitter grammar
-  https://github.com/tree-sitter/tree-sitter-julia
+* TODO Support for completion systems
+Prescient should be an option
+Orderless should also be an option
 
-** DONE ledger
+** TODO Helm
+** TODO Ivy
++ includes counsel
 
-* DONE Support syntax checkers
-** DONE flymake
-** DONE flycheck
+** TODO Vertico
++ includes consult & embark
 
-* DONE Support for project management
-** DONE project
-** DONE projectile
+** TODO fido vertical mode
+maybe.
+
+** TODO Mct
+maybe
+
+** TODO Corfu
+** TODO Company
+** TODO Completion preview mode
+maybe. It seems so simple that a preset may not be worthwhile
+
