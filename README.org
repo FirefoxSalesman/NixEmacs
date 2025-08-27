@@ -802,6 +802,9 @@ Because we're using =C-u= to scroll, =M-u= is the universal argument.
 
 ***** keys
 These variables can be used to easily alter some of evil's motion keys, both for itself, & for other modules that use it
+
+Symex's keybinds will not be modified, since that is done by modifying the variable =symex--evil-keyspec=. If the framework were to do this, it would make it harder for the user to modify those keybinds further
+
 ****** =programs.emacs.init.keybinds.evil.up=
 Defaults to ="k"=.
 
