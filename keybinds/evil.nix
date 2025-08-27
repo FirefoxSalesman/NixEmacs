@@ -21,7 +21,7 @@ let
       generalDef key visCommand
     else
       mkBinding key original altCommand;
-  swapBinding = key: original: if matches key original then "" else ''"${key}" "${orignal}"'';
+  swapBinding = key: original: if matches key original then "" else ''"${key}" "${original}"'';
 in
 {
   options.programs.emacs.init.keybinds.evil = {
