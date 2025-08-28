@@ -62,7 +62,7 @@ in
         };
         ghook = ["('on-init-ui-hook 'evil-mode)"];
         config = ''
-          (setq evil-want-Y-yank-to-eol t)
+          (setopt evil-want-Y-yank-to-eol t)
           (evil-set-undo-system 'undo-redo)
           (evil-set-initial-state 'messages-buffer-mode 'normal)
           (general-advice-add '(evil-scroll-down evil-scroll-up evil-scroll-page-up evil-scroll-page-down) :after #'(lambda (arg) (evil-window-middle)))
