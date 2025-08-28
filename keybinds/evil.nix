@@ -53,6 +53,7 @@ in
       evil = {
         enable = true;
         demand = true;
+        gfhook = ["('on-init-ui-hook 'evil-mode)"];
         custom = {
           # Various settings to make it more like vim
           evil-want-integration = true;
@@ -74,7 +75,6 @@ in
           "C-u" = "'nil";
         };
         config = ''
-          (evil-mode)
           (setopt evil-want-Y-yank-to-eol t)
           (evil-set-undo-system 'undo-redo)
           (evil-set-initial-state 'messages-buffer-mode 'normal)
@@ -92,7 +92,7 @@ in
 
       evil-collection = {
         enable = true;
-        after = ["evil"];
+        ghook = ["('evil-mode-hook 'evil-collection-init)"];
         gfhook = lib.mkIf hasSwap [ "('evil-collection-setup-hook 'nix-emacs-hjkl-rotation)" ];
         preface = lib.mkIf hasSwap ''
           (defun nix-emacs-hjkl-rotation (_mode mode-keymaps &rest _rest)
@@ -104,7 +104,6 @@ in
               ${keybinds.evil.keys.evil-collection-swap-keys}))
         '';
         custom.evil-collection-setup-minibuffer = true;
-        config = "(evil-collection-init)";
       };
     };
   };
