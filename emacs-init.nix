@@ -657,7 +657,7 @@ in
     # Credits: The large file handling package is from Noctuid
     largeFileHandling = mkEnableOption "Optimizes operations on large text files";
 
-    useOn = mkEnableOption "Enables on.el";
+    hasOn = mkEnableOption "Enables on.el";
 
     startupTimer = mkEnableOption "Emacs startup duration timer";
 
