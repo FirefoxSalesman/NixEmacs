@@ -1,7 +1,7 @@
 * TODO Language support
 ** TODO Ada
-** TODO Dart
-** TODO Flutter
+** DONE Dart & Flutter
+** TODO Swift
 
 * TODO Support for completion systems
 Prescient should be an option
@@ -25,3 +25,14 @@ maybe
 ** TODO Completion preview mode
 maybe. It seems so simple that a preset may not be worthwhile
 
+* TODO Support for keybindings
+** TODO Evil
+** TODO leader key
+we should be able to choose the prefix for global & local leader keys.
+
+** TODO God mode
+** TODO Avy
+** TODO Multi cursors
+** TODO Undo system
+Uses undo-fu & maybe vundo
+** TODO doom escape

@@ -95,13 +95,14 @@ in
         gfhook = lib.mkIf hasSwap [ "('evil-collection-setup-hook 'nix-emacs-hjkl-rotation)" ];
         preface = lib.mkIf hasSwap ''
           (defun nix-emacs-hjkl-rotation (_mode mode-keymaps &rest _rest)
-            (evil-collection-translate-key 'normal mode-keymaps
+            (evil-collection-translate-key '(normal motion) mode-keymaps
               ${swapBinding keybinds.evil.keys.down "j"}
               ${swapBinding keybinds.evil.keys.up "k"}
               ${swapBinding keybinds.evil.keys.forward "l"}
               ${swapBinding keybinds.evil.keys.backward "h"}
               ${keybinds.evil.keys.evil-collection-swap-keys}))
         '';
+        custom.evil-collection-setup-minibuffer = true;
         config = "(evil-collection-init)";
       };
     };
