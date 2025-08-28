@@ -73,8 +73,8 @@ in
           "M-u" = "'universal-argument-more";
           "C-u" = "'nil";
         };
-        ghook = [ "('on-init-ui-hook 'evil-mode)" ];
         config = ''
+          (evil-mode)
           (setopt evil-want-Y-yank-to-eol t)
           (evil-set-undo-system 'undo-redo)
           (evil-set-initial-state 'messages-buffer-mode 'normal)
@@ -92,7 +92,7 @@ in
 
       evil-collection = {
         enable = true;
-        afterCall = ["evil-mode-hook"];
+        after = ["evil"];
         gfhook = lib.mkIf hasSwap [ "('evil-collection-setup-hook 'nix-emacs-hjkl-rotation)" ];
         preface = lib.mkIf hasSwap ''
           (defun nix-emacs-hjkl-rotation (_mode mode-keymaps &rest _rest)
