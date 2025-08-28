@@ -92,6 +92,7 @@ in
 
       evil-collection = {
         enable = true;
+        afterCall = ["evil-mode-hook"];
         gfhook = lib.mkIf hasSwap [ "('evil-collection-setup-hook 'nix-emacs-hjkl-rotation)" ];
         preface = lib.mkIf hasSwap ''
           (defun nix-emacs-hjkl-rotation (_mode mode-keymaps &rest _rest)
