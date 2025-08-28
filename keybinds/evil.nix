@@ -35,6 +35,7 @@ in
     };
   };
   config.programs.emacs.init = lib.mkIf keybinds.evil.enable {
+    hasOn = true;
     usePackage = {
       evil = {
         enable = true;
@@ -52,6 +53,7 @@ in
           evil-move-cursor-back = false;
           evil-move-beyond-eol = true; # Combined with move-cursor-back, it prevents the cursor from moving behind a "/" when selecting a directory in the minibuffer
           evil-cross-lines = true;
+          evil-want-Y-yank-to-eol = true;
           sentence-end-double-space = false;
         };
         general."M-u" = "'universal-argument";
@@ -59,10 +61,8 @@ in
           "M-u" = "'universal-argument-more";
           "C-u" = "'nil";
         };
-
+        ghook = ["('on-init-ui-hook 'evil-mode)"];
         config = ''
-          (evil-mode)
-          (setq evil-want-Y-yank-to-eol t)
           (evil-set-undo-system 'undo-redo)
           (evil-set-initial-state 'messages-buffer-mode 'normal)
           (general-advice-add '(evil-scroll-down evil-scroll-up evil-scroll-page-up evil-scroll-page-down) :after #'(lambda (arg) (evil-window-middle)))
