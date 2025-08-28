@@ -22,6 +22,14 @@ let
     else
       mkBinding key original altCommand;
   swapBinding = key: original: if matches key original then "" else ''"${key}" "${original}"'';
+  hasSwap =
+    !(
+      matches keybinds.evil.keys.up "k"
+      || matches keybinds.evil.keys.down "j"
+      || matches keybinds.evil.keys.forward "l"
+      || matches keybinds.evil.keys.backward "h"
+      || matches keybinds.evil.keys.evil-collection-swap-keys ""
+    );
 in
 {
   options.programs.emacs.init.keybinds.evil = {
@@ -32,6 +40,11 @@ in
       up = mkBindOption "k" "previous-line";
       down = mkBindOption "j" "next-line";
       prefer-visual-line = lib.mkEnableOption "Switches evil-next-line & evil-previous-line for evil-next-visual-line & evil-previous-visual-line";
+      evil-collection-swap-keys = lib.mkOption {
+        type = lib.types.lines;
+        default = "";
+        description = "list of keys to be swapped";
+      };
     };
   };
   config.programs.emacs.init = lib.mkIf keybinds.evil.enable {
@@ -60,7 +73,7 @@ in
           "M-u" = "'universal-argument-more";
           "C-u" = "'nil";
         };
-        ghook = ["('on-init-ui-hook 'evil-mode)"];
+        ghook = [ "('on-init-ui-hook 'evil-mode)" ];
         config = ''
           (setopt evil-want-Y-yank-to-eol t)
           (evil-set-undo-system 'undo-redo)
@@ -79,32 +92,16 @@ in
 
       evil-collection = {
         enable = true;
-        gfhook = lib.mkIf (
-          !(
-            matches keybinds.evil.keys.up "k"
-            || matches keybinds.evil.keys.down "j"
-            || matches keybinds.evil.keys.forward "l"
-            || matches keybinds.evil.keys.backward "h"
-          )
-        ) [ "('evil-collection-setup-hook 'nix-emacs-hjkl-rotation)" ];
-        preface =
-          lib.mkIf
-            (
-              !(
-                matches keybinds.evil.keys.up "k"
-                || matches keybinds.evil.keys.down "j"
-                || matches keybinds.evil.keys.forward "l"
-                || matches keybinds.evil.keys.backward "h"
-              )
-            )
-            ''
-              (defun nix-emacs-hjkl-rotation (_mode mode-keymaps &rest _rest)
-                (evil-collection-translate-key 'normal mode-keymaps
-                  ${swapBinding keybinds.evil.keys.down "j"}
-                  ${swapBinding keybinds.evil.keys.up "k"}
-                  ${swapBinding keybinds.evil.keys.forward "l"}
-                  ${swapBinding keybinds.evil.keys.backward "h"}))
-            '';
+        gfhook = lib.mkIf hasSwap [ "('evil-collection-setup-hook 'nix-emacs-hjkl-rotation)" ];
+        preface = lib.mkIf hasSwap ''
+          (defun nix-emacs-hjkl-rotation (_mode mode-keymaps &rest _rest)
+            (evil-collection-translate-key 'normal mode-keymaps
+              ${swapBinding keybinds.evil.keys.down "j"}
+              ${swapBinding keybinds.evil.keys.up "k"}
+              ${swapBinding keybinds.evil.keys.forward "l"}
+              ${swapBinding keybinds.evil.keys.backward "h"}
+              ${keybinds.evil.keys.evil-collection-swap-keys}))
+        '';
         config = "(evil-collection-init)";
       };
     };
