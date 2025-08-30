@@ -362,6 +362,8 @@ let
                     "motion"
                   else if matches "e" mode then
                     "emacs"
+                  else if matches "h" mode then
+                    "hybrid"
                   else if matches "g" mode then
                     "god"
                   else
