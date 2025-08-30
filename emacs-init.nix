@@ -360,6 +360,8 @@ let
                     "operator"
                   else if matches "m" mode then
                     "motion"
+                  else if matches "e" mode then
+                    "emacs"
                   else if matches "g" mode then
                     "god"
                   else
