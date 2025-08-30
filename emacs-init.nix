@@ -366,7 +366,7 @@ let
                     "";
                 expandedListOfModes = lib.map expandMode modeAsList;
                 modeString =
-                  if hasColonFirst then "(${concatMapStrings (x: if matches x "" then "" else x + " ") expandedListOfModes})" else mode;
+                  if hasColonFirst then "'(${concatMapStrings (x: if matches x "" then "" else x + " ") expandedListOfModes})" else mode;
               in
               optionals (bs != { }) (
                 [ "(${modeString} ${map}" ] ++ mapAttrsToList (n: v: "  ${quoted n} ${v}") bs ++ [ ")" ]
