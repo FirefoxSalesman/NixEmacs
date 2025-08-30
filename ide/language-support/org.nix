@@ -129,6 +129,15 @@ in
             ''
           );
         };
+        generalOne.global-leader = lib.mkIf keybinds.leader-key.enable {
+          "o" = lib.mkDefault '''(:ignore t :which-key "org")'';
+          "op" = lib.mkDefault "'org-capture";
+        };
+        generalTwo.local-leader.org-mode-map = lib.mkIf keybinds.leader-key.enable {
+          "e" = lib.mkDefault '''(org-export-dispatch :which-key "export")'';
+          "i" = lib.mkDefault '''(org-toggle-inline-images :which-key "show images")'';
+          "b" = lib.mkDefault '''(org-edit-special :which-key "edit block")'';
+        };
         hook = [ "(org-mode . org-indent-mode)" ];
         init = ''
           (defun nix-emacs-project-file (file)
@@ -274,6 +283,7 @@ in
         enable = true;
         config = ''(evil-org-agenda-set-keys)'';
         deferIncrementally = true;
+        generalOne.global-leader."oa" = lib.mkIf keybinds.leader-key.enable (lib.mkDefault "'org-agenda");
         generalTwo."'motion".evil-org-agenda-mode-map = {
           "${keybinds.evil.keys.down}" = "'org-agenda-next-line";
           "${keybinds.evil.keys.up}" = "'org-agenda-previous-line";

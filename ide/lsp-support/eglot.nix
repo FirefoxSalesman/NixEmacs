@@ -1,16 +1,29 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 let
   ide = config.programs.emacs.init.ide;
 in
 {
-  options.programs.emacs.init.ide.eglot.preset = lib.mkEnableOption "Enable eglot's preset configuration";
+  options.programs.emacs.init.ide.eglot.preset =
+    lib.mkEnableOption "Enable eglot's preset configuration";
 
   config = lib.mkIf ide.eglot.preset {
     programs.emacs.init.usePackage = {
       eglot = {
         enable = true;
         defer = true;
+        generalTwo.local-leader.eglot-mode-map =
+          lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
+            {
+              "f" = lib.mkDefault "'eglot-format-buffer";
+              "a" = lib.mkDefault "'eglot-code-actions";
+              "d" = lib.mkDefault "'eldoc-doc-buffer";
+            };
         custom = {
           eglot-report-progress = false;
           eglot-autoshutdown = true;
@@ -21,25 +34,25 @@ in
 
       eglot-booster = {
         enable = true;
-        extraPackages = [pkgs.emacs-lsp-booster];
-        after = ["eglot"];
+        extraPackages = [ pkgs.emacs-lsp-booster ];
+        after = [ "eglot" ];
         config = "(eglot-booster-mode)";
       };
 
       eglot-x = {
         enable = true;
-        after = ["eglot"];
+        after = [ "eglot" ];
         config = "(eglot-x-setup)";
       };
 
       eldoc-box = {
         enable = ide.hoverDoc;
-        hook = ["(eglot-managed-mode . eldoc-box-hover-at-point-mode)"];
+        hook = [ "(eglot-managed-mode . eldoc-box-hover-at-point-mode)" ];
       };
 
       breadcrumb = lib.mkIf ide.breadcrumb {
         enable = true;
-        hook = ["(eglot-managed-mode . breadcrumb-local-mode)"];
+        hook = [ "(eglot-managed-mode . breadcrumb-local-mode)" ];
       };
     };
   };

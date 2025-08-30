@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
-let ide = config.programs.emacs.init.ide;
-in {
+let
+  ide = config.programs.emacs.init.ide;
+in
+{
   options.programs.emacs.init.ide.languages.latex = {
     enable = lib.mkEnableOption "enables LaTeX support";
     magicLatexBuffer = lib.mkEnableOption "use magic-latex-buffer to prettify";
@@ -17,8 +24,7 @@ in {
         package = epkgs: epkgs.auctex;
         init = lib.mkDefault "(setq-default TeX-master nil)";
         custom = {
-          reftex-label-alist = lib.mkDefault ''
-            '(("\\poemtitle" ?P "poem:" "\\ref{%s}" nil ("poem" "poemtitle")))'';
+          reftex-label-alist = lib.mkDefault '''(("\\poemtitle" ?P "poem:" "\\ref{%s}" nil ("poem" "poemtitle")))'';
           reftex-format-cite-function = lib.mkDefault ''
             '(lambda (key fmt)
               (let ((cite (replace-regexp-in-string "%l" key fmt))
@@ -31,6 +37,12 @@ in {
           TeX-parse-self = lib.mkDefault true;
           reftex-plug-into-AUCTeX = lib.mkDefault true;
         };
+        generalTwo.local-leader.LaTeX-mode-map =
+          lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
+            {
+              "p" = lib.mkDefault '''(preview-at-point :which-key "preview")'';
+              "u" = lib.mkDefault '''(preview-clearout-at-point :which-key "unpreview")'';
+            };
       };
 
       bibtex-mode = {
@@ -44,14 +56,11 @@ in {
       latex = {
         enable = true;
         package = epkgs: epkgs.auctex;
-        extraPackages = if ide.eglot.enable || ide.lsp.enable
-        || ide.lspce.enable || ide.lsp-bridge.enable then
-          if ide.languages.latex.preferTexlab then
-            [ pkgs.texlab ]
+        extraPackages =
+          if ide.eglot.enable || ide.lsp.enable || ide.lspce.enable || ide.lsp-bridge.enable then
+            if ide.languages.latex.preferTexlab then [ pkgs.texlab ] else [ pkgs.texlivePackages.digestif ]
           else
-            [ pkgs.texlivePackages.digestif ]
-        else
-          [ ];
+            [ ];
         babel = lib.mkIf ide.languages.org.enable "latex";
         mode = [ ''("\\.tex\\'" . LaTeX-mode)'' ];
         symex = ide.symex;
@@ -60,7 +69,9 @@ in {
         eglot = ide.eglot.enable;
         config = lib.mkIf ide.lspce.enable ''
           (with-eval-after-load 'lspce (dolist (mode '("plain-tex" "latex" "context" "texinfo" "bibtex" "tex"))
-                                                      (add-to-list 'lspce-server-programs (list mode ${if ide.languages.latex.preferTexlab then ''"texlab"'' else ''"digestif"''} ""))))
+                                                      (add-to-list 'lspce-server-programs (list mode ${
+                                                        if ide.languages.latex.preferTexlab then ''"texlab"'' else ''"digestif"''
+                                                      } ""))))
         '';
       };
 
@@ -77,11 +88,9 @@ in {
         ];
       };
 
-      lsp-bridge.custom.lsp-bridge-tex-lsp-server =
-        lib.mkIf ide.lsp-bridge.enable (if ide.languages.latex.preferTexlab then
-          ''"texlab"''
-        else
-          ''"digestif"'');
+      lsp-bridge.custom.lsp-bridge-tex-lsp-server = lib.mkIf ide.lsp-bridge.enable (
+        if ide.languages.latex.preferTexlab then ''"texlab"'' else ''"digestif"''
+      );
     };
   };
 }

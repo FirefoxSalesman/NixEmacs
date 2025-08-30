@@ -49,6 +49,7 @@
     ./vimscript.nix
     ./ledger.nix
     ./julia.nix
+    ./dart.nix
   ];
 
   options.programs.emacs.init.ide = {

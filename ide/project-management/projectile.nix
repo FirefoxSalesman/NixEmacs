@@ -13,6 +13,7 @@
       extraPackages = [pkgs.fd];
       config = "(projectile-mode)";
       bind."C-c p" = "projectile-commander";
+      generalOne.global-leader."P" = lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable (lib.mkDefault "projectile-command-map");
     };
 
     ripgrep = {

@@ -12,6 +12,7 @@ in
       prolog-mode = {
         enable = true;
         mode = [ ''"\\.pl$"'' ];
+        generalTwo."local-leader".prolog-mode-map."r" = lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable (lib.mkDefault "'run-prolog");
       };
 
       flymake-swi-prolog = lib.mkIf ide.flymake.enable {

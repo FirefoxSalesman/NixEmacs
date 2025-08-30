@@ -76,7 +76,7 @@ in
         };
         config = ''
           (setopt evil-want-Y-yank-to-eol t)
-          (evil-set-undo-system 'undo-redo)
+          (evil-set-undo-system ${if keybinds.undo.enable then "'undo-fu" else "'undo-redo" })
           (evil-set-initial-state 'messages-buffer-mode 'normal)
           (general-advice-add '(evil-scroll-down evil-scroll-up evil-scroll-page-up evil-scroll-page-down) :after #'(lambda (arg) (evil-window-middle)))
           (evil-add-command-properties #'flymake-goto-next-error :jump t)

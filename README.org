@@ -100,6 +100,9 @@ Type: String
 
 Default: ""
 
+** =programs.emacs.init.hasOn=
+Installs & loads [[https://gitlab.com/axgfn/on.el][on.el]].
+
 ** =programs.emacs.init.usePackageVerbose=
 Type: Boolean
 
@@ -456,6 +459,24 @@ Example usage:
   };
 #+end_src
 
+**** =preface=
+Use package's =:preface= option. Takes a string
+
+Example usage:
+#+begin_src nix
+programs.emacs.init.usePackage.evil-collection = {
+  enable = true;
+  preface = lib.mkIf hasSwap ''
+    (defun nix-emacs-hjkl-rotation (_mode mode-keymaps &rest _rest)
+      (evil-collection-translate-key '(normal motion) mode-keymaps
+        "e" "j"
+        "o" "k"
+        "i" "l"
+        "n" "h"))
+  '';
+}; 
+#+end_src
+
 **** =extraConfig=
 A string containing any extra lines you want to put in your use-package statement. Good for using keywords not explicitly supported by this framework
 
@@ -606,6 +627,13 @@ Boolean value that enables css support
 
 ****** =css.emmet=
 Boolean value that enables emmet in css buffers
+
+***** dart
+****** =dart.enable=
+Boolean value that enables dart support. You will need to install the language server yourself, since I can't find it in nixpkgs
+
+****** =flutter.enable=
+Boolean value that enables flutter support
 
 ***** =emacs-lisp.enable=
 This module was borrowed from doom.
@@ -805,15 +833,75 @@ These variables can be used to easily alter some of evil's motion keys, both for
 
 Symex's keybinds will not be modified, since that is done by modifying the variable =symex--evil-keyspec=. If the framework were to do this, it would make it harder for the user to modify those keybinds further
 
-****** =programs.emacs.init.keybinds.evil.up=
+****** =programs.emacs.init.keybinds.evil.keys.up=
 Defaults to ="k"=.
 
-****** =programs.emacs.init.keybinds.evil.down=
+****** =programs.emacs.init.keybinds.evil.keys.down=
 Defaults to ="j"=.
 
-****** =programs.emacs.init.keybinds.evil.forward=
+****** =programs.emacs.init.keybinds.evil.keys.forward=
 Defaults to ="l"=.
 
-****** =programs.emacs.init.keybinds.evil.backward=
+****** =programs.emacs.init.keybinds.evil.keys.backward=
 Defaults to ="h"=.
 
+****** =programs.emacs.init.keybinds.evil.keys.evil-collection-swap-keys=
+A string of keys to be swapped.
+Example: (new keys are on the left, old keys are on the right)
+#+begin_src nix
+programs.emacs.init.keybinds.evil.keys.evil-collection-swap-keys = ''
+  "e" "j"
+  "o" "k"
+  "n" "h"
+  "i" "l"
+'';
+#+end_src
+**** leader keys
+Bindings for global-leader:
++ h: help-map
++ f: find-file
++ P: project-prefix-map or projectile-command-map (depending on which of the two you enabled)
++ o: org bindings (if you enabled org's preset)
+  - a: org-agenda
+  - p: org-capture
+
+Bindings for local-leader:
++ org-mode (if org's preset is enabled):
+  - e: org-export-dispatch
+  - i: org-toggle-inline-images
+  - b: org-edit-special (edits a code block)
++ eglot (if eglot's preset is enabled)
+  - f: eglot-format-buffer
+  - a: eglot-code-actions
+  - d: eldoc-doc-buffer
++ racket (if racket's preset is enabled)
+  - .: racket-xp-describe
+  - r: racket-run
++ python (if python's preset is enabled)
+  - r: python-shell-send-buffer
+  - e: code-cells-eval (if jupyter support is enabled)
++ clojure (if clojure's preset is enabled)
+  - s: cider-jack-in (starts cider)
++ prolog (if prolog's preset is enabled)
+  - r: run-prolog
++ latex (if latex's preset is enabled)
+  - p: preview-at-point
+  - u: preview-clearout-at-point (unpreview)
+
+***** =programs.emacs.init.keybinds.leader-keys.enable=
+Enables leader keys. (global-leader for global bindings & local-leader for local bindings)
+
+***** =programs.emacs.init.keybinds.leader-keys.globalPrefix=
+The prefix key to be used by global-leader (ie. "s" "S" "C" or "M")
+
+***** =programs.emacs.init.keybinds.leader-keys.localPrefix=
+The prefix key to be used by local-leader (ie. "s" "S" "C" or "M")
+
+**** =programs.emacs.init.keybinds.undo.enable=
+Enables linear undos with [[https://melpa.org/#/undo-fu][undo-fu]]
+
+**** =programs.emacs.init.keybinds.doomEscape.enable=
+Enables doom/escape, as seen in doom emacs.
++ =C-g= will run doom/escape.
++ If you're using evil, hitting escape while in normal mode will run doom/escape
++ Functions can be added to doom-escape-hook in order to run them whenever doom/escape runs

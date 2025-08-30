@@ -26,13 +26,15 @@ maybe
 maybe. It seems so simple that a preset may not be worthwhile
 
 * TODO Support for keybindings
-** TODO Evil
-** TODO leader key
-we should be able to choose the prefix for global & local leader keys.
+** DONE Evil
+** DONE leader key
++ [X] we should be able to choose the prefix for global & local leader keys.
++ [X] add some useful keys here
 
 ** TODO God mode
 ** TODO Avy
 ** TODO Multi cursors
-** TODO Undo system
+** DONE Undo system
 Uses undo-fu & maybe vundo
-** TODO doom escape
+** DONE doom escape
++ [X] make it good for evil users
