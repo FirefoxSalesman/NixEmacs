@@ -286,8 +286,21 @@ Example usage:
 #+end_src
 
 **** General.el
-Using any of these optins will automatically install & load general.
-***** =general=
+Using any of these options will automatically install & load general.
+***** Binding keys
+You can use shorthand for evil states
++ =:n=- normal
++ =:i=- insert
++ =:v=- visual
++ =:o=- operator
++ =:m=- motion
++ =:e=- emacs
++ =:h=- hybrid
++ =:g=- god
+
+You can also chain them together, for example, if you wish to bind a key in normal, insert, & operator states, you could type =:nio=
+
+****** =general=
 Used for global keys in the =:general= option.
 
 In order to facilitate remapping, keys are not quoted automatically.
@@ -302,8 +315,7 @@ Example usage:
     };
   };
 #+end_src
-
-***** =generalOne=
+****** =generalOne=
 Sets =:general= keybindings with one additional argument (such as evil state, keymap, or leader key)
 
 Example usage:
@@ -311,7 +323,7 @@ Example usage:
   programs.emacs.init.usePackage.consult = {
     enable = true;
     generalOne = {
-      "'normal" = {
+      ":n" = {
         "/" = "'consult-line";
       };
       "org-mode-map" = {
@@ -321,14 +333,14 @@ Example usage:
   };
 #+end_src
 
-***** =generalTwo=
+****** =generalTwo=
 Sets =:general= options that take 2 arguments (such as evil state, keymap, or leader key)
 
 Example usage:
 #+begin_src nix
   programs.emacs.init.usePackage.vundo = {
     enable = true;
-    generalTwo = "'normal".vundo-mode-map."C-e" = "'vundo-next";
+    generalTwo = ":n".vundo-mode-map."C-e" = "'vundo-next";
   };
 #+end_src
 
