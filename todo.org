@@ -1,8 +1,7 @@
 * TODO Language support
 ** TODO Ada
-** DONE Dart & Flutter
 ** TODO Swift
-
+** TODO Svelte
 * TODO Support for completion systems
 Prescient should be an option
 Orderless should also be an option
@@ -26,15 +25,14 @@ maybe
 maybe. It seems so simple that a preset may not be worthwhile
 
 * TODO Support for keybindings
-** DONE Evil
-** DONE leader key
-+ [X] we should be able to choose the prefix for global & local leader keys.
-+ [X] add some useful keys here
-
 ** TODO God mode
 ** TODO Avy
 ** TODO Multi cursors
-** DONE Undo system
-Uses undo-fu & maybe vundo
-** DONE doom escape
-+ [X] make it good for evil users
+** TODO Leader keys
+Add leader keys for
++ [ ] lsp-mode
++ [ ] flycheck
++ [ ] lspce
++ [ ] lsp-bridge
+
+** TODO Which key

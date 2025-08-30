@@ -337,6 +337,7 @@ let
         assembly =
           let
             quoted = v: ''"${escape [ ''"'' ] v}"'';
+            matches = p: n: match p n != null;
             mkBindHelper =
               cmd: prefix: bs:
               optionals (bs != { }) (
@@ -344,8 +345,31 @@ let
               );
             mkGeneralHelper =
               mode: map: bs:
+              let
+                modeAsList = stringToCharacters mode;
+                hasColonFirst = matches (head modeAsList) ":";
+                expandMode =
+                  mode:
+                  if matches mode "n" then
+                    "normal"
+                  else if matches mode "i" then
+                    "insert"
+                  else if matches mode "v" then
+                    "visual"
+                  else if matches mode "o" then
+                    "operator"
+                  else if matches mode "m" then
+                    "motion"
+                  else if matches mode "g" then
+                    "god"
+                  else
+                    "";
+                expandedListOfModes = lib.map expandMode modeAsList;
+                modeString =
+                  if hasColonFirst then "(${concatMapStrings (x: if matches x "" then "" else x + " ") expandedListOfModes})" else mode;
+              in
               optionals (bs != { }) (
-                [ "(${mode} ${map}" ] ++ mapAttrsToList (n: v: "  ${quoted n} ${v}") bs ++ [ ")" ]
+                [ "(${modeString} ${map}" ] ++ mapAttrsToList (n: v: "  ${quoted n} ${v}") bs ++ [ ")" ]
               );
             mkGeneralLocalHelper =
               state: bs:
@@ -401,9 +425,6 @@ let
             mkGfhook = vs: optional (vs != [ ]) ":gfhook ${toString vs}";
             transformName =
               name:
-              let
-                matches = p: n: match p n != null;
-              in
               if matches "tex-mode" name then
                 "latex-mode"
               else if matches "latex" name then
