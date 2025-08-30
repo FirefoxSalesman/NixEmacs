@@ -347,26 +347,26 @@ let
               mode: map: bs:
               let
                 modeAsList = stringToCharacters mode;
-                hasColonFirst = matches (head modeAsList) ":";
+                hasColonFirst = matches ":" (head modeAsList);
                 expandMode =
                   mode:
-                  if matches mode "n" then
+                  if matches "n" mode then
                     "normal"
-                  else if matches mode "i" then
+                  else if matches "i" mode then
                     "insert"
-                  else if matches mode "v" then
+                  else if matches "v" mode then
                     "visual"
-                  else if matches mode "o" then
+                  else if matches "o" mode then
                     "operator"
-                  else if matches mode "m" then
+                  else if matches "m" mode then
                     "motion"
-                  else if matches mode "g" then
+                  else if matches "g" mode then
                     "god"
                   else
                     "";
                 expandedListOfModes = lib.map expandMode modeAsList;
                 modeString =
-                  if hasColonFirst then "'(${concatMapStrings (x: if matches x "" then "" else x + " ") expandedListOfModes})" else mode;
+                  if hasColonFirst then "'(${concatMapStrings (x: if matches "" x then "" else x + " ") expandedListOfModes})" else mode;
               in
               optionals (bs != { }) (
                 [ "(${modeString} ${map}" ] ++ mapAttrsToList (n: v: "  ${quoted n} ${v}") bs ++ [ ")" ]
