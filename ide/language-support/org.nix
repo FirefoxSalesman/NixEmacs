@@ -229,7 +229,7 @@ in
         ghook = [ "('org-mode-hook 'evil-org-mode)" ];
         gfhook = [ "('org-capture-mode-hook 'evil-insert-state)" ];
         # stolen from doom
-        generalTwo."'normal".org-mode-map = {
+        generalTwo.":n".org-mode-map = {
           "]h" = '''(org-forward-heading-same-level :which-key "next heading")'';
           "[h" = '''(org-backward-heading-same-level :which-key "prev heading")'';
           "]c" = '''(org-babel-next-src-block :which-key "next src block")'';
@@ -284,7 +284,7 @@ in
         config = ''(evil-org-agenda-set-keys)'';
         deferIncrementally = true;
         generalOne.global-leader."oa" = lib.mkIf keybinds.leader-key.enable (lib.mkDefault "'org-agenda");
-        generalTwo."'motion".evil-org-agenda-mode-map = {
+        generalTwo.":m".evil-org-agenda-mode-map = {
           "${keybinds.evil.keys.down}" = "'org-agenda-next-line";
           "${keybinds.evil.keys.up}" = "'org-agenda-previous-line";
           "b${keybinds.evil.keys.down}" = "'org-agenda-previous-item";

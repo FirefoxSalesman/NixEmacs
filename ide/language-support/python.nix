@@ -106,7 +106,7 @@ in
         generalTwo = {
           "local-leader".code-cells-mode-map."e" =
             lib.mkIf keybinds.leader-key.enable (lib.mkDefault "'code-cells-eval");
-          "'normal".code-cells-mode-map = lib.mkIf keybinds.evil.enable {
+          ":n".code-cells-mode-map = lib.mkIf keybinds.evil.enable {
             "M-${keybinds.evil.keys.down}" = "'code-cells-forward-cell";
             "M-${keybinds.evil.keys.up}" = "'code-cells-backward-cell";
           };

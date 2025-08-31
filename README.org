@@ -300,6 +300,8 @@ You can use shorthand for evil states
 
 You can also chain them together, for example, if you wish to bind a key in normal, insert, & operator states, you could type =:nio=
 
+This shorthand was inspired by doom's =map!=
+
 ****** =general=
 Used for global keys in the =:general= option.
 

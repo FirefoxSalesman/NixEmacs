@@ -74,7 +74,7 @@ let
           type = types.attrsOf (types.attrsOf types.str);
           default = { };
           example = {
-            "'normal" = {
+            ":n" = {
               "/" = "'consult-line";
             };
           };
@@ -87,7 +87,7 @@ let
           type = types.attrsOf (types.attrsOf (types.attrsOf types.str));
           default = { };
           example = {
-            "'normal".vundo-mode-map."C-e" = "'vundo-next";
+            ":n".vundo-mode-map."C-e" = "'vundo-next";
           };
           description = ''
             The entries to use for keymaps with 2 arguments in <option>:general</option>.
