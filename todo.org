@@ -35,4 +35,4 @@ Add leader keys for
 + [ ] lspce
 + [ ] lsp-bridge
 
-** TODO Which key
+** DONE Which key

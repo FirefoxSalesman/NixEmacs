@@ -919,3 +919,22 @@ Enables doom/escape, as seen in doom emacs.
 + =C-g= will run doom/escape.
 + If you're using evil, hitting escape while in normal mode will run doom/escape
 + Functions can be added to doom-escape-hook in order to run them whenever doom/escape runs
+
+**** Which Key
+***** =programs.emacs.init.keybinds.whichKey.enable=
+Enables [[https://github.com/justbur/emacs-which-key][which-key]]
+
+***** =programs.emacs.init.keybinds.whichKey.posframe.enable=
+Creates a posframe popup for which-key
+
+***** =programs.emacs.init.keybinds.whichKey.posframe.unparent=
+Posframe appears in a new frame, which can be useful if you use exwm.
+
+**** =programs.emacs.init.keybinds.god.enable=
+Enables [[https://github.com/emacsorphanage/god-mode][god-mode]]. This module is borrowed from doom.
+
+If =programs.emacs.init.keybinds.evil.enable= is true, [[https://github.com/gridaphobe/evil-god-state][evil-god-state]] will be installed.
++ You can enter it with =,= & exit it with =ESC=.
++ Pressing =RET= will enter emacs state
+
+If =programs.emacs.init.keybinds.doomEscape.enable= is true, =doom/escape= will exit god state
