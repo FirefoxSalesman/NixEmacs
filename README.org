@@ -684,8 +684,12 @@ Boolean value that enables emmet in css buffers
 ***** =hy.enable=
 Boolean option that enables hy support
 
-***** =java.enable=
+***** java
+****** =java.enable=
 Boolean option that enables java support
+
+****** =java.eglotJava=
+Boolean option to install [[https://github.com/yveszoundi/eglot-java][eglot-java]], allowing the user to take advantage of more of jdtls's features. Doing this will stop nix from installing jdtls from you, potentially resulting in user irritation.
 
 ***** =javascript.enable=
 Boolean option that enables javascript support

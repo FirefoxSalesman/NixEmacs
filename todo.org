@@ -25,7 +25,6 @@ maybe
 maybe. It seems so simple that a preset may not be worthwhile
 
 * TODO Support for keybindings
-** TODO God mode
 ** TODO Avy
 ** TODO Multi cursors
 ** TODO Leader keys
@@ -35,4 +34,5 @@ Add leader keys for
 + [ ] lspce
 + [ ] lsp-bridge
 
-** DONE Which key
+* TODO UsePackage Features
+** TODO  :general-config

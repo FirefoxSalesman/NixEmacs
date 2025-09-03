@@ -9,7 +9,10 @@ let
   ide = config.programs.emacs.init.ide;
 in
 {
-  options.programs.emacs.init.ide.languages.java.enable = lib.mkEnableOption "enables java support";
+  options.programs.emacs.init.ide.languages.java = {
+    enable = lib.mkEnableOption "enables java support";
+    moreEglot = lib.mkEnableOption "Installs eglot-java. This means you can use more of jdtls's features, but emacs will have to install it for you (rather than nix)";
+  };
 
   config = lib.mkIf ide.languages.java.enable {
     programs.emacs.init.usePackage = {
@@ -17,7 +20,7 @@ in
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "java";
         extraPackages =
-          if ide.lspce.enable || ide.lsp-bridge.enable || ide.eglot.enable then
+          if ide.lspce.enable || ide.lsp-bridge.enable || (ide.eglot.enable && !ide.languages.java.moreEglot) then
             with pkgs; [ jdt-language-server ]
           else
             [ ];
@@ -49,6 +52,12 @@ in
               ;; https://github.com/emacs-lsp/lsp-java/issues/421
               (defun lsp-java--ls-command () "jdtls")
         '';
+      };
+
+      eglot-java = lib.mkIf ide.languages.java.moreEglot {
+        enable = true;
+        after = ["eglot"];
+        config = "(eglot-java-mode)";
       };
     };
   };
