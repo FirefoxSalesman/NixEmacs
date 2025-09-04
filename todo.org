@@ -1,38 +1,27 @@
-* TODO Language support
-** TODO Ada
-** TODO Swift
-** TODO Svelte
+* TODO ide features
+** TODO Language support
+*** TODO Ada
+*** DONE Swift
+*** DONE Svelte
+** TODO devshell support
 * TODO Support for completion systems
-Prescient should be an option
-Orderless should also be an option
-
 ** TODO Helm
-** TODO Ivy
-+ includes counsel
-
-** TODO Vertico
-+ includes consult & embark
-
-** TODO fido vertical mode
-maybe.
-
-** TODO Mct
-maybe
-
-** TODO Corfu
+** DONE Ivy
+** DONE Vertico
+** DONE Corfu
 ** TODO Company
-** TODO Completion preview mode
-maybe. It seems so simple that a preset may not be worthwhile
-
 * TODO Support for keybindings
 ** TODO Avy
 ** TODO Multi cursors
 ** TODO Leader keys
 Add leader keys for
 + [ ] lsp-mode
-+ [ ] flycheck
 + [ ] lspce
 + [ ] lsp-bridge
 
+** DONE Surround
+** DONE Electric Pair
 * TODO UsePackage Features
 ** TODO  :general-config
+** TODO lspce client construction function (or macro)
+** TODO Allow =custom= to take numbers as args

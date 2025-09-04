@@ -796,6 +796,7 @@ in
       '';
 
       ".config/emacs/init.el".text = ''
+          ;; -*- lexical-binding: t -*-
           ${
             if cfg.packageQuickstart then
               ''
