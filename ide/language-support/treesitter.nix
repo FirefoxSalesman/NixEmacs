@@ -2,7 +2,7 @@
 
 let
   lang = config.programs.emacs.init.ide.languages;
-  makeGrammars = vs: lib.optionals (vs != { }) (lib.concatStringsSep "\n" (lib.mapAttrsToList (n: v: ''(${n} "${v}")'')));
+  makeGrammars = vs: lib.concatStringsSep "\n" (lib.optionals (vs != { }) (lib.mapAttrsToList (n: v: ''(${n} "${v}")'')));
 in
 {
   options.programs.emacs.init.ide.treesitterGrammars = lib.mkOption {
