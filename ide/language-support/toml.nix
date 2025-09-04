@@ -7,10 +7,13 @@ in
   options.programs.emacs.init.ide.languages.toml.enable = lib.mkEnableOption "enables toml support";
 
   config = lib.mkIf ide.languages.toml.enable {
-    programs.emacs.init.usePackage.toml-ts-mode = {
-      enable = true;
-      mode = [''"\\.toml\\'"''];
-      symex = ide.symex;
+    programs.emacs.init = {
+      ide.treesitterGrammars.toml = "https://github.com/ikatyang/tree-sitter-toml";
+      usePackage.toml-ts-mode = {
+        enable = true;
+        mode = [ ''"\\.toml\\'"'' ];
+        symex = ide.symex;
+      };
     };
   };
 }

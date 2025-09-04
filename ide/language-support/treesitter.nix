@@ -71,13 +71,6 @@ in
                 (interactive)
                 (dolist (grammar
                   '(;(xml "https://github.com/ObserverOfTime/tree-sitter-xml")
-                    (kotlin "https://github.com/fwcd/tree-sitter-kotlin")
-                    (haskell "https://github.com/tree-sitter/tree-sitter-haskell")
-                    (toml "https://github.com/ikatyang/tree-sitter-toml")
-                    (json5 "https://github.com/Joakker/tree-sitter-json5")
-                    (julia "https://github.com/tree-sitter/tree-sitter-julia")
-                    (vim "https://github.com/tree-sitter-grammars/tree-sitter-vim")
-                    (elisp "https://github.com/Wilfred/tree-sitter-elisp")
                     ${makeGrammars config.programs.emacs.init.ide.treesitterGrammars}))
                   (add-to-list 'treesit-language-source-alist grammar)
                     ;; Only install `grammar' if we don't already have it
