@@ -2,8 +2,15 @@
 
 let
   lang = config.programs.emacs.init.ide.languages;
+  makeGrammars = vs: lib.optionals (vs != { }) (lib.concatStringsSep "\n" (lib.mapAttrsToList (n: v: ''(${n} "${v}")'')));
 in
 {
+  options.programs.emacs.init.ide.treesitterGrammars = lib.mkOption {
+    type = lib.types.attrsOf lib.types.str;
+    default = { };
+    description = "Grammars for treesit-auto to install.";
+  };
+
   config =
     lib.mkIf
       (
@@ -70,7 +77,8 @@ in
                     (json5 "https://github.com/Joakker/tree-sitter-json5")
                     (julia "https://github.com/tree-sitter/tree-sitter-julia")
                     (vim "https://github.com/tree-sitter-grammars/tree-sitter-vim")
-                    (elisp "https://github.com/Wilfred/tree-sitter-elisp")))
+                    (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+                    ${makeGrammars config.programs.emacs.init.ide.treesitterGrammars}))
                   (add-to-list 'treesit-language-source-alist grammar)
                     ;; Only install `grammar' if we don't already have it
                     ;; installed. However, if you want to *update* a grammar then
