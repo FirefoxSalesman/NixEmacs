@@ -532,7 +532,6 @@ Notable package additions:
 + [[https://github.com/nemethf/eglot-x][eglot-x]]
 
 Default: =false=
-
 **** Lsp
 ***** =programs.emacs.init.ide.lsp.enable= 
 A boolean that will enable lsp-mode for all languages in the language support presets
@@ -562,6 +561,11 @@ A boolean that will enable lsp-bridge-mode for most languages in the language su
 No new language servers will be supported by this framework
 
 Default: =false=
+
+**** =programs.emacs.init.ide.treesitterGrammars=
+An attribute set of language names & links to their grammars.
+
+Only used by the native treesitter library, meaning it won't help symex
 
 **** =programs.emacs.init.ide.symex=
 A boolean that will enable symex for all languages in the language support presets
