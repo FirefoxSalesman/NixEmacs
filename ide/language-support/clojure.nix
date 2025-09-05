@@ -28,8 +28,8 @@ in
         symex = ide.symex;
         config = lib.mkIf ide.lspce.enable ''
           (with-eval-after-load 'lspce
-                                (dolist (mode '("clojure" "clojurec" "clojurescript")))
-                                        (add-to-list 'lspce-server-programs (list mode "clojure-lsp" "")))
+                                (dolist (mode '("clojure" "clojurec" "clojurescript"))
+                                        (add-to-list 'lspce-server-programs (list mode "clojure-lsp" ""))))
         '';
       };
 

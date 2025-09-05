@@ -94,6 +94,42 @@ let
           '';
         };
 
+        generalConfig = mkOption {
+          type = types.attrsOf types.str;
+          default = { };
+          example = {
+            "[remap describe-variable]" = "'helpful-variable";
+          };
+          description = ''
+            The entries to use for global keys in <option>:general-config</option>.
+            The function does not quote your bindings for you, with the intention of being able to use it for remaps.
+          '';
+        };
+
+        generalOneConfig = mkOption {
+          type = types.attrsOf (types.attrsOf types.str);
+          default = { };
+          example = {
+            ":n" = {
+              "/" = "'consult-line";
+            };
+          };
+          description = ''
+            The entries to use for keymaps with 1 argument in <option>:general-config</option>.
+          '';
+        };
+
+        generalTwoConfig = mkOption {
+          type = types.attrsOf (types.attrsOf (types.attrsOf types.str));
+          default = { };
+          example = {
+            ":n".vundo-mode-map."C-e" = "'vundo-next";
+          };
+          description = ''
+            The entries to use for keymaps with 2 arguments in <option>:general-config</option>.
+          '';
+        };
+
         bindLocal = mkOption {
           type = types.attrsOf (types.attrsOf types.str);
           default = { };
@@ -410,12 +446,16 @@ let
                 mkMap = n: v: mkGeneralLocalHelper "${n}" v;
               in
               flatten (mapAttrsToList mkMap bs);
-            buildGeneral =
-              zero: one: two:
-              optionals (zero != { } || one != { } || two != { }) [ ":general" ]
+            buildGeneralHelper =
+              zero: one: two: keyword:
+              optionals (zero != { } || one != { } || two != { }) [ keyword ]
               ++ mkGeneral zero
               ++ mkGeneralOne one
               ++ mkGeneralTwo two;
+            buildGeneral =
+              zero: one: two: buildGeneralHelper zero one two ":general";
+            buildGeneralConfig =
+              zero: one: two: buildGeneralHelper zero one two ":general-config";
             mkBindLocal =
               bs:
               let
@@ -482,6 +522,7 @@ let
             ++ mkGfhook config.gfhook
             ++ mkCustom config.custom
             ++ buildGeneral config.general config.generalOne config.generalTwo
+            ++ buildGeneralConfig config.generalConfig config.generalOneConfig config.generalTwoConfig
             ++ mkSymex name config.symex
             ++ mkMode config.mode
             ++ optionals (config.preface != "") [
@@ -574,6 +615,9 @@ let
     p.symex != false
     || p.ghook != [ ]
     || p.gfhook != [ ]
+    || p.generalOneConfig != { }
+    || p.generalTwoConfig != { }
+    || p.generalConfig != { }
     || p.generalOne != { }
     || p.generalTwo != { }
     || p.general != { }

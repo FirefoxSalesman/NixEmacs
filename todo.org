@@ -3,7 +3,7 @@
 *** TODO Ada
 *** DONE Swift
 *** DONE Svelte
-** TODO devshell support
+** DONE devshell support
 * TODO Support for completion systems
 ** TODO Helm
 ** DONE Ivy
@@ -11,8 +11,10 @@
 ** DONE Corfu
 ** TODO Company
 * TODO Support for keybindings
-** TODO Avy
+** DONE Avy
 ** TODO Multi cursors
+We should support hydras before dealing with this
+
 ** TODO Leader keys
 Add leader keys for
 + [ ] lsp-mode
@@ -21,7 +23,10 @@ Add leader keys for
 
 ** DONE Surround
 ** DONE Electric Pair
+** DONE Nerd Commenter
 * TODO UsePackage Features
 ** TODO  :general-config
-** TODO lspce client construction function (or macro)
+** DONE lspce client construction function (or macro)
+Don't forget to move this
+
 ** TODO Allow =custom= to take numbers as args
