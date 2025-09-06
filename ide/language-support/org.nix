@@ -72,13 +72,13 @@ in
           # Settings from doom
           org-indirect-buffer-display = lib.mkDefault "'current-window";
           org-enforce-todo-dependencies = lib.mkDefault true;
-          org-imenu-depth = lib.mkDefault "6";
-          org-tags-column = lib.mkDefault "0";
+          org-imenu-depth = lib.mkDefault 6;
+          org-tags-column = lib.mkDefault 0;
           org-startup-folded = lib.mkDefault false;
           org-agenda-inhibit-startup = lib.mkDefault true;
           org-agenda-window-setup = lib.mkDefault "'current-window";
           org-agenda-skip-unavailable-files = lib.mkDefault true;
-          org-agenda-span = lib.mkDefault "10";
+          org-agenda-span = lib.mkDefault 10;
           org-agenda-start-on-weekday = lib.mkDefault false;
           org-agenda-start-day = lib.mkDefault ''"-3d"'';
           org-refile-targets = lib.mkDefault ''

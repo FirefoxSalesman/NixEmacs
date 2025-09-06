@@ -495,7 +495,7 @@ Takes a list of strings, which should be the names of the functions the package 
 **** =custom=
 The =:custom= option
 
-Can be a string or a boolean. String values represent everything that isn't a boolean, so if your custom value is an elisp string, you'll need to quote it twice
+Can be a string, int, float, or a boolean. String values represent everything that isn't a boolean, so if your custom value is an elisp string, you'll need to quote it twice
 
 Example usage:
 #+begin_src nix

@@ -17,9 +17,9 @@ in
             enable = true;
             hook = [ "(on-first-buffer . global-flycheck-mode)" ];
             custom = {
-              flycheck-idle-change-delay = "1.0";
+              flycheck-idle-change-delay = 1.0;
               flycheck-buffer-switch-check-intermediate-buffers = true;
-              flycheck-display-errors-delay = "0.25";
+              flycheck-display-errors-delay = 0.25;
             };
           };
 

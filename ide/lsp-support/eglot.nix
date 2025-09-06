@@ -28,7 +28,7 @@ in
           eglot-report-progress = false;
           eglot-autoshutdown = true;
           #borrowed from doom
-          eglot-sync-connect = "1";
+          eglot-sync-connect = 1;
         };
       };
 
