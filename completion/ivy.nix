@@ -153,26 +153,6 @@ in
         generalOne.":nm".":" = lib.mkIf keybinds.evil.enable (lib.mkDefault "'ivy-posframe-dispatching-done");
       };
 
-      counsel-projectile = lib.mkIf ide.projectile {
-        enable = true;
-        after = ["projectile"];
-        config = ''
-          (define-key [remap projectile-find-file] #'counsel-projectile-find-file)
-          (define-key [remap projectile-find-dir] #'counsel-projectile-find-dir)
-          (define-key [remap projectile-switch-to-buffer] #'counsel-projectile-switch-to-buffer)
-          (define-key [remap projectile-grep] #'counsel-projectile-grep)
-          (define-key [remap projectile-ag] #'counsel-projectile-ag)
-          (define-key [remap projectile-switch-project] #'counsel-projectile-switch-project)
-        '';
-      };
-
-      ivy-lsp = lib.mkIf ide.lsp.enable {
-        enable = true;
-        command = ["lsp-ivy-global-workspace-symbol"];
-        after = ["lsp-mode"];
-        bindLocal.lsp-mode-map."C-M-." = "lsp-ivy-workspace-symbol";
-      };
-
       ivy-avy = lib.mkIf keybinds.avy.enable {
         enable = true;
         bindLocal.ivy-minibuffer-map."M-g f" = lib.mkIf (!keybinds.evil.enable) (lib.mkDefault "ivy-avy");

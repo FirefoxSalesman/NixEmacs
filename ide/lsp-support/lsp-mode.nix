@@ -2,6 +2,7 @@
 
 let
   ide = config.programs.emacs.init.ide;
+  completions = config.programs.emacs.init.completions;
 in
 {
   options.programs.emacs.init.ide.lsp.preset = lib.mkEnableOption "Enable lsp-mode's preset configuration (borrowed from doom)";
@@ -31,6 +32,19 @@ in
           lsp-ui-sideline-show-hover = lib.mkDefault false;
           lsp-ui-sideline-actions-icon = lib.mkDefault "lsp-ui-sideline-actions-icon-default";
         };
+      };
+
+      consult-lsp = lib.mkIf completions.vertico.enable {
+        enable = true;
+        after = ["lsp-mode"];
+        bindLocal.lsp-mode-map."C-M-." = "consult-lsp-symbols" ;
+      };
+
+      ivy-lsp = lib.mkIf completions.ivy.enable {
+        enable = true;
+        command = ["lsp-ivy-global-workspace-symbol"];
+        after = ["lsp-mode"];
+        bindLocal.lsp-mode-map."C-M-." = "lsp-ivy-workspace-symbol";
       };
     };
   };

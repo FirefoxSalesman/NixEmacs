@@ -232,18 +232,6 @@ in
         after = ["embark" "consult"];
         hook = ["(embark-collect-mode . consult-preview-at-point-mode)"];
       };
-
-      consult-eglot = lib.mkIf ide.eglot.enable {
-        enable = true;
-        after = ["eglot"];
-        bindLocal.eglot-mode-map."C-M-." = "consult-eglot-symbols" ;
-      };
-      
-      consult-lsp = lib.mkIf ide.lsp.enable {
-        enable = true;
-        after = ["lsp-mode"];
-        bindLocal.lsp-mode-map."C-M-." = "consult-lsp-symbols" ;
-      };
     };
   };
 }
