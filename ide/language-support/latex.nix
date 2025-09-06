@@ -65,12 +65,11 @@ in
         mode = [ ''("\\.tex\\'" . LaTeX-mode)'' ];
         symex = ide.symex;
         lsp = ide.lsp.enable;
-        lspce = ide.lspce.enable;
         eglot = ide.eglot.enable;
-        config = lib.mkIf ide.lspce.enable ''
-          (nix-emacs-lspce-add-server-program '("plain-tex" "latex" "context" "texinfo" "bibtex" "tex") "${
+        lspce = lib.mkIf ide.lspce.enable ''
+          '("plain-tex" "latex" "context" "texinfo" "bibtex" "tex") "${
             if ide.languages.latex.preferTexlab then "texlab" else "digestif"
-          }")
+          }"
         '';
       };
 

@@ -16,9 +16,8 @@ in {
         [ ];
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
-      lspce = ide.lspce.enable;
       symex = ide.symex;
-      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "erlang" "erlang_ls" "--transport stdio")'';
+      lspce = lib.mkIf ide.lspce.enable ''"erlang" "erlang_ls" "--transport stdio"'';
     };
   };
 }

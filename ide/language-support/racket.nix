@@ -12,19 +12,11 @@ in
       enable = ide.languages.scheme.racket;
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
-      lspce = ide.lspce.enable;
+      lspce = lib.mkIf ide.lspce.enable ''"racket" "racket" "-l racket-langserver"'';
       symex = ide.symex;
       mode = [ ''"\\.rkt\\'"'' ];
       init = ''(setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';
-      config = ''
-        (setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))
-        ${
-          if ide.lspce.enable then
-            ''(nix-emacs-lspce-add-server-program "racket" "racket" "-l racket-langserver")''
-          else
-            ""
-        }
-      '';
+      config = ''(setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';
       generalTwo.local-leader.racket-mode-map =
         lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
           {

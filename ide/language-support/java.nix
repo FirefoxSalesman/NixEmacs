@@ -26,10 +26,9 @@ in
             [ ];
         mode = [ ''"\\.java\\'"'' ];
         lsp = ide.lsp.enable;
-        lspce = ide.lspce.enable;
         eglot = ide.eglot.enable;
         symex = ide.symex;
-        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "java" "jdtls")'';
+        lspce = lib.mkIf ide.lspce.enable ''"java" "jdtls"'';
       };
 
       lsp-java = lib.mkIf ide.lsp.enable {

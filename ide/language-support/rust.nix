@@ -16,7 +16,7 @@ in {
         else
           [ ];
         lsp = ide.lsp.enable;
-        lspce = ide.lspce.enable;
+        lspce = lib.mkIf ide.lspce.enable ''"rustic" "rust-analyzer"'';
         eglot = lib.mkIf ide.eglot.enable ''
           ("rust-analyzer" :initializationOptions (:check (:command "clippy")))'';
         symex = ide.symex;
@@ -34,7 +34,6 @@ in {
           else
             false);
         };
-        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "rustic" "rust-analyzer")'';
       };
     };
   };

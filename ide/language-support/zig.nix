@@ -13,9 +13,8 @@ in
       mode = [''"\\.zig\\'"''];
       symex = ide.symex;
       lsp = ide.lsp.enable;
-      lspce = ide.lspce.enable;
       eglot = ide.eglot.enable;
-      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "zig" "zls")'';
+      lspce = lib.mkIf ide.lspce.enable ''"zig" "zls"'';
     };
   };
 }

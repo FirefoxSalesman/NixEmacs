@@ -24,10 +24,9 @@ in
       mode = [ ''"\\.R\\'"'' ];
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
-      lspce = ide.lspce.enable;
       symex = ide.symex;
       custom.ess-ask-for-ess-directory = lib.mkDefault false;
-      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("R" "ess-r") "R" "--slave -e languageserver::run()")'';
+      lspce = lib.mkIf ide.lspce.enable '''("R" "ess-r") "R" "--slave -e languageserver::run()"'';
     };
   };
 }

@@ -21,17 +21,9 @@ in
         babel = lib.mkIf ide.languages.org.enable "scheme";
         symex = ide.symex;
         eglot = lib.mkIf ide.eglot.enable '''(scheme-mode . ("scheme-langserver"))'';
-        lspce = ide.lspce.enable;
+        lspce = lib.mkIf ide.lspce.enable ''"scheme" "scheme-langserver"'';
         init = ''(setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';
-        config = ''
-          (setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))
-          ${
-            if ide.lspce.enable then
-              ''(nix-emacs-lspce-add-server-program "scheme" "scheme-langserver")''
-            else
-              ""
-          }
-        '';
+        config = ''(setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';
       };
     };
   };

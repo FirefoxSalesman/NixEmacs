@@ -18,7 +18,6 @@ in
         mode = [ ''"\\.go\\'"'' ];
         symex = ide.symex;
         lsp = ide.lsp.enable;
-        lspce = ide.lspce.enable;
         eglot = ide.eglot.enable;
         extraPackages =
           if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
@@ -28,7 +27,7 @@ in
             ]
           else
             [ ];
-        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("go" "go-dot-work" "go-dot-mod" "go-mod") "gopls")'';
+        lspce = lib.mkIf ide.lspce.enable '''("go" "go-dot-work" "go-dot-mod" "go-mod") "gopls"'';
       };
 
       ob-go = lib.mkIf ide.languages.org.enable {

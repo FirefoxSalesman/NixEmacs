@@ -20,9 +20,8 @@ in
       mode = [ ''"\\.sql\\'"'' ];
       eglot = lib.mkIf ide.eglot.enable ''"sqls"'';
       lsp = ide.lsp.enable;
-      lspce = ide.lspce.enable;
       symex = ide.symex;
-      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "sql" "sqls")'';
+      lspce = lib.mkIf ide.lspce.enable ''"sql" "sqls"'';
     };
   };
 }

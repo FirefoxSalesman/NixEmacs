@@ -26,10 +26,9 @@ in
           else
             [ ];
         eglot = ide.eglot.enable;
-        lspce = ide.lspce.enable;
         lsp = ide.lsp.enable;
         mode = [ ''("\\.md\\'" . gfm-mode)'' ];
-        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("gfm" "markdown") "marksman" "server")'';
+        lspce = lib.mkIf ide.lspce.enable '''("gfm" "markdown") "marksman" "server"'';
       };
 
       evil-markdown = lib.mkIf keybinds.evil.enable {

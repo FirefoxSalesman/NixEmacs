@@ -17,9 +17,8 @@ in {
           [ ];
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
-        lspce = ide.lspce.enable;
         symex = ide.symex;
-        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "nix" "nixd")'';
+        lspce = lib.mkIf ide.lspce.enable ''"nix" "nixd"'';
       };
 
       json-ts-mode = {

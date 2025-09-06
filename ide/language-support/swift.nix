@@ -15,8 +15,7 @@ in
         extraPackages = lib.mkIf (ide.lsp-bridge.enable || ide.eglot.enable || ide.lsp.enable || ide.lspce.enable) [pkgs.sourcekit-lsp];
         eglot = lib.mkIf ide.eglot.enable ''"sourcekit-lsp"'';
         lsp = ide.lsp.enable;
-        lspce = ide.lspce.enable;
-        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "swift" "sourcekit-lsp")'';
+        lspce = lib.mkIf ide.lspce.enable ''"swift" "sourcekit-lsp"'';
       };
 
       lsp-sourcekit = lib.mkIf ide.lsp.enable {

@@ -20,9 +20,8 @@ in {
         mode = [ ''"\\.scala\\'"'' ];
         eglot = lib.mkIf ide.eglot.enable ''"metals"'';
         lsp = ide.lsp.enable;
-        lspce = ide.lspce.enable;
         symex = ide.symex;
-        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "scala" "metals")'';
+        lspce = lib.mkIf ide.lspce.enable ''"scala" "metals"'';
       };
 
       sbt-mode = {

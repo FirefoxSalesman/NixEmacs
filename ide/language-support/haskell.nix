@@ -25,8 +25,7 @@ in
             [ ];
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
-        lspce = ide.lspce.enable;
-        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "haskell" "haskell-language-server-wrapper" "--lsp")'';
+        lspce = lib.mkIf ide.lspce.enable ''"haskell" "haskell-language-server-wrapper" "--lsp"'';
       };
     };
   };

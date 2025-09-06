@@ -34,8 +34,7 @@ in
         eglot = ide.eglot.enable;
         symex = ide.symex;
         lsp = ide.lsp.enable;
-        lspce = ide.lspce.enable;
-        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "css" "vscode-css-language-server" "--stdio")'';
+        lspce = lib.mkIf ide.lspce.enable ''"css" "vscode-css-language-server" "--stdio"'';
       };
     };
   };

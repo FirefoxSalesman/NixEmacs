@@ -444,6 +444,26 @@ You can also use a string to configure the language server you want to use with 
   };
 #+end_src
 
+**** =lspce=
+Loads & starts lspce upon entering the package's major mode
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.racket-mode = {
+    enable = true;
+    lspce = true;
+  };
+#+end_src
+
+You can also use a string to configure the language server you want to use. It takes the token for a mode (see lspce's [[https://github.com/zbelial/lspce][repository]] for more details) or a list of mode tokens, the command to call a language server, & optionally its arguments. See the documentation for the macro =nix-emacs-lspce-add-server-program= for more details
+#+begin_src nix
+  programs.emacs.init.usePackage.json5-ts-mode = {
+    enable = true;
+    lspce = ''"json5" "vscode-json-language-server" "--stdio"'';
+  };
+#+end_src
+
+
 **** =symex=
 Binds =symex-mode-interface= to enter in evil's normal state for the package's major mode. This will also load symex if it isn't already loaded
 

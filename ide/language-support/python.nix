@@ -40,7 +40,6 @@ in
                                                                                  :autopep8 (:enabled nil)))))'';
         symex = ide.symex;
         lsp = ide.lsp.enable;
-        lspce = ide.lspce.enable;
         mode = [ ''"\\.py\\'"'' ];
         extraPackages =
           if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
@@ -61,8 +60,8 @@ in
           else
             [ ];
         # https://gregnewman.io/blog/emacs-take-two/
-        config = lib.mkIf ide.lspce.enable ''
-          (nix-emacs-lspce-add-server-program "python" ${
+        lspce = lib.mkIf ide.lspce.enable ''
+          "python" ${
             if matches "basedpyright" ide.languages.python.languageServer then
               ''"basedpyright-langserver" "--stdio"''
             else if matches "pyright" ide.languages.python.languageServer then
@@ -71,7 +70,7 @@ in
               ''"pylsp"''
             else
               ''"jedi-language-server"''
-          })
+          }
         '';
         generalTwo."local-leader".python-mode-map."r" = lib.mkIf keybinds.leader-key.enable (
           lib.mkDefault "'python-shell-send-buffer"

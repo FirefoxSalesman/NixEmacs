@@ -19,9 +19,8 @@ in {
       eglot = lib.mkIf ide.eglot.enable ''
         ("purescript-language-server" "--stdio" :initializationOptions (:purescript (:formatter "purs-tidy")))'';
       lsp = ide.lsp.enable;
-      lspce = ide.lspce.enable;
       symex = ide.symex;
-      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "purescript" "purescript-language-server" "--stdio")'';
+      lspce = lib.mkIf ide.lspce.enable ''"purescript" "purescript-language-server" "--stdio"'';
     };
   };
 }

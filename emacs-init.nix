@@ -259,7 +259,7 @@ let
         };
 
         lspce = mkOption {
-          type = types.bool;
+          type = types.either types.bool types.str;
           default = false;
           description = ''
             Starts lspce upon loading the major mode.
@@ -490,9 +490,10 @@ let
               '';
             mkLspCe =
               name: vs:
-              optional vs [
-                "(${transformName name} . (lambda () (require 'lspce) (lspce-mode)))"
-              ];
+              optional (vs != false) ''
+                :hook (${transformName name} . (lambda () (require 'lspce) (lspce-mode)))
+                ${if isString vs then ":config (nix-emacs-add-server-programs ${vs})" else ""}
+              '';
             mkSymex =
               name: vs:
               optional vs '':general ('normal ${transformName name}-map "RET" '(lambda () (interactive) (require 'symex) (symex-mode-interface)))'';
@@ -516,9 +517,10 @@ let
             ++ mkFunctions config.functions
             ++ mkDemand config.demand
             ++ mkDiminish config.diminish
-            ++ mkHook (config.hook ++ mkLsp name config.lsp ++ mkLspCe name config.lspce)
+            ++ mkHook (config.hook ++ mkLsp name config.lsp)
             ++ mkGhook config.ghook
             ++ mkEglot name config.eglot
+            ++ mkLspCe name config.lspce
             ++ mkGfhook config.gfhook
             ++ mkCustom config.custom
             ++ buildGeneral config.general config.generalOne config.generalTwo

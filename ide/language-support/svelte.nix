@@ -14,8 +14,7 @@ in
       mode = [''"\\.svelte\\'"''];
       eglot = ''("svelteserver" "--stdio")'';
       lsp = ide.lsp.enable;
-      lspce = ide.lspce.enable;
-      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "svelte" "svelteserver" "--stdio")'';
+      lspce = lib.mkIf ide.lspce.enable ''"svelte" "svelteserver" "--stdio"'';
     };
   };
 }
