@@ -299,7 +299,7 @@ let
         };
 
         custom = mkOption {
-          type = types.attrsOf (types.either types.float (types.either types.str types.bool));
+          type = types.attrsOf (types.either (types.either types.float types.int) (types.either types.str types.bool));
           default = { };
           example = {
             "display-line-numbers-type" = "'relative";
