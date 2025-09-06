@@ -23,7 +23,7 @@ in
       eglot = lib.mkIf ide.eglot.enable ''("vim-language-server" "--stdio")'';
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
-      config = lib.mkIf ide.lspce.enable ''(with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("vimscript" "vim-language-server" "--stdio")))'';
+      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("vimscript") "vim-language-server" "--stdio")'';
     };
   };
 }

@@ -32,9 +32,7 @@ in
           # Kotlin's language server takes a very long time to initialize on a new project
           # https://github.com/fwcd/kotlin-language-server/issues/510
           custom.eglot-connect-timeout = lib.mkIf ide.eglot.enable (lib.mkDefault "999999");
-          config = lib.mkIf ide.lspce.enable ''
-            (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("kotlin" "kotlin-language-server" "")))
-          '';
+          config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("kotlin") "kotlin-language-server")'';
         };
 
         ob-kotlin = lib.mkIf ide.languages.org.enable {

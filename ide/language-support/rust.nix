@@ -34,8 +34,7 @@ in {
           else
             false);
         };
-        config = lib.mkIf ide.lspce.enable ''
-          (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("rustic" "rust-analyzer" "")))'';
+        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("rustic") "rust-analyzer")'';
       };
     };
   };

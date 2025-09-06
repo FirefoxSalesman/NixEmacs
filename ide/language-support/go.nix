@@ -28,11 +28,7 @@ in
             ]
           else
             [ ];
-        config = lib.mkIf ide.lspce.enable ''
-          (with-eval-after-load 'lspce
-                                (dolist (mode '("go" "go-dot-work" "go-dot-mod" "go-mod")))
-                                        (add-to-list 'lspce-server-programs (list "gopls" "")))
-        '';
+        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("go" "go-dot-work" "go-dot-mod" "go-mod") "gopls")'';
       };
 
       ob-go = lib.mkIf ide.languages.org.enable {

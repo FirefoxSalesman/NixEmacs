@@ -68,10 +68,9 @@ in
         lspce = ide.lspce.enable;
         eglot = ide.eglot.enable;
         config = lib.mkIf ide.lspce.enable ''
-          (with-eval-after-load 'lspce (dolist (mode '("plain-tex" "latex" "context" "texinfo" "bibtex" "tex"))
-                                                      (add-to-list 'lspce-server-programs (list mode ${
-                                                        if ide.languages.latex.preferTexlab then ''"texlab"'' else ''"digestif"''
-                                                      } ""))))
+          (nix-emacs-lspce-add-server-program '("plain-tex" "latex" "context" "texinfo" "bibtex" "tex") "${
+            if ide.languages.latex.preferTexlab then "texlab" else "digestif"
+          }")
         '';
       };
 

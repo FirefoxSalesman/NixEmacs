@@ -19,19 +19,17 @@ in
       c-ts-mode = {
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "C";
-        extraPackages =
-          if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
-            if ide.languages.c.preferClangd then [ pkgs.clang-tools ] else [ pkgs.ccls ]
-          else
-            [ ];
+        extraPackages = lib.mkIf (
+          ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable
+        ) (if ide.languages.c.preferClangd then [ pkgs.clang-tools ] else [ pkgs.ccls ]);
         mode = [ ''"\\.c\\'"'' ];
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
         lspce = ide.lspce.enable;
         symex = ide.symex;
-        config = lib.mkIf (ide.lspce.enable && !ide.languages.c.preferClangd) ''
-          (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs (list "C" "ccls" ""))
-        '';
+        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("C") "${
+          if ide.languages.c.preferClangd then "clangd" else "ccls"
+        }")'';
       };
 
       ccls = lib.mkIf (ide.lsp.enable && !ide.languages.c.preferClangd) {

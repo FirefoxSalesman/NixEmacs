@@ -19,10 +19,7 @@ in {
       symex = ide.symex;
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
-      config = lib.mkIf ide.lspce.enable ''
-        (with-eval-after-load 'lspce
-                              (dolist (mode '("tsx" "typescript"))
-                                      (add-to-list 'lspce-server-programs (list mode "typescript-language-server" "--stdio"))))'';
+      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("tsx" "typescript") "typescript-language-server" "--stdio")'';
     };
   };
 }

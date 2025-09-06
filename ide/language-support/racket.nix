@@ -1,9 +1,11 @@
 { lib, config, ... }:
 
-let ide = config.programs.emacs.init.ide;
-in {
-  options.programs.emacs.init.ide.languages.racket.enable = lib.mkEnableOption
-    "Enables racket support. You will need to install the language server yourself";
+let
+  ide = config.programs.emacs.init.ide;
+in
+{
+  options.programs.emacs.init.ide.languages.racket.enable =
+    lib.mkEnableOption "Enables racket support. You will need to install the language server yourself";
 
   config = lib.mkIf ide.languages.racket.enable {
     programs.emacs.init.usePackage.racket-mode = {
@@ -13,20 +15,22 @@ in {
       lspce = ide.lspce.enable;
       symex = ide.symex;
       mode = [ ''"\\.rkt\\'"'' ];
-      init = ''
-        (setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';
+      init = ''(setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';
       config = ''
         (setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))
-        ${if ide.lspce.enable then
-          ''
-            (add-to-list 'lspce-server-programs '("racket" "racket" "-l racket-langserver"))''
-        else
-          ""}
+        ${
+          if ide.lspce.enable then
+            ''(nix-emacs-lspce-add-server-program '("racket") "racket" "-l racket-langserver")''
+          else
+            ""
+        }
       '';
-      generalTwo.local-leader.racket-mode-map = lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable {
-        "." = lib.mkDefault "'racket-xp-describe";
-        "r" = lib.mkDefault "'racket-run";
-      };
+      generalTwo.local-leader.racket-mode-map =
+        lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
+          {
+            "." = lib.mkDefault "'racket-xp-describe";
+            "r" = lib.mkDefault "'racket-run";
+          };
     };
   };
 }

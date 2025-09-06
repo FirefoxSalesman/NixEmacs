@@ -29,11 +29,7 @@ in
         lspce = ide.lspce.enable;
         lsp = ide.lsp.enable;
         mode = [ ''("\\.md\\'" . gfm-mode)'' ];
-        config = lib.mkIf ide.lspce.enable ''
-          (with-eval-after-load 'lspce
-                                (dolist (mode ("gfm" "markdown"))
-                                        (add-to-list 'lspce-server-programs (list mode "marksman" "server"))))
-        '';
+        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("gfm" "markdown") "marksman" "server")'';
       };
 
       evil-markdown = lib.mkIf keybinds.evil.enable {

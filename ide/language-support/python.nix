@@ -61,20 +61,21 @@ in
           else
             [ ];
         # https://gregnewman.io/blog/emacs-take-two/
-        config = lib.mkIf ide.lspce.enable ''(with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("python" ${
-          if matches "basedpyright" ide.languages.python.languageServer then
-            ''"basedpyright-langserver" "--stdio"''
-          else if matches "pyright" ide.languages.python.languageServer then
-            ''"pyright-langserver" "--stdio"''
-          else if matches "pylsp" ide.languages.python.languageServer then
-            ''"pylsp" ""''
-          else
-            ''"jedi-language-server" ""''
-        })))'';
-        generalTwo."local-leader".python-mode-map."r" =
-          lib.mkIf keybinds.leader-key.enable (
-            lib.mkDefault "'python-shell-send-buffer"
-          );
+        config = lib.mkIf ide.lspce.enable ''
+          (nix-emacs-lspce-add-server-program '("python") ${
+            if matches "basedpyright" ide.languages.python.languageServer then
+              ''"basedpyright-langserver" "--stdio"''
+            else if matches "pyright" ide.languages.python.languageServer then
+              ''"pyright-langserver" "--stdio"''
+            else if matches "pylsp" ide.languages.python.languageServer then
+              ''"pylsp"''
+            else
+              ''"jedi-language-server"''
+          })
+        '';
+        generalTwo."local-leader".python-mode-map."r" = lib.mkIf keybinds.leader-key.enable (
+          lib.mkDefault "'python-shell-send-buffer"
+        );
       };
 
       lsp-pyright =
@@ -104,8 +105,9 @@ in
         demand = lib.mkDefault true;
         extraPackages = with pkgs; [ python313Packages.jupytext ];
         generalTwo = {
-          "local-leader".code-cells-mode-map."e" =
-            lib.mkIf keybinds.leader-key.enable (lib.mkDefault "'code-cells-eval");
+          "local-leader".code-cells-mode-map."e" = lib.mkIf keybinds.leader-key.enable (
+            lib.mkDefault "'code-cells-eval"
+          );
           ":n".code-cells-mode-map = lib.mkIf keybinds.evil.enable {
             "M-${keybinds.evil.keys.down}" = "'code-cells-forward-cell";
             "M-${keybinds.evil.keys.up}" = "'code-cells-backward-cell";

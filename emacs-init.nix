@@ -690,7 +690,16 @@ let
   ''
   + optionalString hasEglot ''
     (require 'use-package-eglot)
-  '';
+  ''
+  + optionalString hasLspce ''
+    (defmacro nix-emacs-lspce-add-server-program (langs program &optional args)
+       "Takes a list of languages (as per lspce's spec for adding server programs), the command for a language server,
+        & optionally any arguments. The server will be registered for all relevant modes."
+       `(with-eval-after-load 'lspce
+                              (dolist (mode ,langs)
+                                      (add-to-list 'lspce-server-programs
+                                                   (list mode ,program ,(if args args ""))))))
+  '' ;
   earlyInitFile = ''
     ;;; hm-early-init.el --- Emacs configuration à la Home Manager -*- lexical-binding: t; -*-
     ;;

@@ -18,9 +18,7 @@ in {
             [ ];
         # many thanks to doom
         mode = [ ''"\\.[px]?html?\\'"'' ];
-        config = lib.mkIf ide.lspce.enable ''
-          (add-to-list 'lspce-server-programs '("html" "vscode-html-language-server" "--stdio"))
-        '';
+        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("html") "vscode-html-language-server" "--stdio")'';
         eglot = lib.mkIf ide.eglot.enable ''("vscode-html-language-server" "--stdio")'';
         symex = ide.symex;
         lsp = ide.lsp.enable;

@@ -19,9 +19,7 @@ in {
         lsp = ide.lsp.enable;
         lspce = ide.lspce.enable;
         symex = ide.symex;
-        config = lib.mkIf ide.lspce.enable ''
-          (with-eval-after-load 'lspce (add-to-list mode 'lspce-server-programs (list "csharp" "csharp-lsp" "")))
-        '';
+        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("csharp") "csharp-lsp")'';
       };
 
       lsp-bridge.custom.lsp-bridge-csharp-lsp-server =

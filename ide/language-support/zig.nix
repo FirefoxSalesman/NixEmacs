@@ -15,9 +15,7 @@ in
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
       eglot = ide.eglot.enable;
-      config = lib.mkIf ide.lspce.enable ''
-        (with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("zig" "zls" "")))
-      '';
+      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("zig") "zls")'';
     };
   };
 }

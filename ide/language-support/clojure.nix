@@ -26,11 +26,7 @@ in
         lsp = ide.lsp.enable;
         eglot = ide.eglot.enable;
         symex = ide.symex;
-        config = lib.mkIf ide.lspce.enable ''
-          (with-eval-after-load 'lspce
-                                (dolist (mode '("clojure" "clojurec" "clojurescript"))
-                                        (add-to-list 'lspce-server-programs (list mode "clojure-lsp" ""))))
-        '';
+        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("clojure" "clojurec" "clojurescript") "clojure-lsp")'';
       };
 
       cider = {

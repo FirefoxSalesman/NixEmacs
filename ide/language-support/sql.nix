@@ -22,7 +22,7 @@ in
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
       symex = ide.symex;
-      config = lib.mkIf ide.lspce.enable ''(with-eval-after-load 'lspce (add-to-list 'lspce-server-programs '("sql" "sqls" "")))'';
+      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("sql") "sqls")'';
     };
   };
 }
