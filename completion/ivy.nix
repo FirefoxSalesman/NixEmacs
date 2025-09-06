@@ -19,8 +19,8 @@ in
         enable = true;
         hook = ["(on-first-input . ivy-mode)"];
         custom = {
-          ivy-sort-max-size = lib.mkDefault "7500";
-          ivy-height = lib.mkDefault "17";
+          ivy-sort-max-size = lib.mkDefault 7500;
+          ivy-height = lib.mkDefault 17;
           ivy-fixed-height-minibuffer = lib.mkDefault (!completions.ivy.posframe);
           ivy-read-action-function = lib.mkDefault "#'ivy-hydra-read-action";
           ivy-read-action-format-function = lib.mkDefault "#'ivy-read-action-format-columns";
@@ -90,9 +90,7 @@ in
             "?" = lib.mkDefault "'counsel-grep-or-swiper";
           };
         };
-        custom = {
-          counsel-find-file-ignore-regexp = lib.mkDefault ''"\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"'';
-        };
+        custom.counsel-find-file-ignore-regexp = lib.mkDefault ''"\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"'';
         config = ''
           (setq ivy-initial-inputs-alist nil)
           ${if ide.projectile then "(add-to-list 'counsel-compile-root-functions #'projectile-project-root)" else ""}
@@ -144,7 +142,7 @@ in
         enable = true;
         hook = ["(ivy-mode . ivy-posframe-mode)"];
         custom = {
-          ivy-posframe-border-width = lib.mkDefault "10";
+          ivy-posframe-border-width = lib.mkDefault 10;
           ivy-posframe-parameters = lib.mkDefault ''
             `((min-width . 90)
               (min-height . ,ivy-height))

@@ -9,7 +9,7 @@
       enable = true;
       defer = true;
       config = "(prescient-persist-mode)";
-      custom.prescient-history-length = "100";
+      custom.prescient-history-length = 100;
       afterCall = ["on-first-input-hook"];
     };
   };

@@ -18,8 +18,8 @@ in
         enable = true;
         hook = [ "(on-first-input . global-company-mode)" ];
         custom = {
-          company-minimum-prefix-length = lib.mkDefault "2";
-          company-tooltip-limit = lib.mkDefault "14";
+          company-minimum-prefix-length = lib.mkDefault 2;
+          company-tooltip-limit = lib.mkDefault 14;
           company-tooltip-align-annotations = lib.mkDefault true;
           company-require-match = lib.mkDefault "'never";
           company-global-modes = lib.mkDefault ''

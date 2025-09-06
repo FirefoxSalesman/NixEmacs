@@ -49,10 +49,10 @@ in
         ];
         custom = {
           consult-line-numbers-widen = true;
-          consult-async-min-input = "2";
-          consult-async-refresh-delay = "0.15";
-          consult-async-input-throttle = "0.2";
-          consult-async-input-debounce = "0.1";
+          consult-async-min-input = 2;
+          consult-async-refresh-delay = 0.15;
+          consult-async-input-throttle = 0.2;
+          consult-async-input-debounce = 0.1;
         };
         bindLocal = {
           help-map = {
