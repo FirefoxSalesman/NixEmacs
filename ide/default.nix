@@ -6,5 +6,6 @@
     ./lsp-support
     ./project-management
     ./syntax-checkers
+    ./direnv.nix
   ];
 }

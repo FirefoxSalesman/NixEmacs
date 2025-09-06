@@ -31,14 +31,21 @@
       url = "github:firefoxsalesman/use-package-eglot";
       flake = false;
     };
+
+    svelte-ts-mode = {
+      url = "github:leafOfTree/svelte-ts-mode";
+      flake = false;
+    };
   };
 
-  outputs = { self, ... }@inputs: {
-    homeModules = {
-      emacs-init = import ./emacs-init.nix;
-      emacs-presets = import ./emacs-presets.nix;
+  outputs =
+    { self, ... }@inputs:
+    {
+      homeModules = {
+        emacs-init = import ./emacs-init.nix;
+        emacs-presets = import ./emacs-presets.nix;
+      };
+      homeModule = self.homeModules.emacs-init;
+      overlay = final: prev: import ./overlay.nix final prev inputs;
     };
-    homeModule = self.homeModules.emacs-init;
-    overlay = final: prev: import ./overlay.nix final prev inputs;
-  };
 }

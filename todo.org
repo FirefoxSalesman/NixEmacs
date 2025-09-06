@@ -1,17 +1,7 @@
-* TODO ide features
-** TODO Language support
-*** TODO Ada
-*** DONE Swift
-*** DONE Svelte
-** DONE devshell support
 * TODO Support for completion systems
 ** TODO Helm
-** DONE Ivy
-** DONE Vertico
-** DONE Corfu
-** DONE Company
+** TODO Mct
 * TODO Support for keybindings
-** DONE Avy
 ** TODO Multi cursors
 We should support hydras before dealing with this
 
@@ -21,11 +11,7 @@ Add leader keys for
 + [ ] lspce
 + [ ] lsp-bridge
 
-** DONE Surround
-** DONE Electric Pair
-** DONE Nerd Commenter
 * TODO UsePackage Features
-** DONE :general-config
 ** DONE lspce client construction function (or macro)
 Don't forget to move this
 

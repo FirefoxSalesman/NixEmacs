@@ -8,5 +8,9 @@
     ./undo.nix
     ./which-key.nix
     ./god.nix
+    ./evil-surround.nix
+    ./electric-pair.nix
+    ./evil-nerd-commenter.nix
+    ./avy.nix
   ];
 }

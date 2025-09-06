@@ -50,6 +50,8 @@
     ./ledger.nix
     ./julia.nix
     ./dart.nix
+    ./swift.nix
+    ./svelte.nix
   ];
 
   options.programs.emacs.init.ide = {

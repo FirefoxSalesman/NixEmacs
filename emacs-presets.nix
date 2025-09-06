@@ -4,5 +4,6 @@
   imports = [
     ./ide
     ./keybinds
+    ./completion
   ];
 }

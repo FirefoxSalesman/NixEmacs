@@ -2,7 +2,11 @@
 
 let
   lang = config.programs.emacs.init.ide.languages;
-  makeGrammars = vs: lib.concatStringsSep "\n" (lib.optionals (vs != { }) (lib.mapAttrsToList (n: v: ''(${n} "${v}")'') vs));
+  makeGrammars =
+    vs:
+    lib.concatStringsSep "\n" (
+      lib.optionals (vs != { }) (lib.mapAttrsToList (n: v: ''(${n} "${v}")'') vs)
+    );
 in
 {
   options.programs.emacs.init.ide.treesitterGrammars = lib.mkOption {
@@ -56,6 +60,8 @@ in
         || lang.julia.enable
         || lang.emacs-lisp.enable
         || lang.purescript.enable
+        || lang.swift.enable
+        || lang.svelte.enable
       )
       {
         programs.emacs.init.usePackage = {
