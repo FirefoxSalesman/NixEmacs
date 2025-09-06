@@ -335,6 +335,47 @@ Example usage:
   };
 #+end_src
 
+****** =generalTwoConfig=
+Sets =:general-config= options that take 2 arguments (such as evil state, keymap, or leader key)
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.vundo = {
+    enable = true;
+    generalTwoConfig = ":n".vundo-mode-map."C-e" = "'vundo-next";
+  };
+#+end_src
+
+****** =generalConfig=
+Used for global keys in the =:general-config= option.
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.helpful = {
+    enable = true;
+    generalConfig = {
+      "C-h f" = "'helpful-function";
+    };
+  };
+#+end_src
+****** =generalOneConfig=
+Sets =:general-config= keybindings with one additional argument (such as evil state, keymap, or leader key)
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.consult = {
+    enable = true;
+    generalOneConfig = {
+      ":n" = {
+        "/" = "'consult-line";
+      };
+      "org-mode-map" = {
+        "M-a" = "'consult-org-heading";
+      };
+    };
+  };
+#+end_src
+
 ****** =generalTwo=
 Sets =:general= options that take 2 arguments (such as evil state, keymap, or leader key)
 

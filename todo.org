@@ -9,7 +9,7 @@
 ** DONE Ivy
 ** DONE Vertico
 ** DONE Corfu
-** TODO Company
+** DONE Company
 * TODO Support for keybindings
 ** DONE Avy
 ** TODO Multi cursors
@@ -25,7 +25,7 @@ Add leader keys for
 ** DONE Electric Pair
 ** DONE Nerd Commenter
 * TODO UsePackage Features
-** TODO  :general-config
+** DONE :general-config
 ** DONE lspce client construction function (or macro)
 Don't forget to move this
 
