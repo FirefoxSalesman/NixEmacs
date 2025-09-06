@@ -698,7 +698,7 @@ let
        `(with-eval-after-load 'lspce
                               (dolist (mode ,(if (listp langs)
                                                  langs
-                                                 `,(list langs)))
+                                                 `(,langs)))
                                       (add-to-list 'lspce-server-programs
                                                    (list mode ,program ,(if args args ""))))))
   '' ;
