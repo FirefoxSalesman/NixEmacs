@@ -27,7 +27,7 @@ in
           (setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))
           ${
             if ide.lspce.enable then
-              ''(nix-emacs-lspce-add-server-program '("scheme") "scheme-langserver")''
+              ''(nix-emacs-lspce-add-server-program "scheme" "scheme-langserver")''
             else
               ""
           }

@@ -14,7 +14,7 @@ in
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
-      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("dart") "dart" "language-server")'';
+      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "dart" "dart" "language-server")'';
     };
 
     flutter = lib.mkIf ide.languages.dart.flutter {

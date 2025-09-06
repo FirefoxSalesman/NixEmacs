@@ -18,7 +18,7 @@ in {
       eglot = lib.mkIf ide.eglot.enable ''"fennel-ls"'';
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
-      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("fennel") "fennel-ls"'';
+      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "fennel" "fennel-ls"'';
     };
   };
 }

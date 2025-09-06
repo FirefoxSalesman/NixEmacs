@@ -696,7 +696,9 @@ let
        "Takes a list of languages (as per lspce's spec for adding server programs), the command for a language server,
         & optionally any arguments. The server will be registered for all relevant modes."
        `(with-eval-after-load 'lspce
-                              (dolist (mode ,langs)
+                              (dolist (mode ,(if (listp langs)
+                                                 langs
+                                                 (list langs)))
                                       (add-to-list 'lspce-server-programs
                                                    (list mode ,program ,(if args args ""))))))
   '' ;

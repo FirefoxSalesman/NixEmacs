@@ -20,7 +20,7 @@ in
         (setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))
         ${
           if ide.lspce.enable then
-            ''(nix-emacs-lspce-add-server-program '("racket") "racket" "-l racket-langserver")''
+            ''(nix-emacs-lspce-add-server-program "racket" "racket" "-l racket-langserver")''
           else
             ""
         }

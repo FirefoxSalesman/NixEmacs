@@ -62,7 +62,7 @@ in
             [ ];
         # https://gregnewman.io/blog/emacs-take-two/
         config = lib.mkIf ide.lspce.enable ''
-          (nix-emacs-lspce-add-server-program '("python") ${
+          (nix-emacs-lspce-add-server-program "python" ${
             if matches "basedpyright" ide.languages.python.languageServer then
               ''"basedpyright-langserver" "--stdio"''
             else if matches "pyright" ide.languages.python.languageServer then

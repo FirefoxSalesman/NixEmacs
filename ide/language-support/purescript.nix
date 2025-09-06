@@ -21,7 +21,7 @@ in {
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
       symex = ide.symex;
-      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("purescript") "purescript-language-server" "--stdio")'';
+      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "purescript" "purescript-language-server" "--stdio")'';
     };
   };
 }

@@ -24,7 +24,7 @@ in
       eglot = lib.mkIf ide.eglot.enable ''"lua-language-server"'';
       lsp = ide.lsp.enable;
       lspce = ide.lspce.enable;
-      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("lua") "lua-language-server")'';
+      config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "lua" "lua-language-server")'';
     };
   };
 }

@@ -16,7 +16,7 @@ in
         eglot = lib.mkIf ide.eglot.enable ''"sourcekit-lsp"'';
         lsp = ide.lsp.enable;
         lspce = ide.lspce.enable;
-        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("swift") "sourcekit-lsp")'';
+        config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "swift" "sourcekit-lsp")'';
       };
 
       lsp-sourcekit = lib.mkIf ide.lsp.enable {

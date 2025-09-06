@@ -21,7 +21,7 @@ in {
           lspce = ide.lspce.enable;
           eglot = ide.eglot.enable;
           symex = ide.symex;
-          config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("json") "vscode-json-language-server" "--stdio")'';
+          config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "json" "vscode-json-language-server" "--stdio")'';
         };
 
         json5-ts-mode = {
@@ -31,7 +31,7 @@ in {
           eglot = lib.mkIf ide.eglot.enable ''("vscode-json-language-server" "--stdio")'';
           symex = ide.symex;
           lspce = ide.lspce.enable;
-          config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program '("json5") "vscode-json-language-server" "--stdio")'';
+          config = lib.mkIf ide.lspce.enable ''(nix-emacs-lspce-add-server-program "json5" "vscode-json-language-server" "--stdio")'';
         };
       };
     };
