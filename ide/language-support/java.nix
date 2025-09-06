@@ -20,7 +20,7 @@ in
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "java";
         extraPackages =
-          if ide.lspce.enable || ide.lsp-bridge.enable || (ide.eglot.enable && !ide.languages.java.moreEglot) then
+          if ide.lsp.enable || ide.lspce.enable || ide.lsp-bridge.enable || (ide.eglot.enable && !ide.languages.java.moreEglot) then
             with pkgs; [ jdt-language-server ]
           else
             [ ];
