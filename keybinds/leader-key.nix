@@ -41,7 +41,7 @@ in
         enable = true;
         generalOne = {
           global-leader = {
-            "f" = lib.mkIf (!config.programs.emacs.init.ivy.enable) (lib.mkDefault "'find-file");
+            "f" = lib.mkIf (!config.programs.emacs.init.completions.ivy.enable) (lib.mkDefault "'find-file");
             "h" = lib.mkDefault "help-map";
           };
           help-map = {
