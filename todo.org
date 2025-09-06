@@ -11,8 +11,4 @@ Add leader keys for
 + [ ] lspce
 + [ ] lsp-bridge
 
-* TODO UsePackage Features
-** DONE lspce client construction function (or macro)
-Don't forget to move this
-
-** TODO Allow =custom= to take numbers as args
+* TODO Allow =custom= to take numbers as args

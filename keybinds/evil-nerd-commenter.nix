@@ -4,7 +4,7 @@ let
   keybinds = config.programs.emacs.init.keybinds;
 in
 {
-  options.programs.emacs.init.keybinds.evilNerdCommenter.enable = lib.mkEnableOption "Enables evil-nerd-commenter. Enabling leader keys is enabled.";
+  options.programs.emacs.init.keybinds.evilNerdCommenter.enable = lib.mkEnableOption "Enables evil-nerd-commenter. Enabling leader keys is reccomended.";
 
   config.programs.emacs.init.usePackage.evil-nerd-commenter = lib.mkIf keybinds.evilNerdCommenter.enable {
     enable = true;
