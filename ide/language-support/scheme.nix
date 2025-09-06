@@ -22,7 +22,7 @@ in
         symex = ide.symex;
         eglot = lib.mkIf ide.eglot.enable '''(scheme-mode . ("scheme-langserver"))'';
         lspce = lib.mkIf ide.lspce.enable ''"scheme" "scheme-langserver"'';
-        lsp = lib.mkIf ide.lsp.enable;
+        lsp = ide.lsp.enable;
         init = ''(setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';
         config = ''
           (setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))
