@@ -299,7 +299,9 @@ let
         };
 
         custom = mkOption {
-          type = types.attrsOf (types.either (types.either types.float types.int) (types.either types.str types.bool));
+          type = types.attrsOf (
+            types.either (types.either types.float types.int) (types.either types.str types.bool)
+          );
           default = { };
           example = {
             "display-line-numbers-type" = "'relative";
@@ -406,7 +408,10 @@ let
                     "";
                 expandedListOfModes = lib.map expandMode modeAsList;
                 modeString =
-                  if hasColonFirst then "'(${concatMapStrings (x: if matches "" x then "" else x + " ") expandedListOfModes})" else mode;
+                  if hasColonFirst then
+                    "'(${concatMapStrings (x: if matches "" x then "" else x + " ") expandedListOfModes})"
+                  else
+                    mode;
               in
               optionals (bs != { }) (
                 [ "(${modeString} ${map}" ] ++ mapAttrsToList (n: v: "  ${quoted n} ${v}") bs ++ [ ")" ]
@@ -424,7 +429,17 @@ let
             mkCustom =
               vs:
               optionals (vs != { }) (
-                mapAttrsToList (n: v: ":custom (${n} ${if isBool v then if v then "t" else "nil" else v})") vs
+                mapAttrsToList (
+                  n: v:
+                  ":custom (${n} ${
+                    if isBool v then
+                      if v then "t" else "nil"
+                    else if isInt v || isFloat v then
+                      toString v
+                    else 
+                      v
+                  })"
+                ) vs
               );
             mkDefines = vs: optional (vs != [ ]) ":defines (${toString vs})";
             mkDiminish = vs: optional (vs != [ ]) ":diminish (${toString vs})";
@@ -453,9 +468,11 @@ let
               ++ mkGeneralOne one
               ++ mkGeneralTwo two;
             buildGeneral =
-              zero: one: two: buildGeneralHelper zero one two ":general";
+              zero: one: two:
+              buildGeneralHelper zero one two ":general";
             buildGeneralConfig =
-              zero: one: two: buildGeneralHelper zero one two ":general-config";
+              zero: one: two:
+              buildGeneralHelper zero one two ":general-config";
             mkBindLocal =
               bs:
               let
@@ -703,7 +720,7 @@ let
                                                  `'(,langs)))
                                       (add-to-list 'lspce-server-programs
                                                    (list mode ,program ,(if args args ""))))))
-  '' ;
+  '';
   earlyInitFile = ''
     ;;; hm-early-init.el --- Emacs configuration à la Home Manager -*- lexical-binding: t; -*-
     ;;
