@@ -492,7 +492,7 @@ let
               name: vs:
               optional (vs != false) ''
                 :hook (${transformName name} . (lambda () (require 'lspce) (lspce-mode)))
-                ${if isString vs then ":config (nix-emacs-lspce-add-server-programs ${vs})" else ""}
+                ${if isString vs then ":config (nix-emacs-lspce-add-server-program ${vs})" else ""}
               '';
             mkSymex =
               name: vs:
