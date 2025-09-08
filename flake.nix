@@ -22,11 +22,6 @@
       flake = false;
     };
 
-    symex2 = {
-      url = "github:firefoxsalesman/symex.el/2.0-integration";
-      flake = false;
-    };
-
     use-package-eglot = {
       url = "github:firefoxsalesman/use-package-eglot";
       flake = false;

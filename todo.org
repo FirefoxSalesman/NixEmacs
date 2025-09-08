@@ -10,5 +10,3 @@ Add leader keys for
 + [ ] lsp-mode
 + [ ] lspce
 + [ ] lsp-bridge
-
-* TODO Allow =custom= to take numbers as args
