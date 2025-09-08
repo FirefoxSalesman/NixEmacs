@@ -31,6 +31,11 @@
       url = "github:leafOfTree/svelte-ts-mode";
       flake = false;
     };
+
+    symex = {
+      url = "github:drym-org/symex.el" ;
+      flake = false;
+    };
   };
 
   outputs =

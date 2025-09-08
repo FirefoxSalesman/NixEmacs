@@ -26,6 +26,18 @@ final: prev: inputs: {
             ;
           }
         );
+        symex = (
+          prev.emacsPackages.callPackage ./emacs-packages/symex.nix {
+            inherit inputs;
+            inherit (prev.emacsPackages)
+              trivialBuild
+              tsc
+              evil
+              seq
+              paredit
+            ;
+          }
+        );
         eglot-booster = (
           prev.emacsPackages.callPackage ./emacs-packages/eglot-booster.nix {
             inherit inputs;
