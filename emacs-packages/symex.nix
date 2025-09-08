@@ -9,7 +9,6 @@ trivialBuild rec {
     tsc
     paredit
     evil
-    evil-surround
     seq
   ];
 
