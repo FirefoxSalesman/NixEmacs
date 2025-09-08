@@ -1,4 +1,4 @@
-{ inputs, trivialBuild, tsc, paredit, evil, seq } :
+{ inputs, trivialBuild, tsc, paredit, evil, seq, lithium }:
 
 trivialBuild rec {
   pname = "symex";
@@ -10,6 +10,7 @@ trivialBuild rec {
     paredit
     evil
     seq
+    lithium
   ];
 
   buildInputs = propagatedUserEnvPkgs;

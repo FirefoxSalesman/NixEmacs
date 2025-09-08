@@ -35,6 +35,7 @@ final: prev: inputs: {
               evil
               seq
               paredit
+              lithium
             ;
           }
         );
