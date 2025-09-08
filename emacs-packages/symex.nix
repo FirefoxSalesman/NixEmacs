@@ -7,7 +7,6 @@ trivialBuild rec {
 
   propagatedUserEnvPkgs = [
     tsc
-    tree-sitter
     paredit
     evil
     evil-surround
