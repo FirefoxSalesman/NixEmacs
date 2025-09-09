@@ -33,7 +33,7 @@
     };
 
     symex = {
-      url = "github:drym-org/symex.el" ;
+      url = "github:drym-org/symex.el/2.0-integration";
       flake = false;
     };
   };
