@@ -404,6 +404,8 @@ let
                     "hybrid"
                   else if matches "g" mode then
                     "god"
+                  else if matches "s" mode then
+                    "symex"
                   else
                     "";
                 expandedListOfModes = lib.map expandMode modeAsList;
