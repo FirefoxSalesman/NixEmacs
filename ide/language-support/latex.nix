@@ -70,7 +70,7 @@ in
             if ide.languages.latex.preferTexlab then "texlab" else "digestif"
           }"
         '';
-	symex = ide.symex
+	symex = ide.symex;
       };
 
       magic-latex-buffer = {
