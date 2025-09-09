@@ -14,7 +14,10 @@ in
         babel = lib.mkIf ide.languages.org.enable "emacs-lisp";
         symex = ide.symex;
         mode = [ ''("\\.Cask\\'" . emacs-lisp-mode)'' ];
-        hook = lib.mkIf ide.flymake.enable [ "(emacs-lisp-mode . flymake-mode)" ];
+        hook = lib.mkIf ide.flymake.enable [
+          "(emacs-lisp-mode . flymake-mode)"
+          "(emacs-lisp-mode . (lambda () (treesit-parser-create 'elisp)))"
+        ];
       };
 
       elisp-demos = {

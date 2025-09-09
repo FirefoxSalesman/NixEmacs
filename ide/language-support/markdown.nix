@@ -34,9 +34,11 @@ in
       evil-markdown = lib.mkIf keybinds.evil.enable {
         enable = true;
         defer = true;
+	symex = ide.symex;
         hook = [
           "(markdown-mode . evil-markdown-mode)"
           "(markdown-mode . outline-minor-mode)"
+	  "(markdown-mode . (lambda () (treesit-parser-create 'markdown)))"
         ];
         custom.evil-markdown-movement-bindings = ''
           '((up . "${keybinds.evil.keys.up}")

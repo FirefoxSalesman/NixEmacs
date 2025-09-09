@@ -42,6 +42,7 @@ in
         org = {
           enable = true;
           mode = [ ''("\\.org\\'" . org-mode)'' ];
+          symex = ide.symex;
           deferIncrementally = [
             "calendar"
             "find-func"
@@ -139,7 +140,10 @@ in
             "i" = lib.mkDefault '''(org-toggle-inline-images :which-key "show images")'';
             "b" = lib.mkDefault '''(org-edit-special :which-key "edit block")'';
           };
-          hook = [ "(org-mode . org-indent-mode)" ];
+          hook = [
+            "(org-mode . org-indent-mode)"
+            "(org-mode . (lambda () (treesit-parser-create 'org)))"
+          ];
           init = ''
             (defun nix-emacs-project-file (file)
               "Retrieves file from the root of the current project."
