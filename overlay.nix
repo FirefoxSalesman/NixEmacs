@@ -31,12 +31,13 @@ final: prev: inputs: {
             inherit inputs;
             inherit (prev.emacsPackages)
               trivialBuild
-              tsc
-              tree-sitter
-              evil
-              evil-surround
               seq
+              lithium
+              mantra
+              repeat-ring
               paredit
+              pubsub
+              evil
               ;
           }
         );

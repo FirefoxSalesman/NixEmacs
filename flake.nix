@@ -33,7 +33,7 @@
     };
 
     symex = {
-      url = "github:firefoxsalesman/symex.el/2.0-integration";
+      url = "github:firefoxsalesman/symex.el/treesit";
       flake = false;
     };
   };

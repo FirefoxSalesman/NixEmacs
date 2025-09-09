@@ -1,12 +1,13 @@
 {
   inputs,
   trivialBuild,
-  tsc,
-  tree-sitter,
-  evil,
-  evil-surround,
   seq,
-  paredit
+  lithium,
+  mantra,
+  repeat-ring,
+  pubsub,
+  paredit,
+  evil
 }:
 
 trivialBuild rec {
@@ -15,12 +16,13 @@ trivialBuild rec {
   src = inputs.symex;
 
   propagatedUserEnvPkgs = [
-    tsc
-    tree-sitter
-    evil
-    evil-surround
     seq
+    lithium
+    mantra
+    repeat-ring
     paredit
+    pubsub
+    evil
   ];
 
   buildInputs = propagatedUserEnvPkgs;
