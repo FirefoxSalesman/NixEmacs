@@ -64,8 +64,7 @@ in
         || lang.svelte.enable
       )
       {
-        programs.emacs.init.usePackage = {
-          treesit-auto = {
+        programs.emacs.init.usePackage.treesit-auto = {
             enable = true;
             custom.treesit-auto-install = "'prompt";
             init = "(mp-setup-install-grammars)";
@@ -86,44 +85,5 @@ in
                       (treesit-install-language-grammar (car grammar)))))
             '';
           };
-
-          tree-sitter = {
-            enable = true;
-            afterCall = [ "on-first-file-hook" ];
-            config = ''
-                      (global-tree-sitter-mode)
-                      (dolist (mode '((java-ts-mode . java)
-                        (kotlin-ts-mode . kotlin)
-                        (html-ts-mode . html)
-              		      (lua-ts-mode . lua)
-              		      (go-ts-mode . go)
-              		      (python-ts-mode . python)
-              		      (scala-ts-mode . scala)
-              		      (js-ts-mode . javascript)
-              		      (typescript-ts-mode . typescript)
-              		      ;;(haskell-ts-mode . haskell)
-              		      (json-ts-mode . json)
-              		      (gfm-mode . markdown)
-              		      (ruby-ts-mode . ruby)
-              		      (csharp-ts-mode . c-sharp)
-              		      (rust-ts-mode . rust)
-              		      (css-ts-mode . css)
-              		      (c-ts-mode . c)
-              		      (racket-repl-mode . racket)
-              		      (ess-r-mode . r)
-              		      (inferior-ess-r-mode . r)
-              		      (erlang-ts-mode . erlang)
-                        (toml-ts-mode . toml)
-              		      (julia-ts-mode . julia)))
-                      (add-to-list 'tree-sitter-major-mode-language-alist mode))
-            '';
-          };
-
-          tree-sitter-langs = {
-            enable = true;
-            custom.tree-sitter-langs-grammar-dir = ''"~/.cache/emacs/tree-sitter"'';
-            afterCall = [ "global-tree-sitter-mode-hook" ];
-          };
-        };
       };
 }
