@@ -50,7 +50,6 @@ in
         mode = [ ''"\\.bib\\'"'' ];
         lsp = ide.lsp.enable;
         eglot = ide.eglot.enable;
-        symex = ide.symex;
       };
 
       latex = {
@@ -63,7 +62,6 @@ in
             [ ];
         babel = lib.mkIf ide.languages.org.enable "latex";
         mode = [ ''("\\.tex\\'" . LaTeX-mode)'' ];
-        symex = ide.symex;
         lsp = ide.lsp.enable;
         eglot = ide.eglot.enable;
         lspce = lib.mkIf ide.lspce.enable ''

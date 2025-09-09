@@ -17,6 +17,7 @@ in {
       mode = [ ''"\\.sh\\'"'' ];
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
+      symex = ide.symex;
       lspce = lib.mkIf ide.lspce.enable '''("sh" "bash") "bash-language-server" "start"'';
     };
   };

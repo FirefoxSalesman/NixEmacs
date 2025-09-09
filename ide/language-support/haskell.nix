@@ -25,6 +25,7 @@ in
             [ ];
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
+	symex = ide.symex;
         lspce = lib.mkIf ide.lspce.enable ''"haskell" "haskell-language-server-wrapper" "--lsp"'';
       };
     };

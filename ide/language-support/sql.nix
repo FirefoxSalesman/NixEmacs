@@ -20,7 +20,6 @@ in
       mode = [ ''"\\.sql\\'"'' ];
       eglot = lib.mkIf ide.eglot.enable ''"sqls"'';
       lsp = ide.lsp.enable;
-      symex = ide.symex;
       lspce = lib.mkIf ide.lspce.enable ''"sql" "sqls"'';
     };
   };

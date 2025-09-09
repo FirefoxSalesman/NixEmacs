@@ -24,6 +24,7 @@ in
       eglot = lib.mkIf ide.eglot.enable ''"lua-language-server"'';
       lsp = ide.lsp.enable;
       lspce = lib.mkIf ide.lspce.enable ''"lua" "lua-language-server"'';
+      symex = ide.symex.enable ;
     };
   };
 }

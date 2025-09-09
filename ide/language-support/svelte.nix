@@ -15,6 +15,7 @@ in
       eglot = ''("svelteserver" "--stdio")'';
       lsp = ide.lsp.enable;
       lspce = lib.mkIf ide.lspce.enable ''"svelte" "svelteserver" "--stdio"'';
+      symex = ide.symex;
     };
   };
 }

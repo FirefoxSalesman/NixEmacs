@@ -24,7 +24,6 @@ in
       mode = [ ''"\\.R\\'"'' ];
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
-      symex = ide.symex;
       custom.ess-ask-for-ess-directory = lib.mkDefault false;
       lspce = lib.mkIf ide.lspce.enable '''("R" "ess-r") "R" "--slave -e languageserver::run()"'';
     };
