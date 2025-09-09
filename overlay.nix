@@ -36,6 +36,9 @@ final: prev: inputs: {
               seq
               paredit
               lithium
+              mantra
+              repeat-ring
+              pubsub
             ;
           }
         );
