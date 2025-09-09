@@ -2,7 +2,6 @@
   inputs,
   trivialBuild,
   seq,
-  lithium,
   mantra,
   repeat-ring,
   pubsub,
@@ -17,7 +16,6 @@ trivialBuild rec {
 
   propagatedUserEnvPkgs = [
     seq
-    lithium
     mantra
     repeat-ring
     paredit

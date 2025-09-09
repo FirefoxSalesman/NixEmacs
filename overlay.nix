@@ -32,7 +32,6 @@ final: prev: inputs: {
             inherit (prev.emacsPackages)
               trivialBuild
               seq
-              lithium
               mantra
               repeat-ring
               paredit
