@@ -11,7 +11,6 @@ in
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "forth";
       mode = [''"\\.fs\\'"''];
-      symex = ide.symex;
     };
   };
 }

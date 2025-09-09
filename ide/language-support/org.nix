@@ -60,7 +60,6 @@ in
             "org-agenda"
             "org-capture"
           ];
-          symex = ide.symex;
           babel = "org";
           custom = {
             org-confirm-babel-evaluate = lib.mkDefault false;

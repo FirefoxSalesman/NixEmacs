@@ -10,7 +10,6 @@ in
     programs.emacs.init.usePackage.nxml = {
       enable = true;
       mode = [''("\\.xml\\'" . nxml-mode)''];
-      symex = ide.symex;
     };
   };
 }

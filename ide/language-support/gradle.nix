@@ -10,7 +10,6 @@ in
     programs.emacs.init.usePackage.groovy-mode = {
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "groovy";
-      symex = ide.symex;
       mode = [''"\\.gradle\\'"''];
     };
   };
