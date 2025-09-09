@@ -55,7 +55,6 @@ in
       latex = {
         enable = true;
         package = epkgs: epkgs.auctex;
-	hook = ["(LaTeX-mode . (lambda () (treesit-parser-create 'latex)))"];
         extraPackages =
           if ide.eglot.enable || ide.lsp.enable || ide.lspce.enable || ide.lsp-bridge.enable then
             if ide.languages.latex.preferTexlab then [ pkgs.texlab ] else [ pkgs.texlivePackages.digestif ]
@@ -70,7 +69,6 @@ in
             if ide.languages.latex.preferTexlab then "texlab" else "digestif"
           }"
         '';
-	symex = ide.symex;
       };
 
       magic-latex-buffer = {
