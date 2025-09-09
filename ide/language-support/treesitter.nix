@@ -62,28 +62,29 @@ in
         || lang.purescript.enable
         || lang.swift.enable
         || lang.svelte.enable
+        || lang.org.enable
       )
       {
         programs.emacs.init.usePackage.treesit-auto = {
-            enable = true;
-            custom.treesit-auto-install = "'prompt";
-            init = "(mp-setup-install-grammars)";
-            config = "(global-treesit-auto-mode)";
-            # stolen from mickey petersen
-            preface = ''
-              (defun mp-setup-install-grammars ()
-                "Install Tree-sitter grammars if they are absent."
-                (interactive)
-                (dolist (grammar
-                  '(;(xml "https://github.com/ObserverOfTime/tree-sitter-xml")
-                    ${makeGrammars config.programs.emacs.init.ide.treesitterGrammars}))
-                  (add-to-list 'treesit-language-source-alist grammar)
-                    ;; Only install `grammar' if we don't already have it
-                    ;; installed. However, if you want to *update* a grammar then
-                    ;; this obviously prevents that from happening.
-                    (unless (treesit-language-available-p (car grammar))
-                      (treesit-install-language-grammar (car grammar)))))
-            '';
-          };
+          enable = true;
+          custom.treesit-auto-install = "'prompt";
+          init = "(mp-setup-install-grammars)";
+          config = "(global-treesit-auto-mode)";
+          # stolen from mickey petersen
+          preface = ''
+            (defun mp-setup-install-grammars ()
+              "Install Tree-sitter grammars if they are absent."
+              (interactive)
+              (dolist (grammar
+                '(;(xml "https://github.com/ObserverOfTime/tree-sitter-xml")
+                  ${makeGrammars config.programs.emacs.init.ide.treesitterGrammars}))
+                (add-to-list 'treesit-language-source-alist grammar)
+                  ;; Only install `grammar' if we don't already have it
+                  ;; installed. However, if you want to *update* a grammar then
+                  ;; this obviously prevents that from happening.
+                  (unless (treesit-language-available-p (car grammar))
+                    (treesit-install-language-grammar (car grammar)))))
+          '';
+        };
       };
 }

@@ -8,7 +8,6 @@ in
     lib.mkEnableOption "Enables additional support for emacs lisp. Borrowed from doom, & highly reccommended";
 
   config.programs.emacs.init = lib.mkIf ide.languages.emacs-lisp.enable {
-    ide.treesitterGrammars.elisp = "https://github.com/Wilfred/tree-sitter-elisp";
     usePackage = {
       elisp-mode = {
         enable = true;
