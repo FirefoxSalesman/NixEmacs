@@ -2,6 +2,8 @@
 
 let
   keybinds = config.programs.emacs.init.keybinds;
+  evilStates = if keybinds.evil.enable then "insert normal hybrid motion visual operator" else "";
+  symex = if config.programs.emacs.init.ide.symex then "symex" else "";
 in
 {
   options.programs.emacs.init.keybinds.leader-key = {
@@ -22,17 +24,13 @@ in
     prelude = ''
       (general-create-definer global-leader
         :keymaps 'override
-        :states '(emacs ${
-          if keybinds.evil.enable then "insert normal hybrid motion visual operator" else ""
-        })
+        :states '(emacs ${evilStates} ${symex})
         :prefix "SPC"
         :global-prefix "${keybinds.leader-key.globalPrefix}-SPC")
         
       (general-create-definer local-leader
         :prefix "${keybinds.leader-key.localPrefix}-SPC"
-        :states '(emacs ${
-          if keybinds.evil.enable then "insert normal hybrid motion visual operator" else ""
-        }))
+        :states '(emacs ${evilStates} ${symex}))
 
     '';
 
