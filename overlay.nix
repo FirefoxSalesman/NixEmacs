@@ -23,7 +23,7 @@ final: prev: inputs: {
               eglot
               project
               xref
-            ;
+              ;
           }
         );
         symex = (
@@ -32,14 +32,12 @@ final: prev: inputs: {
             inherit (prev.emacsPackages)
               trivialBuild
               tsc
+              tree-sitter
               evil
+              evil-surround
               seq
               paredit
-              lithium
-              mantra
-              repeat-ring
-              pubsub
-            ;
+              ;
           }
         );
         eglot-booster = (
