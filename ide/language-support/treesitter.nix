@@ -76,8 +76,7 @@ in
               "Install Tree-sitter grammars if they are absent."
               (interactive)
               (dolist (grammar
-                '(;(xml "https://github.com/ObserverOfTime/tree-sitter-xml")
-                  ${makeGrammars config.programs.emacs.init.ide.treesitterGrammars}))
+                '(${makeGrammars config.programs.emacs.init.ide.treesitterGrammars}))
                 (add-to-list 'treesit-language-source-alist grammar)
                   ;; Only install `grammar' if we don't already have it
                   ;; installed. However, if you want to *update* a grammar then
