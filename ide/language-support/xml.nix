@@ -13,11 +13,9 @@ in
 
   config = lib.mkIf ide.languages.xml.enable {
     programs.emacs.init = {
-      ide.treesitterGrammars."xml" = "https://github.com/ObserverOfTime/tree-sitter-xml";
       usePackage.nxml = {
         enable = true;
         mode = [ ''("\\.xml\\'" . nxml-mode)'' ];
-	symex = ide.symex;
       };
     };
   };
