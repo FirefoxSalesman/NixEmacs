@@ -210,6 +210,14 @@ let
           '';
         };
 
+        autoload = mkOption {
+          type = types.listOf types.str;
+          default = [ ];
+          description = ''
+            The entries to use for <option>:autoload</option>.
+          '';
+        };
+
         hook = mkOption {
           type = types.listOf types.str;
           default = [ ];
@@ -427,6 +435,7 @@ let
             mkAfter = vs: optional (vs != [ ]) ":after (${toString vs})";
             mkAfterCall = vs: optional (vs != [ ]) ":after-call (${toString vs})";
             mkCommand = vs: optional (vs != [ ]) ":commands (${toString vs})";
+            mkAutoload = vs: optional (vs != [ ]) ":autoload (${toString vs})";
             # Having :custom before every statement grants better load times. No idea why
             mkCustom =
               vs:
@@ -438,7 +447,7 @@ let
                       if v then "t" else "nil"
                     else if isInt v || isFloat v then
                       toString v
-                    else 
+                    else
                       v
                   })"
                 ) vs
@@ -530,6 +539,7 @@ let
             ++ mkBindLocal config.bindLocal
             ++ mkChords config.chords
             ++ mkCommand config.command
+            ++ mkAutoload config.autoload
             ++ mkDefer config.defer
             ++ mkDeferIncrementally config.deferIncrementally
             ++ mkDefines config.defines

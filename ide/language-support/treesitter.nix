@@ -65,14 +65,20 @@ in
         || lang.org.enable
       )
       {
-        programs.emacs.init.usePackage.treesit-auto = {
-          enable = true;
-          custom.treesit-auto-install = "'prompt";
-          init = "(mp-setup-install-grammars)";
-          config = "(global-treesit-auto-mode)";
-          # stolen from mickey petersen
+        programs.emacs.init = {
           preface = ''
-            (defun mp-setup-install-grammars ()
+            (defmacro treesit! (lang)
+                  "Creates a lanbda that sets up the treesitter parser for lang."
+                  `(lambda () (treesit-parser-create ,lang)))
+          '';
+          usePackage.treesit-auto = {
+            enable = true;
+            custom.treesit-auto-install = "'prompt";
+            init = "(mp-setup-install-grammars)";
+            config = "(global-treesit-auto-mode)";
+            # stolen from mickey petersen
+            preface = ''
+              (defun mp-setup-install-grammars ()
               "Install Tree-sitter grammars if they are absent."
               (interactive)
               (dolist (grammar
@@ -83,7 +89,8 @@ in
                   ;; this obviously prevents that from happening.
                   (unless (treesit-language-available-p (car grammar))
                     (treesit-install-language-grammar (car grammar)))))
-          '';
+            '';
+          };
         };
       };
 }

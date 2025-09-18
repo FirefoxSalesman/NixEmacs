@@ -805,7 +805,7 @@ Default: =false=
 **** =programs.emacs.init.ide.treesitterGrammars=
 An attribute set of language names & links to their grammars.
 
-Only used by the native treesitter library, meaning it won't help symex
+When this option is used, it implicitly enables the treesitter module & adds the elisp macro =treesit!=, which generates a lambda that activates the treesitter grammar for the given language (see the macro documentation for more details).
 
 **** =programs.emacs.init.ide.symex=
 A boolean that will enable symex for all languages in the language support presets

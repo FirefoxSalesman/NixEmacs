@@ -16,7 +16,7 @@ in
         mode = [ ''("\\.Cask\\'" . emacs-lisp-mode)'' ];
         hook = lib.mkIf ide.flymake.enable [
           "(emacs-lisp-mode . flymake-mode)"
-          "(emacs-lisp-mode . (lambda () (treesit-parser-create 'elisp)))"
+          "(emacs-lisp-mode . (treesit! 'elisp))"
         ];
       };
 

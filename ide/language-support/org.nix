@@ -142,7 +142,7 @@ in
           };
           hook = [
             "(org-mode . org-indent-mode)"
-            "(org-mode . (lambda () (treesit-parser-create 'org)))"
+            "(org-mode . (treesit! 'org))"
           ];
           init = ''
             (defun nix-emacs-project-file (file)
