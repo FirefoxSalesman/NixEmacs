@@ -18,7 +18,7 @@ in
       # borrowed from doom
       hook = [
         "(purescript-mode . purescript-indentation-mode)"
-        "(purescript-mode . (treesit! 'purescript))"
+        "(purescript-mode . (lambda () (treesit-parser-create 'purescript)))"
       ];
       extraPackages =
         if ide.eglot.enable || ide.lspce.enable || ide.lsp.enable then
