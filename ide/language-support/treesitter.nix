@@ -66,7 +66,7 @@ in
       )
       {
         programs.emacs.init = {
-          preface = ''
+          prelude = ''
             (defmacro treesit! (lang)
                   "Creates a lanbda that sets up the treesitter parser for lang."
                   `(lambda () (treesit-parser-create ,lang)))
