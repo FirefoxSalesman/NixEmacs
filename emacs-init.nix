@@ -501,6 +501,8 @@ let
                 "latex-mode"
               else if matches "latex" name then
                 "LaTeX-mode"
+              else if matches "elisp-mode" then
+                "emacs-lisp-mode"
               else if matches ".*-mode" name then
                 name
               else
