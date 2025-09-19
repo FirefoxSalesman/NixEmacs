@@ -22,7 +22,7 @@ in
         else
           [ ];
       mode = [ ''"\\.R\\'"'' ];
-      hook = ["(ess-r-mode . (lambda () (treesit-parser-create 'r)))"];
+      gfhook = lib.mkIf ide.symex [ "('ess-r-mode-hook (treesit! 'r))" ];
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
       custom.ess-ask-for-ess-directory = lib.mkDefault false;

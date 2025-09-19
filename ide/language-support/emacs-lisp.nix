@@ -8,6 +8,7 @@ in
     lib.mkEnableOption "Enables additional support for emacs lisp. Borrowed from doom, & highly reccommended";
 
   config.programs.emacs.init = lib.mkIf ide.languages.emacs-lisp.enable {
+    ide.treesitterGrammars."elisp" = lib.mkIf ide.symex "https://github.com/Wilfred/tree-sitter-elisp";
     usePackage = {
       elisp-mode = {
         enable = true;
@@ -16,8 +17,8 @@ in
         mode = [ ''("\\.Cask\\'" . emacs-lisp-mode)'' ];
         hook = lib.mkIf ide.flymake.enable [
           "(emacs-lisp-mode . flymake-mode)"
-          "(emacs-lisp-mode . (lambda () (treesit-parser-create 'elisp)))"
         ];
+        gfhook = lib.mkIf ide.symex [ "('emacs-lisp-mode-hook (treesit! 'elisp))" ];
       };
 
       elisp-demos = {

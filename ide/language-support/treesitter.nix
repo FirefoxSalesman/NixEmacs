@@ -54,15 +54,13 @@ in
         || lang.common-lisp.enable
         || lang.scheme.enable
         || lang.racket.enable
-        || lang.xml.enable
-        || lang.org.enable
         || lang.vimscript.enable
         || lang.julia.enable
-        || lang.emacs-lisp.enable
         || lang.purescript.enable
         || lang.swift.enable
         || lang.svelte.enable
-        || lang.org.enable
+        || config.programs.emacs.init.ide.symex
+        || (config.programs.emacs.init.treesitterGrammars != { })
       )
       {
         programs.emacs.init = {

@@ -37,7 +37,7 @@ in
 
   config = lib.mkIf ide.languages.org.enable {
     programs.emacs.init = {
-      ide.treesitterGrammars."org" = "https://github.com/emiasims/tree-sitter-org";
+      ide.treesitterGrammars."org" = lib.mkIf ide.symex "https://github.com/emiasims/tree-sitter-org";
       usePackage = {
         org = {
           enable = true;
@@ -140,10 +140,8 @@ in
             "i" = lib.mkDefault '''(org-toggle-inline-images :which-key "show images")'';
             "b" = lib.mkDefault '''(org-edit-special :which-key "edit block")'';
           };
-          hook = [
-            "(org-mode . org-indent-mode)"
-            "(org-mode . (lambda () (treesit-parser-create 'org)))"
-          ];
+          hook = [ "(org-mode . org-indent-mode)" ];
+          gfhook = lib.mkIf ide.symex [ "('org-mode-hook (treesit! 'org))" ];
           init = ''
             (defun nix-emacs-project-file (file)
               "Retrieves file from the root of the current project."

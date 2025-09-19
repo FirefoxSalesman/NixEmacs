@@ -16,11 +16,9 @@ in
     programs.emacs.init.usePackage.purescript-mode = {
       enable = true;
       # borrowed from doom
-      hook = [
-        "(purescript-mode . purescript-indentation-mode)"
-        "(purescript-mode . (lambda () (treesit-parser-create 'purescript)))"
-      ];
-      extraPackages =
+      hook = [ "(purescript-mode . purescript-indentation-mode)" ];
+      gfhook = lib.mkIf ide.symex [ "('purescript-mode-hook (treesit! 'extraPackages))" ];
+      purescript =
         if ide.eglot.enable || ide.lspce.enable || ide.lsp.enable then
           [ pkgs.nodePackages.purescript-language-server ]
         else
