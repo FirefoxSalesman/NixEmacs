@@ -739,7 +739,7 @@ let
 
        (defmacro nix-emacs/gen-hooks (hooks)
          "Takes symbols in parens, HOOKS, & appends -hook to them. Do not pass a proper list into the macro."
-         `(gen-hooks-helper ,(add-to-list 'hooks 'list)))
+         `(gen-hooks-helper ,(push 'list hooks)))
        
        (general-auto-unbind-keys))
   ''
