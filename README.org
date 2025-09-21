@@ -399,6 +399,16 @@ Example usage:
   };
 #+end_src
 
+***** =ghookf=
+The =:ghook= option from general.el, but it automatically appends "-hook" to every hook symbol
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.envrc = {
+    enable = true;
+    ghook = ["('after-init 'envrc-global-mode)"];
+  };
+#+end_src
 
 ***** =gfhook=
 The =:gfhook= option from general.el

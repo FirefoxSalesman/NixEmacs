@@ -234,6 +234,14 @@ let
           '';
         };
 
+        ghookf = mkOption {
+          type = types.listOf types.str;
+          default = [ ];
+          description = ''
+            The entries to use for <option>:ghookf</option>. Functions like ghook, but automatically appends -hook to every hook symbol.
+          '';
+        };
+
         gfhook = mkOption {
           type = types.listOf types.str;
           default = [ ];
@@ -492,9 +500,11 @@ let
               flatten (mapAttrsToList mkMap bs);
             mkBindKeyMap = mkBindHelper "bind-keymap" "";
             mkChords = mkBindHelper "chords" "";
-            mkHook = vs: optional (vs != [ ]) ":hook ${toString vs}";
-            mkGhook = vs: optional (vs != [ ]) ":ghook ${toString vs}";
-            mkGfhook = vs: optional (vs != [ ]) ":gfhook ${toString vs}";
+            hookHelper = vs: keyword: optional (vs != [ ]) "${keyword} ${toString vs}";
+            mkHook = vs: hookHelper vs ":hook";
+            mkGhook = vs: hookHelper vs ":ghook";
+            mkGfhook = vs: hookHelper vs ":gfhook";
+            mkGhookf = vs: hookHelper vs ":ghookf";
             transformName =
               name:
               if matches "tex-mode" name then
@@ -550,6 +560,7 @@ let
             ++ mkDiminish config.diminish
             ++ mkHook (config.hook ++ mkLsp name config.lsp)
             ++ mkGhook config.ghook
+            ++ mkGhookf config.ghookf
             ++ mkEglot name config.eglot
             ++ mkLspCe name config.lspce
             ++ mkGfhook config.gfhook
@@ -648,6 +659,7 @@ let
     p.symex != false
     || p.ghook != [ ]
     || p.gfhook != [ ]
+    || p.ghookf != [ ]
     || p.generalOneConfig != { }
     || p.generalTwoConfig != { }
     || p.generalConfig != { }
