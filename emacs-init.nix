@@ -242,22 +242,6 @@ let
           '';
         };
 
-        ghookf = mkOption {
-          type = types.listOf types.str;
-          default = [ ];
-          description = ''
-            The entries to use for <option>:ghook</option>, with -hook appended.
-          '';
-        };
-
-        gfhookf = mkOption {
-          type = types.listOf types.str;
-          default = [ ];
-          description = ''
-            The entries to use for <option>:gfhook</option>, with -hook appended.
-          '';
-        };
-
         defines = mkOption {
           type = types.listOf types.str;
           default = [ ];
@@ -511,9 +495,6 @@ let
             mkHook = vs: optional (vs != [ ]) ":hook ${toString vs}";
             mkGhook = vs: optional (vs != [ ]) ":ghook ${toString vs}";
             mkGfhook = vs: optional (vs != [ ]) ":gfhook ${toString vs}";
-            mkGhookfHelper = vs: fun: fun (map (v: "(nix-emacs/gen-hooks ${v})") vs);
-            mkGhookf = vs: mkGhookfHelper vs mkGhook;
-            mkGfhookf = vs: mkGhookfHelper vs mkGfhook;
             transformName =
               name:
               if matches "tex-mode" name then
@@ -569,8 +550,6 @@ let
             ++ mkDiminish config.diminish
             ++ mkHook (config.hook ++ mkLsp name config.lsp)
             ++ mkGhook config.ghook
-            ++ mkGhookf config.ghookf
-            ++ mkGfhookf config.gfhookf
             ++ mkEglot name config.eglot
             ++ mkLspCe name config.lspce
             ++ mkGfhook config.gfhook
@@ -669,8 +648,6 @@ let
     p.symex != false
     || p.ghook != [ ]
     || p.gfhook != [ ]
-    || p.ghookf != [ ]
-    || p.gfhookf != [ ]
     || p.generalOneConfig != { }
     || p.generalTwoConfig != { }
     || p.generalConfig != { }
@@ -727,20 +704,6 @@ let
       (use-package general
        :demand t
        :config
-       (defun nix-emacs/gen-hooks-helper (hooks)
-         "Takes a list of symbols, HOOKS, & appends -hook to them."
-         (cons (let ((append-hook (lambda (hook)
-       			     (intern (concat (symbol-name hook) "-hook"))))
-       	      (start (car hooks)))
-       	  (if (listp start)
-       	      (mapcar append-hook start)
-       	    (funcall append-hook start)))
-       	(cdr hooks)))
-
-       (defmacro nix-emacs/gen-hooks (hooks)
-         "Takes symbols in parens, HOOKS, & appends -hook to them. Do not pass a proper list into the macro."
-         `(nix-emacs/gen-hooks-helper ,(push 'list hooks)))
-       
        (general-auto-unbind-keys))
   ''
   + optionalString hasBind ''
