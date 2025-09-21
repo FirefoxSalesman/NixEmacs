@@ -406,7 +406,7 @@ Example usage:
 #+begin_src nix
   programs.emacs.init.usePackage.envrc = {
     enable = true;
-    ghook = ["('after-init 'envrc-global-mode)"];
+    ghookf = ["('after-init 'envrc-global-mode)"];
   };
 #+end_src
 
@@ -419,6 +419,17 @@ Example usage:
       enable = true;
       gfhook = ["('racket-mode-hook 'hs-minor-mode)"];
   };
+#+end_src
+
+***** =gfhookf=
+The =:gfhook= option from general.el, but it automatically appends "-hook" to every hook symbol
+
+Example usage:
+#+begin_src nix
+programs.emacs.init.usePackage.racket-mode = {
+enable = true;
+gfhookf = ["('racket-mode 'hs-minor-mode)"];
+};
 #+end_src
 
 **** =defines=

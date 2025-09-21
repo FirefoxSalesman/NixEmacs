@@ -250,6 +250,14 @@ let
           '';
         };
 
+        gfhookf = mkOption {
+          type = types.listOf types.str;
+          default = [ ];
+          description = ''
+            The entries to use for <option>:gfhookf</option>. Functions like gfhook, but automatically appends -hook to every hook symbol.
+          '';
+        };
+
         defines = mkOption {
           type = types.listOf types.str;
           default = [ ];
@@ -505,6 +513,7 @@ let
             mkGhook = vs: hookHelper vs ":ghook";
             mkGfhook = vs: hookHelper vs ":gfhook";
             mkGhookf = vs: hookHelper vs ":ghookf";
+            mkGfhookf = vs: hookHelper vs ":gfhookf";
             transformName =
               name:
               if matches "tex-mode" name then
@@ -561,6 +570,7 @@ let
             ++ mkHook (config.hook ++ mkLsp name config.lsp)
             ++ mkGhook config.ghook
             ++ mkGhookf config.ghookf
+            ++ mkGfhookf config.gfhookf
             ++ mkEglot name config.eglot
             ++ mkLspCe name config.lspce
             ++ mkGfhook config.gfhook
@@ -660,6 +670,7 @@ let
     || p.ghook != [ ]
     || p.gfhook != [ ]
     || p.ghookf != [ ]
+    || p.gfhookf != [ ]
     || p.generalOneConfig != { }
     || p.generalTwoConfig != { }
     || p.generalConfig != { }
@@ -749,6 +760,9 @@ let
                         arglist
                         `(hook! ,@arglist))
                       arglists))))
+
+       (defalias 'use-package-normalize/:gfhookf #'use-package-normalize/:gfhook)
+       (defalias 'use-package-handler/:gfhookf #'use-package-handler/:ghookf)
 
        (general-auto-unbind-keys))
   ''
