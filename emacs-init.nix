@@ -716,6 +716,40 @@ let
       (use-package general
        :demand t
        :config
+       (defun hook! (hooks functions &optional append local transient)
+         "Like `general-add-hook`, but the -hook is appended to every symbol in HOOKS for you.
+          FUNCTIONS, APPEND, LOCAL, & TRANSIENT are all passed directly to `general-add-hook`."
+         (let* ((append-hook (lambda (hook)
+       			(intern (concat (symbol-name hook) "-hook"))))
+       	 (new-hooks (if (listp hooks)
+       		       (mapcar append-hook hooks)
+       		      (funcall append-hook hooks))))
+           (general-add-hook new-hooks functions append local transient)))
+
+       (setq use-package-keywords
+             ;; should go in the same location as :bind
+             ;; adding to end may not cause problems, but see issue #22
+             (cl-loop for item in use-package-keywords
+                      if (eq item :hook)
+                      collect :hook and collect :ghookf and collect :gfhookf
+                      else
+                      ;; don't add duplicates
+                      unless (memq item '(:ghookf :gfhookf))
+                      collect item))
+
+       (defalias 'use-package-normalize/:ghookf #'general-normalize-hook)
+
+       (defalias 'use-package-autoloads/:ghookf #'use-package-autoloads/:ghook)
+
+       (defun use-package-handler/:ghookf (name _keyword arglists rest state)
+         "Use-package handler for :ghookf and :gfhookf."
+         (use-package-concat
+          (use-package-process-keywords name rest state)
+          `(,@(mapcar (lambda (arglist)
+                        arglist
+                        `(hook! ,@arglist))
+                      arglists))))
+
        (general-auto-unbind-keys))
   ''
   + optionalString hasBind ''
