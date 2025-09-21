@@ -511,8 +511,9 @@ let
             mkHook = vs: optional (vs != [ ]) ":hook ${toString vs}";
             mkGhook = vs: optional (vs != [ ]) ":ghook ${toString vs}";
             mkGfhook = vs: optional (vs != [ ]) ":gfhook ${toString vs}";
-            mkGhookf = vs: mkGhook (map vs (v: "(nix-emacs/gen-hooks ${v})"));
-            mkGfhookf = vs: mkGfhook (map vs (v: "(nix-emacs/gen-hooks ${v})"));
+            mkGhookfHelper = vs: fun: fun (map vs (v: "(nix-emacs/gen-hooks ${v})"));
+            mkGhookf = vs: mkGhookfHelper vs mkGhook;
+            mkGfhookf = vs: mkGhookfHelper vs mkGfhook;
             transformName =
               name:
               if matches "tex-mode" name then
