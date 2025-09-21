@@ -53,7 +53,7 @@ in
       evil = {
         enable = true;
         demand = true;
-        gfhook = [ "('on-init-ui-hook 'evil-mode)" ];
+        gfhookf = [ "('on-init-ui 'evil-mode)" ];
         custom = {
           # Various settings to make it more like vim
           evil-want-integration = true;
@@ -93,7 +93,7 @@ in
       evil-collection = {
         enable = true;
         ghookf = [ "('evil-mode 'evil-collection-init)" ];
-        gfhook = lib.mkIf hasSwap [ "('evil-collection-setup-hook 'nix-emacs-hjkl-rotation)" ];
+        gfhookf = lib.mkIf hasSwap [ "('evil-collection-setup 'nix-emacs-hjkl-rotation)" ];
         preface = lib.mkIf hasSwap ''
           (defun nix-emacs-hjkl-rotation (_mode mode-keymaps &rest _rest)
             (evil-collection-translate-key '(normal motion) mode-keymaps

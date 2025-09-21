@@ -17,7 +17,7 @@ in
       enable = true;
       # borrowed from doom
       hook = [ "(purescript-mode . purescript-indentation-mode)" ];
-      gfhook = lib.mkIf ide.symex [ "('purescript-mode-hook (treesit! 'extraPackages))" ];
+      gfhookf = lib.mkIf ide.symex [ "('purescript-mode (treesit! 'extraPackages))" ];
       purescript =
         if ide.eglot.enable || ide.lspce.enable || ide.lsp.enable then
           [ pkgs.nodePackages.purescript-language-server ]

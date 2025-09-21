@@ -41,8 +41,8 @@ in
           company-dabbrev-ignore-case = lib.mkDefault false;
           company-dabbrev-downcase = lib.mkDefault false;
         };
-        gfhook = lib.mkIf keybinds.evil.enable [
-          "('(evil-insert-state-exit-hook evil-emacs-state-exit-hook) 'company-abort)"
+        gfhookf = lib.mkIf keybinds.evil.enable [
+          "('(evil-insert-state-exit evil-emacs-state-exit-hook) 'company-abort)"
         ];
         config = ''
           (with-eval-after-load 'eldoc

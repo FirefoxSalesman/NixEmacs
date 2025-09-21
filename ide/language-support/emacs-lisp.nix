@@ -18,7 +18,7 @@ in
         hook = lib.mkIf ide.flymake.enable [
           "(emacs-lisp-mode . flymake-mode)"
         ];
-        gfhook = lib.mkIf ide.symex [ "('emacs-lisp-mode-hook (treesit! 'elisp))" ];
+        gfhookf = lib.mkIf ide.symex [ "('emacs-lisp-mode (treesit! 'elisp))" ];
       };
 
       elisp-demos = {

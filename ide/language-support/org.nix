@@ -141,7 +141,7 @@ in
             "b" = lib.mkDefault '''(org-edit-special :which-key "edit block")'';
           };
           hook = [ "(org-mode . org-indent-mode)" ];
-          gfhook = lib.mkIf ide.symex [ "('org-mode-hook (treesit! 'org))" ];
+          gfhookf = lib.mkIf ide.symex [ "('org-mode (treesit! 'org))" ];
           init = ''
             (defun nix-emacs-project-file (file)
               "Retrieves file from the root of the current project."
@@ -230,7 +230,7 @@ in
               (right . "${keybinds.evil.keys.forward}"))
           '';
           ghookf = [ "('org-mode 'evil-org-mode)" ];
-          gfhook = [ "('org-capture-mode-hook 'evil-insert-state)" ];
+          gfhookf = [ "('org-capture-mode 'evil-insert-state)" ];
           # stolen from doom
           generalTwo.":n".org-mode-map = {
             "]h" = '''(org-forward-heading-same-level :which-key "next heading")'';

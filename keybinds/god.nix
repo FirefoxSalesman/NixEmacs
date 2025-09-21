@@ -4,14 +4,15 @@ let
   keybinds = config.programs.emacs.init.keybinds;
 in
 {
-  options.programs.emacs.init.keybinds.god.enable = lib.mkEnableOption "Enables god-mode. (Borrowed from doom)";
+  options.programs.emacs.init.keybinds.god.enable =
+    lib.mkEnableOption "Enables god-mode. (Borrowed from doom)";
 
   config.programs.emacs.init = lib.mkIf keybinds.god.enable {
     hasOn = lib.mkIf (!keybinds.evil.enable) true;
     usePackage = {
-      god-mode =  {
+      god-mode = {
         enable = true;
-        hook = lib.mkIf (!keybinds.evil.enable) ["(on-init-ui-hook . god-mode-all)"];
+        hook = lib.mkIf (!keybinds.evil.enable) [ "(on-init-ui-hook . god-mode-all)" ];
         custom = {
           god-exempt-major-modes = false;
           god-exempt-predicates = false;
@@ -31,8 +32,8 @@ in
 
       evil-god-state = lib.mkIf keybinds.evil.enable {
         enable = true;
-        command = ["evil-god-state"];
-        gfhook = lib.mkIf keybinds.doomEscape.enable ["('doom-escape-hook 'evil-god-state-bail)"];
+        command = [ "evil-god-state" ];
+        gfhookf = lib.mkIf keybinds.doomEscape.enable [ "('doom-escape 'evil-god-state-bail)" ];
         generalOne = {
           ":n"."," = "'evil-execute-in-god-state";
           ":e"."<escape>" = "'evil-god-state";
