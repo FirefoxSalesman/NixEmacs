@@ -178,8 +178,8 @@ in
 
         org-modern = lib.mkIf ide.languages.org.aesthetics.enable {
           enable = true;
-          ghook = [
-            "('org-mode-hook '(org-modern-mode org-toggle-pretty-entities variable-pitch-mode visual-line-mode nix-emacs-org-font-setup))"
+          ghookf = [
+            "('org-mode '(org-modern-mode org-toggle-pretty-entities variable-pitch-mode visual-line-mode nix-emacs-org-font-setup))"
           ];
           custom = {
             org-modern-star = "'replace";
@@ -229,7 +229,7 @@ in
               (left . "${keybinds.evil.keys.backward}")
               (right . "${keybinds.evil.keys.forward}"))
           '';
-          ghook = [ "('org-mode-hook 'evil-org-mode)" ];
+          ghookf = [ "('org-mode 'evil-org-mode)" ];
           gfhook = [ "('org-capture-mode-hook 'evil-insert-state)" ];
           # stolen from doom
           generalTwo.":n".org-mode-map = {

@@ -53,7 +53,7 @@ in
       evil = {
         enable = true;
         demand = true;
-        gfhook = ["('on-init-ui-hook 'evil-mode)"];
+        gfhook = [ "('on-init-ui-hook 'evil-mode)" ];
         custom = {
           # Various settings to make it more like vim
           evil-want-integration = true;
@@ -76,7 +76,7 @@ in
         };
         config = ''
           (setopt evil-want-Y-yank-to-eol t)
-          (evil-set-undo-system ${if keybinds.undo.enable then "'undo-fu" else "'undo-redo" })
+          (evil-set-undo-system ${if keybinds.undo.enable then "'undo-fu" else "'undo-redo"})
           (evil-set-initial-state 'messages-buffer-mode 'normal)
           (general-advice-add '(evil-scroll-down evil-scroll-up evil-scroll-page-up evil-scroll-page-down) :after #'(lambda (arg) (evil-window-middle)))
           (evil-add-command-properties #'flymake-goto-next-error :jump t)
@@ -92,7 +92,7 @@ in
 
       evil-collection = {
         enable = true;
-        ghook = ["('evil-mode-hook 'evil-collection-init)"];
+        ghookf = [ "('evil-mode 'evil-collection-init)" ];
         gfhook = lib.mkIf hasSwap [ "('evil-collection-setup-hook 'nix-emacs-hjkl-rotation)" ];
         preface = lib.mkIf hasSwap ''
           (defun nix-emacs-hjkl-rotation (_mode mode-keymaps &rest _rest)
