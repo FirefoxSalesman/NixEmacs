@@ -399,6 +399,18 @@ Example usage:
   };
 #+end_src
 
+
+***** =ghookf=
+The =:ghook= option from general.el, but with "-hook" appended to the end of every hook
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.envrc = {
+    enable = true;
+    ghook = ["('after-init 'envrc-global-mode)"];
+  };
+#+end_src
+
 ***** =gfhook=
 The =:gfhook= option from general.el
 
@@ -407,6 +419,17 @@ Example usage:
   programs.emacs.init.usePackage.racket-mode = {
       enable = true;
       gfhook = ["('racket-mode-hook 'hs-minor-mode)"];
+  };
+#+end_src
+
+***** =gfhookf=
+The =:gfhook= option from general.el, but with "-hook" appended to the end of every hook
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.racket-mode = {
+      enable = true;
+      gfhookf = ["('racket-mode 'hs-minor-mode)"];
   };
 #+end_src
 
