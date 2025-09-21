@@ -727,8 +727,8 @@ let
       (use-package general
        :demand t
        :config
-       (defun nix-emacs/gen-hooks (hooks)
-         "Takes the contents of a :ghook or :gfhook, HOO,S & appends -mook to them."
+       (defun nix-emacs/gen-hooks-helper (hooks)
+         "Takes a list of symbols, HOOKS, & appends -hook to them."
          (cons (let ((append-hook (lambda (hook)
        			     (intern (concat (symbol-name hook) "-hook"))))
        	      (start (car hooks)))
@@ -736,6 +736,11 @@ let
        	      (mapcar append-hook start)
        	    (funcall append-hook start)))
        	(cdr hooks)))
+
+       (defmacro nix-emacs/gen-hooks (hooks)
+         "Takes symbols in parens, HOOKS, & appends -hook to them. Do not pass a proper list into the macro."
+         `(gen-hooks-helper ,(add-to-list 'hooks 'list)))
+       
        (general-auto-unbind-keys))
   ''
   + optionalString hasBind ''
