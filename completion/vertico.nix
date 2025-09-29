@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 let
   completions = config.programs.emacs.init.completions;
@@ -17,7 +22,7 @@ in
     usePackage = {
       vertico = {
         enable = true;
-        hook = ["(on-first-input . vertico-mode)"];
+        hook = [ "(on-first-input . vertico-mode)" ];
         custom.vertico-cycle = true;
         generalTwo.":n".vertico-map = lib.mkIf keybinds.evil.enable {
           "RET" = "'vertico-exit";
@@ -34,10 +39,10 @@ in
         };
         bindLocal.vertico-map."M-g f" = lib.mkIf (!keybinds.evil.enable) "vertico-quick-jump";
       };
-      
+
       marginalia = {
         enable = true;
-        hook = ["(on-first-input . marginalia-mode)"];
+        hook = [ "(on-first-input . marginalia-mode)" ];
       };
 
       consult = {
@@ -81,8 +86,12 @@ in
             "g" = lib.mkDefault "consult-goto-line";
             "M-g" = lib.mkDefault "consult-goto-line";
             "o" = lib.mkDefault "consult-outline";
-            "m" = lib.mkDefault (if keybinds.evil.enable then "evil-collection-consult-mark" else "consult-mark");
-            "k" = lib.mkDefault (if keybinds.evil.enable then "evil-collection-consult-jump-list" else "consult-global-mark");
+            "m" = lib.mkDefault (
+              if keybinds.evil.enable then "evil-collection-consult-mark" else "consult-mark"
+            );
+            "k" = lib.mkDefault (
+              if keybinds.evil.enable then "evil-collection-consult-jump-list" else "consult-global-mark"
+            );
             "i" = lib.mkDefault "consult-imenu";
             "I" = lib.mkDefault "consult-imenu-multi";
           };
@@ -110,36 +119,41 @@ in
           };
         };
         generalTwo.local-leader = {
-          org-mode-map."o" = lib.mkIf ide.languages.org.enable (lib.mkDefault '''(consult-org-heading :which-key "outline")'');
-          markdown-mode-map."o" = lib.mkIf ide.languages.markdown.enable (lib.mkDefault '''(consult-outline :which-key "go to heading")'');
+          org-mode-map."o" = lib.mkIf ide.languages.org.enable (
+            lib.mkDefault '''(consult-org-heading :which-key "outline")''
+          );
+          markdown-mode-map."o" = lib.mkIf ide.languages.markdown.enable (
+            lib.mkDefault '''(consult-outline :which-key "go to heading")''
+          );
         };
         bind = {
           "M-#" = lib.mkDefault "consult-register-load";
           "M-'" = lib.mkDefault "consult-register-store";
           "C-M-#" = lib.mkDefault "consult-register";
           "M-y" = lib.mkDefault "consult-yank-pop";
+          "M-X" = lib.mkDefault "consult-mode-command";
         };
         custom.xref-show-xrefs-function = "#'consult-xref";
         config = lib.mkIf (keybinds.evil.enable && completions.orderless) ''
-          (defun nix-emacs-save-search-history (pattern)
-            "Gets history from pattern, & saves it where evil mode can find it"
-            (add-to-history 'evil-search-forward-history pattern)
-            (add-to-history 'search-ring pattern)
-            (add-to-history 'regexp-search-ring pattern)
-            (setq evil-ex-search-pattern (list pattern t t))
-            (setq evil-ex-search-direction 'forward)
-            (when evil-ex-search-persistent-highlight
-              (evil-ex-search-activate-highlight evil-ex-search-pattern)))
-          
-          (defun noct-consult-line-evil-history (&rest _)
-            "Add latest `consult-line' search pattern to the evil search history ring.
-            This only works with orderless and for the first component of the search."
-            (when (and (bound-and-true-p evil-mode)
-                       (eq evil-search-module 'isearch))
-              (nix-emacs-save-search-history (cadr (orderless-compile
-  				              (car consult--line-history))))))
-          
-          (general-add-advice #'consult-line :after #'noct-consult-line-evil-history)
+                  (defun nix-emacs-save-search-history (pattern)
+                    "Gets history from pattern, & saves it where evil mode can find it"
+                    (add-to-history 'evil-search-forward-history pattern)
+                    (add-to-history 'search-ring pattern)
+                    (add-to-history 'regexp-search-ring pattern)
+                    (setq evil-ex-search-pattern (list pattern t t))
+                    (setq evil-ex-search-direction 'forward)
+                    (when evil-ex-search-persistent-highlight
+                      (evil-ex-search-activate-highlight evil-ex-search-pattern)))
+                  
+                  (defun noct-consult-line-evil-history (&rest _)
+                    "Add latest `consult-line' search pattern to the evil search history ring.
+                    This only works with orderless and for the first component of the search."
+                    (when (and (bound-and-true-p evil-mode)
+                               (eq evil-search-module 'isearch))
+                      (nix-emacs-save-search-history (cadr (orderless-compile
+          				              (car consult--line-history))))))
+                  
+                  (general-add-advice #'consult-line :after #'noct-consult-line-evil-history)
         '';
       };
 
@@ -151,7 +165,9 @@ in
       consult-dir = {
         enable = true;
         config = "(add-to-list 'consult-dir-sources 'consult-dir--source-tramp-ssh t)";
-        custom.consult-dir-project-list-function = lib.mkIf ide.projectile (lib.mkDefault "#'consult-dir-projectile-dirs");
+        custom.consult-dir-project-list-function = lib.mkIf ide.projectile (
+          lib.mkDefault "#'consult-dir-projectile-dirs"
+        );
         bindLocal.vertico-map = {
           "C-x C-d" = "consult-dir";
           "C-x C-j" = "consult-dir-jump-file";
@@ -160,21 +176,23 @@ in
 
       vertico-prescient = lib.mkIf completions.prescient {
         enable = true;
-        hook = ["(minibuffer-mode . vertico-prescient-mode)"];
+        hook = [ "(minibuffer-mode . vertico-prescient-mode)" ];
         custom = {
           vertico-prescient-enable-filtering = false;
-          vertico-prescient-completion-styles = lib.mkDefault (if completions.orderless then "'(orderless prescient basic)" else "'(prescient basic)");
+          vertico-prescient-completion-styles = lib.mkDefault (
+            if completions.orderless then "'(orderless prescient basic)" else "'(prescient basic)"
+          );
           vertico-prescient-enable-sorting = true;
         };
       };
 
       embark = lib.mkIf completions.vertico.embark {
         enable = true;
-        command = ["embark-act"];
+        command = [ "embark-act" ];
         bind."C-;" = "'embark-dwim";
         defer = true;
         bindLocal = {
-          help-map."b" = "embark-bindings"; 
+          help-map."b" = "embark-bindings";
           minibuffer-local-map."C-;" = "embark-act";
         };
         generalTwo = lib.mkIf keybinds.evil.enable {
@@ -186,10 +204,10 @@ in
           prefix-help-command = "#'embark-prefix-help-command";
           which-key-use-C-h-commands = lib.mkIf keybinds.whichKey.enable false;
           embark-indicators = lib.mkIf keybinds.whichKey.enable ''
-              '(embark-which-key-indicator
-                embark-highlight-indicator
-                embark-isearch-highlight-indicator)
-            '';
+            '(embark-which-key-indicator
+              embark-highlight-indicator
+              embark-isearch-highlight-indicator)
+          '';
         };
         init = lib.mkIf keybinds.whichKey.enable ''
           (defun embark-which-key-indicator ()
@@ -214,23 +232,26 @@ in
                    keymap)
                  nil nil t (lambda (binding)
                              (not (string-suffix-p "-argument" (cdr binding))))))))
-          
+
           (defun embark-hide-which-key-indicator (fn &rest args)
             "Hide the which-key indicator immediately when using the completing-read prompter."
             (which-key--hide-popup-ignore-command)
             (let ((embark-indicators
                    (remq #'embark-which-key-indicator embark-indicators)))
               (apply fn args)))
-          
+
           (advice-add #'embark-completing-read-prompter
                       :around #'embark-hide-which-key-indicator)
         '';
       };
-      
+
       embark-consult = lib.mkIf completions.vertico.embark {
         enable = true;
-        after = ["embark" "consult"];
-        hook = ["(embark-collect-mode . consult-preview-at-point-mode)"];
+        after = [
+          "embark"
+          "consult"
+        ];
+        hook = [ "(embark-collect-mode . consult-preview-at-point-mode)" ];
       };
     };
   };
