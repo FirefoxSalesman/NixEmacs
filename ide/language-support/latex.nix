@@ -88,7 +88,7 @@ in
         if ide.languages.latex.preferTexlab then ''"texlab"'' else ''"digestif"''
       );
 
-      evil-tex = lib.mkIf config.programs.emacs.init.evil.enable {
+      evil-tex = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
         enable = true;
         hook = [ "(LaTeX-mode . evil-tex-mode)" ];
       };
