@@ -87,6 +87,11 @@ in
       lsp-bridge.custom.lsp-bridge-tex-lsp-server = lib.mkIf ide.lsp-bridge.enable (
         if ide.languages.latex.preferTexlab then ''"texlab"'' else ''"digestif"''
       );
+
+      evil-tex = lib.mkIf config.programs.emacs.init.evil.enable {
+        enable = true;
+        hook = [ "(LaTeX-mode . evil-tex-mode)" ];
+      };
     };
   };
 }

@@ -1,10 +1,6 @@
 * TODO Ide Features
 ** TODO  Magit
 ** TODO Treesit Fold
-** TODO Evil-Latex
-* TODO Support for completion systems
-** DONE Helm
-** TODO Mct
 * TODO Support for keybindings
 ** TODO Multi cursors
 We should support hydras before dealing with this
@@ -14,11 +10,6 @@ Add leader keys for
 + [ ] lsp-mode
 + [ ] lspce
 + [ ] lsp-bridge
-* TODO Terminals
-** TODO Eshell
-** TODO Eat
-** TODO Vterm
-** TODO Coterm
 * TODO Writing
 ** TODO Denote
 ** TODO Org Roam

@@ -9,5 +9,7 @@
     ./ivy.nix
     ./company.nix
     ./simple-completion-extras.nix
+    ./helm.nix
+    ./mct.nix
   ];
 }

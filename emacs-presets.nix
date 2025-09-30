@@ -5,5 +5,6 @@
     ./ide
     ./keybinds
     ./completion
+    ./term
   ];
 }
