@@ -1,6 +1,7 @@
 * TODO Ide Features
 ** TODO  Magit
 ** TODO Treesit Fold
+** TODO Evil-Latex
 * TODO Support for completion systems
 ** DONE Helm
 ** TODO Mct
