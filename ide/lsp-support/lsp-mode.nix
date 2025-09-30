@@ -34,7 +34,7 @@ in
         };
       };
 
-      consult-lsp = lib.mkIf completions.vertico.enable {
+      consult-lsp = lib.mkIf completions.smallExtras.enable {
         enable = true;
         after = ["lsp-mode"];
         bindLocal.lsp-mode-map."C-M-." = "consult-lsp-symbols" ;

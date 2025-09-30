@@ -55,7 +55,7 @@ in
         hook = [ "(eglot-managed-mode . breadcrumb-local-mode)" ];
       };
 
-      consult-eglot = lib.mkIf config.programs.emacs.init.completions.vertico.enable {
+      consult-eglot = lib.mkIf config.programs.emacs.init.completions.smallExtras.enable {
         enable = true;
         after = ["eglot"];
         bindLocal.eglot-mode-map."C-M-." = "consult-eglot-symbols" ;
