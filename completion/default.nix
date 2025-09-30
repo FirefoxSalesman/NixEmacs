@@ -8,5 +8,6 @@
     ./corfu.nix
     ./ivy.nix
     ./company.nix
+    ./simple-completion-extras.nix
   ];
 }

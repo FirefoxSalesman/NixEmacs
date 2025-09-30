@@ -1,5 +1,8 @@
+* TODO Ide Features
+** TODO  Magit
+** TODO Treesit Fold
 * TODO Support for completion systems
-** TODO Helm
+** DONE Helm
 ** TODO Mct
 * TODO Support for keybindings
 ** TODO Multi cursors
@@ -10,3 +13,15 @@ Add leader keys for
 + [ ] lsp-mode
 + [ ] lspce
 + [ ] lsp-bridge
+* TODO Terminals
+** TODO Eshell
+** TODO Eat
+** TODO Vterm
+** TODO Coterm
+* TODO Writing
+** TODO Denote
+** TODO Org Roam
+** TODO Novelist
+** TODO Citar
+** TODO Nov
+** TODO Pdf tools
