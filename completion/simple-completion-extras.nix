@@ -17,7 +17,7 @@ in
     embark = lib.mkEnableOption "Enables embark's completion actions. Borrowed from Karthink, the embark wiki, & Doom";
   };
 
-  config.programs.emacs.init = lib.mkIf completions.smallExtras {
+  config.programs.emacs.init = lib.mkIf completions.smallExtras.enable {
     hasOn = true;
     usePackage = {
       marginalia = {
