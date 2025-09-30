@@ -14,7 +14,10 @@ in
 
   config.programs.emacs.init = lib.mkIf completions.vertico.enable {
     hasOn = true;
-    completions.smallExtras.enable = true;
+    completions.smallExtras = {
+      enable = true;
+      embark = true;
+    };
     usePackage = {
       vertico = {
         enable = true;

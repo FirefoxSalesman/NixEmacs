@@ -774,16 +774,18 @@ Enables vertico as a completion system. Many things are borrowed from Doom
 **** smallCompletionExtras
 Things like consult, marginalia, & embark.
 
-***** =programs.emacs.init.completions.smallCompletionExtras.embark=
-Enables embark's completion actions. Borrowed from Karthink, the embark wiki, & Doom
-
-***** =programs.emacs.init.completions.smallCompletionExtras.evilConsultLine=
-Evil's / runs consult-line. Borrowed from Noctuid's config. Only works with orderless
-
 ***** =programs.emacs.init.completions.smallCompletionExtras.enable=
 Enables consult & marginalia.
 
 Enabled by default if you have vertico.
+
+***** =programs.emacs.init.completions.smallCompletionExtras.embark=
+Enables embark's completion actions. Borrowed from Karthink, the embark wiki, & Doom
+
+Enabled by default if you have vertico.
+
+***** =programs.emacs.init.completions.smallCompletionExtras.evilConsultLine=
+Evil's / runs consult-line. Borrowed from Noctuid's config. Only works with orderless
 
 *** ide
 **** Eglot
