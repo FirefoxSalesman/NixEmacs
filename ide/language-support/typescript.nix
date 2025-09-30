@@ -13,7 +13,7 @@ in
     lib.mkEnableOption "enables typescript support";
 
   config.programs.emacs.init = lib.mkIf ide.languages.typescript.enable {
-    treesitter.wantTreesitter = true;
+    ide.treesitter.wantTreesitter = true;
     usePackage.typescript-ts-mode = {
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "typescript";
