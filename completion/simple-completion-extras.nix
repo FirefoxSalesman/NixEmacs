@@ -154,7 +154,7 @@ in
         bindLocal.goto-map."f" = lib.mkDefault "consult-flycheck";
       };
 
-      embark = lib.mkIf completions.smallCompletions.embark {
+      embark = lib.mkIf completions.smallExtras.embark {
         enable = true;
         command = [ "embark-act" ];
         bind."C-;" = "'embark-dwim";
