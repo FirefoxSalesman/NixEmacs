@@ -52,6 +52,8 @@
     ./dart.nix
     ./swift.nix
     ./svelte.nix
+    ./makefile.nix
+    ./yaml.nix
   ];
 
   options.programs.emacs.init.ide = {
