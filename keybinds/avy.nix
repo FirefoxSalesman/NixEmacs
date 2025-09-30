@@ -8,7 +8,7 @@ in
   options.programs.emacs.init.keybinds.avy = {
     enable = lib.mkEnableOption "Enables avy support. Many actions borrowed from Karthink.";
     evilModifierKey = lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
       default = "M";
       description = "The modifier key to use for evil easymotions";
     };

@@ -9,12 +9,12 @@ in
   options.programs.emacs.init.keybinds.leader-key = {
     enable = lib.mkEnableOption "Enables the leader key.";
     globalPrefix = lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
       default = "C";
       description = "The prefix key for nix-emacs/global-leader";
     };
     localPrefix = lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
       default = "M";
       description = "The prefix key for nix-emacs/local-leader";
     };

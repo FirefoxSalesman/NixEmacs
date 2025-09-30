@@ -5,7 +5,7 @@ let
   mkBindOption =
     key: desc:
     lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
       default = key;
       description = "binding for evil-${desc}";
     };
