@@ -761,6 +761,20 @@ Swiper replaces isearch/evil search. Some configuration stolen from noctuid
 ***** =programs.emacs.init.completions.ivy.posframe=
 Ivy uses a posframe for its completions
 
+**** helm
+***** =programs.emacs.init.completions.helm.enable=
+Enables helm completions, largely borrowed from doom.
+
+***** =programs.emacs.init.completions.helm.fuzzy=
+Enables fuzzy search in helm, largely borrowed from helm.
+
+***** =programs.emacs.init.completions.helm.swiperReplaceSearch=
+Swiper replaces isearch/evil search.
+
+**** mct
+***** =programs.emacs.init.completions.mct.enable=
+Enables mct. Config stolen from prot.
+
 **** =programs.emacs.init.completions.orderless=
 Enables orderless completion styles. Borrowed from David Wilson's config
 
@@ -1002,6 +1016,9 @@ Enables ledger support
 ***** =lua.enable=
 Boolean value that enables lua support
 
+***** =makefile.enable=
+Boolean that enables makefile support
+
 ***** =markdown.enable=
 Boolean that enables markdown support
 
@@ -1117,9 +1134,35 @@ Boolean option to enable vimscript support.
 ***** =xml.enable=
 Boolean option to enable xml support.
 
+***** =yaml.enable=
+Boolean option to enable yaml support.
+
 ***** =zenscript.enable=
 Boolean option to enable zenscript support.
 
 ***** =zig.enable=
 Boolean option to enable zig support.
 
+*** term
+If you've enabled leader keys, you can open your terminal of choice with =global-leader t=
+
+**** coterm
+***** =programs.emacs.init.terminals.coterm.enable=
+Enables coterm as your terminal.
+
+***** =programs.emacs.init.terminals.coterm.coterm-program=
+The program to be called when opening a terminal with =run-coterm=.
+
+**** =programs.emacs.init.terminals.eat=
+Enables eat (emulate a terminal). Also sets up eat to work nicely with eshell
+
+**** =programs.emacs.init.terminals.eshell=
+Enables eshell. It's recommended that you also enable eat so you can have proper terminal emulation.
++ Eshell is prettied up a little bit with pfetch, syntax highlighting, & a git-prompt
++ Fish completions are enabled. It's recommended that you enable company or corfu to take full advantage of them
+
+**** =programs.emacs.init.terminals.term=
+Enables multi-term as your terminal.
+
+**** =programs.emacs.init.terminals.vterm=
+Enables vterm as your terminal.
