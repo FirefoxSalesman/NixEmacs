@@ -14,8 +14,9 @@ in
     preferClangd = lib.mkEnableOption "uses clang instead of ccls";
   };
 
-  config = lib.mkIf ide.languages.c.enable {
-    programs.emacs.init.usePackage = {
+  config.programs.emacs.init = lib.mkIf ide.languages.c.enable {
+    ide.treesitter.wantTreesitter = true;
+    usePackage = {
       c-ts-mode = {
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "C";
@@ -26,7 +27,9 @@ in
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
         symex = ide.symex;
-        lspce = lib.mkIf ide.lspce.enable ''"C" "${if ide.languages.c.preferClangd then "clangd" else "ccls"}"'';
+        lspce = lib.mkIf ide.lspce.enable ''"C" "${
+          if ide.languages.c.preferClangd then "clangd" else "ccls"
+        }"'';
       };
 
       ccls = lib.mkIf (ide.lsp.enable && !ide.languages.c.preferClangd) {

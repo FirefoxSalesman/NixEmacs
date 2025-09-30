@@ -15,7 +15,7 @@ in
 
   config = lib.mkIf ide.languages.kotlin.enable {
     programs.emacs.init = {
-      ide.treesitterGrammars.kotlin = "https://github.com/fwcd/tree-sitter-kotlin";
+      ide.treesitter.treesitterGrammars.kotlin = "https://github.com/fwcd/tree-sitter-kotlin";
       usePackage = {
         kotlin-ts-mode = {
           enable = true;

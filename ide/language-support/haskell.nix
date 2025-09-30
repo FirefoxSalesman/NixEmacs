@@ -13,7 +13,7 @@ in
     lib.mkEnableOption "enables haskell support";
   config = lib.mkIf ide.languages.haskell.enable {
     programs.emacs.init = {
-      ide.treesitterGrammars.haskell = "https://github.com/tree-sitter/tree-sitter-haskell";
+      ide.treesitter.treesitterGrammars.haskell = "https://github.com/tree-sitter/tree-sitter-haskell";
       usePackage.haskell-ts-mode = {
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "haskell";

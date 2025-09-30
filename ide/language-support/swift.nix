@@ -7,7 +7,7 @@ in
   options.programs.emacs.init.ide.languages.swift.enable = lib.mkEnableOption "Enables swift support (stolen from doom)";
 
   config.programs.emacs.init = lib.mkIf ide.languages.swift.enable {
-    ide.treesitterGrammars.swift = "https://github.com/alex-pinkus/tree-sitter-swift";
+    ide.treesitter.treesitterGrammars.swift = "https://github.com/alex-pinkus/tree-sitter-swift";
     usePackage = {
       swift-ts-mode = {
         enable = true;

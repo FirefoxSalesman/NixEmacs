@@ -6,10 +6,8 @@ in
 {
   options.programs.emacs.init.ide.languages.pug.enable = lib.mkEnableOption "enables pug support";
 
-  config = lib.mkIf ide.languages.pug.enable {
-    programs.emacs.init.usePackage.pug-mode = {
-      enable = ide.web.pug;
-      mode = [''"\\.pug\\'"''];
-    };
+  config.programs.emacs.init.usePackage.pug-mode = lib.mkIf ide.languages.pug.enable {
+    enable = true;
+    mode = [ ''"\\.pug\\'"'' ];
   };
 }

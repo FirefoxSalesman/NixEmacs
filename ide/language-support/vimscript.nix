@@ -13,7 +13,7 @@ in
     lib.mkEnableOption "Enables support for vimscript, because why not?";
 
   config.programs.emacs.init = lib.mkIf ide.languages.vimscript.enable {
-    ide.treesitterGrammars.vim = "https://github.com/tree-sitter-grammars/tree-sitter-vim";
+    ide.treesitter.treesitterGrammars.vim = "https://github.com/tree-sitter-grammars/tree-sitter-vim";
     usePackage.vimscript-ts-mode = {
       enable = true;
       mode = [ ''"\\.vim\\'"'' ];

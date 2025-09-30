@@ -11,8 +11,9 @@ in
 {
   options.programs.emacs.init.ide.languages.lua.enable = lib.mkEnableOption "enables lua support";
 
-  config = lib.mkIf ide.languages.lua.enable {
-    programs.emacs.init.usePackage.lua-ts-mode = {
+  config.programs.emacs.init = lib.mkIf ide.languages.lua.enable {
+    ide.treesitter.wantTreesitter = true;
+    usePackage.lua-ts-mode = {
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "lua";
       extraPackages =
@@ -24,7 +25,7 @@ in
       eglot = lib.mkIf ide.eglot.enable ''"lua-language-server"'';
       lsp = ide.lsp.enable;
       lspce = lib.mkIf ide.lspce.enable ''"lua" "lua-language-server"'';
-      symex = ide.symex.enable ;
+      symex = ide.symex.enable;
     };
   };
 }

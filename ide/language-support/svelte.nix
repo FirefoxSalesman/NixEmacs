@@ -7,7 +7,7 @@ in
   options.programs.emacs.init.ide.languages.svelte.enable = lib.mkEnableOption "Enables svelte support";
 
   config.programs.emacs.init = {
-    ide.treesitterGrammars.svelte = "https://github.com/Himujjal/tree-sitter-svelte";
+    ide.treesitter.treesitterGrammars.svelte = "https://github.com/Himujjal/tree-sitter-svelte";
     usePackage.svelte-ts-mode = lib.mkIf ide.languages.svelte.enable {
       enable = true;
       extraPackages = lib.mkIf (ide.eglot.enable || ide.lsp.enable || ide.lspce.enable || ide.lsp-bridge.enable) [pkgs.svelte-language-server];

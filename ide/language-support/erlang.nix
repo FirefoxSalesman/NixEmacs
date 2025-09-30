@@ -1,19 +1,27 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
-let ide = config.programs.emacs.init.ide;
-in {
+let
+  ide = config.programs.emacs.init.ide;
+in
+{
   options.programs.emacs.init.ide.languages.erlang.enable =
     lib.mkEnableOption "enables erlang support";
 
-  config = lib.mkIf ide.languages.erlang.enable {
-    programs.emacs.init.usePackage.erlang-ts = {
+  config.programs.emacs.init = lib.mkIf ide.languages.erlang.enable {
+    ide.treesitter.wantTreesitter = true;
+    usePackage.erlang-ts = {
       enable = true;
       mode = [ ''("\\.erl\\'" . erlang-ts-mode)'' ];
-      extraPackages = if ide.lsp-bridge.enable || ide.eglot.enable
-      || ide.lspce.enable || ide.lsp.enable then
-        [ pkgs.beamMinimal28Packages.erlang-ls ]
-      else
-        [ ];
+      extraPackages =
+        if ide.lsp-bridge.enable || ide.eglot.enable || ide.lspce.enable || ide.lsp.enable then
+          [ pkgs.beamMinimal28Packages.erlang-ls ]
+        else
+          [ ];
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
       symex = ide.symex;

@@ -15,46 +15,54 @@ in
   };
 
   config = lib.mkIf ide.languages.java.enable {
-    programs.emacs.init.usePackage = {
-      java-ts-mode = {
-        enable = true;
-        babel = lib.mkIf ide.languages.org.enable "java";
-        extraPackages =
-          if ide.lsp.enable || ide.lspce.enable || ide.lsp-bridge.enable || (ide.eglot.enable && !ide.languages.java.moreEglot) then
-            with pkgs; [ jdt-language-server ]
-          else
-            [ ];
-        mode = [ ''"\\.java\\'"'' ];
-        lsp = ide.lsp.enable;
-        eglot = ide.eglot.enable;
-        symex = ide.symex;
-        lspce = lib.mkIf ide.lspce.enable ''"java" "jdtls"'';
-      };
+    programs.emacs.init = {
+      ide.treesitter.wantTreesitter = true;
+      usePackage = {
+        java-ts-mode = {
+          enable = true;
+          babel = lib.mkIf ide.languages.org.enable "java";
+          extraPackages =
+            if
+              ide.lsp.enable
+              || ide.lspce.enable
+              || ide.lsp-bridge.enable
+              || (ide.eglot.enable && !ide.languages.java.moreEglot)
+            then
+              with pkgs; [ jdt-language-server ]
+            else
+              [ ];
+          mode = [ ''"\\.java\\'"'' ];
+          lsp = ide.lsp.enable;
+          eglot = ide.eglot.enable;
+          symex = ide.symex;
+          lspce = lib.mkIf ide.lspce.enable ''"java" "jdtls"'';
+        };
 
-      lsp-java = lib.mkIf ide.lsp.enable {
-        enable = true;
-        after = [ "lsp-mode" ];
-        custom.lsp-java-prefer-native-command = true;
-        config = ''
-              ;; https://github.com/emacs-lsp/lsp-java/issues/487
-              (defun java-server-subdir-for-jar (orig &rest args)
-                "Add nix subdir to `lsp-java-server-install-dir' so that the lsp test
-          succeeds."
-                (let ((lsp-java-server-install-dir
-                        ;;(expand-file-name "./share/java/jdtls/" lsp-java-server-install-dir)))
-                        (expand-file-name "./share/java/jdtls/" "${pkgs.jdt-language-server}")))
-                  (apply orig args)))
-              (advice-add 'lsp-java--locate-server-jar :around #'java-server-subdir-for-jar)
+        lsp-java = lib.mkIf ide.lsp.enable {
+          enable = true;
+          after = [ "lsp-mode" ];
+          custom.lsp-java-prefer-native-command = true;
+          config = ''
+                ;; https://github.com/emacs-lsp/lsp-java/issues/487
+                (defun java-server-subdir-for-jar (orig &rest args)
+                  "Add nix subdir to `lsp-java-server-install-dir' so that the lsp test
+            succeeds."
+                  (let ((lsp-java-server-install-dir
+                          ;;(expand-file-name "./share/java/jdtls/" lsp-java-server-install-dir)))
+                          (expand-file-name "./share/java/jdtls/" "${pkgs.jdt-language-server}")))
+                    (apply orig args)))
+                (advice-add 'lsp-java--locate-server-jar :around #'java-server-subdir-for-jar)
 
-              ;; https://github.com/emacs-lsp/lsp-java/issues/421
-              (defun lsp-java--ls-command () "jdtls")
-        '';
-      };
+                ;; https://github.com/emacs-lsp/lsp-java/issues/421
+                (defun lsp-java--ls-command () "jdtls")
+          '';
+        };
 
-      eglot-java = lib.mkIf ide.languages.java.moreEglot {
-        enable = true;
-        after = ["eglot"];
-        config = "(eglot-java-mode)";
+        eglot-java = lib.mkIf ide.languages.java.moreEglot {
+          enable = true;
+          after = [ "eglot" ];
+          config = "(eglot-java-mode)";
+        };
       };
     };
   };

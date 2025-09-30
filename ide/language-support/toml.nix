@@ -8,7 +8,7 @@ in
 
   config = lib.mkIf ide.languages.toml.enable {
     programs.emacs.init = {
-      ide.treesitterGrammars.toml = "https://github.com/ikatyang/tree-sitter-toml";
+      ide.treesitter.treesitterGrammars.toml = "https://github.com/ikatyang/tree-sitter-toml";
       usePackage.toml-ts-mode = {
         enable = true;
         mode = [ ''"\\.toml\\'"'' ];

@@ -844,7 +844,13 @@ No new language servers will be supported by this framework
 
 Default: =false=
 
-**** =programs.emacs.init.ide.treesitterGrammars=
+**** =programs.emacs.init.ide.treesitter.wantTreesitter=
+Set this option to true to enable the treesitter module.
+
+When this option is used it adds the elisp macro =treesit!=, which generates a lambda that activates the treesitter grammar for the given language (see the macro documentation for more details).
+It doesn't seem to work with the hook keyword, but ghook, gfhook, & elisp's add-hook all work fine.
+
+**** =programs.emacs.init.ide.treesitter.treesitterGrammars=
 An attribute set of language names & links to their grammars.
 
 When this option is used, it implicitly enables the treesitter module & adds the elisp macro =treesit!=, which generates a lambda that activates the treesitter grammar for the given language (see the macro documentation for more details).

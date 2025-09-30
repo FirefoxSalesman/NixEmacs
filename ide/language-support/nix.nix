@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf ide.languages.nix.enable {
     programs.emacs.init = {
-      ide.treesitterGrammars."nix" = "https://github.com/nix-community/tree-sitter-nix";
+      ide.treesitter.treesitterGrammars."nix" = "https://github.com/nix-community/tree-sitter-nix";
       usePackage = {
         nix-ts-mode = {
           enable = true;

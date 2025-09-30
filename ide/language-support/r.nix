@@ -11,8 +11,9 @@ in
 {
   options.programs.emacs.init.ide.languages.r.enable = lib.mkEnableOption "enables r support";
 
-  config = lib.mkIf ide.languages.r.enable {
-    programs.emacs.init.usePackage.ess-r-mode = {
+  config.programs.emacs.init = lib.mkIf ide.languages.r.enable {
+    ide.treesitter.wantTreesitter = true;
+    usePackage.ess-r-mode = {
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "R";
       package = epkgs: epkgs.ess;

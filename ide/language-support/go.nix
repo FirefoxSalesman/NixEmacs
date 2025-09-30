@@ -11,8 +11,9 @@ in
 {
   options.programs.emacs.init.ide.languages.go.enable = lib.mkEnableOption "enables go support";
 
-  config = lib.mkIf ide.languages.go.enable {
-    programs.emacs.init.usePackage = {
+  config.programs.emacs.init = lib.mkIf ide.languages.go.enable {
+    ide.treesitter.wantTreesitter = true;
+    usePackage = {
       go-ts-mode = {
         enable = true;
         mode = [ ''"\\.go\\'"'' ];

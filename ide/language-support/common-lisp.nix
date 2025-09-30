@@ -17,6 +17,7 @@ in
       lisp-mode = lib.mkIf ide.languages.org.enable {
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "lisp";
+        symex = ide.symex;
       };
 
       sly = {

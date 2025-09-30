@@ -7,7 +7,7 @@ in {
 
   config = lib.mkIf ide.languages.json.enable {
     programs.emacs.init = {
-      ide.treesitterGrammars.json5 = "https://github.com/Joakker/tree-sitter-json5";
+      ide.treesitter.treesitterGrammars.json5 = "https://github.com/Joakker/tree-sitter-json5";
       usePackage = {
         json-ts-mode = {
           enable = true;

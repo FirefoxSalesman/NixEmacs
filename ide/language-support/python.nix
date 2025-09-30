@@ -21,8 +21,9 @@ in
     };
   };
 
-  config = lib.mkIf ide.languages.python.enable {
-    programs.emacs.init.usePackage = {
+  config.programs.emacs.init = lib.mkIf ide.languages.python.enable {
+    ide.treesitter.wantTreesitter = true;
+    usePackage = {
       python-ts-mode = {
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "python";

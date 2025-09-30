@@ -37,7 +37,7 @@ in
 
   config = lib.mkIf ide.languages.org.enable {
     programs.emacs.init = {
-      ide.treesitterGrammars."org" = lib.mkIf ide.symex "https://github.com/emiasims/tree-sitter-org";
+      ide.treesitter.treesitterGrammars."org" = lib.mkIf ide.symex "https://github.com/emiasims/tree-sitter-org";
       usePackage = {
         org = {
           enable = true;
