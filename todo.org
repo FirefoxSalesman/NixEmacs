@@ -15,5 +15,5 @@ Add leader keys for
 ** TODO Org Roam
 ** TODO Novelist
 ** TODO Citar
-** TODO Nov
+** DONE Nov
 ** TODO Pdf tools

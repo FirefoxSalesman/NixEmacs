@@ -201,6 +201,17 @@ Example usage:
   };
 #+end_src
 
+**** =magic=
+Entries for =:magic=.
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.pdf-tools = {
+      enable = true;
+      magic = [''("%PDF . pdf-view-mode")''];
+  };
+#+end_src
+
 **** =after=
 A list of packages to be used in use-package's =:after= keyword
 

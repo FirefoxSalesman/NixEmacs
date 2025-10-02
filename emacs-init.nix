@@ -162,6 +162,14 @@ let
           '';
         };
 
+        magic = mkOption {
+          type = types.listOf types.str;
+          default = [ ];
+          description = ''
+            The entries to use for <option>:mode</option>.
+          '';
+        };
+
         after = mkOption {
           type = types.listOf types.str;
           default = [ ];
@@ -470,7 +478,6 @@ let
               );
             mkDefines = vs: optional (vs != [ ]) ":defines (${toString vs})";
             mkDiminish = vs: optional (vs != [ ]) ":diminish (${toString vs})";
-            mkMode = vs: optional (vs != [ ]) ":mode ${toString vs}";
             mkFunctions = vs: optional (vs != [ ]) ":functions (${toString vs})";
             mkBind = mkBindHelper "bind" "";
             mkBabel = n: ":init (add-to-list 'org-babel-langs '(${n} . t))";
@@ -514,6 +521,8 @@ let
             mkGfhook = vs: hookHelper vs ":gfhook";
             mkGhookf = vs: hookHelper vs ":ghookf";
             mkGfhookf = vs: hookHelper vs ":gfhookf";
+            mkMode = vs: hookHelper vs ":mode";
+            mkMagic = vs: hookHelper vs ":magic";
             transformName =
               name:
               if matches "tex-mode" name then
@@ -579,6 +588,7 @@ let
             ++ buildGeneralConfig config.generalConfig config.generalOneConfig config.generalTwoConfig
             ++ mkSymex name config.symex
             ++ mkMode config.mode
+            ++ mkMagic config.magic
             ++ optionals (config.preface != "") [
               ":preface"
               config.preface
