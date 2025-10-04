@@ -484,7 +484,10 @@ let
                 v;
             mkCustom = vs: optionals (vs != { }) (mapAttrsToList (n: v: ":custom (${n} ${optionHelper v})") vs);
             mkSetopt =
-              vs: optionals (vs != { }) ":config (setopt ${mapAttrsToList (n: v: "${n} ${optionHelper v}") vs})";
+              vs:
+              optionals (vs != { }) [
+                ":config (setopt ${toString (mapAttrsToList (n: v: "${n} ${optionHelper v}") vs)})"
+              ];
             mkDefines = vs: optional (vs != [ ]) ":defines (${toString vs})";
             mkDiminish = vs: optional (vs != [ ]) ":diminish (${toString vs})";
             mkFunctions = vs: optional (vs != [ ]) ":functions (${toString vs})";
