@@ -343,6 +343,19 @@ let
           '';
         };
 
+        setopt = mkOption {
+          type = types.attrsOf (
+            types.either (types.either types.float types.int) (types.either types.str types.bool)
+          );
+          default = { };
+          example = {
+            "display-line-numbers-type" = "'relative";
+          };
+          description = ''
+            The entries to use for <option>:config (setopt)</option>.
+          '';
+        };
+
         config = mkOption {
           type = types.lines;
           default = "";
@@ -461,21 +474,17 @@ let
             mkCommand = vs: optional (vs != [ ]) ":commands (${toString vs})";
             mkAutoload = vs: optional (vs != [ ]) ":autoload (${toString vs})";
             # Having :custom before every statement grants better load times. No idea why
-            mkCustom =
-              vs:
-              optionals (vs != { }) (
-                mapAttrsToList (
-                  n: v:
-                  ":custom (${n} ${
-                    if isBool v then
-                      if v then "t" else "nil"
-                    else if isInt v || isFloat v then
-                      toString v
-                    else
-                      v
-                  })"
-                ) vs
-              );
+            optionHelper =
+              v:
+              if isBool v then
+                if v then "t" else "nil"
+              else if isInt v || isFloat v then
+                toString v
+              else
+                v;
+            mkCustom = vs: optionals (vs != { }) (mapAttrsToList (n: v: ":custom (${n} ${optionHelper v})") vs);
+            mkSetopt =
+              vs: optionals (vs != { }) ":config (setopt ${mapAttrsToList (n: v: "${n} ${optionHelper v}") vs})";
             mkDefines = vs: optional (vs != [ ]) ":defines (${toString vs})";
             mkDiminish = vs: optional (vs != [ ]) ":diminish (${toString vs})";
             mkFunctions = vs: optional (vs != [ ]) ":functions (${toString vs})";
@@ -584,6 +593,7 @@ let
             ++ mkLspCe name config.lspce
             ++ mkGfhook config.gfhook
             ++ mkCustom config.custom
+            ++ mkSetopt config.setopt
             ++ buildGeneral config.general config.generalOne config.generalTwo
             ++ buildGeneralConfig config.generalConfig config.generalOneConfig config.generalTwoConfig
             ++ mkSymex name config.symex

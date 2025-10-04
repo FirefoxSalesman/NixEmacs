@@ -550,6 +550,34 @@ Example usage:
   };
 #+end_src
 
+
+**** =setopt=
+Equivalent to
+#+begin_src emacs-lisp
+:config (setopt options)
+#+end_src
+
+Can be a string, int, float, or a boolean. String values represent everything that isn't a boolean, so if your custom value is an elisp string, you'll need to quote it twice
+
+Example usage:
+#+begin_src nix
+  programs.emacs.init.usePackage.dashboard = {
+    enable = true;
+    setopt = {
+      dashboard-banner-logo-title = ''"Emacs: The one true desktop environment"'';
+      dashboard-center-content = true;
+      dashboard-items = '''((recents   . 5)
+                            (bookmarks . 5)
+                            (projects  . 5)
+                            (agenda    . 5))'';
+      dashboard-icon-type = "'nerd-icons";
+      dashboard-set-heading-icons = true;
+      dashboard-set-file-icons = true;
+      dashboard-agenda-sort-strategy = "'(time-up)";
+    };
+  };
+#+end_src
+
 **** =config=
 Use package's =:config= option. Takes a string
 
