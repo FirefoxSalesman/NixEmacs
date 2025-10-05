@@ -18,10 +18,20 @@ in
       enable = true;
       setopt = {
         completion-styles = lib.mkDefault (
-          if completions.prescient then "'(orderless prescient basic)" else "'(orderless basic)"
+          if completions.prescient then
+            [
+              "'orderless"
+              "'prescient"
+              "'basic"
+            ]
+          else
+            [
+              "'orderless"
+              "'basic"
+            ]
         );
         completion-category-defaults = lib.mkDefault false;
-        completion-category-overrides = lib.mkDefault "'((file (styles . (partial-completion))))";
+        completion-category-overrides = lib.mkDefault [ "'(file (styles . (partial-completion)))" ];
       };
       afterCall = [ "on-first-input-hook" ];
     };

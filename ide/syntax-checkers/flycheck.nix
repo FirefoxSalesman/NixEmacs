@@ -37,7 +37,7 @@ in
             config = "(global-flycheck-eglot-mode)";
           };
 
-          eglot.setopt.eglot-stay-out-of = lib.mkIf ide.eglot.preset (lib.mkDefault "'(flymake)");
+          eglot.setopt.eglot-stay-out-of = lib.mkIf ide.eglot.preset (lib.mkDefault [ "'flymake" ]);
         };
       };
     };

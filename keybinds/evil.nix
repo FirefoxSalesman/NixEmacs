@@ -68,6 +68,7 @@ in
           evil-move-beyond-eol = true; # Combined with move-cursor-back, it prevents the cursor from moving behind a "/" when selecting a directory in the minibuffer
           evil-cross-lines = true;
           sentence-end-double-space = false;
+          evil-want-Y-yank-to-eol = true;
         };
         generalConfig."M-u" = "'universal-argument";
         generalOneConfig.universal-argument-map = {
@@ -75,7 +76,6 @@ in
           "C-u" = "'nil";
         };
         config = ''
-          (setopt evil-want-Y-yank-to-eol t)
           (evil-set-undo-system ${if keybinds.undo.enable then "'undo-fu" else "'undo-redo"})
           (evil-set-initial-state 'messages-buffer-mode 'normal)
           (general-advice-add '(evil-scroll-down evil-scroll-up evil-scroll-page-up evil-scroll-page-down) :after #'(lambda (arg) (evil-window-middle)))

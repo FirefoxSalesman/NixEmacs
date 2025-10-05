@@ -71,7 +71,17 @@ in
         defer = true;
         hook = [ "(corfu-mode . corfu-prescient-mode)" ];
         setopt.corfu-prescient-completion-styles = lib.mkDefault (
-          if completions.orderless then "'(orderless basic prescient)" else "'(basic prescient)"
+          if completions.orderless then
+            [
+              "'orderless"
+              "'basic"
+              "'prescient"
+            ]
+          else
+            [
+              "'basic"
+              "'prescient"
+            ]
         );
       };
 

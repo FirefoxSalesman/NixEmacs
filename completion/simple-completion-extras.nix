@@ -168,13 +168,15 @@ in
           lib.mkIf keybinds.evil.enable "'evil-record-macro";
         setopt = {
           # Replace key help with a completing-read interface
-          prefix-help-command = "#'embark-prefix-help-command";
-          which-key-use-C-h-commands = lib.mkIf keybinds.whichKey.enable false;
-          embark-indicators = lib.mkIf keybinds.whichKey.enable ''
-            '(embark-which-key-indicator
-              embark-highlight-indicator
-              embark-isearch-highlight-indicator)
-          '';
+          prefix-help-command = lib.mkDefault "#'embark-prefix-help-command";
+          which-key-use-C-h-commands = lib.mkIf keybinds.whichKey.enable (lib.mkDefault false);
+          embark-indicators = lib.mkIf keybinds.whichKey.enable (
+            lib.mkDefault [
+              "'embark-which-key-indicator"
+              "'embark-highlight-indicator"
+              "'embark-isearch-highlight-indicator"
+            ]
+          );
         };
         init = lib.mkIf keybinds.whichKey.enable ''
           (defun embark-which-key-indicator ()

@@ -154,10 +154,10 @@ in
         hook = [ "(ivy-mode . ivy-posframe-mode)" ];
         setopt = {
           ivy-posframe-border-width = lib.mkDefault 10;
-          ivy-posframe-parameters = lib.mkDefault ''
-            `((min-width . 90)
-              (min-height . ,ivy-height))
-          '';
+          ivy-posframe-parameters = lib.mkDefault [
+            "'(min-width . 90)"
+            "`(min-height . ,ivy-height)"
+          ];
         };
         generalOne.":nm".":" = lib.mkIf keybinds.evil.enable (
           lib.mkDefault "'ivy-posframe-dispatching-done"

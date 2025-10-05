@@ -4,7 +4,7 @@ Adapted from: [[https://gitlab.com/rycee/nur-expressions][Rycee's NUR Expression
 Add this module to your nix flake
 
 Example:
-#+begin_src nix
+#+begin_src nix-ts
   {
     description = "Home manager config flake";
 
@@ -119,7 +119,7 @@ Some things of note:
 + Don't forget to set =enable= to true for each package.
 
 *** An example
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.mpv = {
       enable = true;
       command = ["efs/mpv-browse-url" "efs/mpv-eww-url"];
@@ -146,7 +146,7 @@ Sets the =:chords= option for [[https://github.com/waymondo/use-package-chords][
 If you use this option, Use Package Chords will be installed & loaded for you
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.ace-jump-mode.chords = {
     "jj" = "ace-jump-char-mode";
     "jk" = "ace-jump-word-mode";
@@ -157,7 +157,7 @@ Example usage:
 Sets the =:bind= option.
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.ace-jump-mode.bind = {
     "c" = "ace-jump-char-mode";
     "w" = "ace-jump-word-mode";
@@ -168,7 +168,7 @@ Example usage:
 Sets the =:bind= option with local keymaps
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.helm = {
     enable = true;
     bindLocal = {
@@ -181,7 +181,7 @@ Example usage:
 The entries to use for =:bind-keymap=
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.projectile = {
     enable = true;
     bindKeyMap = {
@@ -194,7 +194,7 @@ Example usage:
 Entries for =:mode=. Don't forget to double quote each entry.
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.python-ts-mode = {
       enable = true;
       mode = [''"\\.py\\'"''];
@@ -205,7 +205,7 @@ Example usage:
 Entries for =:magic=.
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.pdf-tools = {
       enable = true;
       magic = [''("%PDF . pdf-view-mode")''];
@@ -216,7 +216,7 @@ Example usage:
 A list of packages to be used in use-package's =:after= keyword
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.evil-collection = {
     enable = true;
     after = ["evil"];
@@ -229,7 +229,7 @@ Entries to use for the =:after-call= option (as seen in [[https://github.com/doo
 Basically, after call defers loading the package until the specified hook is run
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.eshell-git-prompt = {
     enable = true;
     afterCall = ["eshell-mode"];
@@ -249,7 +249,7 @@ This option can be set to true, or to a list of package names.
 + If it's a list of package names, those packages will be incrementally loaded first (this is useful for breaking up large packages like org-mode)
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage = {
     nxml = {
       enable = true;
@@ -267,7 +267,7 @@ Example usage:
 The =:commands= keyword.
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.nerd-icons = {
     enable = true;
     command = [
@@ -289,7 +289,7 @@ Example usage:
 The =:hook= option for use-package.
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.usePackage.init.eglot = {
     enable = true;
     hook = ["(python-mode . eglot-ensure)"];
@@ -320,7 +320,7 @@ Used for global keys in the =:general= option.
 In order to facilitate remapping, keys are not quoted automatically.
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.helpful = {
     enable = true;
     general = {
@@ -333,7 +333,7 @@ Example usage:
 Sets =:general= keybindings with one additional argument (such as evil state, keymap, or leader key)
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.consult = {
     enable = true;
     generalOne = {
@@ -351,7 +351,7 @@ Example usage:
 Sets =:general-config= options that take 2 arguments (such as evil state, keymap, or leader key)
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.vundo = {
     enable = true;
     generalTwoConfig = ":n".vundo-mode-map."C-e" = "'vundo-next";
@@ -362,7 +362,7 @@ Example usage:
 Used for global keys in the =:general-config= option.
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.helpful = {
     enable = true;
     generalConfig = {
@@ -374,7 +374,7 @@ Example usage:
 Sets =:general-config= keybindings with one additional argument (such as evil state, keymap, or leader key)
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.consult = {
     enable = true;
     generalOneConfig = {
@@ -392,7 +392,7 @@ Example usage:
 Sets =:general= options that take 2 arguments (such as evil state, keymap, or leader key)
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.vundo = {
     enable = true;
     generalTwo = ":n".vundo-mode-map."C-e" = "'vundo-next";
@@ -403,7 +403,7 @@ Example usage:
 The =:ghook= option from general.el
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.envrc = {
     enable = true;
     ghook = ["('after-init-hook 'envrc-global-mode)"];
@@ -414,7 +414,7 @@ Example usage:
 The =:ghook= option from general.el, but it automatically appends "-hook" to every hook symbol
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.envrc = {
     enable = true;
     ghookf = ["('after-init 'envrc-global-mode)"];
@@ -425,7 +425,7 @@ Example usage:
 The =:gfhook= option from general.el
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.racket-mode = {
       enable = true;
       gfhook = ["('racket-mode-hook 'hs-minor-mode)"];
@@ -436,7 +436,7 @@ Example usage:
 The =:gfhook= option from general.el, but it automatically appends "-hook" to every hook symbol
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
 programs.emacs.init.usePackage.racket-mode = {
 enable = true;
 gfhookf = ["('racket-mode 'hs-minor-mode)"];
@@ -452,7 +452,7 @@ Takes a list of strings, which should be the names of the functions the package 
 Loads & starts lsp-mode upon entering the package's major mode
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.racket-mode = {
     enable = true;
     lsp = true;
@@ -463,7 +463,7 @@ Example usage:
 Loads & starts eglot upon entering the package's major mode
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.racket-mode = {
     enable = true;
     eglot = true;
@@ -471,7 +471,7 @@ Example usage:
 #+end_src
 
 You can also use a string to configure the language server you want to use with [[https://gitlab.com/aidanhall/use-package-eglot][use-package-eglot]]
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.json5-ts-mode = {
     enable = true;
     eglot = ''("vscode-json-language-server" "--stdio")'';
@@ -482,7 +482,7 @@ You can also use a string to configure the language server you want to use with 
 Loads & starts lspce upon entering the package's major mode
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.racket-mode = {
     enable = true;
     lspce = true;
@@ -490,7 +490,7 @@ Example usage:
 #+end_src
 
 You can also use a string to configure the language server you want to use. It takes the token for a mode (see lspce's [[https://github.com/zbelial/lspce][repository]] for more details) or a list of mode tokens, the command to call a language server, & optionally its arguments. See the documentation for the macro =nix-emacs-lspce-add-server-program= for more details
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.json5-ts-mode = {
     enable = true;
     lspce = ''"json5" "vscode-json-language-server" "--stdio"'';
@@ -504,7 +504,7 @@ Binds =symex-mode-interface= to enter in evil's normal state for the package's m
 Setting this option will install symex automatically
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.racket-mode = {
     enable = true;
     symex = true;
@@ -532,24 +532,25 @@ The =:custom= option
 Can be a string, int, float, or a boolean. String values represent everything that isn't a boolean, so if your custom value is an elisp string, you'll need to quote it twice
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.dashboard = {
     enable = true;
     custom = {
       dashboard-banner-logo-title = ''"Emacs: The one true desktop environment"'';
       dashboard-center-content = true;
-      dashboard-items = '''((recents   . 5)
-                            (bookmarks . 5)
-                            (projects  . 5)
-                            (agenda    . 5))'';
+      dashboard-items = [
+	"'(recents . 5)"
+        "'(bookmarks . 5)" 
+        "'(projects . 5)" 
+        "'(agenda . 5)"
+      ];
       dashboard-icon-type = "'nerd-icons";
       dashboard-set-heading-icons = true;
       dashboard-set-file-icons = true;
-      dashboard-agenda-sort-strategy = "'(time-up)";
+      dashboard-agenda-sort-strategy = ["'time-up"];
     };
   };
 #+end_src
-
 
 **** =setopt=
 Equivalent to
@@ -560,20 +561,22 @@ Equivalent to
 Can be a string, int, float, or a boolean. String values represent everything that isn't a boolean, so if your custom value is an elisp string, you'll need to quote it twice
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.dashboard = {
     enable = true;
     setopt = {
       dashboard-banner-logo-title = ''"Emacs: The one true desktop environment"'';
       dashboard-center-content = true;
-      dashboard-items = '''((recents   . 5)
-                            (bookmarks . 5)
-                            (projects  . 5)
-                            (agenda    . 5))'';
+      dashboard-items = [
+	"'(recents . 5)"
+        "'(bookmarks . 5)" 
+        "'(projects . 5)" 
+        "'(agenda . 5)"
+      ];
       dashboard-icon-type = "'nerd-icons";
       dashboard-set-heading-icons = true;
       dashboard-set-file-icons = true;
-      dashboard-agenda-sort-strategy = "'(time-up)";
+      dashboard-agenda-sort-strategy = ["'time-up"];
     };
   };
 #+end_src
@@ -582,7 +585,7 @@ Example usage:
 Use package's =:config= option. Takes a string
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.elec-pair = {
     enable = true;
     config = ''
@@ -600,7 +603,7 @@ Example usage:
 Use package's =:preface= option. Takes a string
 
 Example usage:
-#+begin_src nix
+#+begin_src nix-ts
 programs.emacs.init.usePackage.evil-collection = {
   enable = true;
   preface = lib.mkIf hasSwap ''
@@ -630,7 +633,7 @@ Additional nix packages to add to =home.packages= when this package is enabled
 Lets the user specify a language to use =org-babel-do-load-languages= on.
 
 Example:
-#+begin_src nix
+#+begin_src nix-ts
   programs.emacs.init.usePackage.ob-hy = {
     enable = true;
     babel = lib.mkIf ide.org.enable "hy";
@@ -681,7 +684,7 @@ Defaults to ="h"=.
 ****** =programs.emacs.init.keybinds.evil.keys.evil-collection-swap-keys=
 A string of keys to be swapped.
 Example: (new keys are on the left, old keys are on the right)
-#+begin_src nix
+#+begin_src nix-ts
 programs.emacs.init.keybinds.evil.keys.evil-collection-swap-keys = ''
   "e" "j"
   "o" "k"

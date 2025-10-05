@@ -17,22 +17,22 @@ in
         mct-hide-completion-mode-line = lib.mkDefault true;
         mct-completing-read-multiple-indicator = lib.mkDefault true;
         mct-live-completion = lib.mkDefault "'visible";
-        mct-completion-passlist = lib.mkDefault ''
-          	'(select-frame-by-name
-                    Info-goto-node
-                    Info-index
-                    Info-menu
-                    vc-retrieve-tag
-                    ;; Some completion categories
-                    consult-buffer
-                    consult-location
-                    embark-keybinding
-                    imenu
-                    file
-                    project-file
-                    buffer
-                    kill-ring)
-          	'';
+        mct-completion-passlist = lib.mkDefault [
+          "'select-frame-by-name"
+          "'Info-goto-node"
+          "'Info-index"
+          "'Info-menu"
+          "'vc-retrieve-tag"
+          # Some completion categories
+          "'consult-buffer"
+          "'consult-location"
+          "'embark-keybinding"
+          "'imenu"
+          "'file"
+          "'project-file"
+          "'buffer"
+          "'kill-ring"
+        ];
       };
       generalTwoConfig.":mnei" = lib.mkIf keybinds.evil.enable {
         mct-minibuffer-local-completion-map = {

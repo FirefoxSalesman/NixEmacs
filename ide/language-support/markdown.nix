@@ -37,12 +37,12 @@ in
         "(markdown-mode . evil-markdown-mode)"
         "(markdown-mode . outline-minor-mode)"
       ];
-      setopt.evil-markdown-movement-bindings = ''
-        '((up . "${keybinds.evil.keys.up}")
-          (down . "${keybinds.evil.keys.down}")
-          (left . "${keybinds.evil.keys.backward}")
-          (right . "${keybinds.evil.keys.forward}"))
-      '';
+      setopt.evil-markdown-movement-bindings = [
+        '''(up . "${keybinds.evil.keys.up}")''
+        '''(down . "${keybinds.evil.keys.down}")''
+        '''(left . "${keybinds.evil.keys.backward}")''
+        '''(right . "${keybinds.evil.keys.forward}")''
+      ];
     };
   };
 }

@@ -22,6 +22,7 @@ in
         eshell-buffer-maximum-lines = lib.mkDefault 100;
         eshell-hist-ignoredups = lib.mkDefault true;
         eshell-scroll-to-bottom-on-input = lib.mkDefault true;
+        eshell-destroy-buffer-when-process-dies = lib.mkDefault true;
       };
       hook = [
         #Save command history when commands are entered
@@ -41,10 +42,6 @@ in
         "e" = lib.mkDefault '''(eshell-insert-envvar :which-key "insert environment variable")'';
         "b" = lib.mkDefault '''(eshell-insert-buffer-name :which-key "insert buffer name")'';
       };
-      config = ''
-        	  (with-eval-after-load 'esh-opt
-                  (setopt eshell-destroy-buffer-when-process-dies t))
-        	'';
     };
 
     eshell-syntax-highlighting = {

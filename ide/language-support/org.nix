@@ -92,46 +92,53 @@ in
             org-agenda-span = lib.mkDefault 10;
             org-agenda-start-on-weekday = lib.mkDefault false;
             org-agenda-start-day = lib.mkDefault ''"-3d"'';
-            org-refile-targets = lib.mkDefault ''
-              '((nil :maxlevel . 3)
-                (org-agenda-files :maxlevel . 3))
-            '';
+            org-refile-targets = lib.mkDefault [
+              "'(nil :maxlevel . 3)"
+              "'(org-agenda-files :maxlevel . 3)"
+            ];
             org-refile-use-outline-path = lib.mkDefault "'file";
             org-outline-path-complete-in-steps = lib.mkDefault false;
             org-src-preserve-indentation = lib.mkDefault true;
             org-link-elisp-confirm-function = lib.mkDefault false;
             org-src-window-setup = lib.mkDefault "'other-window";
             org-babel-lisp-eval-fn = lib.mkIf ide.languages.common-lisp.enable (lib.mkDefault "#'sly-eval");
-            org-modules = lib.mkDefault "'(ol-bibtex)";
+            org-modules = lib.mkDefault [ "'ol-bibtex" ];
             # borrowed from doom
             org-capture-bookmark = lib.mkIf ide.languages.org.captureTemplates.enable (lib.mkDefault false);
             org-capture-templates = lib.mkIf ide.languages.org.captureTemplates.enable (
-              lib.mkDefault ''
-                '(("t" "Personal todo" entry
-                   (file org-default-todo-file)
-                   "* TODO [ ] %?\n%i\n%a" :prepend t)
-                  ("n" "Personal notes" entry
-                   (file org-default-notes-file)
-                   "* %u %?\n%i\n%a" :prepend t)
-                  ("j" "Journal" entry
-                   (file+olp+datetree org-default-journal-file)
-                   "* %U %?\n%i\n%a" :prepend t)
+              lib.mkDefault [
+                ''
+                  '("t" "Personal todo" entry
+                                     (file org-default-todo-file)
+                                     "* TODO [ ] %?\n%i\n%a" :prepend t)''
+                ''
+                  '("n" "Personal notes" entry
+                                     (file org-default-notes-file)
+                                     "* %u %?\n%i\n%a" :prepend t)''
+                ''
+                  '("j" "Journal" entry
+                                     (file+olp+datetree org-default-journal-file)
+                                     "* %U %?\n%i\n%a" :prepend t)''
 
-                  ;; Will use {project-root}/{todo,notes,changelog}.org, unless a
-                  ;; {todo,notes,changelog}.org file is found in a parent directory.
-                  ;; Uses the basename from `+org-capture-todo-file',
-                  ;; `+org-capture-changelog-file' and `+org-capture-notes-file'.
-                  ("p" "Templates for projects")
-                  ("pt" "Project-local todo" entry ; {project-root}/todo.org
-                   (file nix-emacs-project-todo)
-                   "* TODO %?\n%i\n%a" :prepend t)
-                  ("pn" "Project-local notes" entry ; {project-root}/notes.org
-                   (file nix-emacs-project-notes)
-                   "* %U %?\n%i\n%a" :prepend t)
-                  ("pc" "Project-local changelog" entry  ; {project-root}/changelog.org
-                   (file+headline nix-emacs-project-changelog "Unreleased")
-                   "* %U %?\n%i\n%a" :prepend t))
-              ''
+                # Will use {project-root}/{todo,notes,changelog}.org, unless a
+                # {todo,notes,changelog}.org file is found in a parent directory.
+                # Uses the basename from `+org-capture-todo-file',
+                # `+org-capture-changelog-file' and `+org-capture-notes-file'.
+                '''("p" "Templates for projects")''
+                ''
+                  '("pt" "Project-local todo" entry ; {project-root}/todo.org
+                                     (file nix-emacs-project-todo)
+                                     "* TODO %?\n%i\n%a" :prepend t)''
+                ''
+                  '("pn" "Project-local notes" entry ; {project-root}/notes.org
+                                     (file nix-emacs-project-notes)
+                                     "* %U %?\n%i\n%a" :prepend t)''
+                ''
+                  '("pc" "Project-local changelog" entry  ; {project-root}/changelog.org
+                                     (file+headline nix-emacs-project-changelog "Unreleased")
+                                     "* %U %?\n%i\n%a" :prepend t)''
+              ]
+
             );
           };
           generalOne.global-leader = lib.mkIf keybinds.leader-key.enable {
@@ -226,12 +233,12 @@ in
 
         evil-org = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
           enable = true;
-          setopt.evil-org-movement-bindings = ''
-            '((up . "${keybinds.evil.keys.up}")
-              (down . "${keybinds.evil.keys.down}")
-              (left . "${keybinds.evil.keys.backward}")
-              (right . "${keybinds.evil.keys.forward}"))
-          '';
+          setopt.evil-org-movement-bindings = [
+            '''(up . "${keybinds.evil.keys.up}")''
+            '''(down . "${keybinds.evil.keys.down}")''
+            '''(left . "${keybinds.evil.keys.backward}")''
+            '''(right . "${keybinds.evil.keys.forward}")''
+          ];
           ghookf = [ "('org-mode 'evil-org-mode)" ];
           gfhookf = [ "('org-capture-mode 'evil-insert-state)" ];
           # stolen from doom

@@ -41,7 +41,17 @@ in
         setopt = {
           vertico-prescient-enable-filtering = false;
           vertico-prescient-completion-styles = lib.mkDefault (
-            if completions.orderless then "'(orderless prescient basic)" else "'(prescient basic)"
+            if completions.orderless then
+              [
+                "'orderless"
+                "'prescient"
+                "'basic"
+              ]
+            else
+              [
+                "'prescient"
+                "'basic"
+              ]
           );
           vertico-prescient-enable-sorting = true;
         };

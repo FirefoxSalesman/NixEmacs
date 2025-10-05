@@ -24,7 +24,19 @@ in
         package = epkgs: epkgs.auctex;
         init = lib.mkDefault "(setq-default TeX-master nil)";
         setopt = {
-          reftex-label-alist = lib.mkDefault '''(("\\poemtitle" ?P "poem:" "\\ref{%s}" nil ("poem" "poemtitle")))'';
+          reftex-label-alist = lib.mkDefault [
+            [
+              ''"\\poemtitle"''
+              "'?P"
+              ''"poem:"''
+              ''"\\ref{%s}"''
+              false
+              [
+                ''"poem"''
+                ''"poemtitle"''
+              ]
+            ]
+          ];
           reftex-format-cite-function = lib.mkDefault ''
             '(lambda (key fmt)
               (let ((cite (replace-regexp-in-string "%l" key fmt))

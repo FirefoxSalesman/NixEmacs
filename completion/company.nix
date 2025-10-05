@@ -3,7 +3,6 @@
 let
   completions = config.programs.emacs.init.completions;
   keybinds = config.programs.emacs.init.keybinds;
-  ide = config.programs.emacs.init.ide;
 in
 {
   options.programs.emacs.init.completions.company = {
@@ -22,20 +21,21 @@ in
           company-tooltip-limit = lib.mkDefault 14;
           company-tooltip-align-annotations = lib.mkDefault true;
           company-require-match = lib.mkDefault "'never";
-          company-global-modes = lib.mkDefault ''
-            '(not erc-mode
-                                                                   circe-mode
-                                                                   message-mode
-                                                                   help-mode
-                                                                   gud-mode
-                                                                   vterm-mode)
-          '';
-          company-frontends = lib.mkDefault ''
-            '(company-pseudo-tooltip-frontend
-                                                             company-echo-metadata-frontend)
-          '';
+          company-global-modes = lib.mkDefault [
+            "'not"
+            "'erc-mode"
+            "'circe-mode"
+            "'message-mode"
+            "'help-mode"
+            "'gud-mode"
+            "'vterm-mode"
+          ];
+          company-frontends = lib.mkDefault [
+            "'company-pseudo-tooltip-frontend"
+            "'company-echo-metadata-frontend"
+          ];
 
-          company-backends = lib.mkDefault "'(company-capf)";
+          company-backends = lib.mkDefault [ "'company-capf" ];
           company-auto-commit = lib.mkDefault false;
           company-dabbrev-other-buffers = lib.mkDefault false;
           company-dabbrev-ignore-case = lib.mkDefault false;

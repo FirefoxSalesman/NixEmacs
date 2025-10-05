@@ -41,7 +41,7 @@ in
         lsp-java = lib.mkIf ide.lsp.enable {
           enable = true;
           after = [ "lsp-mode" ];
-          setopt.lsp-java-prefer-native-command = true;
+          setopt.lsp-java-prefer-native-command = lib.mkDefault true;
           config = ''
                 ;; https://github.com/emacs-lsp/lsp-java/issues/487
                 (defun java-server-subdir-for-jar (orig &rest args)
