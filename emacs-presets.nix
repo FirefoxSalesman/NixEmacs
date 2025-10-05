@@ -6,5 +6,7 @@
     ./keybinds
     ./completion
     ./term
+    ./tools
+    ./writing
   ];
 }

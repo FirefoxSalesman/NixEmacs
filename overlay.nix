@@ -58,6 +58,12 @@ final: prev: inputs: {
             inherit (prev.emacsPackages) trivialBuild use-package eglot;
           }
         );
+        org-novelist = (
+          prev.emacsPackages.callPackage ./emacs-packages/org-novelist.nix {
+            inherit inputs;
+            inherit (prev.emacsPackages) trivialBuild org;
+          }
+        );
       }
     ));
 }

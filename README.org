@@ -1214,3 +1214,69 @@ Enables multi-term as your terminal.
 
 **** =programs.emacs.init.terminals.vterm=
 Enables vterm as your terminal.
+
+*** tools
+**** =config.programs.emacs.init.tools.nov=
+Enables [[https://melpa.org/#/nov][nov]] for reading epubs.
+
+**** =config.programs.emacs.init.tools.pdf=
+Enables [[https://github.com/vedang/pdf-tools][pdf-tools]] for reading pdf files
+
+*** writing
+**** =config.programs.emacs.init.writing.citar=
+Enables citar for doing citations.
+
+If you have leader keys & denote enabled, you'll get the following keybinds:
++ =on=- create a new note about one of your bibtex references
++ =oo=- open a note on one of your bibtex references.
++ =ol=- insert a link to a note on one of your bibtex references
++ =ow=- find denote files for a specific citation
+
+If you have leader keys & org roam enabled, you'll get the following keybinds:
++ =on=- create a new note about one of your bibtex references
++ =oo=- open a note on one of your bibtex references.
+
+**** =config.programs.emacs.init.writing.denote=
+Enables denote as your notes system.
+
+If you have leader keys enabled, you'll gain the following keybinds:
++ =of=- open or create a note
++ =or=- rename a note
++ =oi=- link to a note
+
+If smallExtras for completions are enabled, you'll get previews when looking for your notes & the following keybind if leader keys are enabled:
++ =os=- ripgrep search through your notes
+
+If org support & leader keys are enabled, you'll gain the following keybind
++ =oh=- link to an org heading
+
+**** =config.programs.emacs.init.writing.novelist=
+Enables org novelist.
+
+You can create a new novel project with =M-x org-novelist-new-story=
+
+If leader keys are enabled, you'll get some local-leader bindings while inside a novelist file
++ =cn=- new character
++ =cr=- rename character
++ =cd=- destroy character
++ =hn=- new chapter
++ =hr=- rename chapter
++ =hd=- destroy chapter
++ =pn=- new place
++ =pr=- rename place
++ =pd=- destroy place
++ =rn=- new prop
++ =rr=- rename prop
++ =rd=- destroy prop
++ =e=- export novel
+
+**** =config.programs.emacs.init.writing.orgRoam=
+Enables org roam. (largely borrowed from doom)
+
+If you have leader keys enabled, you'll get the following keybinds:
++ =of=- find a note
++ =oi=- make a new note
++ =og=- show the graph of backlinks
+
+If you have small completion extras, you'll also get the following leader keybind
++ =os=- search your notes with ripgrep.

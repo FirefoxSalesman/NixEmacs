@@ -10,13 +10,3 @@ Add leader keys for
 + [ ] lsp-mode
 + [ ] lspce
 + [ ] lsp-bridge
-* TODO Writing
-** TODO Denote
-+ [ ] Install denote-org if org support is enabled
-+ [ ] Install denote-markdown if markdown support is enabled
-
-** TODO Org Roam
-** DONE Novelist
-** TODO Citar
-** DONE Nov
-** DONE Pdf tools

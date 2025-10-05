@@ -233,7 +233,7 @@ in
 
         evil-org = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
           enable = true;
-          setopt.evil-org-movement-bindings = [
+          custom.evil-org-movement-bindings = [
             '''(up . "${keybinds.evil.keys.up}")''
             '''(down . "${keybinds.evil.keys.down}")''
             '''(left . "${keybinds.evil.keys.backward}")''
