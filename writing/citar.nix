@@ -43,7 +43,7 @@ in
     citar-denote = lib.mkIf writing.denote {
       enable = true;
       command = [ "citar-denote-mode" ];
-      generalOne.global-leader = keybinds.leader-key.enable {
+      generalOne.global-leader = lib.mkIf keybinds.leader-key.enable {
         "on" = '''(citar-create-note :which-key "new citar note")'';
         "oo" = '''(citar-denote-open-note :which-key "open citar note")'';
         "ol" = "'citar-denote-link-reference";
