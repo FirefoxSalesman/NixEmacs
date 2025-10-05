@@ -164,9 +164,8 @@ in
           minibuffer-local-map."C-;" = "embark-act";
         };
         generalTwo.":n".minibuffer-local-completion-map.":" = lib.mkIf keybinds.evil.enable "'embark-act";
-;
-	generalTwoConfig.":nm".embark-collect-mode-map."q" = lib.mkIf keybinds.evil.enable "'evil-record-macro";
-;
+        generalTwoConfig.":nm".embark-collect-mode-map."q" =
+          lib.mkIf keybinds.evil.enable "'evil-record-macro";
         custom = {
           # Replace key help with a completing-read interface
           prefix-help-command = "#'embark-prefix-help-command";
@@ -215,9 +214,10 @@ in
 
       embark-consult = lib.mkIf completions.smallExtras.embark {
         enable = true;
-        after = "embark"
+        after = [
+          "embark"
           "consult"
-;
+        ];
         hook = [ "(embark-collect-mode . consult-preview-at-point-mode)" ];
       };
     };
