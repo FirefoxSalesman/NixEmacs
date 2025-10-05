@@ -54,10 +54,10 @@ in
         enable = true;
         demand = true;
         gfhookf = [ "('on-init-ui 'evil-mode)" ];
+        custom.evil-want-keybinding = false;
         setopt = {
           # Various settings to make it more like vim
           evil-want-integration = true;
-          evil-want-keybinding = false;
           evil-want-minibuffer = true;
           evil-want-C-u-scroll = true;
           evil-want-C-w-delete = true;

@@ -63,6 +63,15 @@ in
             "org-capture"
           ];
           babel = "org";
+          custom = {
+            org-startup-folded = lib.mkDefault false;
+            org-agenda-files = lib.mkIf ide.languages.org.captureTemplates.enable (
+              lib.mkDefault ''(list (expand-file-name "${ide.languages.org.captureTemplates.todoFile}" org-directory))''
+            );
+            org-default-notes-file = lib.mkIf ide.languages.org.captureTemplates.enable (
+              lib.mkDefault ''(expand-file-name "${ide.languages.org.captureTemplates.notesFile}" org-directory)''
+            );
+          };
           setopt = {
             org-confirm-babel-evaluate = lib.mkDefault false;
             org-src-fontify-natively = lib.mkDefault true;
@@ -77,7 +86,6 @@ in
             org-enforce-todo-dependencies = lib.mkDefault true;
             org-imenu-depth = lib.mkDefault 6;
             org-tags-column = lib.mkDefault 0;
-            org-startup-folded = lib.mkDefault false;
             org-agenda-inhibit-startup = lib.mkDefault true;
             org-agenda-window-setup = lib.mkDefault "'current-window";
             org-agenda-skip-unavailable-files = lib.mkDefault true;
@@ -95,12 +103,6 @@ in
             org-src-window-setup = lib.mkDefault "'other-window";
             org-babel-lisp-eval-fn = lib.mkIf ide.languages.common-lisp.enable (lib.mkDefault "#'sly-eval");
             org-modules = lib.mkDefault "'(ol-bibtex)";
-            org-agenda-files = lib.mkIf ide.languages.org.captureTemplates.enable (
-              lib.mkDefault ''(list (expand-file-name "${ide.languages.org.captureTemplates.todoFile}" org-directory))''
-            );
-            org-default-notes-file = lib.mkIf ide.languages.org.captureTemplates.enable (
-              lib.mkDefault ''(expand-file-name "${ide.languages.org.captureTemplates.notesFile}" org-directory)''
-            );
             # borrowed from doom
             org-capture-bookmark = lib.mkIf ide.languages.org.captureTemplates.enable (lib.mkDefault false);
             org-capture-templates = lib.mkIf ide.languages.org.captureTemplates.enable (

@@ -18,7 +18,7 @@ in
       which-key = {
         enable = true;
         hook = [ "(on-first-input . which-key-mode)" ];
-        setopt.which-key-idle-delay = 1;
+        setopt.which-key-idle-delay = lib.mkDefault 1.0;
       };
 
       which-key-posframe = lib.mkIf keybinds.whichKey.posframe.enable {
