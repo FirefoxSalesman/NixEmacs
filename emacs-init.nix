@@ -18,6 +18,10 @@ let
     merge = mergeOneOption;
   };
 
+  lispVar = types.either (types.either (types.either types.float types.int) (types.either types.str types.bool)) (
+    types.listOf lispVar
+  );
+
   usePackageType = types.submodule (
     { name, config, ... }:
     {
@@ -332,7 +336,8 @@ let
 
         custom = mkOption {
           type = types.attrsOf (
-            types.either (types.either types.float types.int) (types.either types.str types.bool)
+            # types.either (types.either types.float types.int) (types.either types.str types.bool)
+            lispVar
           );
           default = { };
           example = {
@@ -345,7 +350,8 @@ let
 
         setopt = mkOption {
           type = types.attrsOf (
-            types.either (types.either types.float types.int) (types.either types.str types.bool)
+            # types.either (types.either types.float types.int) (types.either types.str types.bool)
+            lispVar
           );
           default = { };
           example = {
@@ -480,6 +486,8 @@ let
                 if v then "t" else "nil"
               else if isInt v || isFloat v then
                 toString v
+              else if isList v then
+                "(list ${concatMapStrings optionHelper v})"
               else
                 v;
             mkCustom = vs: optionals (vs != { }) (mapAttrsToList (n: v: ":custom (${n} ${optionHelper v})") vs);
