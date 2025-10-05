@@ -16,7 +16,7 @@ in
           flycheck = {
             enable = true;
             hook = [ "(on-first-buffer . global-flycheck-mode)" ];
-            custom = {
+            setopt = {
               flycheck-idle-change-delay = 1.0;
               flycheck-buffer-switch-check-intermediate-buffers = true;
               flycheck-display-errors-delay = 0.25;
@@ -37,7 +37,7 @@ in
             config = "(global-flycheck-eglot-mode)";
           };
 
-          eglot.custom.eglot-stay-out-of = lib.mkIf ide.eglot.preset (lib.mkDefault "'(flymake)");
+          eglot.setopt.eglot-stay-out-of = lib.mkIf ide.eglot.preset (lib.mkDefault "'(flymake)");
         };
       };
     };

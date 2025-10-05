@@ -63,7 +63,7 @@ in
             "org-capture"
           ];
           babel = "org";
-          custom = {
+          setopt = {
             org-confirm-babel-evaluate = lib.mkDefault false;
             org-src-fontify-natively = lib.mkDefault true;
             org-src-tab-acts-natively = lib.mkDefault true;
@@ -182,7 +182,7 @@ in
           ghookf = [
             "('org-mode '(org-modern-mode org-toggle-pretty-entities variable-pitch-mode visual-line-mode nix-emacs-org-font-setup))"
           ];
-          custom = {
+          setopt = {
             org-modern-star = "'replace";
             org-modern-hide-stars = "'leading";
           };
@@ -224,7 +224,7 @@ in
 
         evil-org = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
           enable = true;
-          custom.evil-org-movement-bindings = ''
+          setopt.evil-org-movement-bindings = ''
             '((up . "${keybinds.evil.keys.up}")
               (down . "${keybinds.evil.keys.down}")
               (left . "${keybinds.evil.keys.backward}")

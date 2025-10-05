@@ -30,7 +30,7 @@ in
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
         symex = ide.symex;
-        custom.ruby-insert-encoding-magic-comment = lib.mkDefault false;
+        setopt.ruby-insert-encoding-magic-comment = lib.mkDefault false;
       };
 
       yard-mode = {

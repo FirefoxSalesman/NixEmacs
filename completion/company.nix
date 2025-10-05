@@ -17,7 +17,7 @@ in
       company = {
         enable = true;
         hook = [ "(on-first-input . global-company-mode)" ];
-        custom = {
+        setopt = {
           company-minimum-prefix-length = lib.mkDefault 2;
           company-tooltip-limit = lib.mkDefault 14;
           company-tooltip-align-annotations = lib.mkDefault true;
@@ -76,7 +76,7 @@ in
         hook = [ "(company-mode . company-box-mode)" ];
       };
 
-      evil-collection.custom.evil-collection-want-company-extended-keybinds = lib.mkIf keybinds.evil.enable (
+      evil-collection.setopt.evil-collection-want-company-extended-keybinds = lib.mkIf keybinds.evil.enable (
         lib.mkDefault true
       );
 

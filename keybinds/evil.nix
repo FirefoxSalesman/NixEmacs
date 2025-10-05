@@ -54,7 +54,7 @@ in
         enable = true;
         demand = true;
         gfhookf = [ "('on-init-ui 'evil-mode)" ];
-        custom = {
+        setopt = {
           # Various settings to make it more like vim
           evil-want-integration = true;
           evil-want-keybinding = false;
@@ -103,7 +103,7 @@ in
               ${swapBinding keybinds.evil.keys.backward "h"}
               ${keybinds.evil.keys.evil-collection-swap-keys}))
         '';
-        custom.evil-collection-setup-minibuffer = true;
+        setopt.evil-collection-setup-minibuffer = true;
       };
     };
   };

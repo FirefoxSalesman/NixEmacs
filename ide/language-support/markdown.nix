@@ -37,7 +37,7 @@ in
         "(markdown-mode . evil-markdown-mode)"
         "(markdown-mode . outline-minor-mode)"
       ];
-      custom.evil-markdown-movement-bindings = ''
+      setopt.evil-markdown-movement-bindings = ''
         '((up . "${keybinds.evil.keys.up}")
           (down . "${keybinds.evil.keys.down}")
           (left . "${keybinds.evil.keys.backward}")

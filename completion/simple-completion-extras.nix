@@ -32,7 +32,7 @@ in
           fd
           ripgrep
         ];
-        custom = {
+        setopt = {
           consult-line-numbers-widen = true;
           consult-async-min-input = 2;
           consult-async-refresh-delay = 0.15;
@@ -140,7 +140,7 @@ in
       consult-dir = {
         enable = true;
         config = "(add-to-list 'consult-dir-sources 'consult-dir--source-tramp-ssh t)";
-        custom.consult-dir-project-list-function = lib.mkIf ide.projectile (
+        setopt.consult-dir-project-list-function = lib.mkIf ide.projectile (
           lib.mkDefault "#'consult-dir-projectile-dirs"
         );
         bindLocal.minibuffer-local-completion-map = {
@@ -166,7 +166,7 @@ in
         generalTwo.":n".minibuffer-local-completion-map.":" = lib.mkIf keybinds.evil.enable "'embark-act";
         generalTwoConfig.":nm".embark-collect-mode-map."q" =
           lib.mkIf keybinds.evil.enable "'evil-record-macro";
-        custom = {
+        setopt = {
           # Replace key help with a completing-read interface
           prefix-help-command = "#'embark-prefix-help-command";
           which-key-use-C-h-commands = lib.mkIf keybinds.whichKey.enable false;

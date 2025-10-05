@@ -24,7 +24,7 @@ in
               "a" = lib.mkDefault "'eglot-code-actions";
               "d" = lib.mkDefault "'eldoc-doc-buffer";
             };
-        custom = {
+        setopt = {
           eglot-report-progress = false;
           eglot-autoshutdown = true;
           #borrowed from doom

@@ -4,14 +4,15 @@ let
   keybinds = config.programs.emacs.init.keybinds;
 in
 {
-  options.programs.emacs.init.keybinds.electricPair.enable = lib.mkEnableOption "Enables electric-pair-mode. Borrowed from Derek Taylor.";
+  options.programs.emacs.init.keybinds.electricPair.enable =
+    lib.mkEnableOption "Enables electric-pair-mode. Borrowed from Derek Taylor.";
 
-  config.programs.emacs.init = {
+  config.programs.emacs.init = lib.mkIf keybinds.electricPair.enable {
     hasOn = true;
     usePackage.elec-pair = {
       enable = true;
-      hook = ["(on-first-buffer . electric-pair-mode)"];
-      custom.electric-pair-pairs = ''
+      hook = [ "(on-first-buffer . electric-pair-mode)" ];
+      setopt.electric-pair-pairs = ''
         '((?\" . ?\")
           (?\[ . ?\])
           (?\( . ?\))

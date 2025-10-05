@@ -40,7 +40,7 @@ in
           mode = [ ''"/flake\\.lock\\'"'' ];
         };
 
-        lsp-bridge.custom.lsp-bridge-nix-lsp-server = lib.mkIf ide.lsp-bridge.enable ''"nixd"'';
+        lsp-bridge.setopt.lsp-bridge-nix-lsp-server = lib.mkIf ide.lsp-bridge.enable ''"nixd"'';
 
         ob-nix = lib.mkIf ide.languages.org.enable {
           enable = true;

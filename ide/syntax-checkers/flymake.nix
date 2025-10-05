@@ -12,7 +12,7 @@ in
       flymake = {
         enable = true;
         defer = true;
-        custom.flymake-indicator-position = "'right-fringe";
+        setopt.flymake-indicator-position = "'right-fringe";
         hook = lib.mkIf ide.languages.emacs-lisp.enable [
           ''
             (flymake-mode . (lambda () (when (eq major-mode 'emacs-lisp-mode)
@@ -25,7 +25,7 @@ in
 
       flymake-popon = lib.mkIf (ide.hoverDoc && !ide.flycheck.preset) {
         enable = true;
-        custom.flymake-popon-method = "'posframe";
+        setopt.flymake-popon-method = "'posframe";
         hook = [ "(flymake-mode . flymake-popon-mode)" ];
       };
 

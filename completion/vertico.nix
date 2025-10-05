@@ -18,7 +18,7 @@ in
       vertico = {
         enable = true;
         hook = [ "(on-first-input . vertico-mode)" ];
-        custom.vertico-cycle = true;
+        setopt.vertico-cycle = true;
         generalTwoConfig.":n".vertico-map = lib.mkIf keybinds.evil.enable {
           "RET" = "'vertico-exit";
           "${keybinds.evil.keys.down}" = "'vertico-next";
@@ -38,7 +38,7 @@ in
       vertico-prescient = lib.mkIf completions.prescient {
         enable = true;
         hook = [ "(minibuffer-mode . vertico-prescient-mode)" ];
-        custom = {
+        setopt = {
           vertico-prescient-enable-filtering = false;
           vertico-prescient-completion-styles = lib.mkDefault (
             if completions.orderless then "'(orderless prescient basic)" else "'(prescient basic)"

@@ -13,7 +13,7 @@ in
       god-mode = {
         enable = true;
         hook = lib.mkIf (!keybinds.evil.enable) [ "(on-init-ui-hook . god-mode-all)" ];
-        custom = {
+        setopt = {
           god-exempt-major-modes = false;
           god-exempt-predicates = false;
         };

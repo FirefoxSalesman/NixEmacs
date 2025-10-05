@@ -18,7 +18,7 @@ in
       ivy = {
         enable = true;
         hook = [ "(on-first-input . ivy-mode)" ];
-        custom = {
+        setopt = {
           ivy-sort-max-size = lib.mkDefault 7500;
           ivy-height = lib.mkDefault 17;
           ivy-fixed-height-minibuffer = lib.mkDefault (!completions.ivy.posframe);
@@ -37,7 +37,7 @@ in
       ivy-rich = {
         enable = true;
         after = [ "ivy" ];
-        custom = {
+        setopt = {
           ivy-rich-parse-remote-buffer = lib.mkDefault false;
           ivy-rich-switch-buffer-faces-alist = lib.mkDefault false;
         };
@@ -92,7 +92,7 @@ in
             "?" = lib.mkDefault "'counsel-grep-or-swiper";
           };
         };
-        custom.counsel-find-file-ignore-regexp = lib.mkDefault ''"\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"'';
+        setopt.counsel-find-file-ignore-regexp = lib.mkDefault ''"\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"'';
         config = ''
           (setq ivy-initial-inputs-alist nil)
           ${
@@ -152,7 +152,7 @@ in
       ivy-posframe = lib.mkIf completions.ivy.posframe {
         enable = true;
         hook = [ "(ivy-mode . ivy-posframe-mode)" ];
-        custom = {
+        setopt = {
           ivy-posframe-border-width = lib.mkDefault 10;
           ivy-posframe-parameters = lib.mkDefault ''
             `((min-width . 90)

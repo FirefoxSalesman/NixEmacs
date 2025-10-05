@@ -1,11 +1,16 @@
-{ pkgs, config, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 
 let
   ide = config.programs.emacs.init.ide;
   completions = config.programs.emacs.init.completions;
 in
 {
-  options.programs.emacs.init.ide.lsp.preset = lib.mkEnableOption "Enable lsp-mode's preset configuration (borrowed from doom)";
+  options.programs.emacs.init.ide.lsp.preset =
+    lib.mkEnableOption "Enable lsp-mode's preset configuration (borrowed from doom)";
 
   config = lib.mkIf ide.lsp.preset {
     programs.emacs.init.usePackage = {
@@ -13,7 +18,7 @@ in
       lsp-mode = {
         enable = true;
         defer = true;
-        custom = {
+        setopt = {
           lsp-enable-folding = lib.mkDefault false;
           lsp-enable-text-document-color = lib.mkDefault false;
           lsp-enable-on-type-formatting = lib.mkDefault false;
@@ -23,8 +28,8 @@ in
 
       lsp-ui = lib.mkIf ide.hoverDoc {
         enable = true;
-        hook = ["(lsp-mode . lsp-ui-mode)"];
-        custom = {
+        hook = [ "(lsp-mode . lsp-ui-mode)" ];
+        setopt = {
           lsp-ui-doc-show-with-mouse = lib.mkDefault false;
           lsp-ui-doc-position = lib.mkDefault "'at-point";
           lsp-ui-doc-show-with-cursor = lib.mkDefault true;
@@ -36,14 +41,14 @@ in
 
       consult-lsp = lib.mkIf completions.smallExtras.enable {
         enable = true;
-        after = ["lsp-mode"];
-        bindLocal.lsp-mode-map."C-M-." = "consult-lsp-symbols" ;
+        after = [ "lsp-mode" ];
+        bindLocal.lsp-mode-map."C-M-." = "consult-lsp-symbols";
       };
 
       ivy-lsp = lib.mkIf completions.ivy.enable {
         enable = true;
-        command = ["lsp-ivy-global-workspace-symbol"];
-        after = ["lsp-mode"];
+        command = [ "lsp-ivy-global-workspace-symbol" ];
+        after = [ "lsp-mode" ];
         bindLocal.lsp-mode-map."C-M-." = "lsp-ivy-workspace-symbol";
       };
     };

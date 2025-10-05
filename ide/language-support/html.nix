@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
-let ide = config.programs.emacs.init.ide;
-in {
+let
+  ide = config.programs.emacs.init.ide;
+in
+{
   options.programs.emacs.init.ide.languages.web = {
     enable = lib.mkEnableOption "enables html support";
     emmet = lib.mkEnableOption "enables emmet for html";
@@ -27,7 +34,7 @@ in {
       emmet-mode = {
         enable = ide.html.emmet;
         hook = [ "(html-ts-mode . emmet-mode)" ];
-        custom.emmet-move-cursor-between-quotes = lib.mkDefault true;
+        setopt.emmet-move-cursor-between-quotes = lib.mkDefault true;
       };
     };
   };

@@ -90,14 +90,14 @@ in
           {
             enable = true;
             after = [ "lsp-mode" ];
-            custom.lsp-pyright-langserver-command =
+            setopt.lsp-pyright-langserver-command =
               if (matches "basedpyright" ide.languages.python.languageServer) then
                 ''"basedpyright"''
               else
                 ''"pyright"'';
           };
 
-      lsp-bridge.custom.lsp-bridge-python-lsp-server = lib.mkIf ide.lsp-bridge.enable "${ide.languages.python.languageServer
+      lsp-bridge.setopt.lsp-bridge-python-lsp-server = lib.mkIf ide.lsp-bridge.enable "${ide.languages.python.languageServer
       }";
 
       code-cells = lib.mkIf ide.languages.python.jupyter {

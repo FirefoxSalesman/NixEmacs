@@ -34,7 +34,7 @@ in
           '';
           usePackage.treesit-auto = {
             enable = true;
-            custom.treesit-auto-install = "'prompt";
+            setopt.treesit-auto-install = "'prompt";
             init = "(mp-setup-install-grammars)";
             config = "(global-treesit-auto-mode)";
             # stolen from mickey petersen

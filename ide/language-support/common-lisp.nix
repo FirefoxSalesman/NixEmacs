@@ -23,7 +23,7 @@ in
       sly = {
         enable = true;
         hook = [ "(lisp-mode-local-vars . sly-editing-mode)" ];
-        custom = {
+        setopt = {
           inferior-lisp-program = lib.mkDefault ''"${pkgs.sbcl}/bin/sbcl"'';
           sly-kill-without-query-p = lib.mkDefault true;
         };

@@ -26,7 +26,7 @@ in
       gfhookf = lib.mkIf ide.symex [ "('ess-r-mode (treesit! 'r))" ];
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
-      custom.ess-ask-for-ess-directory = lib.mkDefault false;
+      setopt.ess-ask-for-ess-directory = lib.mkDefault false;
       lspce = lib.mkIf ide.lspce.enable '''("R" "ess-r") "R" "--slave -e languageserver::run()"'';
       symex = ide.symex;
     };

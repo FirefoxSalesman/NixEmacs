@@ -23,7 +23,7 @@ in
         enable = ide.languages.latex.magicLatexBuffer;
         package = epkgs: epkgs.auctex;
         init = lib.mkDefault "(setq-default TeX-master nil)";
-        custom = {
+        setopt = {
           reftex-label-alist = lib.mkDefault '''(("\\poemtitle" ?P "poem:" "\\ref{%s}" nil ("poem" "poemtitle")))'';
           reftex-format-cite-function = lib.mkDefault ''
             '(lambda (key fmt)
@@ -84,7 +84,7 @@ in
         ];
       };
 
-      lsp-bridge.custom.lsp-bridge-tex-lsp-server = lib.mkIf ide.lsp-bridge.enable (
+      lsp-bridge.setopt.lsp-bridge-tex-lsp-server = lib.mkIf ide.lsp-bridge.enable (
         if ide.languages.latex.preferTexlab then ''"texlab"'' else ''"digestif"''
       );
 

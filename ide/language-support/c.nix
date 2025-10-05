@@ -37,7 +37,7 @@ in
         after = [ "lsp-mode" ];
       };
 
-      lsp-bridge.custom.lsp-bridge-c-lsp-server = lib.mkIf ide.lsp-bridge.enable (
+      lsp-bridge.setopt.lsp-bridge-c-lsp-server = lib.mkIf ide.lsp-bridge.enable (
         if !ide.languages.c.preferClangd then ''"ccls"'' else ''"clangd"''
       );
     };

@@ -29,7 +29,7 @@ in
       helm = {
         enable = true;
         after = [ "helm-mode" ];
-        custom = {
+        setopt = {
           helm-candidate-number-limit = lib.mkDefault 150;
           helm-display-header-line = lib.mkDefault false;
           helm-ff-auto-update-initial-value = lib.mkDefault false;
@@ -86,7 +86,7 @@ in
       helm-rg = {
         enable = true;
         extraPackages = [ pkgs.ripgrep ];
-        custom.helm-rg-display-buffer-normal-method = lib.mkDefault "#'pop-to-buffer";
+        setopt.helm-rg-display-buffer-normal-method = lib.mkDefault "#'pop-to-buffer";
         bindLocal = {
           helm-rg-map."C-c C-e" = lib.mkDefault "helm-rg--bounce";
           helm-rg--bounce-mode-map = {

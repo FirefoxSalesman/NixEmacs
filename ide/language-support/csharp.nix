@@ -29,7 +29,7 @@ in
         lspce = lib.mkIf ide.lspce.enable ''"csharp" "csharp-lsp"'';
       };
 
-      lsp-bridge.custom.lsp-bridge-csharp-lsp-server = lib.mkIf ide.lsp-bridge.enable ''"csharp-ls"'';
+      lsp-bridge.setopt.lsp-bridge-csharp-lsp-server = lib.mkIf ide.lsp-bridge.enable ''"csharp-ls"'';
     };
   };
 }

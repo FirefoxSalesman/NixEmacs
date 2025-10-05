@@ -31,7 +31,7 @@ in
       rustic = {
         enable = true;
         mode = [ ''("\\.rs$" . rustic-mode)'' ];
-        custom = {
+        setopt = {
           rust-mode-treesitter-derive = lib.mkDefault true;
           rustic-lsp-client = lib.mkDefault (
             if ide.eglot.enable then

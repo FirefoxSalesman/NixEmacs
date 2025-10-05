@@ -17,15 +17,15 @@ in
     usePackage = {
       which-key = {
         enable = true;
-        hook = ["(on-first-input . which-key-mode)"];
-        custom.which-key-idle-delay = 1;
+        hook = [ "(on-first-input . which-key-mode)" ];
+        setopt.which-key-idle-delay = 1;
       };
-      
+
       which-key-posframe = lib.mkIf keybinds.whichKey.posframe.enable {
         enable = true;
         defer = true;
-        hook = ["(which-key-mode . which-key-posframe-mode)"];
-        custom.which-key-posframe-poshandler = "'posframe-poshandler-frame-bottom-center";
+        hook = [ "(which-key-mode . which-key-posframe-mode)" ];
+        setopt.which-key-posframe-poshandler = "'posframe-poshandler-frame-bottom-center";
         config = lib.mkIf keybinds.whichKey.posframe.unparent ''
           (defun which-key-posframe--show-buffer (act-popup-dim)
              "Show which-key buffer when popup type is posframe.

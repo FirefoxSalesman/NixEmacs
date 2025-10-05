@@ -29,7 +29,7 @@ in
           "(on-first-buffer . global-corfu-mode)"
           (lib.mkIf completions.corfu.wantMinibuffer "(minibuffer-setup . corfu-enable-in-minibuffer)")
         ];
-        custom = {
+        setopt = {
           corfu-cycle = true;
           corfu-autodelay = 0;
           corfu-auto-prefix = 2;
@@ -70,7 +70,7 @@ in
         enable = true;
         defer = true;
         hook = [ "(corfu-mode . corfu-prescient-mode)" ];
-        custom.corfu-prescient-completion-styles = lib.mkDefault (
+        setopt.corfu-prescient-completion-styles = lib.mkDefault (
           if completions.orderless then "'(orderless basic prescient)" else "'(basic prescient)"
         );
       };
