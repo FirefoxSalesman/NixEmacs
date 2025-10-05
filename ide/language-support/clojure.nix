@@ -32,7 +32,7 @@ in
       cider = {
         enable = ide.languages.java.clojure;
         hook = [ "(clojure-mode . cider-mode)" ];
-        generalTwo.local-leader.cider-mode-map."s" = lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable lib.mkDefault '''(cider-jack-in :which-key "start cider")''; 
+        generalTwoConfig.local-leader.cider-mode-map."s" = lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable lib.mkDefault '''(cider-jack-in :which-key "start cider")''; 
       };
     };
   };

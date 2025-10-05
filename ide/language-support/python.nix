@@ -73,7 +73,7 @@ in
               ''"jedi-language-server"''
           }
         '';
-        generalTwo."local-leader".python-mode-map."r" = lib.mkIf keybinds.leader-key.enable (
+        generalTwoConfig."local-leader".python-mode-map."r" = lib.mkIf keybinds.leader-key.enable (
           lib.mkDefault "'python-shell-send-buffer"
         );
       };
@@ -104,7 +104,7 @@ in
         enable = true;
         demand = lib.mkDefault true;
         extraPackages = with pkgs; [ python313Packages.jupytext ];
-        generalTwo = {
+        generalTwoConfig = {
           "local-leader".code-cells-mode-map."e" = lib.mkIf keybinds.leader-key.enable (
             lib.mkDefault "'code-cells-eval"
           );

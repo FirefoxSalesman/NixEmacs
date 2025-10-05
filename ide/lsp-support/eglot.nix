@@ -17,7 +17,7 @@ in
       eglot = {
         enable = true;
         defer = true;
-        generalTwo.local-leader.eglot-mode-map =
+        generalTwoConfig.local-leader.eglot-mode-map =
           lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
             {
               "f" = lib.mkDefault "'eglot-format-buffer";
@@ -57,8 +57,8 @@ in
 
       consult-eglot = lib.mkIf config.programs.emacs.init.completions.smallExtras.enable {
         enable = true;
-        after = ["eglot"];
-        bindLocal.eglot-mode-map."C-M-." = "consult-eglot-symbols" ;
+        after = [ "eglot" ];
+        bindLocal.eglot-mode-map."C-M-." = "consult-eglot-symbols";
       };
     };
   };

@@ -3,11 +3,13 @@
 let
   completions = config.programs.emacs.init.completions;
   keybinds = config.programs.emacs.init.keybinds;
-  mkDisableOption = desc: lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-    description = desc;
-  };
+  mkDisableOption =
+    desc:
+    lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = desc;
+    };
 in
 {
   options.programs.emacs.init.completions.corfu = {
@@ -51,24 +53,26 @@ in
               (setq-local corfu-auto t) ;; Enable/disable auto completion
               (corfu-mode 1)))
         '';
-        generalTwo.":ie".corfu-map = lib.mkIf keybinds.evil.enable {
+        generalTwoConfig.":ie".corfu-map = lib.mkIf keybinds.evil.enable {
           "S-SPC" = "'corfu-insert-separator";
           "C-${keybinds.evil.keys.down}" = "'corfu-next";
           "C-p" = "nil";
           "C-${keybinds.evil.keys.up}" = "'corfu-previous";
         };
       };
-      
+
       corfu-popupinfo = {
         enable = true;
-        hook = ["(corfu-mode . corfu-popupinfo-mode)"];
+        hook = [ "(corfu-mode . corfu-popupinfo-mode)" ];
       };
-      
+
       corfu-prescient = lib.mkIf completions.prescient {
         enable = true;
         defer = true;
-        hook = ["(corfu-mode . corfu-prescient-mode)"];
-        custom.corfu-prescient-completion-styles = lib.mkDefault (if completions.orderless then "'(orderless basic prescient)" else "'(basic prescient)");
+        hook = [ "(corfu-mode . corfu-prescient-mode)" ];
+        custom.corfu-prescient-completion-styles = lib.mkDefault (
+          if completions.orderless then "'(orderless basic prescient)" else "'(basic prescient)"
+        );
       };
 
       corfu-quick = lib.mkIf keybinds.avy.enable {

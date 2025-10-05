@@ -17,7 +17,7 @@ in
       mode = [ ''"\\.rkt\\'"'' ];
       init = ''(setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';
       config = ''(setq auto-mode-alist (delete '("\\.rkt\\'" . scheme-mode) auto-mode-alist))'';
-      generalTwo.local-leader.racket-mode-map =
+      generalTwoConfig.local-leader.racket-mode-map =
         lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
           {
             "." = lib.mkDefault "'racket-xp-describe";

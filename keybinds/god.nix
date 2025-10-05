@@ -37,10 +37,10 @@ in
         generalOne = {
           ":n"."," = "'evil-execute-in-god-state";
           ":e"."<escape>" = "'evil-god-state";
-          evil-god-state-map = {
-            "<escape>" = "'evil-god-state-bail";
-            "<return>" = "'evil-emacs-state";
-          };
+        };
+        generalOneConfig.evil-god-state-map = {
+          "<escape>" = "'evil-god-state-bail";
+          "<return>" = "'evil-emacs-state";
         };
       };
     };

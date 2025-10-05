@@ -37,7 +37,7 @@ in
           TeX-parse-self = lib.mkDefault true;
           reftex-plug-into-AUCTeX = lib.mkDefault true;
         };
-        generalTwo.local-leader.LaTeX-mode-map =
+        generalTwoConfig.local-leader.LaTeX-mode-map =
           lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
             {
               "p" = lib.mkDefault '''(preview-at-point :which-key "preview")'';

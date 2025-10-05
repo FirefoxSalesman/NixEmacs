@@ -69,8 +69,8 @@ in
           evil-cross-lines = true;
           sentence-end-double-space = false;
         };
-        general."M-u" = "'universal-argument";
-        generalOne.universal-argument-map = {
+        generalConfig."M-u" = "'universal-argument";
+        generalOneConfig.universal-argument-map = {
           "M-u" = "'universal-argument-more";
           "C-u" = "'nil";
         };

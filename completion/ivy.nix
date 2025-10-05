@@ -17,7 +17,7 @@ in
     usePackage = {
       ivy = {
         enable = true;
-        hook = ["(on-first-input . ivy-mode)"];
+        hook = [ "(on-first-input . ivy-mode)" ];
         custom = {
           ivy-sort-max-size = lib.mkDefault 7500;
           ivy-height = lib.mkDefault 17;
@@ -29,12 +29,14 @@ in
           ivy-on-del-error-function = lib.mkDefault "#'ignore";
           ivy-use-selectable-prompt = lib.mkDefault true;
         };
-        generalOne.":nm".":" = lib.mkIf (keybinds.evil.enable && !completions.ivy.posframe) (lib.mkDefault "'ivy-posframe-dispatching-done");
+        generalOneConfig.":nm".":" = lib.mkIf (keybinds.evil.enable && !completions.ivy.posframe) (
+          lib.mkDefault "'ivy-posframe-dispatching-done"
+        );
       };
 
       ivy-rich = {
         enable = true;
-        after = ["ivy"];
+        after = [ "ivy" ];
         custom = {
           ivy-rich-parse-remote-buffer = lib.mkDefault false;
           ivy-rich-switch-buffer-faces-alist = lib.mkDefault false;
@@ -48,7 +50,7 @@ in
 
       counsel = {
         enable = true;
-        after = ["ivy"];
+        after = [ "ivy" ];
         bindLocal = {
           help-map = {
             "C-a" = lib.mkDefault "counsel-apropos";
@@ -93,7 +95,12 @@ in
         custom.counsel-find-file-ignore-regexp = lib.mkDefault ''"\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"'';
         config = ''
           (setq ivy-initial-inputs-alist nil)
-          ${if ide.projectile then "(add-to-list 'counsel-compile-root-functions #'projectile-project-root)" else ""}
+          ${
+            if ide.projectile then
+              "(add-to-list 'counsel-compile-root-functions #'projectile-project-root)"
+            else
+              ""
+          }
           (dolist (fn '(counsel-rg counsel-find-file))
             (ivy-add-actions
              fn '(("p" (lambda (path) (with-ivy-window (insert (file-relative-name path default-directory))))
@@ -105,42 +112,46 @@ in
              ("L" (lambda (path) (with-ivy-window (insert (format "[[%s]]" path))))
               "Insert absolute org-link"))))
           (ivy-add-actions 'counsel-file-jump (plist-get ivy--actions-list 'counsel-find-file))
-          
-          ${if completions.ivy.swiperReplaceSearch && keybinds.evil.enable then
-               ''(defun nix-emacs-add-ivy-text-to-history ()
-                   "Add the last ivy search to `regexp-search-ring'."
-                   (add-to-history
-                    'regexp-search-ring
-                    (ivy--regex ivy-text)
-                    regexp-search-ring-max))
-               
-                 (defun nix-emacs-evil-search-action ()
-                   "Update evil search information based on last ivy search."
-                   (when (and (bound-and-true-p evil-mode)
-                              (eq evil-search-module 'evil-search))
-                     (add-to-history 'evil-ex-search-history ivy-text)
-                     (setq evil-ex-search-pattern (list ivy-text t t))
-                     (setq evil-ex-search-direction 'forward)
-                     (when evil-ex-search-persistent-highlight
-                       (evil-ex-search-activate-highlight evil-ex-search-pattern))))
-               
-               
-                 (general-add-hook 'counsel-grep-post-action-hook (list
-                                                                   #'nix-emacs-match-beginning
-                                                                   #'nix-emacs-add-ivy-text-to-history
-                                                                   #'nix-emacs-evil-search-action))''
-               else ""}
+
+          ${
+            if completions.ivy.swiperReplaceSearch && keybinds.evil.enable then
+              ''
+                (defun nix-emacs-add-ivy-text-to-history ()
+                                   "Add the last ivy search to `regexp-search-ring'."
+                                   (add-to-history
+                                    'regexp-search-ring
+                                    (ivy--regex ivy-text)
+                                    regexp-search-ring-max))
+                               
+                                 (defun nix-emacs-evil-search-action ()
+                                   "Update evil search information based on last ivy search."
+                                   (when (and (bound-and-true-p evil-mode)
+                                              (eq evil-search-module 'evil-search))
+                                     (add-to-history 'evil-ex-search-history ivy-text)
+                                     (setq evil-ex-search-pattern (list ivy-text t t))
+                                     (setq evil-ex-search-direction 'forward)
+                                     (when evil-ex-search-persistent-highlight
+                                       (evil-ex-search-activate-highlight evil-ex-search-pattern))))
+                               
+                               
+                                 (general-add-hook 'counsel-grep-post-action-hook (list
+                                                                                   #'nix-emacs-match-beginning
+                                                                                   #'nix-emacs-add-ivy-text-to-history
+                                                                                   #'nix-emacs-evil-search-action))''
+            else
+              ""
+          }
         '';
       };
 
       ivy-prescient = lib.mkIf completions.prescient {
         enable = true;
-        hook = ["(ivy-mode . ivy-prescient-mode)"];
+        hook = [ "(ivy-mode . ivy-prescient-mode)" ];
       };
 
       ivy-posframe = lib.mkIf completions.ivy.posframe {
         enable = true;
-        hook = ["(ivy-mode . ivy-posframe-mode)"];
+        hook = [ "(ivy-mode . ivy-posframe-mode)" ];
         custom = {
           ivy-posframe-border-width = lib.mkDefault 10;
           ivy-posframe-parameters = lib.mkDefault ''
@@ -148,7 +159,9 @@ in
               (min-height . ,ivy-height))
           '';
         };
-        generalOne.":nm".":" = lib.mkIf keybinds.evil.enable (lib.mkDefault "'ivy-posframe-dispatching-done");
+        generalOne.":nm".":" = lib.mkIf keybinds.evil.enable (
+          lib.mkDefault "'ivy-posframe-dispatching-done"
+        );
       };
 
       ivy-avy = lib.mkIf keybinds.avy.enable {

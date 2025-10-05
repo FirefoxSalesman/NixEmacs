@@ -19,7 +19,7 @@ in
         enable = true;
         hook = [ "(on-first-input . vertico-mode)" ];
         custom.vertico-cycle = true;
-        generalTwo.":n".vertico-map = lib.mkIf keybinds.evil.enable {
+        generalTwoConfig.":n".vertico-map = lib.mkIf keybinds.evil.enable {
           "RET" = "'vertico-exit";
           "${keybinds.evil.keys.down}" = "'vertico-next";
           "${keybinds.evil.keys.up}" = "'vertico-previous";
