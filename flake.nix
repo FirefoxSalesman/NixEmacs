@@ -36,6 +36,11 @@
       url = "github:firefoxsalesman/symex.el/treesit";
       flake = false;
     };
+
+    org-novelist = {
+      url = "github:sympodius/org-novelist";
+      flake = false;
+    };
   };
 
   outputs =
