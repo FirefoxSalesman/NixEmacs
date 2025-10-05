@@ -335,10 +335,7 @@ let
         };
 
         custom = mkOption {
-          type = types.attrsOf (
-            # types.either (types.either types.float types.int) (types.either types.str types.bool)
-            lispVar
-          );
+          type = types.attrsOf lispVar;
           default = { };
           example = {
             "display-line-numbers-type" = "'relative";
@@ -349,10 +346,7 @@ let
         };
 
         setopt = mkOption {
-          type = types.attrsOf (
-            # types.either (types.either types.float types.int) (types.either types.str types.bool)
-            lispVar
-          );
+          type = types.attrsOf lispVar;
           default = { };
           example = {
             "display-line-numbers-type" = "'relative";
@@ -487,7 +481,7 @@ let
               else if isInt v || isFloat v then
                 toString v
               else if isList v then
-                "(list ${concatMapStrings optionHelper v})"
+                "(list ${concatMapStrings (k: "${optionHelper k} ") v})"
               else
                 v;
             mkCustom = vs: optionals (vs != { }) (mapAttrsToList (n: v: ":custom (${n} ${optionHelper v})") vs);
