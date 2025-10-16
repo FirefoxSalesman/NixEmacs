@@ -33,7 +33,9 @@ in
       evil-god-state = lib.mkIf keybinds.evil.enable {
         enable = true;
         command = [ "evil-god-state" ];
-        gfhookf = lib.mkIf keybinds.doomEscape.enable [ "('doom-escape 'evil-god-state-bail)" ];
+        gfhookf = lib.mkIf keybinds.doomEscape.enable [
+          "('doom-escape (lambda () (when (featurep 'evil-god-state) (evil-god-state-bail))))"
+        ];
         generalOne = {
           ":n"."," = "'evil-execute-in-god-state";
           ":e"."<escape>" = "'evil-god-state";
