@@ -72,6 +72,13 @@ Type: Boolean
 
 Default: false
 
+*** =programs.emacs.init.aggressiveSymex=
+If set to true, in the major mode of any package where =hasSymex= is true, pressing escape in insert state will put the user in symex state
+
+Type: Boolean
+
+Default: false
+
 *** =programs.emacs.init.largeFileHandling=
 If set to true, will optimize the opening of large files (as seen in [[https://github.com/doomemacs/doomemacs][Doom Emacs]])
 

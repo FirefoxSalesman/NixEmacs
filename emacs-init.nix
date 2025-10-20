@@ -568,7 +568,10 @@ let
               '';
             mkSymex =
               name: vs:
-              optional vs '':general ('normal ${transformName name}-map "RET" '(lambda () (interactive) (require 'symex) (symex-mode-interface)))'';
+              optional vs ''
+                		:general ('normal ${transformName name}-map "RET" '(lambda () (interactive) (require 'symex) (symex-mode-interface)))
+                	                 ('insert ${transformName name}-map "ESC" '(lambda () (interactive) (require 'symex) (symex-mode-interface)))
+                	      '';
             mkDefer = v: if isBool v then optional v ":defer t" else [ ":defer ${toString v}" ];
             mkDeferIncrementally =
               v: if isBool v then optional v ":defer-incrementally t" else map (n: ":defer-incrementally ${n}") v;
@@ -854,6 +857,8 @@ in
 
     # Credits: The large file handling package is from Noctuid
     largeFileHandling = mkEnableOption "Optimizes operations on large text files";
+
+    aggressiveSymex = mkEnableOption "When leaving insert state, enter symex state instead of normal state.";
 
     hasOn = mkEnableOption "Enables on.el";
 
