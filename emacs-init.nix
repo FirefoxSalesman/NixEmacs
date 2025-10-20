@@ -572,7 +572,7 @@ let
                 		:general ('normal ${transformName name}-map "RET" '(lambda () (interactive) (require 'symex) (symex-mode-interface)))
                 	                 ${
                                     if cfg.aggressiveSymex then
-                                      ''('insert ${transformName name}-map "ESC" '(lambda () (interactive) (require 'symex) (symex-mode-interface)))''
+                                      ''('insert ${transformName name}-map "<escape>" '(lambda () (interactive) (require 'symex) (symex-mode-interface)))''
                                     else
                                       ""
                                   }
