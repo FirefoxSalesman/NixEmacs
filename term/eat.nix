@@ -8,14 +8,18 @@ in
 
   config.programs.emacs.init.usePackage.eat = lib.mkIf terminals.eat {
     enable = true;
-    command = ["eat"];
-    hook = ["(eshell-mode . eat-eshell-mode)"];
-    generalOne.global-leader."t" = lib.mkIf (config.programs.emacs.init.keybinds.leader-key.enable && !terminals.eshell) "'eat";
+    command = [ "eat" ];
+    generalOne.global-leader."t" = lib.mkIf (
+      config.programs.emacs.init.keybinds.leader-key.enable && !terminals.eshell
+    ) "'eat";
     config = ''
-      ${if config.programs.emacs.init.keybinds.evil.enable then ''(evil-ex-define-cmd "term" 'eat)'' else ""}
+      ${
+        if config.programs.emacs.init.keybinds.evil.enable then ''(evil-ex-define-cmd "term" 'eat)'' else ""
+      }
+      (with-eval-after-load 'eshell (eat-eshell-mode))
       (defun eat-term-get-suitable-term-name (&optional display)
         "Return the most suitable value for `TERM' for DISPLAY.
-      
+
           If the number of colors supported by display (as returned by
           `display-color-cells') is more than 256, return \"eat-truecolor\", if
           it is more than 8 but less than or equal to 256, return

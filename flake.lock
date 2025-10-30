@@ -1,0 +1,147 @@
+{
+  "nodes": {
+    "doom-utils": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756500702,
+        "narHash": "sha256-Ut9lt9XiHo9GHIh0duSxwydAM6gUFreUSl58qvWelVw=",
+        "owner": "firefoxsalesman",
+        "repo": "doom-utils",
+        "rev": "44b81aa705a16679d0cda38184b8637f73d8cec6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "firefoxsalesman",
+        "repo": "doom-utils",
+        "type": "github"
+      }
+    },
+    "eglot-booster": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1752690112,
+        "narHash": "sha256-xUBQrQpw+JZxcqT1fy/8C2tjKwa7sLFHXamBm45Fa4Y=",
+        "owner": "jdtsmith",
+        "repo": "eglot-booster",
+        "rev": "cab7803c4f0adc7fff9da6680f90110674bb7a22",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jdtsmith",
+        "repo": "eglot-booster",
+        "type": "github"
+      }
+    },
+    "eglot-x": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1750956070,
+        "narHash": "sha256-a2qkitikqGZBXI4aVdn8c7P4HFwep9RPWkOVBbgQV2g=",
+        "owner": "nemethf",
+        "repo": "eglot-x",
+        "rev": "8e872efd3d0b7779bde5b1e1d75c8e646a1f729f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nemethf",
+        "repo": "eglot-x",
+        "type": "github"
+      }
+    },
+    "org-modern-indent": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1678423102,
+        "narHash": "sha256-7EWtvL8SlYQ8EDx9mR3ixdXYwLI1D9cCOKF+7t08DtQ=",
+        "owner": "alphapapa",
+        "repo": "org-modern-indent",
+        "rev": "952abf3a54d0589fd2a25e007d67254a6a30276a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alphapapa",
+        "repo": "org-modern-indent",
+        "type": "github"
+      }
+    },
+    "org-novelist": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1716379970,
+        "narHash": "sha256-9rUCaOOSxSIHLH8NIdiDudLGmcF2C3FfgwKkwjKeHgg=",
+        "owner": "sympodius",
+        "repo": "org-novelist",
+        "rev": "4577dcc8d0206bc321c307bffc13ead107cf5ee0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sympodius",
+        "repo": "org-novelist",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "doom-utils": "doom-utils",
+        "eglot-booster": "eglot-booster",
+        "eglot-x": "eglot-x",
+        "org-modern-indent": "org-modern-indent",
+        "org-novelist": "org-novelist",
+        "svelte-ts-mode": "svelte-ts-mode",
+        "symex": "symex",
+        "use-package-eglot": "use-package-eglot"
+      }
+    },
+    "svelte-ts-mode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753004480,
+        "narHash": "sha256-1V389XqYCOlewqBglv//UkaZwHEc5pFqbt7nrLdgU6U=",
+        "owner": "leafOfTree",
+        "repo": "svelte-ts-mode",
+        "rev": "8a7b90358a79b7844a39ffa722eac2fd41eea2ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "leafOfTree",
+        "repo": "svelte-ts-mode",
+        "type": "github"
+      }
+    },
+    "symex": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1757439166,
+        "narHash": "sha256-18FsqxP4UNXTx5jSo2y/IyP34ZUFQckh6gL++yzzqso=",
+        "owner": "firefoxsalesman",
+        "repo": "symex.el",
+        "rev": "8dec240d796757d1c769a1cf4e489927b560c480",
+        "type": "github"
+      },
+      "original": {
+        "owner": "firefoxsalesman",
+        "ref": "treesit",
+        "repo": "symex.el",
+        "type": "github"
+      }
+    },
+    "use-package-eglot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1754999779,
+        "narHash": "sha256-P42tMHhpxAiLvKE7fWG1LuCbAJiMviQH9+XLFsc99K4=",
+        "owner": "firefoxsalesman",
+        "repo": "use-package-eglot",
+        "rev": "2decf8fa4b7ecb3783c1118e45196cd8cdb04b30",
+        "type": "github"
+      },
+      "original": {
+        "owner": "firefoxsalesman",
+        "repo": "use-package-eglot",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
