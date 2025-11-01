@@ -40,7 +40,7 @@ in
       setopt.consult-denote-grep-command = "'consult-ripgrep";
     };
 
-    org.custom.org-capture-templates = lib.mkIf ide.languages.org.enable [
+    org.setopt.org-capture-templates = lib.mkIf ide.languages.org.enable [
       ''
         '("d" "Denote note" plain
         	(file denote-last-path)
