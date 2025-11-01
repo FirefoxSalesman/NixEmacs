@@ -711,11 +711,19 @@ Enables evil surround
 **** leader keys
 Bindings for global-leader:
 + h: help-map
-+ f: find-file
++ f: find-file (or counsel-find-file if ivy is enabled)
 + P: project-prefix-map or projectile-command-map (depending on which of the two you enabled)
 + o: org bindings (if you enabled org's preset)
   - a: org-agenda
   - p: org-capture
+  - f: denote-open-or-create (if you enabled denote) or org-roam-find-file (if you enabled org-roam)
+  - i: org-roam-insert (if you enabled org-roam) or denote-link (if you enabled denote)
+  - g: org-roam-graph (if you enabled org-roam)
+  - s: consult-org-roam-search (if you enabled org-roam & simple-completion-extras) or consult-denote-grep (if you enabled denote & simple-completion-extras)
+  - h: denote-org-link-to-heading (if you enabled denote & org support)
++ b: consult-bookmark (if simple-completion-extras is enabled)
++ i: consult/counsel-imenu (depending on if you enabled ivy or simple-completion-extras)
++ I: consult-imenu-multi (if you enabled simple-completion-extras)
 
 Bindings for local-leader:
 + org-mode (if org's preset is enabled):
