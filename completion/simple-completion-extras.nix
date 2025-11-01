@@ -94,7 +94,7 @@ in
           };
           global-leader = lib.mkIf keybinds.leader-key.enable {
             "b" = lib.mkDefault "'consult-bookmark";
-            "i" = lib.mkDefault "'consult-imenu";
+            "i" = lib.mkDefault "'nix-emacs/consult-header";
             "I" = lib.mkDefault "'consult-imenu-multi";
           };
         };
