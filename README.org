@@ -721,9 +721,11 @@ Bindings for global-leader:
   - g: org-roam-graph (if you enabled org-roam)
   - s: consult-org-roam-search (if you enabled org-roam & simple-completion-extras) or consult-denote-grep (if you enabled denote & simple-completion-extras)
   - h: denote-org-link-to-heading (if you enabled denote & org support)
-+ b: consult-bookmark (if simple-completion-extras is enabled)
-+ i: consult/counsel-imenu (depending on if you enabled ivy or simple-completion-extras)
-+ I: consult-imenu-multi (if you enabled simple-completion-extras)
++ i: counsel-imenu (depending on if you enabled ivy)
++ If simple-completion-extras is enabled:
+  - i: nix-emacs/consult-header (Runs consult-imenu, except in markdown-mode or org-mode where it runs consult-outline or consult-org-heading, respectively)
+  - I: consult-imenu-multi
+  - b: consult-bookmark
 
 Bindings for local-leader:
 + org-mode (if org's preset is enabled):
@@ -734,6 +736,17 @@ Bindings for local-leader:
   - f: eglot-format-buffer
   - a: eglot-code-actions
   - d: eldoc-doc-buffer
+  - r: eglot-rename
++ lsp-mode (if lsp-mode's preset is enabled)
+  - f: lsp-format-buffer
+  - a: lsp-execute-code-action
+  - r: lsp-rename
++ lspce (if lspce's preset is enabled)
+  - r: lspce-rename
+  - a: lspce-code-actions
++ lsp-bridge (if lsp-bridge's preset is enabled)
+  - r: lsp-bridge-rename
+  - a: lsp-bridge-code-action
 + racket (if racket's preset is enabled)
   - .: racket-xp-describe
   - r: racket-run
@@ -747,6 +760,11 @@ Bindings for local-leader:
 + latex (if latex's preset is enabled)
   - p: preview-at-point
   - u: preview-clearout-at-point (unpreview)
++ dart (if dart's preset is enabled)
+  - q: flutter-quit
+  - h: flutter-hot-reload
+  - H: flutter-hot-restart
+  - u: flutter-run
 
 ***** =programs.emacs.init.keybinds.leader-keys.enable=
 Enables leader keys. (global-leader for global bindings & local-leader for local bindings)

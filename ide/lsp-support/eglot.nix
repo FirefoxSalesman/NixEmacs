@@ -23,6 +23,7 @@ in
               "f" = lib.mkDefault "'eglot-format-buffer";
               "a" = lib.mkDefault "'eglot-code-actions";
               "d" = lib.mkDefault "'eldoc-doc-buffer";
+              "r" = lib.mkDefault "'eglot-rename";
             };
         setopt = {
           eglot-report-progress = false;

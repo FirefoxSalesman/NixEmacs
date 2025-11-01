@@ -7,6 +7,7 @@
 let
   ide = config.programs.emacs.init.ide;
   completions = config.programs.emacs.init.completions;
+  keybinds = config.programs.emacs.init.keybinds;
 in
 {
   options.programs.emacs.init.ide.lsp.preset =
@@ -23,6 +24,17 @@ in
           lsp-enable-text-document-color = lib.mkDefault false;
           lsp-enable-on-type-formatting = lib.mkDefault false;
           lsp-headerline-breadcrumb-enable = lib.mkDefault ide.breadcrumb;
+        };
+        generalTwoConfig.local-leader.lsp-mode-map = lib.mkIf keybinds.leader-keys.enable {
+          "f" = "'lsp-format-buffer";
+          "a" = "'lsp-execute-code-action";
+          "r" = "'lsp-rename";
+        };
+        generalOneConfig.lsp-ui-peek-mode-map = lib.mkIf keybinds.evil.enable {
+          "${keybinds.evil.keys.down}" = "'lsp-ui-peek--select-next";
+          "${keybinds.evil.keys.up}" = "'lsp-ui-peek--select-prev";
+          "C-${keybinds.evil.keys.down}" = "'lsp-ui-peek--select-next-file";
+          "C-${keybinds.evil.keys.up}" = "'lsp-ui-peek--select-prev-file";
         };
       };
 

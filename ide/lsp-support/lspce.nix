@@ -1,7 +1,9 @@
 { config, lib, ... }:
 
-let ide = config.programs.emacs.init.ide;
-in {
+let
+  ide = config.programs.emacs.init.ide;
+in
+{
   options.programs.emacs.init.ide.lspce.preset =
     lib.mkEnableOption "Enable lspce's preset configuration";
 
@@ -10,6 +12,12 @@ in {
       lspce = {
         enable = true;
         defer = true;
+        generalTwoConfig.local-leader.lspce-mode-map =
+          lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
+            {
+              "a" = "'lspce-code-actions";
+              "r" = "'lspce-rename";
+            };
       };
 
       eldoc-box = lib.mkIf ide.hoverDoc {

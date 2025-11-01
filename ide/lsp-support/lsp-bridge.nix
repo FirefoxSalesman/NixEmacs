@@ -19,6 +19,12 @@ in
         };
         afterCall = [ "on-first-input-hook" ];
         config = "(global-lsp-bridge-mode)";
+        generalTwoConfig.local-leader.lsp-bridge-mode =
+          lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
+            {
+              "r" = lib.mkDefault "'lsp-bridge-rename";
+              "a" = lib.mkDefault "'lsp-bridge-code-action";
+            };
       };
     };
   };

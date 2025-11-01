@@ -1,26 +1,7 @@
 * TODO Ide Features
 ** TODO  Magit
 ** TODO Treesit Fold
+** TODO Copilot
 * TODO Support for keybindings
 ** TODO Multi cursors
 We should support hydras before dealing with this
-
-** TODO Leader keys
-Add leader keys for
-+ [ ] Flutter
-+ [ ] lsp-mode
-  Same things as eglot
-+ [ ] lspce
-  Same things as eglot
-+ [ ] lsp-bridge
-  Same things as eglot
-
-** TODO Other Keys
-#+begin_src emacs-lisp
-(map! :map lsp-ui-peek-mode-map
-      "j"   #'lsp-ui-peek--select-next
-      "k"   #'lsp-ui-peek--select-prev
-      "C-k" #'lsp-ui-peek--select-prev-file
-      "C-j" #'lsp-ui-peek--select-next-file)
-#+end_src
-
