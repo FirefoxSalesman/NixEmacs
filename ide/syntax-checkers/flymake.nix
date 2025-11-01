@@ -15,7 +15,7 @@ in
         setopt.flymake-indicator-position = "'right-fringe";
         hook = lib.mkIf ide.languages.emacs-lisp.enable [
           ''
-            (flymake-mode . (lambda () (when (eq major-mode 'emacs-lisp-mode)
+            (flymake-mode . (lambda () (when (major-mode? 'emacs-lisp-mode)
                                                                                                         (setq-local eldoc-documentation-functions '(elisp-eldoc-var-docstring
                                                                                                                                                     elisp-eldoc-funcall
                                                                                                                                                     t)))))''

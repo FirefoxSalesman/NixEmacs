@@ -72,7 +72,7 @@ in
             "k" = lib.mkDefault (
               if keybinds.evil.enable then "evil-collection-consult-jump-list" else "consult-global-mark"
             );
-            "i" = lib.mkDefault "consult-imenu";
+            "i" = lib.mkDefault "nix-emacs/consult-header";
             "I" = lib.mkDefault "consult-imenu-multi";
           };
           search-map = {
@@ -98,14 +98,6 @@ in
             "I" = lib.mkDefault "'consult-imenu-multi";
           };
         };
-        generalTwo.local-leader = {
-          org-mode-map."o" = lib.mkIf ide.languages.org.enable (
-            lib.mkDefault '''(consult-org-heading :which-key "outline")''
-          );
-          markdown-mode-map."o" = lib.mkIf ide.languages.markdown.enable (
-            lib.mkDefault '''(consult-outline :which-key "go to heading")''
-          );
-        };
         bind = {
           "M-#" = lib.mkDefault "consult-register-load";
           "M-'" = lib.mkDefault "consult-register-store";
@@ -114,6 +106,14 @@ in
           "M-X" = lib.mkDefault "consult-mode-command";
         };
         custom.xref-show-xrefs-function = "#'consult-xref";
+        preface = ''
+          (defun nix-emacs/consult-header ()
+             "Runs 'consult-imenu', unless 'consult-outline' or 'consult-org-heading' can be run."
+             (interactive)
+             (cond ((major-mode? 'org-mode) (consult-org-heading))
+            	  ((major-mode? 'gfm-mode) (consult-outline))
+           	  (t (consult-imenu))))
+        '';
         config = lib.mkIf (keybinds.evil.enable && completions.orderless) ''
           (defun nix-emacs-save-search-history (pattern)
                     "Gets history from pattern, & saves it where evil mode can find it"

@@ -991,7 +991,9 @@ in
                 (setq package-enable-at-startup nil)
               ''
           }
-
+          (defun major-mode? (mode)
+          	"Return t if the current major mode is MODE."
+          	(eq major-mode mode))
 
         ${usePackageSetup}
         ${cfg.prelude}
