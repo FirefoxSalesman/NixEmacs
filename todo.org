@@ -18,12 +18,9 @@ Add leader keys for
 ** TODO Other Keys
 #+begin_src emacs-lisp
 (map! :map lsp-ui-peek-mode-map
-        "j"   #'lsp-ui-peek--select-next
-        "k"   #'lsp-ui-peek--select-prev
-        "C-k" #'lsp-ui-peek--select-prev-file
-        "C-j" #'lsp-ui-peek--select-next-file)
+      "j"   #'lsp-ui-peek--select-next
+      "k"   #'lsp-ui-peek--select-prev
+      "C-k" #'lsp-ui-peek--select-prev-file
+      "C-j" #'lsp-ui-peek--select-next-file)
 #+end_src
 
-* TODO Writing
-** TODO Denote Capture
-+ Org capture should be freed from mkDefault
