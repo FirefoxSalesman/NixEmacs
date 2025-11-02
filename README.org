@@ -872,6 +872,49 @@ Enables embark's completion actions. Borrowed from Karthink, the embark wiki, & 
 ***** =programs.emacs.init.completions.smallCompletionExtras.evilConsultLine=
 Evil's / runs consult-line. Borrowed from Noctuid's config. Only works with orderless
 
+**** tempel
+A simple & effective templating system that integrates with =completion-at-point=.
+
+***** =programs.emacs.init.completions.tempel.enable=
+Enables completions with tempel
+
+***** =programs.emacs.init.completions.tempel.templates=
+The templates for tempel to use.
+
+Type: attribute set of attribute set of str.
+
+The 1^st attribute set is the major mode for the templates to be used in. The 2^nd attribute set is the name of the template to its contents.
+
+See:  [[https://github.com/minad/tempel][Tempel's Readme]] for more info on how to construct a template
+
+Example:
+#+begin_src nix-ts
+programs.emacs.init.completions.tempel = {
+  enable = true;
+  templates = {
+    nix-ts-mode.upackage = ''p "= {" n "  enable = true;" q "  }"'';
+    js-ts-mode = {
+      clg = ''"console.log(" p ");"'';
+      doc = ''"/**" n> " * " q n " */"'';
+      anfn = ''"(" p ") => {" n> q n "};"'';
+      qs = ''"document.querySelector(\"" q "\");"'';
+      "if" = ''"if (" p ") {" n> q n "}"'';
+    };
+    bash-ts-mode = {
+      bang = ''"#!/bin/sh" n q'';
+      safebang = ''"#!/bin/sh" n "set -euo pipefail" n q'';
+    };
+    racket-mode = {
+      "let" = ''"(let [(" p ")]" n q ")"'';
+      letrec = ''"(letrec [(" p ")]" n q ")"'';
+      letstar = ''"(let* [(" p ")]" n q ")"'';
+      namelet = ''"(let " p " [(" p ")]" n q ")"'';
+      defun = ''"(define " p " (lambda (" p ")" n q "))"'';
+    };
+  };
+};
+#+end_src
+
 *** ide
 **** Eglot
 ***** =programs.emacs.init.ide.eglot.enable= 

@@ -11,5 +11,6 @@
     ./simple-completion-extras.nix
     ./helm.nix
     ./mct.nix
+    ./tempel.nix
   ];
 }
