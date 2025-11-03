@@ -7,5 +7,6 @@
     ./project-management
     ./syntax-checkers
     ./direnv.nix
+    ./copilot.nix
   ];
 }

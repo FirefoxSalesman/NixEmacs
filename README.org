@@ -1016,6 +1016,20 @@ Enables direnv support
 
 If leader keys are enabled, relevant bindings are bound to SPC e
 
+**** Copilot
+***** =programs.emacs.init.ide.copilot.enable=
+Enables copilot completion.
+
+***** =programs.emacs.init.ide.copilot.keepOutOf=
+Major modes to not activate copilot in
+
+Type: list of str
+
+Example:
+#+begin_src nix-ts
+programs.emacs.init.ide.copilot.keepOutOf = ["c-ts-mode" "json5-ts-mode" "json-ts-mode" "LaTeX-mode"];
+#+end_src
+
 **** Language Support
 Every option here can be found under =programs.emacs.init.ide.languages=
 

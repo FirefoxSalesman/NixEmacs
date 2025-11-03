@@ -1,8 +1,7 @@
 * TODO Ide Features
 ** TODO  Magit
 ** TODO Treesit Fold
-** TODO Copilot
+** TODO Yara Language Support
 * TODO Support for keybindings
 ** TODO Multi cursors
 We should support hydras before dealing with this
-** TODO Tempel
