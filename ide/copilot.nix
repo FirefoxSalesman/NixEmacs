@@ -1,4 +1,8 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 
 let
   ide = config.programs.emacs.init.ide;
@@ -8,7 +12,7 @@ in
     enable = lib.mkEnableOption "Enable Copilot completions";
     keepOutOf = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = "Major modes Copilot shouldn't be enabled in.";
     };
   };
@@ -16,9 +20,19 @@ in
   config.programs.emacs.init.usePackage.copilot = lib.mkIf ide.copilot.enable {
     enable = true;
     hook = [
-      ''(prog-mode . (lambda ()
-	                     (when (length= (-filter 'major-mode? '(${lib.concatMapStrings (k: "${k} ") ide.copilot.keepOutOf})) 0)
-	                       (copilot-mode))))
-      ''];
+      ''
+        (prog-mode . (lambda ()
+        	                     (when (length= (-filter 'major-mode? '(${
+                                lib.concatMapStrings (k: "${k} ") ide.copilot.keepOutOf
+                              })) 0)
+        	                       (copilot-mode))))
+      ''
+    ];
+    # Due to some odd bugs, we put the bindings in the mode map, rather than the completion map.
+    bindLocal.copilot-mode-map = {
+      "TAB" = lib.mkDefault "copilot-accept-completion";
+      "<tab>" = lib.mkDefault "copilot-accept-completion";
+      "C-i" = lib.mkDefault "copilot-accept-completion";
+    };
   };
 }
