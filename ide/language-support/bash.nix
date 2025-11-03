@@ -7,11 +7,16 @@
 
 let
   ide = config.programs.emacs.init.ide;
+  completions = config.programs.emacs.init.completions;
 in
 {
   options.programs.emacs.init.ide.languages.bash.enable = lib.mkEnableOption "enables bash support";
 
   config.programs.emacs.init = lib.mkIf ide.languages.bash.enable {
+    completions.tempel.templates.bash-ts-mode = lib.mkIf completions.tempel.enable {
+      bang = ''"#!/bin/sh" n q'';
+      safebang = ''"#!/bin/sh" n "set -euo pipefail" n q'';
+    };
     ide.treesitter.wantTreesitter = true;
     usePackage.bash-ts-mode = {
       enable = true;

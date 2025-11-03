@@ -2,6 +2,7 @@
 
 let
   ide = config.programs.emacs.init.ide;
+  completions = config.programs.emacs.init.completions;
   keybinds = config.programs.emacs.init.keybinds;
 in
 {
@@ -37,6 +38,11 @@ in
 
   config = lib.mkIf ide.languages.org.enable {
     programs.emacs.init = {
+      completions.tempel.templates.org-mode = lib.mkIf completions.tempel.enable {
+        au = ''"#+author: " q'';
+        ti = ''"#+title: " q'';
+        latex = ''"@@latex:" q "@@"'';
+      };
       ide.treesitter.treesitterGrammars."org" =
         lib.mkIf ide.symex "https://github.com/emiasims/tree-sitter-org";
       usePackage = {

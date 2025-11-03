@@ -7,12 +7,20 @@
 
 let
   ide = config.programs.emacs.init.ide;
+  completions = config.programs.emacs.init.completions;
 in
 {
   options.programs.emacs.init.ide.languages.javascript.enable =
     lib.mkEnableOption "enables javascript support";
 
-  config.programs.emacs.init = lib.mkIf ide.languages.javascript.enable {
+  config.programs.emacs.init = lib.mkIf completions.tempel.enable {
+    completions.tempel.templates.js-ts-mode = lib.mkIf ide.languages.javascript.enable {
+      clg = ''"console.log(" p ");"'';
+      doc = ''"/**" n> " * " q n " */"'';
+      anfn = ''"(" p ") => {" n> q n "};"'';
+      qs = ''"document.querySelector(\"" q "\");"'';
+      "if" = ''"if (" p ") {" n> q n "}"'';
+    };
     ide.treesitter.wantTreesitter = true;
     usePackage.js-ts-mode = {
       enable = true;

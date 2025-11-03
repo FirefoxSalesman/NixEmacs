@@ -7,6 +7,7 @@
 
 let
   ide = config.programs.emacs.init.ide;
+  completions = config.programs.emacs.init.completions;
 in
 {
   options.programs.emacs.init.ide.languages.c = {
@@ -14,8 +15,23 @@ in
     preferClangd = lib.mkEnableOption "uses clang instead of ccls";
   };
 
-  config.programs.emacs.init = lib.mkIf ide.languages.c.enable {
+  config.programs.emacs.init = lib.mkIf completons.tempel.enable {
     ide.treesitter.wantTreesitter = true;
+    completions.tempel.templates.c-ts-mode = {
+      doc = ''"/**" n> " * " q n " */"'';
+      "if" = ''"if (" p ") {" n> q n "}"'';
+      for = ''"for (int i = " p "; i < " p "; i++) {" n> q n "}"'';
+      while = ''"while (" p ") {" n> q n "}"'';
+      stdio = ''"#include <stdio.h>"'';
+      stdlib = ''"#include <stdlib.h>"'';
+      string = ''"#include <string.h>"'';
+      unistd = ''"#include <unistd.h>"'';
+      mpi = ''"#include <mpi.h>"'';
+      math = ''"#include <math.h>"'';
+      define = ''"#define " p'';
+      function = ''p " " p " (" p ") {" n> q n "}"'';
+      main = ''"int main (int argc, char **argv) {" n> q n "}" '';
+    };
     usePackage = {
       c-ts-mode = {
         enable = true;

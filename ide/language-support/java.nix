@@ -7,6 +7,7 @@
 
 let
   ide = config.programs.emacs.init.ide;
+  completions = config.programs.emacs.init.completions;
 in
 {
   options.programs.emacs.init.ide.languages.java = {
@@ -17,6 +18,13 @@ in
   config = lib.mkIf ide.languages.java.enable {
     programs.emacs.init = {
       ide.treesitter.wantTreesitter = true;
+      completions.tempel.templates.java-ts-mode = lib.mkIf completions.tempel.enable {
+        doc = ''"/**" n> " * " q n " */"'';
+        "if" = ''"if (" p ") {" n> q n "}"'';
+        class = ''"public class " (p (file-name-base (or (buffer-file-name) (buffer-name)))) " {" n> r> n "}"'';
+        method = ''p " " p " " p "(" p ") {" n> q n "}"'';
+        while = ''"while (" p ") {" n> q n "}"'';
+      };
       usePackage = {
         java-ts-mode = {
           enable = true;
