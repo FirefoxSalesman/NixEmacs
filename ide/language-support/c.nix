@@ -15,7 +15,7 @@ in
     preferClangd = lib.mkEnableOption "uses clang instead of ccls";
   };
 
-  config.programs.emacs.init = lib.mkIf completons.tempel.enable {
+  config.programs.emacs.init = lib.mkIf completions.tempel.enable {
     ide.treesitter.wantTreesitter = true;
     completions.tempel.templates.c-ts-mode = {
       doc = ''"/**" n> " * " q n " */"'';
