@@ -29,16 +29,16 @@ in
         java-ts-mode = {
           enable = true;
           babel = lib.mkIf ide.languages.org.enable "java";
-          bindLocal.java-ts-mode-map."RET" = ''
+          bindLocal.java-ts-mode-map."RET" = lib.mkDefault ''
             (lambda ()
                  (interactive)
                  (nix-emacs/starred-newline "block_comment"))'';
           generalTwoConfig.":n".java-ts-mode-map = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
-            "o" = ''
+            "o" = lib.mkDefault lib.mkDefault ''
                 '(lambda ()
               	  (interactive)
                   (nix-emacs/starred-evil-open 'evil-open-below "block_comment"))'';
-            "O" = ''
+            "O" = lib.mkDefault lib.mkDefault ''
                 '(lambda ()
               	  (interactive)
                   (nix-emacs/starred-evil-open 'evil-open-above "block_comment"))'';

@@ -39,16 +39,16 @@ in
         extraPackages = lib.mkIf (
           ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable
         ) (if ide.languages.c.preferClangd then [ pkgs.clang-tools ] else [ pkgs.ccls ]);
-        bindLocal.c-ts-mode-map."RET" = ''
+        bindLocal.c-ts-mode-map."RET" = lib.mkDefault ''
           (lambda ()
           	(interactive)
                  (nix-emacs/starred-newline "comment"))'';
         generalTwoConfig.":n".c-ts-mode-map = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
-          "o" = ''
+          "o" = lib.mkDefault ''
             '(lambda ()
             	(interactive)
                     (nix-emacs/starred-evil-open 'evil-open-below "comment"))'';
-          "O" = ''
+          "O" = lib.mkDefault ''
             '(lambda ()
             	(interactive)
                     (nix-emacs/starred-evil-open 'evil-open-above "comment"))'';
