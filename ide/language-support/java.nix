@@ -34,11 +34,11 @@ in
                  (interactive)
                  (nix-emacs/starred-newline "block_comment"))'';
           generalTwoConfig.":n".java-ts-mode-map = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
-            "o" = lib.mkDefault lib.mkDefault ''
+            "o" = lib.mkDefault ''
                 '(lambda ()
               	  (interactive)
                   (nix-emacs/starred-evil-open 'evil-open-below "block_comment"))'';
-            "O" = lib.mkDefault lib.mkDefault ''
+            "O" = lib.mkDefault ''
                 '(lambda ()
               	  (interactive)
                   (nix-emacs/starred-evil-open 'evil-open-above "block_comment"))'';
