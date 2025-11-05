@@ -42,9 +42,17 @@ in
         bindLocal.c-ts-mode-map."RET" = ''
           (lambda ()
           	(interactive)
-                  (if (nix-emacs/in-node "comment")
-                       (progn (newline) (insert " * "))
-                            (newline)))'';
+                 (nix-emacs/starred-newline "comment"))'';
+        generalTwoConfig.":n".c-ts-mode-map = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
+          "o" = ''
+            '(lambda ()
+            	(interactive)
+                    (nix-emacs/starred-evil-open 'evil-open-below "comment"))'';
+          "O" = ''
+            '(lambda ()
+            	(interactive)
+                    (nix-emacs/starred-evil-open 'evil-open-above "comment"))'';
+        };
         mode = [ ''"\\.c\\'"'' ];
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;

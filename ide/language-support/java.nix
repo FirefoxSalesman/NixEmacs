@@ -30,11 +30,19 @@ in
           enable = true;
           babel = lib.mkIf ide.languages.org.enable "java";
           bindLocal.java-ts-mode-map."RET" = ''
-                  (lambda ()
-                       (interactive)
-                           (if (nix-emacs/in-node "block_comment")
-                                (progn (newline) (insert " * "))
-            	                (newline)))'';
+            (lambda ()
+                 (interactive)
+                 (nix-emacs/starred-newline "block_comment"))'';
+          generalTwoConfig.":n".java-ts-mode-map = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
+            "o" = ''
+                '(lambda ()
+              	  (interactive)
+                  (nix-emacs/starred-evil-open 'evil-open-below "block_comment"))'';
+            "O" = ''
+                '(lambda ()
+              	  (interactive)
+                  (nix-emacs/starred-evil-open 'evil-open-above "block_comment"))'';
+          };
           extraPackages =
             if
               ide.lsp.enable
