@@ -66,9 +66,9 @@ in
                     ''
                       (defun nix-emacs/starred-evil-open (open-fn comment-type)
                                "Call OPEN-FN. If in COMMENT-TYPE, insert a *."
-                         (funcall open-fn 1)
+                               (funcall open-fn 1)
                                (when (nix-emacs/in-node comment-type)
-                               (insert " * ")) ''
+                               (insert " * ")))''
                   else
                     ''''
                 }
