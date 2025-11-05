@@ -108,6 +108,7 @@ in
 
       pet = {
         enable = true;
+        after = [ "python-ts-mode" ];
         config = "(add-hook 'python-base-mode-hook 'pet-mode -10)";
       };
 
