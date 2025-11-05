@@ -12,8 +12,9 @@ let
 in
 {
   options.programs.emacs.init.ide.languages.python = {
-    enable = lib.mkEnableOption "enables python support";
+    enable = lib.mkEnableOption "Enables python support. Partly borrowed from snakemacs.";
     jupyter = lib.mkEnableOption "enables code-cells, a minor mode for editing jupyter files";
+    snakemake = lib.mkEnableOption "enables snakemake support";
     languageServer = lib.mkOption {
       type = lib.types.str;
       default = "basedpyright";
@@ -29,16 +30,16 @@ in
         babel = lib.mkIf ide.languages.org.enable "python";
         eglot = lib.mkIf ide.eglot.enable ''
           ("basedpyright-langserver" "--stdio" 
-                                                                                 :initializationOptions (:basedpyright (:plugins (
-                                                                                 :ruff (:enabled t
-                                                                                        :lineLength 88
-                                                                                        :exclude ["E501"]  ; Disable line length warnings
-                                                                                        :select ["E", "F", "I", "UP"])  ; Enable specific rule families
-                                                                                 :pycodestyle (:enabled nil)  ; Disable other linters since we're using ruff
-                                                                                 :pyflakes (:enabled nil)
-                                                                                 :pylint (:enabled nil)
-                                                                                 :rope_completion (:enabled t)
-                                                                                 :autopep8 (:enabled nil)))))'';
+                                     :initializationOptions (:basedpyright (:plugins (
+                                     :ruff (:enabled t
+                                            :lineLength 88
+                                            :exclude ["E501"]  ; Disable line length warnings
+                                            :select ["E", "F", "I", "UP"])  ; Enable specific rule families
+                                     :pycodestyle (:enabled nil)  ; Disable other linters since we're using ruff
+                                     :pyflakes (:enabled nil)
+                                     :pylint (:enabled nil)
+                                     :rope_completion (:enabled t)
+                                     :autopep8 (:enabled nil)))))'';
         symex = ide.symex;
         lsp = ide.lsp.enable;
         mode = [ ''"\\.py\\'"'' ];
@@ -99,6 +100,16 @@ in
 
       lsp-bridge.setopt.lsp-bridge-python-lsp-server = lib.mkIf ide.lsp-bridge.enable "${ide.languages.python.languageServer
       }";
+
+      python-docstring = {
+        enable = true;
+        hook = [ "(python-ts-mode . python-docstring-mode)" ];
+      };
+
+      pet = {
+        enable = true;
+        config = "(add-hook 'python-base-mode-hook 'pet-mode -10)";
+      };
 
       code-cells = lib.mkIf ide.languages.python.jupyter {
         enable = true;
