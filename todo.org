@@ -2,6 +2,13 @@
 ** TODO  Magit
 ** TODO Treesit Fold
 ** TODO Yara Language Support
+** TODO Python Improvements
+As seen in snakemacs
++ [ ] Include pet
++ [ ] Include python-docstring
++ [ ] Optionally include snakemake-mode
++ [ ] Better jupyter support
++ [ ] Switch the lsp server option to an enum
 * TODO Support for keybindings
 ** TODO Multi cursors
 We should support hydras before dealing with this

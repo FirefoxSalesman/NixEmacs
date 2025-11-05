@@ -28,8 +28,7 @@ in
         	                       (copilot-mode))))
       ''
     ];
-    # Due to some odd bugs, we put the bindings in the mode map, rather than the completion map.
-    bindLocal.copilot-mode-map = {
+    bindLocal.copilot-completion-map = {
       "TAB" = lib.mkDefault "copilot-accept-completion";
       "<tab>" = lib.mkDefault "copilot-accept-completion";
       "C-i" = lib.mkDefault "copilot-accept-completion";

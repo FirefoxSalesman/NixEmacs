@@ -29,6 +29,12 @@ in
         java-ts-mode = {
           enable = true;
           babel = lib.mkIf ide.languages.org.enable "java";
+          bindLocal.java-ts-mode-map."RET" = ''
+                  (lambda ()
+                       (interactive)
+                           (if (nix-emacs/in-node "block_comment")
+                                (progn (newline) (insert " * "))
+            	                (newline)))'';
           extraPackages =
             if
               ide.lsp.enable

@@ -39,6 +39,12 @@ in
         extraPackages = lib.mkIf (
           ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable
         ) (if ide.languages.c.preferClangd then [ pkgs.clang-tools ] else [ pkgs.ccls ]);
+        bindLocal.c-ts-mode-map."RET" = ''
+          (lambda ()
+          	(interactive)
+                  (if (nix-emacs/in-node "comment")
+                       (progn (newline) (insert " * "))
+                            (newline)))'';
         mode = [ ''"\\.c\\'"'' ];
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;

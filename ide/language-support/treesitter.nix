@@ -39,6 +39,24 @@ in
             config = "(global-treesit-auto-mode)";
             # stolen from mickey petersen
             preface = ''
+
+              (defun nix-emacs/treesit-node-at-point-equals (type)
+                "Return t if the type of the node at point is TYPE."
+                (equal (treesit-node-type (treesit-node-at (marker-last-position (point-marker))))
+              	 type))
+
+              (defun nix-emacs/treesit-on-last-node-line? ()
+                "Return t if point is on the last line of the current node."
+                (equal (line-number-at-pos (marker-last-position (point-marker)))
+              	 (line-number-at-pos (treesit-node-end
+              			      (treesit-node-at
+              			       (marker-last-position (point-marker)))))))
+
+              (defun nix-emacs/in-node (type)
+                "Return t if the point is inside a TYPE node."
+                (and (nix-emacs/treesit-node-at-point-equals type)
+                     (not (nix-emacs/treesit-on-last-node-line?))))
+
               (defun mp-setup-install-grammars ()
               "Install Tree-sitter grammars if they are absent."
               (interactive)
