@@ -108,8 +108,7 @@ in
 
       pet = {
         enable = true;
-        after = [ "python-ts-mode" ];
-        config = "(add-hook 'python-base-mode-hook 'pet-mode -10)";
+        hook = [ "(python-ts-mode . pet-mode)" ];
       };
 
       code-cells = lib.mkIf ide.languages.python.jupyter {

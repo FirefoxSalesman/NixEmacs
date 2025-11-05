@@ -4,8 +4,6 @@
 ** TODO Yara Language Support
 ** TODO Python Improvements
 As seen in snakemacs
-+ [X] Include pet
-+ [X] Include python-docstring
 + [ ] Optionally include snakemake-mode
 + [ ] Better jupyter support
 + [ ] Switch the lsp server option to an enum
