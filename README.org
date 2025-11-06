@@ -1201,6 +1201,7 @@ Boolean option that enables pug support
 Boolean option that enables purescript support
 
 ***** python
+Many features are borrowed from the wonderful [[https://github.com/martibosch/snakemacs][Snakemacs]]
 ****** =python.enable=
 Boolean option that enables python support
 
@@ -1208,7 +1209,9 @@ Boolean option that enables python support
 Enables [[https://github.com/astoff/code-cells.el][code-cells]], allowing you to edit jupyter notebooks in
 emacs.
 
-This does not give you the ability to interact with jupyter from emacs.
+If org is enabled, you can run jupyter notebooks from an org file.
+
+We may switch to jupyter-ascending at some point
 
 ****** =python.language-server=
 A string determining what language server to install, if a language server client is enabled
@@ -1222,6 +1225,9 @@ Options include:
 Inputting any other text will result in no language server being installed
 
 Based pyright config originates from here: https://gregnewman.io/blog/emacs-take-two/
+
+****** =python.snakemake=
+Adds support for snakemake files
 
 ***** =racket.enable=
 Boolean option to enable racket support.

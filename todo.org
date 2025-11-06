@@ -4,8 +4,8 @@
 ** TODO Yara Language Support
 ** TODO Python Improvements
 As seen in snakemacs
-+ [ ] Optionally include snakemake-mode
-+ [ ] Better jupyter support
++ [X] Optionally include snakemake-mode
++ [X] Better jupyter support
 + [ ] Switch the lsp server option to an enum
 * TODO Support for keybindings
 ** TODO Multi cursors
