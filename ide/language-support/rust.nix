@@ -12,7 +12,10 @@ in
   options.programs.emacs.init.ide.languages.rust.enable = lib.mkEnableOption "enables rust support";
 
   config.programs.emacs.init = lib.mkIf ide.languages.rust.enable {
-    ide.treesitter.wantTreesitter = true;
+    ide = {
+      treesitter.wantTreesitter = true;
+      treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "rustic-mode" ];
+    };
     usePackage = {
       rust-ts-mode = {
         enable = true;

@@ -13,7 +13,10 @@ in
     lib.mkEnableOption "enables erlang support";
 
   config.programs.emacs.init = lib.mkIf ide.languages.erlang.enable {
-    ide.treesitter.wantTreesitter = true;
+    ide = {
+      treesitter.wantTreesitter = true;
+      treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "erlang-ts-mode" ];
+    };
     usePackage.erlang-ts = {
       enable = true;
       mode = [ ''("\\.erl\\'" . erlang-ts-mode)'' ];

@@ -12,7 +12,10 @@ in
     lib.mkEnableOption "Enables support for julia (stolen from doom). No support for lspce.";
 
   config.programs.emacs.init = lib.mkIf ide.languages.julia.enable {
-    ide.treesitter.treesitterGrammars.julia = "https://github.com/tree-sitter/tree-sitter-julia";
+    ide = {
+      treesitter.treesitterGrammars.julia = "https://github.com/tree-sitter/tree-sitter-julia";
+      treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "julia-ts-mode" ];
+    };
     usePackage = {
       julia-ts-mode = {
         enable = true;

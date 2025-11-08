@@ -16,7 +16,10 @@ in
   };
 
   config.programs.emacs.init = lib.mkIf completions.tempel.enable {
-    ide.treesitter.wantTreesitter = true;
+    ide = {
+      treesitter.wantTreesitter = true;
+      treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "c-ts-mode" ];
+    };
     completions.tempel.templates.c-ts-mode = {
       doc = ''"/**" n> " * " q n " */"'';
       "if" = ''"if (" p ") {" n> q n "}"'';

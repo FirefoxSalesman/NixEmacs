@@ -21,7 +21,10 @@ in
       qs = ''"document.querySelector(\"" q "\");"'';
       "if" = ''"if (" p ") {" n> q n "}"'';
     };
-    ide.treesitter.wantTreesitter = true;
+    ide = {
+      treesitter.wantTreesitter = true;
+      treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "typescript-ts-mode" ];
+    };
     usePackage.typescript-ts-mode = {
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "typescript";

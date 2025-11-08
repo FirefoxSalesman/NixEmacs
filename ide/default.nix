@@ -8,5 +8,6 @@
     ./syntax-checkers
     ./direnv.nix
     ./copilot.nix
+    ./treesit-fold.nix
   ];
 }

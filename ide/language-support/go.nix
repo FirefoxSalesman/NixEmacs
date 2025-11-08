@@ -12,7 +12,10 @@ in
   options.programs.emacs.init.ide.languages.go.enable = lib.mkEnableOption "enables go support";
 
   config.programs.emacs.init = lib.mkIf ide.languages.go.enable {
-    ide.treesitter.wantTreesitter = true;
+    ide = {
+      treesitter.wantTreesitter = true;
+      treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "go-ts-mode" ];
+    };
     usePackage = {
       go-ts-mode = {
         enable = true;

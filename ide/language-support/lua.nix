@@ -12,7 +12,10 @@ in
   options.programs.emacs.init.ide.languages.lua.enable = lib.mkEnableOption "enables lua support";
 
   config.programs.emacs.init = lib.mkIf ide.languages.lua.enable {
-    ide.treesitter.wantTreesitter = true;
+    ide = {
+      treesitter.wantTreesitter = true;
+      treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "lua-ts-mode" ];
+    };
     usePackage.lua-ts-mode = {
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "lua";

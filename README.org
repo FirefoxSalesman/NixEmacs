@@ -1030,6 +1030,18 @@ Example:
 programs.emacs.init.ide.copilot.keepOutOf = ["c-ts-mode" "json5-ts-mode" "json-ts-mode" "LaTeX-mode"];
 #+end_src
 
+**** Treesit Fold
+***** =programs.emacs.init.ide.treesit-fold.enable=
+Enables code folding with treesitter
+
+***** =programs.emacs.init.ide.treesit-fold.enabled-modes=
+A list of modes to enable =treesit-fold-mode= for
+
+Example:
+#+begin_src nix-ts
+programs.emacs.init.ide.treesit-fold.enabledModes = ["bash-ts-mode" "emacs-lisp-mode"];
+#+end_src
+
 **** Language Support
 Every option here can be found under =programs.emacs.init.ide.languages=
 
@@ -1280,6 +1292,9 @@ Boolean option to enable xml support.
 
 ***** =yaml.enable=
 Boolean option to enable yaml support.
+
+***** =yara.enable=
+Boolean option to enable yara support.
 
 ***** =zenscript.enable=
 Boolean option to enable zenscript support.

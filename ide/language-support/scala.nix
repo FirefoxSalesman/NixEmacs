@@ -16,7 +16,10 @@ in
   };
 
   config.programs.emacs.init = lib.mkIf ide.languages.scala.enable {
-    ide.treesitter.wantTreesitter = true;
+    ide = {
+      treesitter.wantTreesitter = true;
+      treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "scala-ts-mode" ];
+    };
     usePackage = {
       scala-ts-mode = {
         enable = true;

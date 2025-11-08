@@ -16,6 +16,10 @@ in
 
   config = lib.mkIf ide.languages.web.enable {
     programs.emacs.init.usePackage = {
+      ide = {
+        treesitter.wantTreesitter = true;
+        treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "haskell-ts-mode" ];
+      };
       html-ts-mode = {
         enable = true;
         extraPackages =

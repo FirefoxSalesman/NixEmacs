@@ -54,6 +54,7 @@
     ./svelte.nix
     ./makefile.nix
     ./yaml.nix
+    ./yara.nix
   ];
 
   options.programs.emacs.init.ide = {

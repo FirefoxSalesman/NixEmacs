@@ -12,7 +12,10 @@ in
   options.programs.emacs.init.ide.languages.r.enable = lib.mkEnableOption "enables r support";
 
   config.programs.emacs.init = lib.mkIf ide.languages.r.enable {
-    ide.treesitter.wantTreesitter = true;
+    ide = {
+      treesitter.wantTreesitter = true;
+      treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "ess-r-mode" ];
+    };
     usePackage.ess-r-mode = {
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "R";

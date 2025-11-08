@@ -15,7 +15,10 @@ in
 
   config = lib.mkIf ide.languages.kotlin.enable {
     programs.emacs.init = {
-      ide.treesitter.treesitterGrammars.kotlin = "https://github.com/fwcd/tree-sitter-kotlin";
+      ide = {
+        treesitter.treesitterGrammars.kotlin = "https://github.com/fwcd/tree-sitter-kotlin";
+        treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "kotlin-ts-mode" ];
+      };
       usePackage = {
         kotlin-ts-mode = {
           enable = true;

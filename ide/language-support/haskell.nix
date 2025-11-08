@@ -13,7 +13,10 @@ in
     lib.mkEnableOption "enables haskell support";
   config = lib.mkIf ide.languages.haskell.enable {
     programs.emacs.init = {
-      ide.treesitter.treesitterGrammars.haskell = "https://github.com/tree-sitter/tree-sitter-haskell";
+      ide = {
+        treesitter.treesitterGrammars.haskell = "https://github.com/tree-sitter/tree-sitter-haskell";
+        treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "haskell-ts-mode" ];
+      };
       usePackage.haskell-ts-mode = {
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "haskell";
@@ -25,7 +28,7 @@ in
             [ ];
         eglot = ide.eglot.enable;
         lsp = ide.lsp.enable;
-	symex = ide.symex;
+        symex = ide.symex;
         lspce = lib.mkIf ide.lspce.enable ''"haskell" "haskell-language-server-wrapper" "--lsp"'';
       };
     };

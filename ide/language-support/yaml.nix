@@ -11,7 +11,10 @@ in
 {
   options.programs.emacs.init.ide.languages.yaml.enable = lib.mkEnableOption "Enables Yaml support";
   config.programs.emacs.init = {
-    ide.treesitter.wantTreesitter = true;
+    ide = {
+      treesitter.wantTreesitter = true;
+      treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "yaml-ts-mode" ];
+    };
     usePackage.yaml-ts-mode = lib.mkIf ide.languages.yaml.enable {
       enable = true;
       mode = [ ''"\\.yaml\\'"'' ];

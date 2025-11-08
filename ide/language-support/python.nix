@@ -23,7 +23,10 @@ in
   };
 
   config.programs.emacs.init = lib.mkIf ide.languages.python.enable {
-    ide.treesitter.wantTreesitter = true;
+    ide = {
+      treesitter.wantTreesitter = true;
+      treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "python-ts-mode" ];
+    };
     usePackage = {
       python-ts-mode = {
         enable = true;

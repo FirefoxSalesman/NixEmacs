@@ -8,7 +8,10 @@ in
 
   config = lib.mkIf ide.languages.toml.enable {
     programs.emacs.init = {
-      ide.treesitter.treesitterGrammars.toml = "https://github.com/ikatyang/tree-sitter-toml";
+      ide = {
+        treesitter.treesitterGrammars.toml = "https://github.com/ikatyang/tree-sitter-toml";
+        treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "toml-ts-mode" ];
+      };
       usePackage.toml-ts-mode = {
         enable = true;
         mode = [ ''"\\.toml\\'"'' ];

@@ -17,7 +17,10 @@ in
 
   config = lib.mkIf ide.languages.java.enable {
     programs.emacs.init = {
-      ide.treesitter.wantTreesitter = true;
+      ide = {
+        treesitter.wantTreesitter = true;
+        treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "java-ts-mode" ];
+      };
       completions.tempel.templates.java-ts-mode = lib.mkIf completions.tempel.enable {
         doc = ''"/**" n> " * " q n " */"'';
         "if" = ''"if (" p ") {" n> q n "}"'';

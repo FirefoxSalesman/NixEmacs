@@ -17,7 +17,10 @@ in
       bang = ''"#!/bin/sh" n q'';
       safebang = ''"#!/bin/sh" n "set -euo pipefail" n q'';
     };
-    ide.treesitter.wantTreesitter = true;
+    ide = {
+      treesitter.wantTreesitter = true;
+      treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "bash-ts-mode" ];
+    };
     usePackage.bash-ts-mode = {
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "shell";

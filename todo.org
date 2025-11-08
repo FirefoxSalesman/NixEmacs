@@ -1,11 +1,7 @@
 * TODO Ide Features
 ** TODO  Magit
-** TODO Treesit Fold
-** TODO Yara Language Support
 ** TODO Python Improvements
-As seen in snakemacs
-+ [X] Optionally include snakemake-mode
-+ [X] Better jupyter support
++ [ ] Switch jupyter support to jupyter-ascending (not currently viable, since jupyter-ascending isn't in nixpkgs)
 + [ ] Switch the lsp server option to an enum
 * TODO Support for keybindings
 ** TODO Multi cursors
