@@ -45,7 +45,9 @@ in
                                          (length= (-filter (lambda (x)
                                                                    (with-current-buffer x
                                                                                         (not (or (eq (derived-mode-p 'prog-mode) nil)
-      										                 ${lib.concatMapStrings (k: "(major-mode? ${k})\n") ide.copilot.keepOutOf}
+      										                 ${
+                                   lib.concatMapStrings (k: "(major-mode? '${k})\n") ide.copilot.keepOutOf
+                                 }
                                                                                                  (s-contains? "org-src-fontification" (buffer-name))))))
             			                           (buffer-list))
             		                          0))
