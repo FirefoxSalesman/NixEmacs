@@ -41,12 +41,18 @@ in
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "C";
         extraPackages =
-          (lib.mkIf (ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable) (
-            if ide.languages.c.preferClangd then [ pkgs.clang-tools ] else [ pkgs.ccls ]
-          ))
-          ++ (lib.mkIf (ide.dap.enable || ide.dape.enable) (
-            if ide.languages.c.preferGdb then [ pkgs.gdb ] else [ pkgs.lldb ]
-          ));
+          (
+            if (ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable) then
+              (if ide.languages.c.preferClangd then [ pkgs.clang-tools ] else [ pkgs.ccls ])
+            else
+              [ ]
+          )
+          ++ (
+            if (ide.dap.enable || ide.dape.enable) then
+              (if ide.languages.c.preferGdb then [ pkgs.gdb ] else [ pkgs.lldb ])
+            else
+              [ ]
+          );
         bindLocal.c-ts-mode-map."RET" = lib.mkDefault ''
           (lambda ()
           	(interactive)

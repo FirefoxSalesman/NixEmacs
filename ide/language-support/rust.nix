@@ -30,9 +30,12 @@ in
             else
               [ ]
           )
-          ++ (lib.mkIf (ide.dap.enable || ide.dape.enable) (
-            if ide.languages.rust.preferGdb then [ pkgs.gdb ] else [ pkgs.lldb ]
-          ));
+          ++ (
+            if (ide.dap.enable || ide.dape.enable) then
+              (if ide.languages.rust.preferGdb then [ pkgs.gdb ] else [ pkgs.lldb ])
+            else
+              [ ]
+          );
         lsp = ide.lsp.enable;
         lspce = lib.mkIf ide.lspce.enable ''"rustic" "rust-analyzer"'';
         eglot = lib.mkIf ide.eglot.enable ''("rust-analyzer" :initializationOptions (:check (:command "clippy")))'';
