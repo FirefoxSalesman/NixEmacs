@@ -1,6 +1,8 @@
 { ... }:
 
-imports = [
-  ./dap.nix
-  ./dape.nix
-];
+{
+  imports = [
+    ./dap.nix
+    ./dape.nix
+  ];
+}
