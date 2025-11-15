@@ -1,5 +1,11 @@
 * TODO Ide Features
 ** TODO  Magit
++ We need:
+  - [ ] Proper evil support
+  - [ ] todo
+  - [ ] Project map integration
+  - [ ] forge
+  - [ ] code review
 ** TODO Python Improvements
 + [ ] Switch jupyter support to jupyter-ascending (not currently viable, since jupyter-ascending isn't in nixpkgs)
 + [ ] Switch the lsp server option to an enum

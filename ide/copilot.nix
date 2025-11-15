@@ -22,10 +22,11 @@ in
     hook = [
       ''
         (prog-mode . (lambda ()
-        	                     (when (length= (-filter 'major-mode? '(${
-                                lib.concatMapStrings (k: "${k} ") ide.copilot.keepOutOf
-                              })) 0)
-        	                       (copilot-mode))))
+        	             (when (and (length= (-filter 'major-mode? '(${
+                        lib.concatMapStrings (k: "${k} ") ide.copilot.keepOutOf
+                      })) 0)
+                                        (not (s-contains? "org-src-fontification" (buffer-name))))
+        	                   (copilot-mode))))
       ''
     ];
     preface = ''
