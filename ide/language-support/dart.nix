@@ -15,6 +15,7 @@ in
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
       lspce = lib.mkIf ide.lspce.enable ''"dart" "dart" "language-server"'';
+      config = lib.mkIf ide.dap.enable "(dap-dart-setup)";
     };
 
     flutter = lib.mkIf ide.languages.dart.flutter {

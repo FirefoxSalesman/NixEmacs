@@ -9,7 +9,10 @@ let
   ide = config.programs.emacs.init.ide;
 in
 {
-  options.programs.emacs.init.ide.languages.rust.enable = lib.mkEnableOption "enables rust support";
+  options.programs.emacs.init.ide.languages.rust = {
+    enable = lib.mkEnableOption "enables rust support";
+    preferGdb = lib.mkEnableOption "uses gdb instead of lldb for debugging";
+  };
 
   config.programs.emacs.init = lib.mkIf ide.languages.rust.enable {
     ide = {
@@ -21,14 +24,22 @@ in
         enable = true;
         defer = true;
         extraPackages =
-          if ide.lsp-bridge.enable || ide.lsp.enable || ide.lspce.enable || ide.eglot.enable then
-            [ pkgs.rust-analyzer ]
-          else
-            [ ];
+          (
+            if ide.lsp-bridge.enable || ide.lsp.enable || ide.lspce.enable || ide.eglot.enable then
+              [ pkgs.rust-analyzer ]
+            else
+              [ ]
+          )
+          ++ (lib.mkIf (ide.dap.enable || ide.dape.enable) (
+            if ide.languages.rust.preferGdb then [ pkgs.gdb ] else [ pkgs.lldb ]
+          ));
         lsp = ide.lsp.enable;
         lspce = lib.mkIf ide.lspce.enable ''"rustic" "rust-analyzer"'';
         eglot = lib.mkIf ide.eglot.enable ''("rust-analyzer" :initializationOptions (:check (:command "clippy")))'';
         symex = ide.symex;
+        config = lib.mkIf ide.dap.enable (
+          if ide.languages.rust.preferGdb then "(require 'dap-gdb)" else "(require 'dap-lldb)"
+        );
       };
 
       rustic = {

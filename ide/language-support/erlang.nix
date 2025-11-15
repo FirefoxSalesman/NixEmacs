@@ -29,6 +29,7 @@ in
       lsp = ide.lsp.enable;
       symex = ide.symex;
       lspce = lib.mkIf ide.lspce.enable ''"erlang" "erlang_ls" "--transport stdio"'';
+      config = lib.mkIf ide.dap.enable "(require 'dap-erlang)";
     };
   };
 }

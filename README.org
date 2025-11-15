@@ -962,6 +962,34 @@ No new language servers will be supported by this framework
 
 Default: =false=
 
+**** =programs.emacs.init.ide.dap.enable=
+Enables dap mode. Debugger pre-installation is hit or miss, since a lot of them aren't in nixpkgs.
+
+Languages with pre-installed debuggers:
++ C
++ JS/TS
++ Java
++ Dart
++ Python
++ Go
++ Rust
+
+=dap-debug= is bound to =C-x C-a=
+
+**** =programs.emacs.init.ide.dape.enable=
+Enables dape. Debugger pre-installation is hit or miss, since a lot of them aren't in nixpkgs.
+
+Languages with pre-installed debuggers:
++ C
++ JS/TS
++ Java
++ Dart
++ Python
++ Go
++ Rust
+
+Dape's global map is bound to =C-x C-a=
+
 **** =programs.emacs.init.ide.treesitter.wantTreesitter=
 Set this option to true to enable the treesitter module.
 
@@ -1059,6 +1087,9 @@ Boolean value that enables c support
 
 ****** =c.preferClangd=
 Boolean value that installs clangd when an language server client is enabled instead of ccls
+
+****** =c.preferGdb=
+Boolean value that installs gdb when a dap client is enabled instead of lldb
 
 ***** =coffeescript.enable=
 Boolean value that enables coffeescript support.
@@ -1254,8 +1285,12 @@ Boolean option to enable ruby support.
 
 The module is largely stolen from doom emacs, although a lot of packages were not included
 
-***** =rust.enable=
+***** rust
+****** =rust.enable=
 Boolean option to enable rust support.
+
+****** =rust.preferGdb=
+Boolean value that installs gdb when a dap client is enabled instead of lldb
 
 ***** =scala.enable=
 Boolean option to enable scala support.

@@ -13,6 +13,7 @@ in
   options.programs.emacs.init.ide.languages.c = {
     enable = lib.mkEnableOption "enables c/c++ support";
     preferClangd = lib.mkEnableOption "uses clang instead of ccls";
+    preferGdb = lib.mkEnableOption "uses gdb instead of lldb for debugging";
   };
 
   config.programs.emacs.init = lib.mkIf completions.tempel.enable {
@@ -39,9 +40,13 @@ in
       c-ts-mode = {
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "C";
-        extraPackages = lib.mkIf (
-          ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable
-        ) (if ide.languages.c.preferClangd then [ pkgs.clang-tools ] else [ pkgs.ccls ]);
+        extraPackages =
+          (lib.mkIf (ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable) (
+            if ide.languages.c.preferClangd then [ pkgs.clang-tools ] else [ pkgs.ccls ]
+          ))
+          ++ (lib.mkIf (ide.dap.enable || ide.dape.enable) (
+            if ide.languages.c.preferGdb then [ pkgs.gdb ] else [ pkgs.lldb ]
+          ));
         bindLocal.c-ts-mode-map."RET" = lib.mkDefault ''
           (lambda ()
           	(interactive)
@@ -63,6 +68,9 @@ in
         lspce = lib.mkIf ide.lspce.enable ''"C" "${
           if ide.languages.c.preferClangd then "clangd" else "ccls"
         }"'';
+        config = lib.mkIf ide.dap.enable (
+          if ide.languages.c.preferGdb then "(require 'dap-gdb)" else "(require 'dap-lldb)"
+        );
       };
 
       ccls = lib.mkIf (ide.lsp.enable && !ide.languages.c.preferClangd) {

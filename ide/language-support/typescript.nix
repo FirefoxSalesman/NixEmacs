@@ -29,15 +29,19 @@ in
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "typescript";
       extraPackages =
-        if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
-          with pkgs; [ typescript-language-server ]
-        else
-          [ ];
+        (
+          if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
+            with pkgs; [ typescript-language-server ]
+          else
+            [ ]
+        )
+        ++ (if (ide.dap.enable || ide.dape.enable) then [ pkgs.vscode-js-debug ] else [ ]);
       mode = [ ''"\\.ts\\'"'' ];
       eglot = ide.eglot.enable;
       symex = ide.symex;
       lsp = ide.lsp.enable;
       lspce = lib.mkIf ide.lspce.enable '''("tsx" "typescript") "typescript-language-server" "--stdio"'';
+      config = lib.mkIf ide.dap.enable "(require 'dap-node)";
     };
   };
 }

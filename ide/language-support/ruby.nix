@@ -31,6 +31,7 @@ in
         lsp = ide.lsp.enable;
         symex = ide.symex;
         setopt.ruby-insert-encoding-magic-comment = lib.mkDefault false;
+        config = lib.mkIf ide.dap.enable "(require 'dap-ruby)";
       };
 
       yard-mode = {

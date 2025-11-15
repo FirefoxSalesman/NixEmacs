@@ -47,23 +47,26 @@ in
         lsp = ide.lsp.enable;
         mode = [ ''"\\.py\\'"'' ];
         extraPackages =
-          if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
-            if (matches "basedpyright" ide.languages.python.languageServer) then
-              with pkgs;
-              [
-                basedpyright
-                ruff
-              ]
-            else if (matches "pylsp" ide.languages.python.languageServer) then
-              [ pkgs.python313Packages.python-lsp-server ]
-            else if (matches "pyright" ide.languages.python.languageServer) then
-              [ pkgs.pyright ]
-            else if (matches "jedi" ide.languages.python.languageServer) then
-              [ pkgs.python313Packages.jedi-language-server ]
+          (
+            if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
+              if (matches "basedpyright" ide.languages.python.languageServer) then
+                with pkgs;
+                [
+                  basedpyright
+                  ruff
+                ]
+              else if (matches "pylsp" ide.languages.python.languageServer) then
+                [ pkgs.python313Packages.python-lsp-server ]
+              else if (matches "pyright" ide.languages.python.languageServer) then
+                [ pkgs.pyright ]
+              else if (matches "jedi" ide.languages.python.languageServer) then
+                [ pkgs.python313Packages.jedi-language-server ]
+              else
+                [ ]
             else
               [ ]
-          else
-            [ ];
+          )
+          ++ (lib.mkIf (ide.dap.eanble || ide.dape.enable) [ pkgs.python313Packages.debugpy ]);
         # https://gregnewman.io/blog/emacs-take-two/
         lspce = lib.mkIf ide.lspce.enable ''
           "python" ${
@@ -80,6 +83,8 @@ in
         generalTwoConfig."local-leader".python-mode-map."r" = lib.mkIf keybinds.leader-key.enable (
           lib.mkDefault "'python-shell-send-buffer"
         );
+        config = lib.mkIf ide.dap.enable "(require 'dap-python)";
+        setopt.dap-python-debugger = lib.mkIf ide.dap.enable (lib.mkDefault "'debugpy");
       };
 
       lsp-pyright =
