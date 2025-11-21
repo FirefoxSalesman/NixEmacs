@@ -10,5 +10,6 @@
     ./direnv.nix
     ./copilot.nix
     ./treesit-fold.nix
+    ./magit.nix
   ];
 }

@@ -1,14 +1,12 @@
 * TODO Ide Features
-** TODO  Magit
-+ We need:
-  - [ ] Proper evil support
-  - [ ] todo
-  - [ ] Project map integration
-  - [ ] forge
-  - [ ] code review
 ** TODO Python Improvements
 + [ ] Switch jupyter support to jupyter-ascending (not currently viable, since jupyter-ascending isn't in nixpkgs)
 + [ ] Switch the lsp server option to an enum
 * TODO Support for keybindings
 ** TODO Multi cursors
 We should support hydras before dealing with this
+** TODO Magit & projectile integration
+Magit functions should be callable from the projectile dispatcher.
+* TODO Tools
+** TODO Dired
+** TODO Exwm

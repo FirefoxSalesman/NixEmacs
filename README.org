@@ -1058,6 +1058,22 @@ Example:
 programs.emacs.init.ide.copilot.keepOutOf = ["c-ts-mode" "json5-ts-mode" "json-ts-mode" "LaTeX-mode"];
 #+end_src
 
+**** Magit
+***** =programs.emacs.init.ide.magit.enable=
+Enables magit support. The following keys will be bound in =project-prefix-map=:
++ v: =magit-status=
++ c: =magit-commit=
++ p: =magit-pull=
++ P: =magit-push=
++ b: =magit-branch=
++ m: =magit-merge=
+
+***** =programs.emacs.init.ide.magit.forge=
+Enables [[https://github.com/magit/forge][forge]] & [[https://github.com/wandersoncferreira/code-review][code-review]]. Stolen from Doom. 
+
+***** =programs.emacs.init.ide.magit.todo=
+Enables [[https://github.com/alphapapa/magit-todos][magit-todos]], allowing you to see project todos in your magit-status buffer.
+
 **** Treesit Fold
 ***** =programs.emacs.init.ide.treesit-fold.enable=
 Enables code folding with treesitter
