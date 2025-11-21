@@ -82,5 +82,14 @@
         (oset projection-project-type-maven build "mvn -B clean compile")
       '';
     };
+
+    projection-multi-embark = lib.mkIf config.programs.emacs.init.completions.smallExtras.embark {
+      enable = true;
+      after = [
+        "embark"
+        "projection-multi"
+      ];
+      config = "(projection-multi-embark-setup-command-map)";
+    };
   };
 }
