@@ -1384,6 +1384,21 @@ Enables [[https://melpa.org/#/nov][nov]] for reading epubs.
 **** =config.programs.emacs.init.tools.pdf=
 Enables [[https://github.com/vedang/pdf-tools][pdf-tools]] for reading pdf files
 
+**** dired
+***** =config.programs.emacs.init.tools.dired.enable=
+Enables some small dired improvements.
++ If leader keys are enabled, leader + d will open dired.
++ C-x C-j runs =dired-jump=
++ w starts wdired
++ Diredfl is used for syntax highlighting
++ Hides dotfiles by default. They can be shown again with =H=.
+
+***** =config.programs.emacs.init.tools.dired.narrow=
+Binds =N= to =dired-narrow-fuzzy=
+
+***** =config.programs.emacs.init.tools.dired.posframe=
+Binds =M-t= to =dired-posframe-mode=
+
 *** writing
 **** =config.programs.emacs.init.writing.citar=
 Enables citar for doing citations.
