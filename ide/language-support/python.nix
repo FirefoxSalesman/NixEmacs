@@ -16,9 +16,15 @@ in
     jupyter = lib.mkEnableOption "enables code-cells, a minor mode for editing jupyter files. If org support is enabled, jupyter kernels can be calledfrom org-babel";
     snakemake = lib.mkEnableOption "enables snakemake support";
     languageServer = lib.mkOption {
-      type = lib.types.str;
-      default = "basedpyright";
-      description = "the language server to use with python. Can be any of basedpyright, pylsp, pyright, or jedi";
+      type = lib.types.enum [
+        "ty"
+        "basedpyright"
+        "pylsp"
+        "pyright"
+        "jedi"
+      ];
+      default = "ty";
+      description = "the language server to use with python. Can be any of ty, basedpyright, pylsp, pyright, or jedi";
     };
   };
 
@@ -31,18 +37,25 @@ in
       python-ts-mode = {
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "python";
-        eglot = lib.mkIf ide.eglot.enable ''
-          ("basedpyright-langserver" "--stdio" 
-                                     :initializationOptions (:basedpyright (:plugins (
-                                     :ruff (:enabled t
-                                            :lineLength 88
-                                            :exclude ["E501"]  ; Disable line length warnings
-                                            :select ["E", "F", "I", "UP"])  ; Enable specific rule families
-                                     :pycodestyle (:enabled nil)  ; Disable other linters since we're using ruff
-                                     :pyflakes (:enabled nil)
-                                     :pylint (:enabled nil)
-                                     :rope_completion (:enabled t)
-                                     :autopep8 (:enabled nil)))))'';
+        eglot = lib.mkIf ide.eglot.enable (
+          if ide.languages.python.languageServer == "basedpyright" then
+            ''
+              ("basedpyright-langserver" "--stdio" 
+                                         :initializationOptions (:basedpyright (:plugins (
+                                         :ruff (:enabled t
+                                                :lineLength 88
+                                                :exclude ["E501"]  ; Disable line length warnings
+                                                :select ["E", "F", "I", "UP"])  ; Enable specific rule families
+                                         :pycodestyle (:enabled nil)  ; Disable other linters since we're using ruff
+                                         :pyflakes (:enabled nil)
+                                         :pylint (:enabled nil)
+                                         :rope_completion (:enabled t)
+                                         :autopep8 (:enabled nil)))))''
+          else if ide.languages.python.languageServer == "ty" then
+            ''("ty" "server")''
+          else
+            true
+        );
         symex = ide.symex;
         lsp = ide.lsp.enable;
         mode = [ ''"\\.py\\'"'' ];
@@ -61,6 +74,8 @@ in
                 [ pkgs.pyright ]
               else if (matches "jedi" ide.languages.python.languageServer) then
                 [ pkgs.python313Packages.jedi-language-server ]
+              else if (matches "ty" ide.languages.python.languageServer) then
+                [ pkgs.ty ]
               else
                 [ ]
             else
@@ -76,6 +91,8 @@ in
               ''"pyright-langserver" "--stdio"''
             else if matches "pylsp" ide.languages.python.languageServer then
               ''"pylsp"''
+            else if matches "ty" ide.languages.python.languageServer then
+              ''"ty server"''
             else
               ''"jedi-language-server"''
           }

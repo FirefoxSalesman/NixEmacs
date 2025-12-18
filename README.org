@@ -1280,8 +1280,9 @@ Options include:
 + pylsp
 + pyright
 + jedi
++ ty
 
-Inputting any other text will result in no language server being installed
+Defaults to ty.
 
 Based pyright config originates from here: https://gregnewman.io/blog/emacs-take-two/
 

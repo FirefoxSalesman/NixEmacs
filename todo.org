@@ -1,5 +1,6 @@
 * TODO Ide Features
 ** TODO Python Improvements
++ [ ] Add support for ty
 + [ ] Switch jupyter support to jupyter-ascending (not currently viable, since jupyter-ascending isn't in nixpkgs)
 + [ ] Switch the lsp server option to an enum
 * TODO Support for keybindings
@@ -10,3 +11,10 @@ Magit functions should be callable from the projectile dispatcher.
 * TODO Tools
 ** TODO Dired
 ** TODO Exwm
+** TODO Dashboard
+* TODO Aesthetics
+** TODO Icons
++ Enabling this option enables a variety of icon packages depending on what other options are enabled
+  - [ ] all-the-icons-dired
+  - [ ] nerd-icons-corfu
+  - [ ] nerd-icons-completion
