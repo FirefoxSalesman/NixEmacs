@@ -22,7 +22,7 @@ in
       };
       usePackage = {
         emmet-mode = {
-          enable = ide.css.emmet;
+          enable = ide.languages.css.emmet;
           hook = [ "(css-ts-mode . emmet-mode)" ];
           setopt.emmet-move-cursor-between-quotes = lib.mkDefault true;
         };
