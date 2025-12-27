@@ -9,16 +9,16 @@ let
   ide = config.programs.emacs.init.ide;
 in
 {
-  options.programs.emacs.init.ide.languages.web = {
+  options.programs.emacs.init.ide.languages.html = {
     enable = lib.mkEnableOption "enables html support";
     emmet = lib.mkEnableOption "enables emmet for html";
   };
 
-  config = lib.mkIf ide.languages.web.enable {
+  config = lib.mkIf ide.languages.html.enable {
     programs.emacs.init.usePackage = {
       ide = {
         treesitter.wantTreesitter = true;
-        treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "haskell-ts-mode" ];
+        treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "html-ts-mode" ];
       };
       html-ts-mode = {
         enable = true;
