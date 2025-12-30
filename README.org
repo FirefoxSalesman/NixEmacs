@@ -1078,7 +1078,7 @@ Enables [[https://github.com/alphapapa/magit-todos][magit-todos]], allowing you 
 ***** =programs.emacs.init.ide.treesit-fold.enable=
 Enables code folding with treesitter
 
-***** =programs.emacs.init.ide.treesit-fold.enabled-modes=
+***** =programs.emacs.init.ide.treesit-fold.enabledModes=
 A list of modes to enable =treesit-fold-mode= for
 
 Example:
