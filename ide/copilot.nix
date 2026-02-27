@@ -34,7 +34,7 @@ in
       (defun nix-emacs/kill-copilot ()
         "Kill copilot process & related buffers."
         (interactive)  
-        (jsonrpc-shutdown copilot--connection)
+        (jsonrpc-shutdown copilot--connection nil)
         (dolist (buf '("*copilot-language-server-log*" "*copilot events*"))
           (when (get-buffer buf)
             (kill-buffer buf))))
