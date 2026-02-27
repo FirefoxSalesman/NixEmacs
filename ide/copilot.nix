@@ -21,12 +21,13 @@ in
     enable = true;
     hook = [
       ''
-        (prog-mode . (lambda ()
-        	             (when (and (length= (-filter 'major-mode? '(${
-                        lib.concatMapStrings (k: "${k} ") ide.copilot.keepOutOf
-                      })) 0)
-                                        (not (s-contains? "org-src-fontification" (buffer-name))))
-        	                   (copilot-mode))))
+                (prog-mode . (lambda ()
+                	             (when (and (length= (-filter 'major-mode? '(${
+                                lib.concatMapStrings (k: "${k} ") ide.copilot.keepOutOf
+                              })) 0)
+        					(not (s-contains? "*markdown-code-fontification:java-ts-mode*" (buffer-name)))
+                                                (not (s-contains? "org-src-fontification" (buffer-name))))
+                	                   (copilot-mode))))
       ''
     ];
     preface = ''
@@ -39,20 +40,21 @@ in
             (kill-buffer buf))))
     '';
     config = ''
-            (add-hook 'kill-buffer-hook
-                      (lambda ()
-                              (when (and (not (or (equal "*copilot-language-server-log*" (buffer-name))
-                                                  (equal "*copilot events*" (buffer-name))))
-                                         (length= (-filter (lambda (x)
-                                                                   (with-current-buffer x
-                                                                                        (not (or (eq (derived-mode-p 'prog-mode) nil)
-      										                 ${
-                                   lib.concatMapStrings (k: "(major-mode? '${k})\n") ide.copilot.keepOutOf
-                                 }
+                  (add-hook 'kill-buffer-hook
+                            (lambda ()
+                                    (when (and (not (or (equal "*copilot-language-server-log*" (buffer-name))
+                                                        (equal "*copilot events*" (buffer-name))))
+                                               (length= (-filter (lambda (x)
+                                                                         (with-current-buffer x
+                                                                                              (not (or (eq (derived-mode-p 'prog-mode) nil)
+            										                 ${
+                                         lib.concatMapStrings (k: "(major-mode? '${k})\n") ide.copilot.keepOutOf
+                                       }
+      												 (s-contains? "*markdown-code-fontification:java-ts-mode*" (buffer-name))
                                                                                                  (s-contains? "org-src-fontification" (buffer-name))))))
-            			                           (buffer-list))
-            		                          0))
-            	                    (nix-emacs/kill-copilot))))
+                  			                           (buffer-list))
+                  		                          0))
+                  	                    (nix-emacs/kill-copilot))))
     '';
     bindLocal.copilot-completion-map = {
       "TAB" = lib.mkDefault "copilot-accept-completion";
