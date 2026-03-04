@@ -9,12 +9,5 @@ We should support hydras before dealing with this
 ** TODO Magit & projectile integration
 Magit functions should be callable from the projectile dispatcher.
 * TODO Tools
-** TODO Dired
 ** TODO Exwm
 ** TODO Dashboard
-* TODO Aesthetics
-** TODO Icons
-+ Enabling this option enables a variety of icon packages depending on what other options are enabled
-  - [ ] all-the-icons-dired
-  - [ ] nerd-icons-corfu
-  - [ ] nerd-icons-completion

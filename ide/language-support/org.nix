@@ -151,6 +151,7 @@ in
             "op" = lib.mkDefault "'org-capture";
           };
           generalTwoConfig.local-leader.org-mode-map = lib.mkIf keybinds.leader-key.enable {
+            "s" = lib.mkDefault '''(org-sort :which-key "sort")'';
             "e" = lib.mkDefault '''(org-export-dispatch :which-key "export")'';
             "i" = lib.mkDefault '''(org-toggle-inline-images :which-key "show images")'';
             "b" = lib.mkDefault '''(org-edit-special :which-key "edit block")'';
@@ -187,7 +188,7 @@ in
 
         org-contrib = lib.mkIf ide.hoverDoc {
           enable = true;
-          config = ''(ox-extras-activate '(ignore-headlines))'';
+          config = "(ox-extras-activate '(ignore-headlines))";
           deferIncrementally = [ "ox-extra" ];
         };
 
@@ -233,7 +234,7 @@ in
         org-modern-indent = lib.mkIf ide.languages.org.aesthetics.enable {
           enable = true;
           afterCall = [ "org-mode-hook" ];
-          config = ''(add-hook 'org-mode-hook 'org-modern-indent-mode 90)'';
+          config = "(add-hook 'org-mode-hook 'org-modern-indent-mode 90)";
         };
 
         evil-org = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
@@ -299,7 +300,7 @@ in
 
         evil-org-agenda = lib.mkIf keybinds.evil.enable {
           enable = true;
-          config = ''(evil-org-agenda-set-keys)'';
+          config = "(evil-org-agenda-set-keys)";
           deferIncrementally = true;
           generalOne.global-leader."oa" = lib.mkIf keybinds.leader-key.enable (lib.mkDefault "'org-agenda");
           generalTwoConfig.":m".evil-org-agenda-mode-map = {
