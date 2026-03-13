@@ -42,6 +42,7 @@ in
         au = ''"#+author: " q'';
         ti = ''"#+title: " q'';
         latex = ''"@@latex:" q "@@"'';
+        quote = ''"#+begin_quote" n q n "#+end_quote"'';
       };
       ide.treesitter.treesitterGrammars."org" =
         lib.mkIf ide.symex "https://github.com/emiasims/tree-sitter-org";

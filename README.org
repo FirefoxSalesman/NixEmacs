@@ -1458,3 +1458,13 @@ If you have leader keys enabled, you'll get the following keybinds:
 
 If you have small completion extras, you'll also get the following leader keybind
 + =os=- search your notes with ripgrep.
+*** aesthetics
+**** icons
+***** =programs.emacs.init.aesthetics.icons.enable=
+Enables nerd-icons in various emacs modes that are in modules supported by this framework.
+
+***** =programs.emacs.init.aesthetics.icons.forceInstallAllTheIcons=
+Forcibly installs all-the-icons, even if no package that this framework supports would take advantage of it.
+
+***** =programs.emacs.init.aesthetics.icons.forceInstallNerdIcons=
+Forcibly installs nerd-icons even if no package that this framework supports would take advantage of it.
