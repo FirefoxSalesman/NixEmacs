@@ -23,11 +23,11 @@ in
   };
 
   config.programs.emacs.init = lib.mkIf tools.exwm.enable {
-    # hasOn = true;
+    hasOn = true;
     usePackage = {
       exwm = {
         enable = true;
-        # afterCall = [ "on-init-ui-hook" ];
+        afterCall = [ "on-init-ui-hook" ];
         # custom = {
         #   exwm-workspace-warp-cursor = lib.mkDefault tools.exwm.wantMouseWarping;
         #   # exwm-input-global-keys = makeBinds tools.exwm.bindings;
