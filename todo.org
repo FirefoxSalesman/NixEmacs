@@ -11,8 +11,6 @@ Magit functions should be callable from the projectile dispatcher.
 * TODO Tools
 ** TODO Exwm
 + [ ] Make an option for buffer renames
-+ [ ] Automate putting exwm buffers in motion state when evil mode is enabled
++ [X] Automate putting exwm buffers in motion state when evil mode is enabled
 + [ ] There is a lot we can't do for the user, & we should make that obvious in the documentation
-+ [ ] Make an option to bind global keys
-+ [X] Make a mouse warping option that will make the mouse warp on monitor & window switch
 + [ ] Make a gaps option
