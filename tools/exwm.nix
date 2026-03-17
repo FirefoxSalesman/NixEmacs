@@ -22,12 +22,12 @@ in
     # simulationKeys = bindType "Simulation keys for exwm. Left hand side is the original key, right hand side is the new key.";
   };
 
-  config.programs.emacs.init = {
-    hasOn = true;
-    usePackage = lib.mkIf tools.exwm.enable {
+  config.programs.emacs.init = lib.mkIf tools.exwm.enable {
+    # hasOn = true;
+    usePackage = {
       exwm = {
         enable = true;
-        afterCall = [ "on-init-ui-hook" ];
+        # afterCall = [ "on-init-ui-hook" ];
         # custom = {
         #   exwm-workspace-warp-cursor = lib.mkDefault tools.exwm.wantMouseWarping;
         #   # exwm-input-global-keys = makeBinds tools.exwm.bindings;
