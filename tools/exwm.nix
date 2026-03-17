@@ -1,7 +1,7 @@
 { lib, config, ... }:
 
 let
-  makeBinds = vs: lib.optionals (vs != { }) (lib.mapAttrsToList (n: v: "`([?\${n}] . ${v})"));
+  makeBinds = vs: lib.optionals (vs != { }) (lib.mapAttrsToList (n: v: "`([${n}] . ${v})"));
   tools = config.programs.emacs.init.tools;
   bindType =
     desc:
@@ -10,7 +10,7 @@ let
       default = { };
       description =
         desc
-        + " Exported in the form ([?\\key] . command). These items are syntax quoted for your convenience.";
+        + " Exported in the form ([key] . command). These items are syntax quoted for your convenience. In order to use a modifier key, you must prefix the modifier with \\?";
     };
 in
 {
