@@ -1,17 +1,17 @@
 { lib, config, ... }:
 
 let
-  makeBinds = vs: lib.optionals (vs != { }) (lib.mapAttrsToList (n: v: "`([?\${n}] . ${v})"));
+  # makeBinds = vs: lib.optionals (vs != { }) (lib.mapAttrsToList (n: v: "`([?\${n}] . ${v})"));
   tools = config.programs.emacs.init.tools;
-  bindType =
-    desc:
-    lib.mkOption {
-      type = lib.types.attrsOf lib.types.str;
-      default = { };
-      description =
-        desc
-        + " Exported in the form ([?\\key] . command). These items are syntax quoted for your convenience.";
-    };
+  # bindType =
+  #   desc:
+  #   lib.mkOption {
+  #     type = lib.types.attrsOf lib.types.str;
+  #     default = { };
+  #     description =
+  #       desc
+  #       + " Exported in the form ([?\\key] . command). These items are syntax quoted for your convenience.";
+  #   };
 in
 {
   options.programs.emacs.init.tools.exwm = {
