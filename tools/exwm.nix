@@ -1,7 +1,7 @@
 { lib, config, ... }:
 
 let
-  makeBinds = vs: lib.optionals (vs != { }) (lib.mapAttrsToList (n: v: "`([${n}] . ${v})"));
+  makeBinds = vs: lib.optionals (vs != { }) (lib.mapAttrsToList (n: v: "`([${n}] . ${v})") vs);
   tools = config.programs.emacs.init.tools;
   bindType =
     desc:
