@@ -19,7 +19,7 @@ in
     # useGaps = lib.mkEnableOption "Enables gaps around the emacs frame";
     wantMouseWarping = lib.mkEnableOption "Enables mouse warping to the center of the focused window";
     bindings = bindType "Keybindings for exwm. Left hand side is the key, right hand side is the command.";
-    # simulationKeys = bindType "Simulation keys for exwm. Left hand side is the original key, right hand side is the new key.";
+    simulationKeys = bindType "Simulation keys for exwm. Left hand side is the original key, right hand side is the new key.";
   };
 
   config.programs.emacs.init = lib.mkIf tools.exwm.enable {
@@ -31,7 +31,7 @@ in
         custom = {
           exwm-workspace-warp-cursor = lib.mkDefault tools.exwm.wantMouseWarping;
           exwm-input-global-keys = makeBinds tools.exwm.bindings;
-          # exwm-input-simulation-keys = makeBinds tools.exwm.simulationKeys;
+          exwm-input-simulation-keys = makeBinds tools.exwm.simulationKeys;
         };
       };
 
