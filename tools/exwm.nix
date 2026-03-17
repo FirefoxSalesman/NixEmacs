@@ -30,8 +30,10 @@ in
         afterCall = [ "on-init-ui-hook" ];
         custom = {
           exwm-workspace-warp-cursor = lib.mkDefault tools.exwm.wantMouseWarping;
-          exwm-input-global-keys = makeBinds tools.exwm.bindings;
-          exwm-input-simulation-keys = makeBinds tools.exwm.simulationKeys;
+          exwm-input-global-keys = lib.mkIf (tools.exwm.bindings != { }) (makeBinds tools.exwm.bindings);
+          exwm-input-simulation-keys = lib.mkIf (tools.exwm.bindings != { }) (
+            makeBinds tools.exwm.simulationKeys
+          );
         };
       };
 
