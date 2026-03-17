@@ -1468,3 +1468,5 @@ Forcibly installs all-the-icons, even if no package that this framework supports
 
 ***** =programs.emacs.init.aesthetics.icons.forceInstallNerdIcons=
 Forcibly installs nerd-icons even if no package that this framework supports would take advantage of it.
+**** =programs.emacs.init.aesthetics.dashboard.enable=
+Enables the emacs-dashboard package & a basic configuration
