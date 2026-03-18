@@ -1,6 +1,7 @@
 { lib, config, ... }:
 
 let
+  makeRenames = vs: lib.optionals (vs != { }) (lib.mapAttrsToList (n: v: "(${n} ${v})") vs);
   makeBinds = vs: lib.optionals (vs != { }) (lib.mapAttrsToList (n: v: "`([${n}] . ${v})") vs);
   tools = config.programs.emacs.init.tools;
 in
@@ -13,6 +14,11 @@ in
       type = lib.types.attrsOf lib.types.str;
       default = { };
       description = "Keybindings for exwm. Left hand side is the key, right hand side is the command. Exported in the form ([key] . command). These items are syntax quoted for your convenience. In order to use a modifier key, you must prefix the modifier with \\?";
+    };
+    titleAlterations = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
+      default = { };
+      description = "Alternate titles for exwm buffers. Left hand side is the buffer's exwm-class-name. Right hand side is the lisp code to generate the new title.";
     };
   };
 
@@ -29,10 +35,24 @@ in
               [ "(exwm-mode . evil-motion-state)" ]
             else
               [ ]
+          )
+          ++ (
+            if tools.exwm.titleAlterations != { } then
+              [
+                ''
+                  	  (exwm-update-title . (lambda ()
+                                                    (pcase exwm-class-name
+                                                           ${makeRenames tools.exwm.titleAlterations})))
+                  	  ''
+              ]
+            else
+              [ ]
           );
         custom = {
           exwm-workspace-warp-cursor = lib.mkDefault tools.exwm.wantMouseWarping;
           exwm-input-global-keys = makeBinds tools.exwm.bindings;
+          exwm-layout-show-all-buffers = lib.mkDefault true;
+          exwm-workspace-show-all-buffers = lib.mkDefault true;
         };
       };
 

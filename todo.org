@@ -10,7 +10,6 @@ We should support hydras before dealing with this
 Magit functions should be callable from the projectile dispatcher.
 * TODO Tools
 ** TODO Exwm
-+ [ ] Make an option for buffer renames
-+ [X] Automate putting exwm buffers in motion state when evil mode is enabled
++ [X] Make an option for buffer renames
 + [ ] There is a lot we can't do for the user, & we should make that obvious in the documentation
 + [ ] Make a gaps option
