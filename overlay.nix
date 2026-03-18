@@ -65,7 +65,7 @@ final: prev: inputs: {
           }
         );
         exwm-outer-gaps = (
-          prev.emacs.pkgs.callPackage ./packages/emacs/exwm-outer-gaps.nix {
+          prev.emacs.pkgs.callPackage ./emacs-packages/exwm-outer-gaps.nix {
             inherit inputs;
             inherit (prev.emacs.pkgs) trivialBuild exwm xelb;
           }
