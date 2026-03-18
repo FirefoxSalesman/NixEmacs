@@ -12,7 +12,7 @@ in
 {
   options.programs.emacs.init.tools.exwm = {
     enable = lib.mkEnableOption "Enables exwm";
-    # useGaps = lib.mkEnableOption "Enables gaps around the emacs frame";
+    useGaps = lib.mkEnableOption "Enables gaps around the emacs frame";
     wantMouseWarping = lib.mkEnableOption "Enables mouse warping to the center of the focused window";
     bindings = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
@@ -44,10 +44,10 @@ in
             if tools.exwm.titleAlterations != { } then
               [
                 ''
-                  	  (exwm-update-title . (lambda ()
+                  (exwm-update-title . (lambda ()
                                                     (pcase exwm-class-name
                                                            ${makeRenames tools.exwm.titleAlterations})))
-                  	  ''
+                ''
               ]
             else
               [ ]
@@ -64,6 +64,12 @@ in
         enable = true;
         defer = true;
         hook = [ "(exwm-wm-mode . exwm-mff-mode)" ];
+      };
+
+      exwm-outer-gaps = lib.mkIf tools.exwm.useGaps {
+        enable = true;
+        config = "(ignore-errors (exwm-outer-gaps-mode))";
+        after = [ "exwm" ];
       };
     };
   };
