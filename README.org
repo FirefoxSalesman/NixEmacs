@@ -1400,6 +1400,35 @@ Binds =N= to =dired-narrow-fuzzy=
 ***** =config.programs.emacs.init.tools.dired.posframe=
 Binds =M-t= to =dired-posframe-mode=
 
+**** exwm
+***** =config.programs.emacs.init.tools.exwm.enable=
+Enables exwm.
++ It is important that you set =exwm-randr-workspace-monitor-plist= in order to get your monitor setup right.
++ =M-x=, =C-x=, & =C-c= are all passed through to emacs buffers by default (as seen in emacs from scratch).
+  - Like in emacs from scratch, any keypress can be sent directly to the exwm buffer with =C-q= 
++ You will automatically be placed on workspace 0 on boot
+
+***** =config.programs.emacs.init.tools.exwm.useGaps=
+Creates some gaps around the emacs frame using [[https://github.com/firefoxsalesman/exwm-outer-gaps][Exwm Outer Gaps]].
+
+***** =config.programs.emacs.init.tools.exwm.wantMouseWarping=
+Automatically move the mouse to the center of the focused window
+
+***** =config.programs.emacs.init.tools.exwm.titleAlterations=
+Lets you set alternate titles for exwm buffers. The left hand side is the buffer's =exwm-class-name=. The right hand side is the lisp code to generate the new title
+
+Example:
+#+begin_src nix-ts
+programs.emacs.init.tools.exwm.titleAlterations.qutebrowser = ''(exwm-workspace-rename-buffer (format "Qutebrowser: %s" exwm-title))'';
+#+end_src
+
+***** =config.programs.emacs.init.tools.exwm.bindings=
+Keybindings for exwm. Left hand side is the key, right hand side is the command. Exported in the form ([key] . command). These items are syntax quoted for your convenience. In order to use a modifier key, you must prefix the modifier with =\\?=
+Example:
+#+begin_src nix-ts
+programs.emacs.init.tools.exwm.bindings."?\\s-r" = "exwm-reset";
+#+end_src
+
 *** writing
 **** =config.programs.emacs.init.writing.citar=
 Enables citar for doing citations.

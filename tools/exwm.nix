@@ -32,32 +32,44 @@ in
       exwm = {
         enable = true;
         afterCall = [ "on-init-ui-hook" ];
-        hook =
-          [ ]
-          ++ (
-            if config.programs.emacs.init.keybinds.evil.enable then
-              [ "(exwm-mode . evil-motion-state)" ]
-            else
-              [ ]
-          )
-          ++ (
-            if tools.exwm.titleAlterations != { } then
-              [
-                ''
-                  (exwm-update-title . (lambda ()
-                                                    (pcase exwm-class-name
-                                                           ${makeRenames tools.exwm.titleAlterations})))
-                ''
-              ]
-            else
-              [ ]
-          );
+        hook = [
+          "(exwm-init . (lambda () (exwm-workspace-switch-create 0)))"
+        ]
+        ++ (
+          if config.programs.emacs.init.keybinds.evil.enable then
+            [ "(exwm-mode . evil-motion-state)" ]
+          else
+            [ ]
+        )
+        ++ (
+          if tools.exwm.titleAlterations != { } then
+            [
+              ''
+                (exwm-update-title . (lambda ()
+                                                  (pcase exwm-class-name
+                                                         ${makeRenames tools.exwm.titleAlterations})))
+              ''
+            ]
+          else
+            [ ]
+        );
         custom = {
           exwm-workspace-warp-cursor = lib.mkDefault tools.exwm.wantMouseWarping;
           exwm-input-global-keys = makeBinds tools.exwm.bindings;
           exwm-layout-show-all-buffers = lib.mkDefault true;
           exwm-workspace-show-all-buffers = lib.mkDefault true;
+          exwm-input-prefix-keys = [
+            '''?\M-x''
+            '''?\C-x''
+            '''?\C-c''
+          ];
         };
+        config = ''
+          (require 'exwm-randr)
+          (exwm-randr-mode)
+          (exwm-wm-mode)
+        '';
+        bindLocal.exwm-mode-map."C-q" = lib.mkDefault "exwm-input-send-next-key";
       };
 
       exwm-mff = lib.mkIf tools.exwm.wantMouseWarping {

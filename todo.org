@@ -8,7 +8,3 @@
 We should support hydras before dealing with this
 ** TODO Magit & projectile integration
 Magit functions should be callable from the projectile dispatcher.
-* TODO Tools
-** TODO Exwm
-+ [ ] There is a lot we can't do for the user, & we should make that obvious in the documentation
-+ [X] Make a gaps option
