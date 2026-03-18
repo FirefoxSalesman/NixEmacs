@@ -3,7 +3,9 @@
 let
   makeRenames =
     vs:
-    lib.optionals (vs != { }) (lib.concatStringsSep "\n" (lib.mapAttrsToList (n: v: "(${n} ${v})") vs));
+    lib.optionals (vs != { }) (
+      lib.concatStringsSep "\n" (lib.mapAttrsToList (n: v: "(\"${n}\" ${v})") vs)
+    );
   makeBinds = vs: lib.optionals (vs != { }) (lib.mapAttrsToList (n: v: "`([${n}] . ${v})") vs);
   tools = config.programs.emacs.init.tools;
 in
