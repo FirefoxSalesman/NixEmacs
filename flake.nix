@@ -41,6 +41,10 @@
       url = "github:sympodius/org-novelist";
       flake = false;
     };
+    exwm-outer-gaps = {
+      url = "github:firefoxsalesman/exwm-outer-gaps";
+      flake = false;
+    };
   };
 
   outputs =
