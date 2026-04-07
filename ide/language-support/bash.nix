@@ -26,7 +26,7 @@ in
       babel = lib.mkIf ide.languages.org.enable "shell";
       extraPackages =
         if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
-          with pkgs; [ nodePackages.bash-language-server ]
+          with pkgs; [ bash-language-server ]
         else
           [ ];
       mode = [ ''"\\.sh\\'"'' ];

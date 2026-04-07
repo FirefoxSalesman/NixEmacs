@@ -17,13 +17,13 @@ in
     # borrowed from doom
     hook = [ "(purescript-mode . purescript-indentation-mode)" ];
     gfhookf = lib.mkIf ide.symex [ "('purescript-mode (treesit! 'extraPackages))" ];
-    purescript =
-      if ide.eglot.enable || ide.lspce.enable || ide.lsp.enable then
-        [ pkgs.nodePackages.purescript-language-server ]
-      else
-        [ ];
-    eglot = lib.mkIf ide.eglot.enable ''("purescript-language-server" "--stdio" :initializationOptions (:purescript (:formatter "purs-tidy")))'';
-    lsp = ide.lsp.enable;
-    lspce = lib.mkIf ide.lspce.enable ''"purescript" "purescript-language-server" "--stdio"'';
+    # extraPackages =
+    #   if ide.eglot.enable || ide.lspce.enable || ide.lsp.enable then
+    #     [ pkgs.nodePackages.purescript-language-server ]
+    #   else
+    #     [ ];
+    # eglot = lib.mkIf ide.eglot.enable ''("purescript-language-server" "--stdio" :initializationOptions (:purescript (:formatter "purs-tidy")))'';
+    # lsp = ide.lsp.enable;
+    # lspce = lib.mkIf ide.lspce.enable ''"purescript" "purescript-language-server" "--stdio"'';
   };
 }
