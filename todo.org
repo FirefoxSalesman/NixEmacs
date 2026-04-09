@@ -3,6 +3,10 @@
 + [ ] Add support for ty
 + [ ] Switch jupyter support to jupyter-ascending (not currently viable, since jupyter-ascending isn't in nixpkgs)
 + [ ] Switch the lsp server option to an enum
+** TODO Fix Purescript
++ https://discourse.nixos.org/t/nodepackages-pnpm-removed-nodepackages-has-been-removed-because-it-was-unmaintainable-within-nixpkgs-migration-guidance/76753
++ We need to repackage the language server
+
 ** TODO Semel
 * TODO Eshell should support global shell aliases
 * TODO Support for keybindings

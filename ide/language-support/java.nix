@@ -91,7 +91,29 @@ in
         eglot-java = lib.mkIf ide.languages.java.moreEglot {
           enable = true;
           after = [ "eglot" ];
-          config = "(eglot-java-mode)";
+          config = ''
+            (eglot-java-mode)
+            (defun eglot-java--jdt-uri-handler (_operation &rest args)
+              "Support Eclipse jdtls `jdt://' uri scheme."
+              (let* ((uri (car args))
+                     (cache-dir (expand-file-name ".eglot-java" (project-root (project-current t))))
+                     (source-file
+                      (expand-file-name
+                       (eglot-java--make-path
+                        cache-dir
+                        (save-match-data
+                          (when (string-match "jdt://contents/\\(.*?\\)/\\(.*\\)\.\\(java\\|class\\)\\?" uri)
+                            (format "%s.java" (replace-regexp-in-string "/" "." (match-string 2 uri) t t))))))))
+                (unless (file-readable-p source-file)
+                  (let ((content (jsonrpc-request (eglot-java--find-server) :java/classFileContents (list :uri uri)))
+                        (metadata-file (format "%s.%s.metadata"
+                                               (file-name-directory source-file)
+                                               (file-name-base source-file))))
+                    (unless (file-directory-p cache-dir) (make-directory cache-dir t))
+                    (with-temp-file source-file (insert content))
+                    (with-temp-file metadata-file (insert uri))))
+                source-file))
+          '';
         };
       };
     };
