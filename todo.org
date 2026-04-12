@@ -7,7 +7,6 @@
 + https://discourse.nixos.org/t/nodepackages-pnpm-removed-nodepackages-has-been-removed-because-it-was-unmaintainable-within-nixpkgs-migration-guidance/76753
 + We need to repackage the language server
 
-** DONE Semel
 * TODO Eshell should support global shell aliases
 * TODO Support for keybindings
 ** TODO Multi cursors
@@ -19,5 +18,5 @@ Magit functions should be callable from the projectile dispatcher.
 ** TODO Elwm
 * TODO Tools
 ** TODO Async
-** TODO No littering
+** DONE No littering
 ** TODO Javelin

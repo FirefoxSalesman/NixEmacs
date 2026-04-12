@@ -6,5 +6,6 @@
     ./dired.nix
     ./nov.nix
     ./pdf.nix
+    ./no-littering.nix
   ];
 }
