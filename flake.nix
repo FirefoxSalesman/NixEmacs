@@ -2,6 +2,11 @@
   description = "Emacs Home Manager Module Flake";
 
   inputs = {
+    semel = {
+      url = "github:eshelyaron/semel";
+      flake = false;
+    };
+
     org-modern-indent = {
       url = "github:alphapapa/org-modern-indent";
       flake = false;
@@ -41,6 +46,7 @@
       url = "github:sympodius/org-novelist";
       flake = false;
     };
+
     exwm-outer-gaps = {
       url = "github:firefoxsalesman/exwm-outer-gaps";
       flake = false;
