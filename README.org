@@ -1138,10 +1138,14 @@ Boolean value that enables dart support. You will need to install the language s
 ****** =flutter.enable=
 Boolean value that enables flutter support
 
-***** =emacs-lisp.enable=
+***** Emacs Lisp
 This module was borrowed from doom.
 
+****** =emacs-lisp.enable=
 Enables additional tools to assist in writing emacs lisp packages.
+
+****** =emacs-lisp.semel=
+Enables semantic highlighting
 
 ***** =erlang.enable=
 Boolean option that enables erlang support

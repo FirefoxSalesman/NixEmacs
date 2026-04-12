@@ -70,6 +70,12 @@ final: prev: inputs: {
             inherit (prev.emacs.pkgs) trivialBuild exwm xelb;
           }
         );
+        semel = (
+          prev.emacs.pkgs.callPackage ./emacs-packages/semel.nix {
+            inherit inputs;
+            inherit (prev.emacs.pkgs) trivialBuild;
+          }
+        );
       }
     ));
 }

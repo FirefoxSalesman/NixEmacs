@@ -4,8 +4,10 @@ let
   ide = config.programs.emacs.init.ide;
 in
 {
-  options.programs.emacs.init.ide.languages.emacs-lisp.enable =
-    lib.mkEnableOption "Enables additional support for emacs lisp. Borrowed from doom, & highly reccommended";
+  options.programs.emacs.init.ide.languages.emacs-lisp = {
+    enable = lib.mkEnableOption "Enables additional support for emacs lisp. Borrowed from doom, & highly reccommended";
+    semel = lib.mkEnableOption "Enables semel for semantic highlighting";
+  };
 
   config.programs.emacs.init = lib.mkIf ide.languages.emacs-lisp.enable {
     ide = {
@@ -46,6 +48,11 @@ in
       breadcrumb = lib.mkIf ide.breadcrumb {
         enable = true;
         hook = [ "(emacs-lisp-mode . breadcrumb-local-mode)" ];
+      };
+
+      semel = {
+        enable = true;
+        hook = [ "(emacs-lisp-mode . semel-mode)" ];
       };
     };
   };
