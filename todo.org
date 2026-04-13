@@ -17,6 +17,5 @@ Magit functions should be callable from the projectile dispatcher.
 ** TODO Golden Ratio
 ** TODO Elwm
 * TODO Tools
-** TODO Async
-** DONE No littering
+** DONE Async
 ** TODO Javelin

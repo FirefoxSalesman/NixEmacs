@@ -1404,6 +1404,9 @@ Binds =N= to =dired-narrow-fuzzy=
 ***** =config.programs.emacs.init.tools.dired.posframe=
 Binds =M-t= to =dired-posframe-mode=
 
+***** =config.programs.emacs.init.tools.dired.async=
+Runs file movement asynchronous
+
 **** exwm
 ***** =config.programs.emacs.init.tools.exwm.enable=
 Enables exwm.
