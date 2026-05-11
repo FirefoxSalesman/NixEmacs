@@ -16,6 +16,3 @@ Magit functions should be callable from the projectile dispatcher.
 * TODO Window Management
 ** TODO Golden Ratio
 ** TODO Elwm
-* TODO Tools
-** DONE Async
-** TODO Javelin

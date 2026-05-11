@@ -21,7 +21,7 @@ in
       setopt = {
         eshell-buffer-maximum-lines = lib.mkDefault 100;
         eshell-hist-ignoredups = lib.mkDefault true;
-        eshell-scroll-to-bottom-on-input = lib.mkDefault true;
+        eshell-scroll-to-bottom-on-input = lib.mkDefault "'this";
         eshell-destroy-buffer-when-process-dies = lib.mkDefault true;
       };
       hook = [
@@ -61,7 +61,7 @@ in
     eshell-git-prompt = {
       enable = true;
       afterCall = [ "eshell-mode" ];
-      config = ''(eshell-git-prompt-use-theme 'powerline)'';
+      config = "(eshell-git-prompt-use-theme 'powerline)";
     };
   };
 }
