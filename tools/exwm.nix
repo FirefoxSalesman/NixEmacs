@@ -75,7 +75,8 @@ in
       exwm-mff = lib.mkIf tools.exwm.wantMouseWarping {
         enable = true;
         defer = true;
-        hook = [ "(exwm-wm-mode . exwm-mff-mode)" ];
+        command = lib.mkIf tools.goldenRatio [ "exwm-mff-warp-to-selected" ];
+        hook = lib.mkIf (!tools.goldenRatio) [ "(exwm-wm-mode . exwm-mff-mode)" ];
       };
 
       exwm-outer-gaps = lib.mkIf tools.exwm.useGaps {

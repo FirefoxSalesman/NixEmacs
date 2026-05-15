@@ -1445,6 +1445,10 @@ Example:
 #+begin_src nix-ts
 programs.emacs.init.tools.exwm.bindings."?\\s-r" = "exwm-reset";
 #+end_src
+
+**** =config.programs.emacs.init.tools.goldenRatio=
+Enables [[https://github.com/roman/golden-ratio.el][golden-ratio-mode]]
+
 **** =config.programs.emacs.init.tools.noLittering.enable=
 Enables no-littering. Borrowed from Emacs from Scratch
 

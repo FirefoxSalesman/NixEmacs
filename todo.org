@@ -14,6 +14,6 @@ We should support hydras before dealing with this
 ** TODO Magit & projectile integration
 Magit functions should be callable from the projectile dispatcher.
 * TODO Window Management
-** TODO Golden Ratio
+** DONE Golden Ratio
 ** TODO Elwm
 * TODO Move to import-tree
