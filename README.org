@@ -11,7 +11,7 @@ Example:
     inputs = {
       nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
       emacs-init.url = "github:firefoxsalesman/NixEmacs";
-      
+
       home-manager = {
         url = "github:nix-community/home-manager";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -21,13 +21,13 @@ Example:
     outputs = { self, home-manager, nixpkgs, emacs-init, ... }@inputs:
       let
         system = "x86_64-linux";
-        
+
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
           overlays = [
             inputs.emacs-init.overlay
-          ];        
+          ];
         };
       in
         {
@@ -133,7 +133,7 @@ Some things of note:
       config = ''
         (defun efs/mpv-browse-url (url &optional single)
           (mpv-play-url url))
-      
+
         (defun efs/mpv-eww-url ()
           (interactive)
           (mpv-play-url (eww-current-url)))
@@ -524,7 +524,7 @@ The =:demand= option from use package.
 Type: boolean
 
 **** =diminish=
-A list of strings to be passed to the =:diminish= 
+A list of strings to be passed to the =:diminish=
 
 If this option is set, diminish will be installed & loaded automatically
 
@@ -547,8 +547,8 @@ Example usage:
       dashboard-center-content = true;
       dashboard-items = [
 	"'(recents . 5)"
-        "'(bookmarks . 5)" 
-        "'(projects . 5)" 
+        "'(bookmarks . 5)"
+        "'(projects . 5)"
         "'(agenda . 5)"
       ];
       dashboard-icon-type = "'nerd-icons";
@@ -576,8 +576,8 @@ Example usage:
       dashboard-center-content = true;
       dashboard-items = [
 	"'(recents . 5)"
-        "'(bookmarks . 5)" 
-        "'(projects . 5)" 
+        "'(bookmarks . 5)"
+        "'(projects . 5)"
         "'(agenda . 5)"
       ];
       dashboard-icon-type = "'nerd-icons";
@@ -621,7 +621,7 @@ programs.emacs.init.usePackage.evil-collection = {
         "i" "l"
         "n" "h"))
   '';
-}; 
+};
 #+end_src
 
 **** =extraConfig=
@@ -917,14 +917,14 @@ programs.emacs.init.completions.tempel = {
 
 *** ide
 **** Eglot
-***** =programs.emacs.init.ide.eglot.enable= 
+***** =programs.emacs.init.ide.eglot.enable=
 A boolean that will enable eglot for all languages in the language support presets.
 
 This is the language server client that will receive the most support
 
 Default: =false=
 
-***** =programs.emacs.init.ide.eglot.preset= 
+***** =programs.emacs.init.ide.eglot.preset=
 A boolean that enables eglot's preset.
 
 Notable package additions:
@@ -933,29 +933,29 @@ Notable package additions:
 
 Default: =false=
 **** Lsp
-***** =programs.emacs.init.ide.lsp.enable= 
+***** =programs.emacs.init.ide.lsp.enable=
 A boolean that will enable lsp-mode for all languages in the language support presets
 
 Default: =false=
 
-***** =programs.emacs.init.ide.lsp.preset= 
+***** =programs.emacs.init.ide.lsp.preset=
 A boolean that enables lsp-mode's preset, which is largely borrowed from Doom
 
 Default: =false=
 
 **** Lspce
-***** =programs.emacs.init.ide.lspce.enable= 
+***** =programs.emacs.init.ide.lspce.enable=
 A boolean that will enable lspce-mode for all languages in the language support presets
 
 Default: =false=
 
-***** =programs.emacs.init.ide.lspce.preset= 
+***** =programs.emacs.init.ide.lspce.preset=
 A boolean that enables lspce's preset. Doesn't do anything too interesting on its own, but it will enable eldoc-box if you have hoverDoc enabled
 
 Default: =false=
 
 **** Lsp Bridge
-***** =programs.emacs.init.ide.lsp-bridge.enable= 
+***** =programs.emacs.init.ide.lsp-bridge.enable=
 A boolean that will enable lsp-bridge-mode for most languages in the language support presets. It also enables lsp-bridge's preset.
 
 No new language servers will be supported by this framework
@@ -1069,7 +1069,7 @@ Enables magit support. The following keys will be bound in =project-prefix-map=:
 + m: =magit-merge=
 
 ***** =programs.emacs.init.ide.magit.forge=
-Enables [[https://github.com/magit/forge][forge]] & [[https://github.com/wandersoncferreira/code-review][code-review]]. Stolen from Doom. 
+Enables [[https://github.com/magit/forge][forge]] & [[https://github.com/wandersoncferreira/code-review][code-review]]. Stolen from Doom.
 
 ***** =programs.emacs.init.ide.magit.todo=
 Enables [[https://github.com/alphapapa/magit-todos][magit-todos]], allowing you to see project todos in your magit-status buffer.
@@ -1158,6 +1158,15 @@ Boolean option that enables forth support
 
 ***** =go.enable=
 Boolean option that enables go support
+
+***** =godot.enable=
+Boolean option that enables gdscript support.
+
+It is very important that you start the godot editor before opening any gdscript/tscn files if you intend to use a language server.
++ Due to the odd nature of the language server, lspce & lsp-bridge are not supported
+
+[[https://www.hristos.co/blog/godot-engine-editing-gdscript-with-emacs/][This]] is a good webpage to read for some tips.
++ gdformat is preinstalled for your convenience.
 
 ***** =gradle.enable=
 Boolean option that enables gradle support
@@ -1412,7 +1421,7 @@ Runs file movement asynchronous
 Enables exwm.
 + It is important that you set =exwm-randr-workspace-monitor-plist= in order to get your monitor setup right.
 + =M-x=, =C-x=, & =C-c= are all passed through to emacs buffers by default (as seen in emacs from scratch).
-  - Like in emacs from scratch, any keypress can be sent directly to the exwm buffer with =C-q= 
+  - Like in emacs from scratch, any keypress can be sent directly to the exwm buffer with =C-q=
 + You will automatically be placed on workspace 0 on boot
 
 ***** =config.programs.emacs.init.tools.exwm.useGaps=

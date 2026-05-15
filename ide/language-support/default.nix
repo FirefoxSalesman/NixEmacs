@@ -36,6 +36,7 @@
     ./sql.nix
     ./forth.nix
     ./go.nix
+    ./godot.nix
     ./markdown.nix
     ./zig.nix
     ./latex.nix
