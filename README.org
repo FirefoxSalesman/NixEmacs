@@ -1163,6 +1163,7 @@ Boolean option that enables go support
 Boolean option that enables gdscript support.
 
 It is very important that you start the godot editor before opening any gdscript/tscn files if you intend to use a language server.
++ The godot editor is preinstalled
 + Due to the odd nature of the language server, lspce & lsp-bridge are not supported
 
 [[https://www.hristos.co/blog/godot-engine-editing-gdscript-with-emacs/][This]] is a good webpage to read for some tips.

@@ -15,13 +15,10 @@ in
     usePackage.gdscript-ts-mode = {
       enable = true;
       package = epkgs: epkgs.gdscript-mode;
-      extraPackages = lib.mkIf (ide.eglot.enable || ide.lsp.enable) (
-        with pkgs;
-        [
-          godot
-          gdtoolkit_4
-        ]
-      );
+      extraPackages = with pkgs; [
+        godot
+        gdtoolkit_4
+      ];
       symex = ide.symex;
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
