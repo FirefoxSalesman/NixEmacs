@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./golden-ratio.nix
     ./exwm.nix
     ./dired.nix
     ./nov.nix
