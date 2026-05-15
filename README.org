@@ -1522,3 +1522,6 @@ Forcibly installs all-the-icons, even if no package that this framework supports
 Forcibly installs nerd-icons even if no package that this framework supports would take advantage of it.
 **** =programs.emacs.init.aesthetics.dashboard.enable=
 Enables the emacs-dashboard package & a basic configuration
+
+**** =programs.emacs.init.aesthetics.declutter.enable=
+Remove screen clutter such as the fringe, tooltips, the scrollbar, the toolbar, & the menubar. Borrowed from Emacs from Scratch.
