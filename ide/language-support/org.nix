@@ -139,7 +139,7 @@ in
                 if config.programs.emacs.init.writing.denote.enable then
                   ''
                     		  '("pn" "Project-local notes" entry ; {project-root}/notes.org
-                                            (file (lambda () (expand-file-name (car (denote-directory-files (denote-project-notes--get-identifier))))))
+                                            (file nix-emacs-denote-project-notes-capture)
                                                                  "* %U %?\n%i\n%a" :prepend t)''
                 else
                   ''

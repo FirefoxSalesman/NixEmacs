@@ -75,8 +75,12 @@ in
 
     denote-project-notes = lib.mkIf ide.languages.org.enable {
       enable = true;
-      after = [ "org-capture" ];
       generalOne.global-leader.oP = "'denote-project-notes-dwim";
+      init = ''
+        (defun nix-emacs-denote-project-notes-capture ()
+          (expand-file-name (car (denote-directory-files (denote-project-notes--get-identifier)))))
+      '';
+      extraConfig = ":autoload denote-project-notes--get-identifier";
     };
   };
 }
