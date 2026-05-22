@@ -72,5 +72,11 @@ in
       };
       setopt.denote-sequence-scheme = lib.mkDefault "'numeric";
     };
+
+    denote-project-notes = {
+      enable = true;
+      after = [ "org-capture" ];
+      generalOne.global-leader.oP = "'denote-project-notes-dwim";
+    };
   };
 }

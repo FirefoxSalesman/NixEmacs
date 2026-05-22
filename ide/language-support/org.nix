@@ -135,10 +135,18 @@ in
                 '("pt" "Project-local todo" entry ; {project-root}/todo.org
                                    (file nix-emacs-project-todo)
                                    "* TODO %?\n%i\n%a" :prepend t)''
-              ''
-                '("pn" "Project-local notes" entry ; {project-root}/notes.org
-                                   (file nix-emacs-project-notes)
-                                   "* %U %?\n%i\n%a" :prepend t)''
+              (
+                if config.progarms.emacs.init.writing.denote.enable then
+                  ''
+                    		  '("pn" "Project-local notes" entry ; {project-root}/notes.org
+                                            (file (lambda () (expand-file-name (car (denote-directory-files (denote-project-notes--get-identifier))))))
+                                                                 "* %U %?\n%i\n%a" :prepend t)''
+                else
+                  ''
+                    '("pn" "Project-local notes" entry ; {project-root}/notes.org
+                                       (file nix-emacs-project-notes)
+                                       "* %U %?\n%i\n%a" :prepend t)''
+              )
               ''
                 '("pc" "Project-local changelog" entry  ; {project-root}/changelog.org
                                    (file+headline nix-emacs-project-changelog "Unreleased")
@@ -266,7 +274,7 @@ in
                            :close-all nil
                            :toggle org-cycle
                            :delete nil
-                           :open-rec nil))        
+                           :open-rec nil))
           '';
           config = ''
             (with-eval-after-load 'evil-collection
