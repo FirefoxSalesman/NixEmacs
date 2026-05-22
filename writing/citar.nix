@@ -14,7 +14,7 @@ in
     citar = {
       enable = true;
       config = ''
-        ${if writing.denote then "(citar-denote-mode)" else ""}
+        ${if writing.denote.enable then "(citar-denote-mode)" else ""}
         ${if writing.orgRoam then "(citar-org-roam-mode)" else ""}
       '';
       hook = [
