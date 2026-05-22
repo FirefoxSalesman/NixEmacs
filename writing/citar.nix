@@ -36,11 +36,11 @@ in
         "citar"
         "embark"
       ];
-      config = ''(citar-embark-mode)'';
+      config = "(citar-embark-mode)";
       setopt.citar-at-point-function = lib.mkDefault "'embark-act";
     };
 
-    citar-denote = lib.mkIf writing.denote {
+    citar-denote = lib.mkIf writing.denote.enable {
       enable = true;
       command = [ "citar-denote-mode" ];
       generalOne.global-leader = lib.mkIf keybinds.leader-key.enable {
