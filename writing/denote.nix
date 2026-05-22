@@ -73,7 +73,7 @@ in
       setopt.denote-sequence-scheme = lib.mkDefault "'numeric";
     };
 
-    denote-project-notes = {
+    denote-project-notes = lib.mkIf ide.languages.org.enable {
       enable = true;
       after = [ "org-capture" ];
       generalOne.global-leader.oP = "'denote-project-notes-dwim";
