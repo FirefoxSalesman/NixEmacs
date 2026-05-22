@@ -1466,7 +1466,8 @@ If you have leader keys & org roam enabled, you'll get the following keybinds:
 + =on=- create a new note about one of your bibtex references
 + =oo=- open a note on one of your bibtex references.
 
-**** =config.programs.emacs.init.writing.denote=
+**** Denote
+***** =config.programs.emacs.init.writing.denote.enable=
 Enables denote as your notes system.
 
 If you have leader keys enabled, you'll gain the following keybinds:
@@ -1479,6 +1480,15 @@ If smallExtras for completions are enabled, you'll get previews when looking for
 
 If org support & leader keys are enabled, you'll gain the following keybind
 + =oh=- link to an org heading
+
+***** =config.programs.emacs.init.writing.denote.sequence=
+Enables the denote-sequence extension.
+
+If you have leader keys enabled, you'll gain the following keybinds:
++ =oqc=- creates a new sequence note
++ =oqf=- find a sequence note
++ =oqp=- make the current note a parent note for sequences
++ =oqr=- make the current note a child note of another note.
 
 **** =config.programs.emacs.init.writing.novelist=
 Enables org novelist.

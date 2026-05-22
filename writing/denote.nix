@@ -4,11 +4,15 @@ let
   ide = config.programs.emacs.init.ide;
   keybinds = config.programs.emacs.init.keybinds;
   completions = config.programs.emacs.init.completions;
+  writing = config.programs.emacs.init.writing;
 in
 {
-  options.programs.emacs.init.writing.denote = lib.mkEnableOption "Enables denote";
+  options.programs.emacs.init.writing.denote = {
+    enable = lib.mkEnableOption "Enables denote";
+    sequence = lib.mkEnableOption "Enables the denote-sequence extension";
+  };
 
-  config.programs.emacs.init.usePackage = lib.mkIf config.programs.emacs.init.writing.denote {
+  config.programs.emacs.init.usePackage = lib.mkIf writing.denote.enable {
     denote = {
       enable = true;
       defer = true;
@@ -54,6 +58,19 @@ in
     denote-org = lib.mkIf ide.languages.org.enable {
       enable = true;
       generalOne.global-leader."oh" = lib.mkIf keybinds.leader-key.enable "'denote-org-link-to-heading";
+    };
+
+    # https://www.alcarney.me/blog/2026/organising-series-with-denote-sequence/
+    denote-sequence = lib.mkIf writing.denote.sequence {
+      enable = true;
+      generalOne.global-leader = lib.mkIf keybinds.leader-key.enable {
+        "oq" = lib.mkDefault '''(:ignore t :which-key "sequence")'';
+        "oqc" = lib.mkDefault "'denote-sequence";
+        "oqf" = lib.mkDefault "'denote-sequence-find";
+        "oqp" = lib.mkDefault "'denote-sequence-rename-as-parent";
+        "oqr" = lib.mkDefault "'denote-sequence-reparent";
+      };
+      setopt.denote-sequence-scheme = lib.mkDefault "'numeric";
     };
   };
 }
