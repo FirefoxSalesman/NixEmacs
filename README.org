@@ -860,6 +860,9 @@ Enables prescient sorting where possible
 ***** =programs.emacs.init.completions.vertico.enable=
 Enables vertico as a completion system. Many things are borrowed from Doom
 
+***** =programs.emacs.init.completions.vertico.posframe=
+Enables vertico-posframe.
+
 **** smallCompletionExtras
 Things like consult, marginalia, & embark.
 

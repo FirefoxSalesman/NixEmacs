@@ -9,8 +9,10 @@ let
   keybinds = config.programs.emacs.init.keybinds;
 in
 {
-  options.programs.emacs.init.completions.vertico.enable =
-    lib.mkEnableOption "Enables vertico as a completion system. Many things are borrowed from Doom";
+  options.programs.emacs.init.completions.vertico = {
+    enable = lib.mkEnableOption "Enables vertico as a completion system. Many things are borrowed from Doom";
+    posframe = lib.mkEnableOption "Enables vertico-posframe.";
+  };
 
   config.programs.emacs.init = lib.mkIf completions.vertico.enable {
     hasOn = true;
@@ -57,6 +59,11 @@ in
         };
       };
 
+      vertico-posframe = lib.mkIf completions.vertico.posframe {
+        enable = true;
+        defer = true;
+        hook = [ "(vertico-mode . vertico-posframe-mode)" ];
+      };
     };
   };
 }

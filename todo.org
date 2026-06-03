@@ -6,6 +6,8 @@
 ** TODO Fix Purescript
 + https://discourse.nixos.org/t/nodepackages-pnpm-removed-nodepackages-has-been-removed-because-it-was-unmaintainable-within-nixpkgs-migration-guidance/76753
 + We need to repackage the language server
+* DONE Vertico posframe
++ Unparent options should use this as well.
 
 * TODO Eshell should support global shell aliases
 * TODO Support for keybindings
@@ -14,6 +16,5 @@ We should support hydras before dealing with this
 ** TODO Magit & projectile integration
 Magit functions should be callable from the projectile dispatcher.
 * TODO Window Management
-** DONE Golden Ratio
 ** TODO Elwm
 * TODO Move to import-tree
