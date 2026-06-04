@@ -9,6 +9,6 @@
     ./pdf.nix
     ./line-numbers.nix
     ./no-littering.nix
-    ./super-save.nix
+    ./sensible-defaults.nix
   ];
 }

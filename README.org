@@ -1399,8 +1399,13 @@ Enables vterm as your terminal.
 **** =config.programs.emacs.init.tools.nov=
 Enables [[https://melpa.org/#/nov][nov]] for reading epubs.
 
-**** =config.programs.emacs.init.tools.superSave.enable=
-Enables [[https://github.com/bbatsov/super-save][super-save-mode]] to automatically save files when idle.
+**** =config.programs.emacs.init.tools.sensibleDefaults.enable=
++ Enables many sensible default settings from Emacs from Scratch & Prot's config.
+  - Use short answers & recursive minibuffers are enabled.
+  - User emacs directory is changed to "~/.cache/emacs"
+  - All buffers are forced to obey display-buffer rules
+  - Unusable M-x commands are removed from the window
++ Enables [[https://github.com/bbatsov/super-save][super-save-mode]] to automatically save files when idle. Backups are disabled.
 
 **** =config.programs.emacs.init.tools.linNumbers.enable=
 Enables line numbers. Borrowed from Emacs from Scratch.

@@ -9,7 +9,9 @@
       (scroll-bar-mode -1) ; Disable visible scrollbar
       (tool-bar-mode -1) ; Disable the toolbar
       (menu-bar-mode -1)
-      (setq visible-bell t)
+      (setq visible-bell t
+            inhibit-startup-message t
+            inhibit-startup-screen t)
 
       ;; Borrowed from Prot (I think)
       (setq-default cursor-in-non-selected-windows nil)
