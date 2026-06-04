@@ -10,4 +10,5 @@
 We should support hydras before dealing with this
 ** TODO Magit & projectile integration
 Magit functions should be callable from the projectile dispatcher.
+* TODO Wgrep
 * TODO Move to import-tree
