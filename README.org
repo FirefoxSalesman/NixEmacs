@@ -1399,6 +1399,12 @@ Enables vterm as your terminal.
 **** =config.programs.emacs.init.tools.nov=
 Enables [[https://melpa.org/#/nov][nov]] for reading epubs.
 
+**** =config.programs.emacs.init.tools.superSave.enable=
+Enables [[https://github.com/bbatsov/super-save][super-save-mode]] to automatically save files when idle.
+
+**** =config.programs.emacs.init.tools.linNumbers.enable=
+Enables line numbers. Borrowed from Emacs from Scratch.
+
 **** =config.programs.emacs.init.tools.pdf=
 Enables [[https://github.com/vedang/pdf-tools][pdf-tools]] for reading pdf files
 
