@@ -10,7 +10,7 @@ in
 {
   options.programs.emacs.init.tools.superSave.enable = lib.mkEnableOption "Enables super-save-mode.";
 
-  programs.emacs.init.usePackage.super-save = lib.mkIf tools.superSave.enable {
+  config.programs.emacs.init.usePackage.super-save = lib.mkIf tools.superSave.enable {
     enable = true;
     hook = [ "(on-first-file . super-save-mode)" ];
     setopt = {
