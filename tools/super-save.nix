@@ -16,10 +16,10 @@ in
       enable = true;
       hook = [ "(on-first-file . super-save-mode)" ];
       setopt = {
-        super-save-auto-save-when-idle = true;
-        auto-save-default = false;
-        super-save-silent = true;
-        super-save-delete-trailing-whitespace = true;
+        super-save-auto-save-when-idle = lib.mkDefault true;
+        auto-save-default = lib.mkDefault false;
+        super-save-silent = lib.mkDefault true;
+        super-save-delete-trailing-whitespace = lib.mkDefault true;
       };
     };
   };
