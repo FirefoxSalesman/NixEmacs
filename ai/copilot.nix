@@ -25,6 +25,7 @@ in
                 	             (when (and (length= (-filter 'major-mode? '(${
                                 lib.concatMapStrings (k: "${k} ") ai.copilot.keepOutOf
                               })) 0)
+        					(not (s-contains? "*code-converting-work*" (buffer-name)))
         					(not (s-contains? "*markdown-code-fontification:java-ts-mode*" (buffer-name)))
                                                 (not (s-contains? "org-src-fontification" (buffer-name))))
                 	                   (copilot-mode))))
@@ -33,7 +34,7 @@ in
     preface = ''
       (defun nix-emacs/kill-copilot ()
         "Kill copilot process & related buffers."
-        (interactive)  
+        (interactive)
         (jsonrpc-shutdown copilot--connection nil)
         (dolist (buf '("*copilot-language-server-log*" "*copilot events*"))
           (when (get-buffer buf)
