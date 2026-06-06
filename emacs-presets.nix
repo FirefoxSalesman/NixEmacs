@@ -3,6 +3,7 @@
 {
   imports = [
     ./aesthetics
+    ./ai
     ./ide
     ./keybinds
     ./completion

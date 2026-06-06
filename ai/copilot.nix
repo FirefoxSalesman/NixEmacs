@@ -5,10 +5,10 @@
 }:
 
 let
-  ide = config.programs.emacs.init.ide;
+  ai = config.programs.emacs.init.ai;
 in
 {
-  options.programs.emacs.init.ide.copilot = {
+  options.programs.emacs.init.ai.copilot = {
     enable = lib.mkEnableOption "Enable Copilot completions";
     keepOutOf = lib.mkOption {
       type = lib.types.listOf lib.types.str;
@@ -17,13 +17,13 @@ in
     };
   };
 
-  config.programs.emacs.init.usePackage.copilot = lib.mkIf ide.copilot.enable {
+  config.programs.emacs.init.usePackage.copilot = lib.mkIf ai.copilot.enable {
     enable = true;
     hook = [
       ''
                 (prog-mode . (lambda ()
                 	             (when (and (length= (-filter 'major-mode? '(${
-                                lib.concatMapStrings (k: "${k} ") ide.copilot.keepOutOf
+                                lib.concatMapStrings (k: "${k} ") ai.copilot.keepOutOf
                               })) 0)
         					(not (s-contains? "*markdown-code-fontification:java-ts-mode*" (buffer-name)))
                                                 (not (s-contains? "org-src-fontification" (buffer-name))))
@@ -48,7 +48,7 @@ in
                                                                          (with-current-buffer x
                                                                                               (not (or (eq (derived-mode-p 'prog-mode) nil)
             										                 ${
-                                         lib.concatMapStrings (k: "(major-mode? '${k})\n") ide.copilot.keepOutOf
+                                         lib.concatMapStrings (k: "(major-mode? '${k})\n") ai.copilot.keepOutOf
                                        }
       												 (s-contains? "*markdown-code-fontification:java-ts-mode*" (buffer-name))
                                                                                                  (s-contains? "org-src-fontification" (buffer-name))))))

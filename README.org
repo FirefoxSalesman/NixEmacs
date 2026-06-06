@@ -1047,20 +1047,6 @@ Enables direnv support
 
 If leader keys are enabled, relevant bindings are bound to SPC e
 
-**** Copilot
-***** =programs.emacs.init.ide.copilot.enable=
-Enables copilot completion.
-
-***** =programs.emacs.init.ide.copilot.keepOutOf=
-Major modes to not activate copilot in
-
-Type: list of str
-
-Example:
-#+begin_src nix-ts
-programs.emacs.init.ide.copilot.keepOutOf = ["c-ts-mode" "json5-ts-mode" "json-ts-mode" "LaTeX-mode"];
-#+end_src
-
 **** Magit
 ***** =programs.emacs.init.ide.magit.enable=
 Enables magit support. The following keys will be bound in =project-prefix-map=:
@@ -1549,3 +1535,21 @@ Enables the emacs-dashboard package & a basic configuration
 
 **** =programs.emacs.init.aesthetics.declutter.enable=
 Remove screen clutter such as the fringe, tooltips, the scrollbar, the toolbar, & the menubar. Borrowed from Emacs from Scratch.
+
+*** AI
+**** Copilot
+***** =programs.emacs.init.ai.copilot.enable=
+Enables copilot completion.
+
+***** =programs.emacs.init.ai.copilot.keepOutOf=
+Major modes to not activate copilot in
+
+Type: list of str
+
+Example:
+#+begin_src nix-ts
+programs.emacs.init.ide.copilot.keepOutOf = ["c-ts-mode" "json5-ts-mode" "json-ts-mode" "LaTeX-mode"];
+#+end_src
+
+**** =programs.emacs.init.ai.minuet.enable=
+Enables completions with minuet. You'll need to set up a model to enable the completions, & you can find the documentation [[https://github.com/milanglacier/minuet-ai.el][here]].
