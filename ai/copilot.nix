@@ -51,6 +51,7 @@ in
                                          lib.concatMapStrings (k: "(major-mode? '${k})\n") ai.copilot.keepOutOf
                                        }
       												 (s-contains? "*markdown-code-fontification:java-ts-mode*" (buffer-name))
+      												 (s-contains? "*code-converting-work*" (buffer-name))
                                                                                                  (s-contains? "org-src-fontification" (buffer-name))))))
                   			                           (buffer-list))
                   		                          0))
