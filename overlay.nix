@@ -82,7 +82,7 @@ final: prev: inputs: {
             inherit (prev.emacs.pkgs) trivialBuild gptel;
           }
         );
-        ob-gptel = inputs.ob-gptel.packages.${nprev.system}.default;
+        ob-gptel = inputs.ob-gptel.packages.${builtins.currentSystem}.default;
       }
     ));
 }
