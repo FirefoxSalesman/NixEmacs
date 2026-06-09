@@ -51,6 +51,13 @@
       url = "github:firefoxsalesman/exwm-outer-gaps";
       flake = false;
     };
+
+    gptel-quick = {
+      url = "github:karthink/gptel-quick";
+      flake = false;
+    };
+
+    ob-gptel.url = "github:jwiegley/ob-gptel";
   };
 
   outputs =

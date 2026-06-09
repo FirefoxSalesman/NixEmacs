@@ -76,6 +76,13 @@ final: prev: inputs: {
             inherit (prev.emacs.pkgs) trivialBuild;
           }
         );
+        gptel-quick = (
+          prev.emacs.pkgs.callPackage ./emacs-packages/gptel-quick.nix {
+            inherit inputs;
+            inherit (prev.emacs.pkgs) trivialBuild gptel;
+          }
+        );
+        ob-gptel = inputs.ob-gptel.packages.${nprev.system}.default;
       }
     ));
 }

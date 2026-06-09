@@ -1553,3 +1553,23 @@ programs.emacs.init.ide.copilot.keepOutOf = ["c-ts-mode" "json5-ts-mode" "json-t
 
 **** =programs.emacs.init.ai.minuet.enable=
 Enables completions with minuet. You'll need to set up a model to enable the completions, & you can find the documentation [[https://github.com/milanglacier/minuet-ai.el][here]].
+
+**** =programs.emacs.init.ai.gptel.enable=
+A clone of doom's gptel config.
+
+Leader keys:
++ =gp=- Open a new gptel buffer
++ =gt=- Add the current item at point (or the current region) to gptel's context
++ =gf=- Add a file to gptel's context
++ =gm=- Open gptel's configuration menu
++ =gr=- Rewrite the current region
++ =ge=- Explain the current region (via [[https://github.com/karthink/gptel-quick][gptel-quick]])
++ =go=- Limit gptel's context to the current org heading (only available if =programs.emacs.init.ide.languages.org.enable= is true.)
++ =gO=- Store gptel's config as org properties in the current buffer (only available if =programs.emacs.init.ide.languages.org.enable= is true.)
+
+If =programs.emacs.init.ide.magit.enable= is true, [[https://github.com/ragnard/gptel-magit][gptel-magit]] will be installed.
++ Press =dx= on a magit diff section to get an explanation
++ Press =M-g= in a commit buffer to generate a message
++ Press =g= in the commit transient to create a commit with a generated message.
+
+If =programs.emacs.init.ide.languages.org.enable= is true, [[https://github.com/jwiegley/ob-gptel][ob-gptel]] will be installed.
