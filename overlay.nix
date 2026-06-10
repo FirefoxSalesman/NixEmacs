@@ -83,6 +83,12 @@ final: prev: inputs: {
           }
         );
         ob-gptel = inputs.ob-gptel.packages.x86_64-linux.default;
+        ragmacs = (
+          prev.emacs.pkgs.callPackage ./emacs-packages/ragmacs.nix {
+            inherit inputs;
+            inherit (prev.emacs.pkgs) trivialBuild gptel;
+          }
+        );
       }
     ));
 }

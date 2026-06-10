@@ -12,6 +12,17 @@ in
 {
   options.programs.emacs.init.ai.gptel = {
     enable = lib.mkEnableOption "Enables gptel. Config borrowed from doom. It is strongly reccomended that you read gptel's readme before using this.";
+    macher = {
+      enable = lib.mkEnableOption "Enables macher, a lightweight agent-like tool built on top of gptel.";
+    };
+    introspection = {
+      enable = lib.mkEnableOption "Provides the introspect preset via ragmacs. It allows gptel to read emacs's documentation.";
+      model = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "The model to use for the introspection preset. Must be a model that can do function calls. Uses the current model if left blank.";
+      };
+    };
   };
 
   config.programs.emacs.init.usePackage = lib.mkIf ai.gptel.enable {
@@ -63,6 +74,64 @@ in
       generalOne.global-leader."ge" = lib.mkIf keybinds.leader-key.enable (
         lib.mkDefault '''("Explain the current region" . gptel-quick)''
       );
+    };
+
+    macher = lib.mkIf ai.gptel.macher.enable {
+      enable = true;
+      command = [ "macher-install" ];
+      config = "(macher-install)";
+      generalOne.global-leader = lib.mkIf keybinds.leader-key.enable {
+        "gM" = lib.mkDefault '''(:ignore t :which-key "macher")'';
+        "gMi" = lib.mkDefault '''("implement" . macher-implement)'';
+        "gMr" = lib.mkDefault '''("revise" . macher-revise)'';
+        "gMd" = lib.mkDefault '''("discuss" . macher-discuss)'';
+        "gMa" = lib.mkDefault '''("abort" . macher-abort)'';
+      };
+    };
+
+    ragmacs = {
+      enable = true;
+      after = [ "gptel" ];
+      config = ''
+        (gptel-make-preset 'introspect
+             :pre (lambda () (require 'ragmacs))
+             :system
+             "You are pair programming with the user in Emacs and on Emacs.
+
+         Your job is to dive into Elisp code and understand the APIs and
+         structure of elisp libraries and Emacs.  Use the provided tools to do
+         so, but do not make duplicate tool calls for information already
+         available in the chat.
+
+         <tone>
+         1. Be terse and to the point.  Speak directly.
+         2. Explain your reasoning.
+         3. Do NOT hedge or qualify.
+         4. If you don't know, say you don't know.
+         5. Do not offer unprompted advice or clarifications.
+         6. Never apologize.
+         7. Do NOT summarize your answers.
+         </tone>
+
+         <code_generation>
+         When generating code:
+         1. Always check that functions or variables you use in your code exist.
+         2. Also check their calling convention and function-arity before you use them.
+         3. Write code that can be tested by evaluation, and offer to evaluate
+         code using the `elisp_eval` tool.
+         </code_generation>
+
+         <formatting>
+         1. When referring to code symbols (variables, functions, tags etc) enclose them in markdown quotes.
+            Examples: `read_file`, `getResponse(url, callback)`
+            Example: `<details>...</details>`
+         2. If you use LaTeX notation, enclose math in \( and \), or \[ and \] delimiters.
+         </formatting>"
+             :tools '("introspection")
+             ${
+               if ai.gptel.introspection.model != "" then ":model '${ai.gptel.introspection.model}" else ""
+             })
+      '';
     };
   };
 }

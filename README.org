@@ -1554,7 +1554,8 @@ programs.emacs.init.ide.copilot.keepOutOf = ["c-ts-mode" "json5-ts-mode" "json-t
 **** =programs.emacs.init.ai.minuet.enable=
 Enables completions with minuet. You'll need to set up a model to enable the completions, & you can find the documentation [[https://github.com/milanglacier/minuet-ai.el][here]].
 
-**** =programs.emacs.init.ai.gptel.enable=
+**** Gptel
+***** =programs.emacs.init.ai.gptel.enable=
 A clone of doom's gptel config.
 
 Leader keys:
@@ -1573,3 +1574,12 @@ If =programs.emacs.init.ide.magit.enable= is true, [[https://github.com/ragnard/
 + Press =g= in the commit transient to create a commit with a generated message.
 
 If =programs.emacs.init.ide.languages.org.enable= is true, [[https://github.com/jwiegley/ob-gptel][ob-gptel]] will be installed.
+
+***** =programs.emacs.init.ai.gptel.macher.enable=
+Enables [[https://github.com/kmontag/macher][macher]], a lightweight set of agent-like tools.
+
+Leader keys:
++ =gMi=- Create a patch implementing whatever the user says to implement.
++ =gMr=- Revise a patch based on the user's instructions.
++ =gMd=- Discuss a piece of code with the llm.
++ =gMa=- Stop the llm's current activities

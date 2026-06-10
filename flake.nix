@@ -58,6 +58,11 @@
     };
 
     ob-gptel.url = "github:jwiegley/ob-gptel";
+
+    ragmacs = {
+      url = "github:positron-solutions/ragmacs";
+      flake = false;
+    };
   };
 
   outputs =
