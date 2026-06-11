@@ -12,17 +12,21 @@ in
 {
   options.programs.emacs.init.ai.gptel = {
     enable = lib.mkEnableOption "Enables gptel. Config borrowed from doom. It is strongly reccomended that you read gptel's readme before using this.";
+
     macher = {
       enable = lib.mkEnableOption "Enables macher, a lightweight agent-like tool built on top of gptel.";
     };
+
     introspection = {
-      enable = lib.mkEnableOption "Provides the introspect preset via ragmacs. It allows gptel to read emacs's documentation.";
+      enable = lib.mkEnableOption "Provides the introspect preset via ragmacs. It allows gptel to read emacs's documentation. Utterly useless if you enable gptel-agent.";
       model = lib.mkOption {
         type = lib.types.str;
         default = "";
         description = "The model to use for the introspection preset. Must be a model that can do function calls. Uses the current model if left blank.";
       };
     };
+
+    agent.enable = lib.mkEnableOption "Enables gptel-agent.";
   };
 
   config.programs.emacs.init.usePackage = lib.mkIf ai.gptel.enable {
@@ -132,6 +136,14 @@ in
                if ai.gptel.introspection.model != "" then ":model '${ai.gptel.introspection.model}" else ""
              })
       '';
+    };
+
+    gptel-agent = lib.mkIf ai.gptel.agent.enable {
+      enable = true;
+      config = "(gptel-agent-update)";
+      generalOne.global-leader."ga" = lib.mkIf keybinds.leader-key.enable (
+        lib.mkDefault '''("agent" . gptel-agent)''
+      );
     };
   };
 }

@@ -1583,3 +1583,9 @@ Leader keys:
 + =gMr=- Revise a patch based on the user's instructions.
 + =gMd=- Discuss a piece of code with the llm.
 + =gMa=- Stop the llm's current activities
+
+***** =programs.emacs.init.ai.gptel.agent.enable=
+Enables [[https://github.com/karthink/gptel-agent][gptel-agent]].
+
+Leader keys:
++ =ga=- Run =gptel-agent=.
