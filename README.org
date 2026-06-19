@@ -1275,22 +1275,22 @@ If org is enabled, you can run jupyter notebooks from an org file.
 
 We may switch to jupyter-ascending at some point
 
-****** =python.language-server=
+****** =python.languageServer=
 A string determining what language server to install, if a language server client is enabled
 
 Options include:
 + basedpyright
-+ pylsp
-+ pyright
-+ jedi
 + ty
++ zuban
++ pyrefly
 
 Defaults to ty.
 
-Based pyright config originates from here: https://gregnewman.io/blog/emacs-take-two/
-
 ****** =python.snakemake=
 Adds support for snakemake files
+
+****** =python.wantRuff=
+Enables ruff in addition to your other language server.
 
 ***** =racket.enable=
 Boolean option to enable racket support.
