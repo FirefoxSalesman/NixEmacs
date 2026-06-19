@@ -89,11 +89,11 @@ in
         enable = true;
         setopt = {
           eglot-python-preset-lsp-server = lib.mkDefault (
-            if ide.languages.python.wantRuff then "'rass" else "'${ide.languages.python.lspServer}"
+            if ide.languages.python.wantRuff then "'rass" else "'${ide.languages.python.languageServer}"
           );
           eglot-python-preset-rass-tools = lib.mkIf ide.languages.python.wantRuff (
             lib.mkDefault [
-              "'${ide.languages.python.lspServer}"
+              "'${ide.languages.python.languageServer}"
               "'ruff"
             ]
           );
