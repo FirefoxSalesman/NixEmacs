@@ -87,6 +87,7 @@ in
 
       eglot-python-preset = lib.mkIf ide.eglot.enable {
         enable = true;
+        extraPackages = [ pkgs.uv ];
         setopt = {
           eglot-python-preset-lsp-server = lib.mkDefault (
             if ide.languages.python.wantRuff then "'rass" else "'${ide.languages.python.languageServer}"
