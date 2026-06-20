@@ -1183,8 +1183,24 @@ Boolean option that enables java support
 ****** =java.eglotJava=
 Boolean option to install [[https://github.com/yveszoundi/eglot-java][eglot-java]], allowing the user to take advantage of more of jdtls's features. Doing this will stop nix from installing jdtls from you, potentially resulting in user irritation.
 
-***** =javascript.enable=
+***** Javascript
+****** =javascript.enable=
 Boolean option that enables javascript support
+
+****** =javascript.languageServer=
+The language server you want to use with javascript & typescript. Can be =typscript-language-server= or =deno=.
+
+****** =javascript.wantEslint=
+Enables eslint in addition to your other js/ts language servers
+
+****** =javascript.wantOxlint=
+Enables oxlint in addition to your other js/ts language servers
+
+****** =javascript.wantOxfmt=
+Enables oxfmt in addition to your other js/ts language servers
+
+****** =javascript.wantBiome=
+Enables biome in addition to your other js/ts language servers
 
 ***** =json.enable=
 Boolean option that enables json support
@@ -1337,7 +1353,7 @@ Boolean option to enable swift support.
 Boolean option to enable toml support.
 
 ***** =typescript.enable=
-Boolean option to enable typescript support.
+Boolean option to enable typescript support. Automatically enables javascript support as well, & uses its language server options
 
 ***** =vimscript.enable=
 Boolean option to enable vimscript support.

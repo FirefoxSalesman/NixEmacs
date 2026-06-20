@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   lib,
   ...
@@ -8,6 +7,14 @@
 let
   ide = config.programs.emacs.init.ide;
   completions = config.programs.emacs.init.completions;
+  wantRass =
+    (
+      ide.languages.javascript.wantBiome
+      || ide.languages.javascript.wantOxfmt
+      || ide.languages.javascript.wantOxlint
+      || ide.languages.javascript.wantEslint
+    )
+    && (ide.eglot.enable || ide.lspce.enable);
 in
 {
   options.programs.emacs.init.ide.languages.typescript.enable =
@@ -24,23 +31,30 @@ in
     ide = {
       treesitter.wantTreesitter = true;
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "typescript-ts-mode" ];
+      languages.javascript.enable = true;
     };
     usePackage.typescript-ts-mode = {
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "typescript";
-      extraPackages =
-        (
-          if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
-            with pkgs; [ typescript-language-server ]
-          else
-            [ ]
-        )
-        ++ (if (ide.dap.enable || ide.dape.enable) then [ pkgs.vscode-js-debug ] else [ ]);
       mode = [ ''"\\.ts\\'"'' ];
       eglot = ide.eglot.enable;
       symex = ide.symex;
       lsp = ide.lsp.enable;
-      lspce = lib.mkIf ide.lspce.enable '''("tsx" "typescript") "typescript-language-server" "--stdio"'';
+      lspce =
+        lib.mkIf ide.lspce.enable lib.mkIf ide.lspce.enable
+          '''("tsx" "typescript") ${if wantRass then ''"rass" "--"'' else ""} ${
+            if ide.languages.javascript.languageServer == "deno" then
+              ''"typescript-language-server" "--stdio"''
+            else
+              ''"deno" "lsp"''
+          } ${if ide.languages.javascript.wantBiome then ''"--" "biome" "lsp-proxy"'' else ""} ${
+            if ide.languages.javascript.wantOxfmt then ''"--" "oxfmt" "--lsp"'' else ""
+          } ${if ide.languages.javascript.wantOxlint then ''"--" "oxlint" "--lsp"'' else ""} ${
+            if ide.languages.javascript.wantEslint then
+              ''"--" "vscode-eslint-language-server" "--stdio"''
+            else
+              ""
+          }'';
       config = lib.mkIf ide.dap.enable "(require 'dap-node)";
     };
   };
