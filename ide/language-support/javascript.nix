@@ -105,10 +105,10 @@ in
                   else
                     [ "'typescript-language-server" ]
                 )
-                (fakeIf ide.languages.javascript.wantBiome [ "'biome" ])
-                (fakeIf ide.languages.javascript.wantOxfmt [ "'oxfmt" ])
-                (fakeIf ide.languages.javascript.wantOxlint [ "'oxlint" ])
-                (fakeIf ide.languages.javascript.wantEslint [ "'eslint" ])
+                (fakeIf ide.languages.javascript.wantBiome "'biome")
+                (fakeIf ide.languages.javascript.wantOxfmt "'oxfmt")
+                (fakeIf ide.languages.javascript.wantOxlint "'oxlint")
+                (fakeIf ide.languages.javascript.wantEslint "'eslint")
               ]
             )
           );
