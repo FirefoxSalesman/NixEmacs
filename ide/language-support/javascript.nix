@@ -23,10 +23,10 @@ in
     enable = lib.mkEnableOption "enables javascript support";
     languageServer = lib.mkOption {
       type = lib.types.enum [
-        "typscript-language-server"
+        "typescript-language-server"
         "deno"
       ];
-      default = "typscript-language-server";
+      default = "typescript-language-server";
       description = "the language server to use with javascript/typescript. Can be either typescript-language-server or deno.";
     };
     wantEslint = lib.mkEnableOption "Enables eslint in addition to the other js/ts language servers.";
