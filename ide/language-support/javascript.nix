@@ -98,15 +98,19 @@ in
           );
           eglot-typescript-preset-rass-tools = lib.mkIf wantRass (
             lib.mkDefault (
-              if ide.languages.javascript.languageServer == "deno" then
-                [ "'deno" ]
-              else
-                [ "'typescript-language-server" ]
+              lib.concatLists [
+                (
+                  if ide.languages.javascript.languageServer == "deno" then
+                    [ "'deno" ]
+                  else
+                    [ "'typescript-language-server" ]
+                )
+                (fakeIf ide.languages.javascript.wantBiome [ "'biome" ])
+                (fakeIf ide.languages.javascript.wantOxfmt [ "'oxfmt" ])
+                (fakeIf ide.languages.javascript.wantOxlint [ "'oxlint" ])
+                (fakeIf ide.languages.javascript.wantEslint [ "'eslint" ])
+              ]
             )
-            ++ (fakeIf ide.languages.javascript.wantBiome [ "'biome" ])
-            ++ (fakeIf ide.languages.javascript.wantOxfmt [ "'oxfmt" ])
-            ++ (fakeIf ide.languages.javascript.wantOxlint [ "'oxlint" ])
-            ++ (fakeIf ide.languages.javascript.wantEslint [ "'eslint" ])
           );
         };
       };
