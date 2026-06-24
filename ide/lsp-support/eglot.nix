@@ -13,65 +13,66 @@ in
     lib.mkEnableOption "Enable eglot's preset configuration";
 
   config = lib.mkIf ide.eglot.preset {
-    # https://github.com/radian-software/apheleia/issues/153
-    tools.apheleia.formatters.eglot = lib.mkIf config.programs.emacs.init.tools.apheleia.enable ''
-      (make-apheleia-formatter apheleia-indent-eglot-managed-buffer
-         (setq-local eglot--cached-server
-                     (with-current-buffer buffer
-                       (eglot-current-server)))
-         (let ((buffer-file-name (buffer-local-value 'buffer-file-name buffer)))
-           (eglot-format-buffer)))
-    '';
-
-    programs.emacs.init.usePackage = {
-      eglot = {
-        enable = true;
-        defer = true;
-        generalTwoConfig.local-leader.eglot-mode-map =
-          lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
-            {
-              "f" = lib.mkIf (!config.programs.emacs.init.tools.apheleia.enable) (
-                lib.mkDefault "'eglot-format-buffer"
-              );
-              "a" = lib.mkDefault "'eglot-code-actions";
-              "d" = lib.mkDefault "'eldoc-doc-buffer";
-              "r" = lib.mkDefault "'eglot-rename";
-            };
-        setopt = {
-          eglot-report-progress = false;
-          eglot-autoshutdown = true;
-          #borrowed from doom
-          eglot-sync-connect = 1;
+    programs.emacs.init = {
+      # https://github.com/radian-software/apheleia/issues/153
+      tools.apheleia.formatters.eglot = lib.mkIf config.programs.emacs.init.tools.apheleia.enable ''
+        (make-apheleia-formatter apheleia-indent-eglot-managed-buffer
+           (setq-local eglot--cached-server
+                       (with-current-buffer buffer
+                         (eglot-current-server)))
+           (let ((buffer-file-name (buffer-local-value 'buffer-file-name buffer)))
+             (eglot-format-buffer)))
+      '';
+      usePackage = {
+        eglot = {
+          enable = true;
+          defer = true;
+          generalTwoConfig.local-leader.eglot-mode-map =
+            lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
+              {
+                "f" = lib.mkIf (!config.programs.emacs.init.tools.apheleia.enable) (
+                  lib.mkDefault "'eglot-format-buffer"
+                );
+                "a" = lib.mkDefault "'eglot-code-actions";
+                "d" = lib.mkDefault "'eldoc-doc-buffer";
+                "r" = lib.mkDefault "'eglot-rename";
+              };
+          setopt = {
+            eglot-report-progress = false;
+            eglot-autoshutdown = true;
+            #borrowed from doom
+            eglot-sync-connect = 1;
+          };
         };
-      };
 
-      eglot-booster = {
-        enable = true;
-        extraPackages = [ pkgs.emacs-lsp-booster ];
-        after = [ "eglot" ];
-        config = "(eglot-booster-mode)";
-      };
+        eglot-booster = {
+          enable = true;
+          extraPackages = [ pkgs.emacs-lsp-booster ];
+          after = [ "eglot" ];
+          config = "(eglot-booster-mode)";
+        };
 
-      eglot-x = {
-        enable = true;
-        after = [ "eglot" ];
-        config = "(eglot-x-setup)";
-      };
+        eglot-x = {
+          enable = true;
+          after = [ "eglot" ];
+          config = "(eglot-x-setup)";
+        };
 
-      eldoc-box = {
-        enable = ide.hoverDoc;
-        hook = [ "(eglot-managed-mode . eldoc-box-hover-at-point-mode)" ];
-      };
+        eldoc-box = {
+          enable = ide.hoverDoc;
+          hook = [ "(eglot-managed-mode . eldoc-box-hover-at-point-mode)" ];
+        };
 
-      breadcrumb = lib.mkIf ide.breadcrumb {
-        enable = true;
-        hook = [ "(eglot-managed-mode . breadcrumb-local-mode)" ];
-      };
+        breadcrumb = lib.mkIf ide.breadcrumb {
+          enable = true;
+          hook = [ "(eglot-managed-mode . breadcrumb-local-mode)" ];
+        };
 
-      consult-eglot = lib.mkIf config.programs.emacs.init.completions.smallExtras.enable {
-        enable = true;
-        after = [ "eglot" ];
-        bindLocal.eglot-mode-map."C-M-." = "consult-eglot-symbols";
+        consult-eglot = lib.mkIf config.programs.emacs.init.completions.smallExtras.enable {
+          enable = true;
+          after = [ "eglot" ];
+          bindLocal.eglot-mode-map."C-M-." = "consult-eglot-symbols";
+        };
       };
     };
   };
