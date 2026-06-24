@@ -7,7 +7,6 @@
 + Can be used to get otherwise unobtainable language servers (purescript)
 ** TODO Citre
 * TODO Eshell should support global shell aliases
-* DONE Macher-Agent
 * TODO Support for keybindings
 ** TODO Multi cursors
 We should support hydras before dealing with this

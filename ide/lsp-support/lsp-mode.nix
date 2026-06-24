@@ -25,7 +25,7 @@ in
           lsp-enable-on-type-formatting = lib.mkDefault false;
           lsp-headerline-breadcrumb-enable = lib.mkDefault ide.breadcrumb;
         };
-        generalTwoConfig.local-leader.lsp-mode-map = lib.mkIf keybinds.leader-keys.enable {
+        generalTwoConfig.local-leader.lsp-mode-map = lib.mkIf keybinds.leader-key.enable {
           "f" = lib.mkIf (!config.programs.emacs.init.tools.apheleia.enable) (
             lib.mkDefault "'lsp-format-buffer"
           );
