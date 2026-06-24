@@ -17,8 +17,8 @@ in
     ide.treesitter.wantTreesitter = true;
 
     tools.apheleia.modeFormatters.csharp-ts-mode = lib.mkIf (
-      config.programs.emacs.init.tools.apheleia.enable && ide.eglot.enable
-    ) (lib.mkDefault "eglot");
+      config.programs.emacs.init.tools.apheleia.enable && (ide.eglot.enable || ide.lsp.enable)
+    ) (lib.mkDefault (if ide.eglot.enable then "eglot" else "lsp"));
 
     usePackage = {
       csharp-ts-mode = {

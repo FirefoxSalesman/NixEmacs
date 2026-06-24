@@ -14,8 +14,8 @@ in
   config = lib.mkIf ide.languages.sql.enable {
     programs.emacs.init = {
       tools.apheleia.modeFormatters.sql-mode = lib.mkIf (
-        ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
-      ) (lib.mkDefault "eglot");
+        config.programs.emacs.init.tools.apheleia.enable && (ide.eglot.enable || ide.lsp.enable)
+      ) (lib.mkDefault (if ide.eglot.enable then "eglot" else "lsp"));
       usePackage.sql = {
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "sql";

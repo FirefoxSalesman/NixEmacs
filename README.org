@@ -1083,6 +1083,8 @@ If =programs.emacs.init.ide.eglot.enable= or =programs.emacs.init.ide.lsp.enable
 ***** =bash.enable=
 Boolean value that enables bash support
 
+If you're using apheleia, shfmt is the default formatter
+
 ***** =clojure.enable=
 Boolean value that enables clojure support
 
@@ -1242,6 +1244,8 @@ Boolean that enables markdown support
 Boolean that enables nix support.
 
 A small portion was stolen from doom.
+
+If you're using apheleia, nixfmt is the default formatter
 
 ***** Org
 ****** =org.enable=
@@ -1473,7 +1477,7 @@ tools.apheleia.formatters = {
 
 This option is used to set the =apheleia-mode-alist= variable in elisp. You should avoid altering that variable by hand.
 
-Eglot users get the eglot formatter automatically
+Eglot users get the =eglot= formatter automatically, & lsp-mode users get the =lsp= formatter automatically
 
 **** exwm
 ***** =config.programs.emacs.init.tools.exwm.enable=

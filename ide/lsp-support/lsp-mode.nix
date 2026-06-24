@@ -14,6 +14,21 @@ in
     lib.mkEnableOption "Enable lsp-mode's preset configuration (borrowed from doom)";
 
   config = lib.mkIf ide.lsp.preset {
+    # Borrowed from Doom
+    tools.apheleia.formatters.lsp = lib.mkIf config.programs.emacs.init.tools.apheleia.enable ''
+      (make-apheleia-formatter
+       apheleia-lsp-formatter
+       (with-current-buffer buffer
+         (let ((edits
+                (lsp-request
+                 "textDocument/formatting"
+                 (lsp--make-document-formatting-params))))
+           (unless (seq-empty-p edits)
+             (with-current-buffer scratch
+               (lsp--apply-text-edits edits 'format)))
+           t)))
+    '';
+
     programs.emacs.init.usePackage = {
       # We elect not to use lsp-booster, because I have no idea how to compile lsp-mode with plists support
       lsp-mode = {

@@ -18,8 +18,8 @@ in
     };
 
     tools.apheleia.modeFormatters.zig-mode = lib.mkIf (
-      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
-    ) (lib.mkDefault "eglot");
+      config.programs.emacs.init.tools.apheleia.enable && (ide.eglot.enable || ide.lsp.enable)
+    ) (lib.mkDefault (if ide.eglot.enable then "eglot" else "lsp"));
 
     usePackage.zig-mode = lib.mkIf ide.languages.zig.enable {
       enable = true;

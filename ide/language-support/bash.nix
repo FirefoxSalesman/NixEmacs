@@ -22,7 +22,7 @@ in
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "bash-ts-mode" ];
     };
     tools.apheleia.modeFormatters.bash-ts-mode = lib.mkIf config.programs.emacs.init.tools.apheleia.enable (
-      lib.mkDefault "shfmt"
+      lib.mkDefault "${lib.getExe pkgs.shfmt}"
     );
     usePackage.bash-ts-mode = {
       enable = true;
