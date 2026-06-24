@@ -13,26 +13,33 @@ in
     lib.mkEnableOption "enables clojure support";
 
   config = lib.mkIf ide.languages.clojure.enable {
-    programs.emacs.init.usePackage = {
-      clojure-mode = {
-        enable = true;
-        babel = lib.mkIf ide.languages.org.enable "clojure";
-        extraPackages =
-          if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then
-            with pkgs; [ clojure-lsp ]
-          else
-            [ ];
-        mode = [ ''"\\.clj\\'"'' ];
-        lsp = ide.lsp.enable;
-        eglot = ide.eglot.enable;
-        symex = ide.symex;
-        lspce = lib.mkIf ide.lspce.enable '''("clojure" "clojurec" "clojurescript") "clojure-lsp"'';
-      };
+    programs.emacs.init = {
+      tools.apheleia.modeFormatters.clojure-mode = lib.mkIf (
+        ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+      ) (lib.mkDefault "eglot");
+      usePackage = {
+        clojure-mode = {
+          enable = true;
+          babel = lib.mkIf ide.languages.org.enable "clojure";
+          extraPackages =
+            if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then
+              with pkgs; [ clojure-lsp ]
+            else
+              [ ];
+          mode = [ ''"\\.clj\\'"'' ];
+          lsp = ide.lsp.enable;
+          eglot = ide.eglot.enable;
+          symex = ide.symex;
+          lspce = lib.mkIf ide.lspce.enable '''("clojure" "clojurec" "clojurescript") "clojure-lsp"'';
+        };
 
-      cider = {
-        enable = ide.languages.java.clojure;
-        hook = [ "(clojure-mode . cider-mode)" ];
-        generalTwoConfig.local-leader.cider-mode-map."s" = lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable lib.mkDefault '''(cider-jack-in :which-key "start cider")''; 
+        cider = {
+          enable = ide.languages.java.clojure;
+          hook = [ "(clojure-mode . cider-mode)" ];
+          generalTwoConfig.local-leader.cider-mode-map."s" =
+            lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable lib.mkDefault
+              '''(cider-jack-in :which-key "start cider")'';
+        };
       };
     };
   };

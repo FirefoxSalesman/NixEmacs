@@ -63,6 +63,11 @@
       url = "github:positron-solutions/ragmacs";
       flake = false;
     };
+
+    macher-agent = {
+      url = "github:elij/macher-agent";
+      flake = false;
+    };
   };
 
   outputs =

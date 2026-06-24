@@ -16,6 +16,11 @@ in
       treesitter.wantTreesitter = true;
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "go-ts-mode" ];
     };
+
+    tools.apheleia.modeFormatters.go-ts-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage = {
       go-ts-mode = {
         enable = true;

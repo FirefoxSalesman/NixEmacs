@@ -14,6 +14,11 @@ in
   # most of what you see here has been stolen from doom emacs
   config.programs.emacs.init = lib.mkIf ide.languages.ruby.enable {
     ide.treesitter.wantTreesitter = true;
+
+    tools.apheleia.modeFormatters.ruby-ts-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage = {
       ruby-ts-mode = {
         enable = true;

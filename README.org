@@ -1447,7 +1447,7 @@ Example:
 #+begin_src nix-ts
 tools.apheleia.modeFormatters = {
   bash-ts-mode = "eglot";
-  python-ts-mode = "'(isort black)";
+  python-ts-mode = "(isort black)";
 };
 #+end_src
 
@@ -1472,6 +1472,8 @@ tools.apheleia.formatters = {
 #+end_src
 
 This option is used to set the =apheleia-mode-alist= variable in elisp. You should avoid altering that variable by hand.
+
+Eglot users get the eglot formatter automatically
 
 **** exwm
 ***** =config.programs.emacs.init.tools.exwm.enable=

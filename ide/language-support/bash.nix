@@ -21,12 +21,20 @@ in
       treesitter.wantTreesitter = true;
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "bash-ts-mode" ];
     };
+    tools.apheleia.modeFormatters.bash-ts-mode = lib.mkIf config.programs.emacs.init.tools.apheleia.enable (
+      lib.mkDefault "shfmt"
+    );
     usePackage.bash-ts-mode = {
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "shell";
       extraPackages =
         if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
-          with pkgs; [ bash-language-server ]
+          with pkgs;
+          [
+            bash-language-server
+            shellcheck
+            shfmt
+          ]
         else
           [ ];
       mode = [ ''"\\.sh\\'"'' ];

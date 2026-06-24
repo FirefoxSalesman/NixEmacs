@@ -17,6 +17,11 @@ in
       treesitter.treesitterGrammars.vim = "https://github.com/tree-sitter-grammars/tree-sitter-vim";
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "vimscript-ts-mode" ];
     };
+
+    tools.apheleia.modeFormatters.vimscript-ts-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage.vimscript-ts-mode = {
       enable = true;
       mode = [ ''"\\.vim\\'"'' ];

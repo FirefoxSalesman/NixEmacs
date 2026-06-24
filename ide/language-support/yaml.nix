@@ -15,6 +15,11 @@ in
       treesitter.wantTreesitter = true;
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "yaml-ts-mode" ];
     };
+
+    tools.apheleia.modeFormatters.yaml-ts-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage.yaml-ts-mode = lib.mkIf ide.languages.yaml.enable {
       enable = true;
       mode = [ ''"\\.yaml\\'"'' ];

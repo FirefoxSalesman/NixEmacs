@@ -21,6 +21,7 @@ in
         treesitter.wantTreesitter = true;
         treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "java-ts-mode" ];
       };
+
       completions.tempel.templates.java-ts-mode = lib.mkIf completions.tempel.enable {
         doc = ''"/**" n> " * " q n " */"'';
         "if" = ''"if (" p ") {" n> q n "}"'';
@@ -28,6 +29,11 @@ in
         method = ''p " " p " " p "(" p ") {" n> q n "}"'';
         while = ''"while (" p ") {" n> q n "}"'';
       };
+
+      tools.apheleia.modeFormatters.java-ts-mode = lib.mkIf (
+        ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+      ) (lib.mkDefault "eglot");
+
       usePackage = {
         java-ts-mode = {
           enable = true;

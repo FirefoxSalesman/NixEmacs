@@ -17,6 +17,11 @@ in
         namelet = ''"(let " p " [(" p ")]" n q ")"'';
         defun = ''"(define " p " (lambda (" p ")" n q "))"'';
       };
+
+      tools.apheleia.modeFormatters.racket-mode = lib.mkIf (
+        ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+      ) (lib.mkDefault "eglot");
+
       usePackage.racket-mode = {
         enable = ide.languages.scheme.racket;
         eglot = ide.eglot.enable;

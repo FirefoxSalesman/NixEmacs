@@ -19,6 +19,11 @@ in
       treesitter.wantTreesitter = true;
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "rustic-mode" ];
     };
+
+    tools.apheleia.modeFormatters.rustic-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage = {
       rust-ts-mode = {
         enable = true;

@@ -16,6 +16,11 @@ in
       treesitter.treesitterGrammars.julia = "https://github.com/tree-sitter/tree-sitter-julia";
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "julia-ts-mode" ];
     };
+
+    tools.apheleia.modeFormatters.julia-ts-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage = {
       julia-ts-mode = {
         enable = true;

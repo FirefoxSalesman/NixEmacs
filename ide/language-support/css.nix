@@ -20,6 +20,11 @@ in
         treesitter.wantTreesitter = true;
         treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "css-ts-mode" ];
       };
+
+      tools.apheleia.modeFormatters.css-ts-mode = lib.mkIf (
+        config.programs.emacs.init.tools.apheleia.enable && ide.eglot.enable
+      ) (lib.mkDefault "eglot");
+
       usePackage = {
         emmet-mode = {
           enable = ide.languages.css.emmet;

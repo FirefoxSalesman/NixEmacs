@@ -13,7 +13,13 @@ in
     lib.mkEnableOption "Enables csharp support. You will be forced to use csharp-ls, because I can't find omnisharp in nixpkgs";
 
   config.programs.emacs.init = lib.mkIf ide.languages.csharp.enable {
+
     ide.treesitter.wantTreesitter = true;
+
+    tools.apheleia.modeFormatters.csharp-ts-mode = lib.mkIf (
+      config.programs.emacs.init.tools.apheleia.enable && ide.eglot.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage = {
       csharp-ts-mode = {
         enable = true;

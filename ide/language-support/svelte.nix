@@ -17,6 +17,11 @@ in
       treesitter.treesitterGrammars.svelte = "https://github.com/Himujjal/tree-sitter-svelte";
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "svelte-ts-mode" ];
     };
+
+    tools.apheleia.modeFormatters.svelte-ts-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage.svelte-ts-mode = {
       enable = true;
       extraPackages = lib.mkIf (

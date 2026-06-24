@@ -9,36 +9,41 @@ in
     flutter = lib.mkEnableOption "Enables flutter support";
   };
 
-  config.programs.emacs.init.usePackage = lib.mkIf ide.languages.dart.enable {
-    dart-mode = {
-      enable = true;
-      eglot = ide.eglot.enable;
-      lsp = ide.lsp.enable;
-      lspce = lib.mkIf ide.lspce.enable ''"dart" "dart" "language-server"'';
-      config = lib.mkIf ide.dap.enable "(dap-dart-setup)";
-    };
+  config.programs.emacs.init = {
+    tools.apheleia.modeFormatters.dart-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+    usePackage = lib.mkIf ide.languages.dart.enable {
+      dart-mode = {
+        enable = true;
+        eglot = ide.eglot.enable;
+        lsp = ide.lsp.enable;
+        lspce = lib.mkIf ide.lspce.enable ''"dart" "dart" "language-server"'';
+        config = lib.mkIf ide.dap.enable "(dap-dart-setup)";
+      };
 
-    flutter = lib.mkIf ide.languages.dart.flutter {
-      enable = true;
-      after = [ "dart-mode" ];
-      generalTwo.local-leader.dart-ts-mode-map =
-        lib.mkIf config.programs.emacs.init.keybinds.leader-keys.enable
-          {
-            "q" = lib.mkDefault "'flutter-quit";
-            "h" = lib.mkDefault "'flutter-hot-reload";
-            "H" = lib.mkDefault "'flutter-hot-restart";
-            "u" = lib.mkDefault "'flutter-run";
-          };
-    };
+      flutter = lib.mkIf ide.languages.dart.flutter {
+        enable = true;
+        after = [ "dart-mode" ];
+        generalTwo.local-leader.dart-ts-mode-map =
+          lib.mkIf config.programs.emacs.init.keybinds.leader-keys.enable
+            {
+              "q" = lib.mkDefault "'flutter-quit";
+              "h" = lib.mkDefault "'flutter-hot-reload";
+              "H" = lib.mkDefault "'flutter-hot-restart";
+              "u" = lib.mkDefault "'flutter-run";
+            };
+      };
 
-    hover = lib.mkIf ide.languages.dart.flutter {
-      enable = true;
-      after = [ "dart-mode" ];
-    };
+      hover = lib.mkIf ide.languages.dart.flutter {
+        enable = true;
+        after = [ "dart-mode" ];
+      };
 
-    lsp-dart = lib.mkIf ide.lsp.enable {
-      enable = true;
-      after = [ "lsp-mode" ];
+      lsp-dart = lib.mkIf ide.lsp.enable {
+        enable = true;
+        after = [ "lsp-mode" ];
+      };
     };
   };
 }

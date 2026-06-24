@@ -16,10 +16,15 @@ in
   };
 
   config.programs.emacs.init = lib.mkIf ide.languages.scala.enable {
+    tools.apheleia.modeFormatters.scala-ts-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     ide = {
       treesitter.wantTreesitter = true;
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "scala-ts-mode" ];
     };
+
     usePackage = {
       scala-ts-mode = {
         enable = true;

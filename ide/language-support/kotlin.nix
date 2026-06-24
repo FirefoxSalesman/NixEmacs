@@ -19,6 +19,11 @@ in
         treesitter.treesitterGrammars.kotlin = "https://github.com/fwcd/tree-sitter-kotlin";
         treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "kotlin-ts-mode" ];
       };
+
+      tools.apheleia.modeFormatters.kotlin-ts-mode = lib.mkIf (
+        ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+      ) (lib.mkDefault "eglot");
+
       usePackage = {
         kotlin-ts-mode = {
           enable = true;

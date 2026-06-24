@@ -16,6 +16,11 @@ in
       treesitter.wantTreesitter = true;
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "lua-ts-mode" ];
     };
+
+    tools.apheleia.modeFormatters.lua-ts-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage.lua-ts-mode = {
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "lua";

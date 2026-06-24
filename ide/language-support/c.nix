@@ -21,6 +21,7 @@ in
       treesitter.wantTreesitter = true;
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "c-ts-mode" ];
     };
+
     completions.tempel.templates.c-ts-mode = {
       doc = ''"/**" n> " * " q n " */"'';
       "if" = ''"if (" p ") {" n> q n "}"'';
@@ -36,6 +37,11 @@ in
       function = ''p " " p " (" p ") {" n> q n "}"'';
       main = ''"int main (int argc, char **argv) {" n> q n "}" '';
     };
+
+    tools.apheleia.modeFormatters.c-ts-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage = {
       c-ts-mode = {
         enable = true;

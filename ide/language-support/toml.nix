@@ -12,6 +12,11 @@ in
         treesitter.treesitterGrammars.toml = "https://github.com/ikatyang/tree-sitter-toml";
         treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "toml-ts-mode" ];
       };
+
+      tools.apheleia.modeFormatters.toml-ts-mode = lib.mkIf (
+        ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+      ) (lib.mkDefault "eglot");
+
       usePackage.toml-ts-mode = {
         enable = true;
         mode = [ ''"\\.toml\\'"'' ];

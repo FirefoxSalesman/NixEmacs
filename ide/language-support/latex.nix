@@ -18,91 +18,97 @@ in
 
   config = lib.mkIf ide.languages.latex.enable {
     # Infinitely many thanks to David Wilson for this one
-    programs.emacs.init.usePackage = {
-      tex = {
-        enable = ide.languages.latex.magicLatexBuffer;
-        package = epkgs: epkgs.auctex;
-        init = lib.mkDefault "(setq-default TeX-master nil)";
-        setopt = {
-          reftex-label-alist = lib.mkDefault [
-            [
-              ''"\\poemtitle"''
-              "'?P"
-              ''"poem:"''
-              ''"\\ref{%s}"''
-              false
+    programs.emacs.init = {
+      tools.apheleia.modeFormatters.LaTeX-mode = lib.mkIf (
+        ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+      ) (lib.mkDefault "eglot");
+
+      usePackage = {
+        tex = {
+          enable = ide.languages.latex.magicLatexBuffer;
+          package = epkgs: epkgs.auctex;
+          init = lib.mkDefault "(setq-default TeX-master nil)";
+          setopt = {
+            reftex-label-alist = lib.mkDefault [
               [
-                ''"poem"''
-                ''"poemtitle"''
+                ''"\\poemtitle"''
+                "'?P"
+                ''"poem:"''
+                ''"\\ref{%s}"''
+                false
+                [
+                  ''"poem"''
+                  ''"poemtitle"''
+                ]
               ]
-            ]
-          ];
-          reftex-format-cite-function = lib.mkDefault ''
-            '(lambda (key fmt)
-              (let ((cite (replace-regexp-in-string "%l" key fmt))
-                   (if ( or (= ?~ (string-to-char fmt))
-                      (member (preceding-char) '(?\ ?\t |/n ?~)))
-                       cite
-                 (concat "~" cite)))))
-          '';
-          TeX-auto-save = lib.mkDefault true;
-          TeX-parse-self = lib.mkDefault true;
-          reftex-plug-into-AUCTeX = lib.mkDefault true;
+            ];
+            reftex-format-cite-function = lib.mkDefault ''
+              '(lambda (key fmt)
+                (let ((cite (replace-regexp-in-string "%l" key fmt))
+                     (if ( or (= ?~ (string-to-char fmt))
+                        (member (preceding-char) '(?\ ?\t |/n ?~)))
+                         cite
+                   (concat "~" cite)))))
+            '';
+            TeX-auto-save = lib.mkDefault true;
+            TeX-parse-self = lib.mkDefault true;
+            reftex-plug-into-AUCTeX = lib.mkDefault true;
+          };
+          generalTwoConfig.local-leader.LaTeX-mode-map =
+            lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
+              {
+                "p" = lib.mkDefault '''(preview-at-point :which-key "preview")'';
+                "u" = lib.mkDefault '''(preview-clearout-at-point :which-key "unpreview")'';
+              };
         };
-        generalTwoConfig.local-leader.LaTeX-mode-map =
-          lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
-            {
-              "p" = lib.mkDefault '''(preview-at-point :which-key "preview")'';
-              "u" = lib.mkDefault '''(preview-clearout-at-point :which-key "unpreview")'';
-            };
-      };
 
-      bibtex-mode = {
-        enable = true;
-        mode = [ ''"\\.bib\\'"'' ];
-        lsp = ide.lsp.enable;
-        eglot = ide.eglot.enable;
-      };
+        bibtex-mode = {
+          enable = true;
+          mode = [ ''"\\.bib\\'"'' ];
+          lsp = ide.lsp.enable;
+          eglot = ide.eglot.enable;
+        };
 
-      latex = {
-        enable = true;
-        package = epkgs: epkgs.auctex;
-        extraPackages =
-          if ide.eglot.enable || ide.lsp.enable || ide.lspce.enable || ide.lsp-bridge.enable then
-            if ide.languages.latex.preferTexlab then [ pkgs.texlab ] else [ pkgs.texlivePackages.digestif ]
-          else
-            [ ];
-        babel = lib.mkIf ide.languages.org.enable "latex";
-        mode = [ ''("\\.tex\\'" . LaTeX-mode)'' ];
-        lsp = ide.lsp.enable;
-        eglot = ide.eglot.enable;
-        lspce = lib.mkIf ide.lspce.enable ''
-          '("plain-tex" "latex" "context" "texinfo" "bibtex" "tex") "${
-            if ide.languages.latex.preferTexlab then "texlab" else "digestif"
-          }"
-        '';
-      };
+        latex = {
+          enable = true;
+          package = epkgs: epkgs.auctex;
+          extraPackages =
+            if ide.eglot.enable || ide.lsp.enable || ide.lspce.enable || ide.lsp-bridge.enable then
+              if ide.languages.latex.preferTexlab then [ pkgs.texlab ] else [ pkgs.texlivePackages.digestif ]
+            else
+              [ ];
+          babel = lib.mkIf ide.languages.org.enable "latex";
+          mode = [ ''("\\.tex\\'" . LaTeX-mode)'' ];
+          lsp = ide.lsp.enable;
+          eglot = ide.eglot.enable;
+          lspce = lib.mkIf ide.lspce.enable ''
+            '("plain-tex" "latex" "context" "texinfo" "bibtex" "tex") "${
+              if ide.languages.latex.preferTexlab then "texlab" else "digestif"
+            }"
+          '';
+        };
 
-      magic-latex-buffer = {
-        enable = ide.languages.latex.magicLatexBuffer;
-        hook = [ "(LaTeX-mode . magic-latex-buffer)" ];
-      };
+        magic-latex-buffer = {
+          enable = ide.languages.latex.magicLatexBuffer;
+          hook = [ "(LaTeX-mode . magic-latex-buffer)" ];
+        };
 
-      cdlatex = {
-        enable = ide.languages.latex.cdlatex;
-        hook = [
-          "('LaTeX-mode . turn-on-cdlatex)"
-          "('org-mode . org-cdlatex-mode)"
-        ];
-      };
+        cdlatex = {
+          enable = ide.languages.latex.cdlatex;
+          hook = [
+            "('LaTeX-mode . turn-on-cdlatex)"
+            "('org-mode . org-cdlatex-mode)"
+          ];
+        };
 
-      lsp-bridge.setopt.lsp-bridge-tex-lsp-server = lib.mkIf ide.lsp-bridge.enable (
-        if ide.languages.latex.preferTexlab then ''"texlab"'' else ''"digestif"''
-      );
+        lsp-bridge.setopt.lsp-bridge-tex-lsp-server = lib.mkIf ide.lsp-bridge.enable (
+          if ide.languages.latex.preferTexlab then ''"texlab"'' else ''"digestif"''
+        );
 
-      evil-tex = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
-        enable = true;
-        hook = [ "(LaTeX-mode . evil-tex-mode)" ];
+        evil-tex = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
+          enable = true;
+          hook = [ "(LaTeX-mode . evil-tex-mode)" ];
+        };
       };
     };
   };

@@ -2,6 +2,7 @@
 
 let
   ide = config.programs.emacs.init.ide;
+  apheleia = config.programs.emacs.init.tools.apheleia.enable;
 in
 {
   options.programs.emacs.init.ide.languages.emacs-lisp = {
@@ -15,6 +16,15 @@ in
         lib.mkIf ide.symex "https://github.com/Wilfred/tree-sitter-elisp";
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "emacs-lisp-mode" ];
     };
+
+    tools.apheleia = lib.mkIf apheleia {
+      formatters.elisp-autofmt = lib.mkDefault ''
+        (make-apheleia-formatter apheleia-indent-elisp
+           (elisp-autofmt-buffer))
+      '';
+      modeFormatters.emacs-lisp-mode = lib.mkDefault "elisp-autofmt";
+    };
+
     usePackage = {
       elisp-mode = {
         enable = true;
@@ -53,6 +63,11 @@ in
       semel = {
         enable = true;
         hook = [ "(emacs-lisp-mode . semel-mode)" ];
+      };
+
+      elisp-autofmt = lib.mkIf apheleia {
+        enable = true;
+        after = [ "apheleia" ];
       };
     };
   };

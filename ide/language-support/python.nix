@@ -33,6 +33,11 @@ in
       treesitter.wantTreesitter = true;
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "python-ts-mode" ];
     };
+
+    tools.apheleia.modeFormatters.python-ts-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage = {
       python-ts-mode = {
         enable = true;

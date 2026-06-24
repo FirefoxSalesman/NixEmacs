@@ -18,6 +18,15 @@ in
         treesitter.treesitterGrammars."nix" = "https://github.com/nix-community/tree-sitter-nix";
         treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "nix-ts-mode" ];
       };
+
+      tools.apheleia = lib.mkIf config.programs.emacs.init.tools.apheleia.enable {
+        modeFormatters.nix-ts-mode = lib.mkDefault "nixfmt";
+        formatters.nixfmt = lib.mkDefault [
+          "${lib.getExe pkgs.nixfmt}"
+          "-"
+        ];
+      };
+
       usePackage = {
         nix-ts-mode = {
           enable = true;

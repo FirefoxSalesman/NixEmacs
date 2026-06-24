@@ -16,6 +16,11 @@ in
       treesitter.wantTreesitter = true;
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "zig-ts-mode" ];
     };
+
+    tools.apheleia.modeFormatters.zig-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage.zig-mode = lib.mkIf ide.languages.zig.enable {
       enable = true;
       extraPackages =

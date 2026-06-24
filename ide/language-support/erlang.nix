@@ -17,6 +17,11 @@ in
       treesitter.wantTreesitter = true;
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "erlang-ts-mode" ];
     };
+
+    tools.apheleia.modeFormatters.erlang-ts-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage.erlang-ts = {
       enable = true;
       mode = [ ''("\\.erl\\'" . erlang-ts-mode)'' ];

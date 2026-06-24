@@ -21,6 +21,10 @@ in
         treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "html-ts-mode" ];
       };
 
+      tools.apheleia.modeFormatters.html-ts-mode = lib.mkIf (
+        ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+      ) (lib.mkDefault "eglot");
+
       usePackage = {
         html-ts-mode = {
           enable = true;

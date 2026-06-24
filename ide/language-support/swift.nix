@@ -17,6 +17,11 @@ in
       treesitter.treesitterGrammars.swift = "https://github.com/alex-pinkus/tree-sitter-swift";
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "swift-ts-mode" ];
     };
+
+    tools.apheleia.modeFormatters.swift-ts-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage = {
       swift-ts-mode = {
         enable = true;

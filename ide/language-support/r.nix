@@ -16,6 +16,11 @@ in
       treesitter.wantTreesitter = true;
       treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "ess-r-mode" ];
     };
+
+    tools.apheleia.modeFormatters.ess-r-mode = lib.mkIf (
+      ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+    ) (lib.mkDefault "eglot");
+
     usePackage.ess-r-mode = {
       enable = true;
       babel = lib.mkIf ide.languages.org.enable "R";

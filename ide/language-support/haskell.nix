@@ -17,6 +17,11 @@ in
         treesitter.treesitterGrammars.haskell = "https://github.com/tree-sitter/tree-sitter-haskell";
         treesit-fold.enabledModes = lib.mkIf ide.treesit-fold.enable [ "haskell-ts-mode" ];
       };
+
+      tools.apheleia.modeFormatters.haskell-ts-mode = lib.mkIf (
+        ide.eglot.enable && config.programs.emacs.init.tools.apheleia.enable
+      ) (lib.mkDefault "eglot");
+
       usePackage.haskell-ts-mode = {
         enable = true;
         babel = lib.mkIf ide.languages.org.enable "haskell";
