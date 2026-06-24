@@ -89,6 +89,12 @@ final: prev: inputs: {
             inherit (prev.emacs.pkgs) trivialBuild gptel;
           }
         );
+        macher-agent = (
+          prev.emacs.pkgs.callPackage ./emacs-packages/macher-agent.nix {
+            inherit inputs;
+            inherit (prev.emacs.pkgs) trivialBuild gptel macher;
+          }
+        );
       }
     ));
 }

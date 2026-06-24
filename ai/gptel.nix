@@ -15,6 +15,7 @@ in
 
     macher = {
       enable = lib.mkEnableOption "Enables macher, a lightweight agent-like tool built on top of gptel.";
+      agent = lib.mkEnableOption "Enables macher-agent for a more agentic workflow.";
     };
 
     introspection = {
@@ -93,7 +94,13 @@ in
       };
     };
 
-    ragmacs = {
+    macher-agent = lib.mkIf (ai.gptel.macher.enable && ai.gptel.macher.agent) {
+      enable = true;
+      after = [ "macher" ];
+      generalOneConfig.global-leader."gMt" = '''("inject thought" . macher-agent-inject-thought)'';
+    };
+
+    ragmacs = lib.mkIf ai.gptel.introspection.enable {
       enable = true;
       after = [ "gptel" ];
       config = ''

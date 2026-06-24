@@ -20,7 +20,9 @@ in
         generalTwoConfig.local-leader.eglot-mode-map =
           lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable
             {
-              "f" = lib.mkDefault "'eglot-format-buffer";
+              "f" = lib.mkIf (!config.programs.emacs.init.tools.apheleia.enable) (
+                lib.mkDefault "'eglot-format-buffer"
+              );
               "a" = lib.mkDefault "'eglot-code-actions";
               "d" = lib.mkDefault "'eldoc-doc-buffer";
               "r" = lib.mkDefault "'eglot-rename";

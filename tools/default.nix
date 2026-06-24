@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./apheleia.nix
     ./golden-ratio.nix
     ./exwm.nix
     ./dired.nix

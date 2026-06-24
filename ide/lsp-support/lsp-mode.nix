@@ -26,15 +26,17 @@ in
           lsp-headerline-breadcrumb-enable = lib.mkDefault ide.breadcrumb;
         };
         generalTwoConfig.local-leader.lsp-mode-map = lib.mkIf keybinds.leader-keys.enable {
-          "f" = "'lsp-format-buffer";
-          "a" = "'lsp-execute-code-action";
-          "r" = "'lsp-rename";
+          "f" = lib.mkIf (!config.programs.emacs.init.tools.apheleia.enable) (
+            lib.mkDefault "'lsp-format-buffer"
+          );
+          "a" = lib.mkDefault "'lsp-execute-code-action";
+          "r" = lib.mkDefault "'lsp-rename";
         };
         generalOneConfig.lsp-ui-peek-mode-map = lib.mkIf keybinds.evil.enable {
-          "${keybinds.evil.keys.down}" = "'lsp-ui-peek--select-next";
-          "${keybinds.evil.keys.up}" = "'lsp-ui-peek--select-prev";
-          "C-${keybinds.evil.keys.down}" = "'lsp-ui-peek--select-next-file";
-          "C-${keybinds.evil.keys.up}" = "'lsp-ui-peek--select-prev-file";
+          "${keybinds.evil.keys.down}" = lib.mkDefault "'lsp-ui-peek--select-next";
+          "${keybinds.evil.keys.up}" = lib.mkDefault "'lsp-ui-peek--select-prev";
+          "C-${keybinds.evil.keys.down}" = lib.mkDefault "'lsp-ui-peek--select-next-file";
+          "C-${keybinds.evil.keys.up}" = lib.mkDefault "'lsp-ui-peek--select-prev-file";
         };
       };
 
@@ -54,14 +56,14 @@ in
       consult-lsp = lib.mkIf completions.smallExtras.enable {
         enable = true;
         after = [ "lsp-mode" ];
-        bindLocal.lsp-mode-map."C-M-." = "consult-lsp-symbols";
+        bindLocal.lsp-mode-map."C-M-." = lib.mkDefault "consult-lsp-symbols";
       };
 
       ivy-lsp = lib.mkIf completions.ivy.enable {
         enable = true;
         command = [ "lsp-ivy-global-workspace-symbol" ];
         after = [ "lsp-mode" ];
-        bindLocal.lsp-mode-map."C-M-." = "lsp-ivy-workspace-symbol";
+        bindLocal.lsp-mode-map."C-M-." = lib.mkDefault "lsp-ivy-workspace-symbol";
       };
     };
   };
