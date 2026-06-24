@@ -13,17 +13,17 @@ in
     lib.mkEnableOption "Enable eglot's preset configuration";
 
   config = lib.mkIf ide.eglot.preset {
-    programs.emacs.init.usePackage = {
-      # https://github.com/radian-software/apheleia/issues/153
-      tools.apheleia.formatters.eglot = lib.mkIf config.programs.emacs.init.tools.apheleia.enable ''
-        (make-apheleia-formatter apheleia-indent-eglot-managed-buffer
-           (setq-local eglot--cached-server
-                       (with-current-buffer buffer
-                         (eglot-current-server)))
-           (let ((buffer-file-name (buffer-local-value 'buffer-file-name buffer)))
-             (eglot-format-buffer)))
-      '';
+    # https://github.com/radian-software/apheleia/issues/153
+    tools.apheleia.formatters.eglot = lib.mkIf config.programs.emacs.init.tools.apheleia.enable ''
+      (make-apheleia-formatter apheleia-indent-eglot-managed-buffer
+         (setq-local eglot--cached-server
+                     (with-current-buffer buffer
+                       (eglot-current-server)))
+         (let ((buffer-file-name (buffer-local-value 'buffer-file-name buffer)))
+           (eglot-format-buffer)))
+    '';
 
+    programs.emacs.init.usePackage = {
       eglot = {
         enable = true;
         defer = true;
