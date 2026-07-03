@@ -3,6 +3,10 @@ final: prev: inputs: {
     pkgs = prev;
     lib = prev.lib;
   };
+  vscode-eslint-language-server = import ./other-packages/vscode-eslint-language-server.nix {
+    pkgs = prev;
+    lib = prev.lib;
+  };
   emacsPackagesFor =
     emacs:
     ((prev.emacsPackagesFor emacs).overrideScope (

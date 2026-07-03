@@ -66,7 +66,7 @@ in
                 else
                   [ pkgs.typescript-language-server ]
               )
-              ++ (fakeIf ide.languages.javascript.wantEslint pkgs.vscode-langservers-extracted)
+              ++ (fakeIf ide.languages.javascript.wantEslint pkgs.vscode-eslint-language-server)
               ++ (fakeIf ide.languages.javascript.wantOxlint pkgs.oxlint)
               ++ (fakeIf ide.languages.javascript.wantOxfmt pkgs.oxfmt)
               ++ (fakeIf ide.languages.javascript.wantBiome pkgs.biome)
