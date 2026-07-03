@@ -35,11 +35,9 @@ in
         css-ts-mode = {
           enable = true;
           babel = lib.mkIf ide.languages.org.enable "css";
-          extraPackages =
-            if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
-              with pkgs; [ vscode-langservers-extracted ]
-            else
-              [ ];
+          extraPackages = lib.mkIf (
+            ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable
+          ) [ pkgs.vscode-css-languageserver ];
           mode = [ ''"\\.css\\'"'' ];
           eglot = ide.eglot.enable;
           symex = ide.symex;

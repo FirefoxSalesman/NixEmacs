@@ -23,11 +23,9 @@ in
       usePackage = {
         json-ts-mode = {
           enable = true;
-          extraPackages =
-            if ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable then
-              with pkgs; [ vscode-langservers-extracted ]
-            else
-              [ ];
+          extraPackages = lib.mkIf (
+            ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable || ide.eglot.enable
+          ) [ pkgs.vscode-json-languageserver ];
           mode = [ ''"\\.json\\'"'' ];
           lsp = ide.lsp.enable;
           eglot = ide.eglot.enable;
@@ -37,7 +35,6 @@ in
 
         json5-ts-mode = {
           enable = true;
-          extraPackages = [ pkgs.vscode-langservers-extracted ];
           mode = [ ''"\\.json5\\'"'' ];
           eglot = lib.mkIf ide.eglot.enable ''("vscode-json-language-server" "--stdio")'';
           symex = ide.symex;

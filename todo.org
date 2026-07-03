@@ -1,10 +1,8 @@
 * TODO Ide Features
 ** TODO Python Improvements
 + [ ] Switch jupyter support to jupyter-ascending (not currently viable, since jupyter-ascending isn't in nixpkgs)
-** TODO Fix Purescript
-+ https://discourse.nixos.org/t/nodepackages-pnpm-removed-nodepackages-has-been-removed-because-it-was-unmaintainable-within-nixpkgs-migration-guidance/76753
 ** TODO Mason
-+ Can be used to get otherwise unobtainable language servers (purescript)
++ Can be used to get otherwise unobtainable language servers (purescript & julia)
 ** TODO Citre
 * TODO Eshell should support global shell aliases
 * TODO Support for keybindings
