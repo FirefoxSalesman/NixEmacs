@@ -1170,7 +1170,9 @@ Due to crashes, symex is currently disabled
 
 ***** html
 ****** =html.enable=
-Boolean option that enables html support
+Boolean option that enables html support.
+
+Due to vscode-langservers-extracted crashing recently, I have borrowed & modified the build instructions for the language server from nixpkgs to use regular nodejs instead of nodejs-slim.
 
 ****** =html.emmet=
 Boolean value that enables emmet in css buffers

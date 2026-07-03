@@ -29,10 +29,9 @@ in
         html-ts-mode = {
           enable = true;
           extraPackages =
-            if ide.lsp-bridge.enable || ide.lsp.enable || ide.eglot.enable then
-              with pkgs; [ vscode-langservers-extracted ]
-            else
-              [ ];
+            lib.mkIf ide.lsp-bridge.enable
+            || ide.lsp.enable
+            || ide.eglot.enable [ pkgs.vscode-html-language-server ];
           # many thanks to doom
           mode = [ ''"\\.[px]?html?\\'"'' ];
           lspce = lib.mkIf ide.lspce.enable ''"html" "vscode-html-language-server" "--stdio"'';
