@@ -1,4 +1,8 @@
 final: prev: inputs: {
+  vscode-html-language-server = import ./other-packages/vscode-html-language-server.nix {
+    pkgs = prev;
+    lib = prev.lib;
+  };
   emacsPackagesFor =
     emacs:
     ((prev.emacsPackagesFor emacs).overrideScope (
