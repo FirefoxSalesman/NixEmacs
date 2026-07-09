@@ -19,7 +19,7 @@ in
     };
 
     introspection = {
-      enable = lib.mkEnableOption "Provides the introspect preset via ragmacs. It allows gptel to read emacs's documentation. Utterly useless if you enable gptel-agent.";
+      enable = lib.mkEnableOption "Provides the introspect preset via ragmacs. It allows gptel to read emacs's documentation.";
       model = lib.mkOption {
         type = lib.types.str;
         default = "";

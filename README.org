@@ -1654,6 +1654,15 @@ Leader keys:
 ****** =programs.emacs.init.ai.gptel.macher.agent=
 Enables [[https://github.com/elij/macher-agent][macher-agent]], which brings macher much closer to a traditional agent experience.
 
+***** Introspection
+Allows gptel to read emacs documentation via [[https://github.com/positron-solutions/ragmacs][ragmacs]].
+
+***** =programs.emacs.init.ai.gptel.introspection.enable=
+Provides a gptel preset called =introspect= that allows it to read emacs documentation.
+
+***** =programs.emacs.init.ai.gptel.introspection.model=
+The model to be used with the introspect preset. If left blank, your currently selected model will be used.
+
 ***** =programs.emacs.init.ai.gptel.agent.enable=
 Enables [[https://github.com/karthink/gptel-agent][gptel-agent]].
 
