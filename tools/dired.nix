@@ -178,7 +178,7 @@ in
           (advice-add #'dired--find-file :override #'dirvish--find-entry)
           (advice-add #'dired-noselect :around #'dirvish-dired-noselect-a)
           (advice-add #'dirvish-side :after (local! window-size-fixed t))
-                    (with-eval-after-load 'dirvish-yank
+          (with-eval-after-load 'dirvish-yank
             (defun dirvish-yank--apply (method dest)
               "Apply yank METHOD to DEST."
               (setq dest (expand-file-name (or dest (dired-current-directory))))
@@ -191,6 +191,7 @@ in
                          (dirvish-yank--get-srcs dirvish-yank-sources)
                          (user-error "DIRVISH[yank]: no marked files"))))
                 (dirvish-yank-default-handler method srcs dest))))
+          ${if tools.dired.dirvish.previews then "(dirvish-peek-mode)" else ""}
           ${
             if tools.exwm.enable then
               ''
