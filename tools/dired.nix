@@ -178,6 +178,17 @@ in
           (advice-add #'dired--find-file :override #'dirvish--find-entry)
           (advice-add #'dired-noselect :around #'dirvish-dired-noselect-a)
           (advice-add #'dirvish-side :after (local! window-size-fixed t))
+          ${
+            if tools.goldenRatio then
+              ''
+                (add-to-list
+                 #'golden-ratio-inhibit-functions
+                 (lambda ()
+                   (string-prefix-p " *SIDE :: " (buffer-name (current-buffer)))))
+              ''
+            else
+              ""
+          }
           (with-eval-after-load 'dirvish-yank
             (defun dirvish-yank--apply (method dest)
               "Apply yank METHOD to DEST."
