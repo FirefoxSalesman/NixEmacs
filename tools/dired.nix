@@ -109,7 +109,7 @@ in
         bindLocal.dirvish-mode-map = lib.mkIf (!keybinds.evil.enable) {
           "M-n" = lib.mkIf tools.dired.narrow (lib.mkDefault "'dirvish-narrow");
           "M-m" = lib.mkDefault "'dirvish-mark-menu";
-          "f" = lib.mkDefault "'dirvish-file-info-menu";
+          "i" = lib.mkDefault "'dirvish-file-info-menu";
           "y" = lib.mkDefault "'dirvish-yank";
           "S" = lib.mkDefault "'dirvish-quicksort";
           "F" = lib.mkDefault "'dirvish-layout-toggle";
