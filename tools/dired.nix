@@ -131,8 +131,8 @@ in
           "S" = lib.mkDefault "'dirvish-quicksort";
           "F" = lib.mkDefault "'dirvish-layout-toggle";
           "z" = lib.mkDefault "'dirvish-history-jump";
-          "g${keybinds.evil.keys.left}" = lib.mkDefault "'dirvish-subtree-up";
-          "g${keybinds.evil.keys.right}" = lib.mkDefault "'dirvish-subtree-toggle";
+          "g${keybinds.evil.keys.backward}" = lib.mkDefault "'dirvish-subtree-up";
+          "g${keybinds.evil.keys.forward}" = lib.mkDefault "'dirvish-subtree-toggle";
           "C-i" = lib.mkDefault "'dirvish-subtree-toggle";
           "[h" = lib.mkDefault "'dirvish-history-go-backward";
           "]h" = lib.mkDefault "'dirvish-history-go-forward";
