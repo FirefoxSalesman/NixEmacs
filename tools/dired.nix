@@ -18,9 +18,14 @@ in
       hook = [
         "(dired-mode . (lambda () (dired-omit-mode) (hl-line-mode) (setq-local visible-cursor nil)))"
       ];
+      # These options are all borrowed from Prot.
       setopt = {
         dired-recursive-deletes = lib.mkDefault "'always";
+        dired-recursive-copies = lib.mkDefault "'always";
         dired-listing-switches = lib.mkDefault ''"-agho --group-directories-first"'';
+        dired-kill-when-opening-new-dired-buffer = lib.mkDefault true;
+        dired-auto-revert-buffer = lib.mkDefault "#'dired-directory-changed-p";
+        dired-create-destination-dirs = lib.mkDefault "'always";
       };
       generalOne.global-leader."d" = lib.mkIf keybinds.leader-key.enable '''("dired" . dired)'';
       bindLocal.ctl-x-map."C-j" = lib.mkDefault "dired-jump";
