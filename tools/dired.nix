@@ -150,31 +150,22 @@ in
           "sS" = lib.mkDefault "'dirvish-relative-symlink";
           "sh" = lib.mkDefault "'dirvish-hardlink";
         };
-        setopt =
-          let
-            dirvishTypes = [
-              "'dirvish"
-              "'dirvish-side"
-            ];
-          in
-          {
-            dirvish-reuse-session = "'open";
-            dirvish-attributes =
-              if config.programs.emacs.init.aesthetics.icons.enable then
-                [
-                  "'file-size"
-                  "'nerd-icons"
-                  "'subtree-state"
-                ]
-              else
-                [
-                  "'file-size"
-                  "'subtree-state"
-                ];
-            dirvish-hide-details = dirvishTypes;
-            dirvish-hide-cursor = dirvishTypes;
-            dirvish-use-mode-line = false;
-          };
+        setopt = {
+          dirvish-reuse-session = "'open";
+          dirvish-attributes =
+            if config.programs.emacs.init.aesthetics.icons.enable then
+              [
+                "'file-size"
+                "'nerd-icons"
+                "'subtree-state"
+              ]
+            else
+              [
+                "'file-size"
+                "'subtree-state"
+              ];
+          dirvish-use-mode-line = false;
+        };
         config = ''
           (dirvish-override-dired-mode)
           (advice-add #'dired--find-file :override #'dirvish--find-entry)
