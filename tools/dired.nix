@@ -191,6 +191,15 @@ in
                          (dirvish-yank--get-srcs dirvish-yank-sources)
                          (user-error "DIRVISH[yank]: no marked files"))))
                 (dirvish-yank-default-handler method srcs dest))))
+          ${
+            if tools.exwm.enable then
+              ''
+                (dolist (ext '("xcf" "odt" "doc" "docx" "odp" "pptx" "xlsx"))
+                  (add-to-list 'dirvish-preview-disabled-exts ext))
+              ''
+            else
+              ""
+          }
         '';
       };
     };
