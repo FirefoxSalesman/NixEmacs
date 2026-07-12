@@ -1439,7 +1439,14 @@ Binds =N= to =dired-narrow-fuzzy=
 Binds =M-t= to =dired-posframe-mode=
 
 ***** =config.programs.emacs.init.tools.dired.async=
-Runs file movement asynchronous
+Runs file movement asynchronously
+
+***** Dirvish
+****** =config.programs.emacs.init.tools.dired.dirvish.enable=
+Enables dirvish support. Largely stolen from doom.
+
+****** =config.programs.emacs.init.tools.dired.dirvish.previews=
+Enables previews for find-file & similar commands via dirvish-peek-mode
 
 **** Apheleia
 ***** =config.programs.emacs.init.tools.apheleia.enable=

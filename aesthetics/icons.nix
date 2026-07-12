@@ -49,7 +49,7 @@ in
       hook = [ "(marginalia-mode . nerd-icons-completion-marginalia-setup)" ];
     };
 
-    nerd-icons-dired = lib.mkIf tools.dired.enable {
+    nerd-icons-dired = lib.mkIf (tools.dired.enable && !tools.dired.dirvish.enable) {
       enable = true;
       hook = [ "(dired-mode . nerd-icons-dired-mode)" ];
     };
