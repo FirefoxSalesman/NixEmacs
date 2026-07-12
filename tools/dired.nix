@@ -151,7 +151,7 @@ in
           "sh" = lib.mkDefault "'dirvish-hardlink";
         };
         setopt = {
-          dirvish-reuse-session = "'open";
+          dirvish-reuse-session = lib.mkDefault "'open";
           dirvish-attributes =
             if config.programs.emacs.init.aesthetics.icons.enable then
               [
@@ -164,7 +164,6 @@ in
                 "'file-size"
                 "'subtree-state"
               ];
-          dirvish-use-mode-line = false;
         };
         config = ''
           (dirvish-override-dired-mode)
