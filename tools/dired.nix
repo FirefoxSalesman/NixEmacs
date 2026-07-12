@@ -27,7 +27,9 @@ in
       dired = {
         enable = true;
         hook = [
-          "(dired-mode . (lambda () (dired-omit-mode) (hl-line-mode) (setq-local visible-cursor nil)))"
+          "(dired-mode . (lambda () (dired-omit-mode) ${
+            if tools.dired.dirvish.enable then "" else "(hl-line-mode) (setq-local visible-cursor nil)"
+          }))"
         ];
         # These options are all borrowed from Prot.
         setopt = {
