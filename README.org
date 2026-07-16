@@ -662,6 +662,14 @@ The modifier key to use for evil easymotions. Defaults to ="M"=.
 
 Easymotion keybinds are M-[key used for the normal movement]
 
+***** =programs.emacs.init.keybinds.avy.avyKeys=
+The keys to use when jumping with avy.
+
+Example usage:
+#+begin_src nix-ts
+programs.emacs.init.keybinds.avy.avyKeys = ["c" "r" "s" "t" "b" "f" "n" "e" "i" "a"];
+#+end_src
+
 **** =programs.emacs.init.keybinds.electricPair.enable=
 Enables electric-pair-mode.  Borrowed from [[https://gitlab.com/dwt1/configuring-emacs][Derek Taylor]]
 

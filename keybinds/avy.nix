@@ -12,6 +12,21 @@ in
       default = "M";
       description = "The modifier key to use for evil easymotions";
     };
+    avyKeys = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [
+        "'?a"
+        "'?s"
+        "'?d"
+        "'?f"
+        "'?g"
+        "'?h"
+        "'?j"
+        "'?k"
+        "'?l"
+      ];
+      description = "The jumping keys to use with avy & similar tools.";
+    };
   };
 
   config.programs.emacs.init.usePackage = lib.mkIf keybinds.avy.enable {
@@ -44,7 +59,7 @@ in
                   (select-window
                    (cdr (ring-ref avy-ring 0)))
                   t)
-                
+
                 ${
                   if keybinds.evil.enable then
                     ''
@@ -78,6 +93,7 @@ in
             ${if completions.smallExtras.embark then "(?o . nix-emacs-avy-action-embark)" else ""})
         ''
       );
+      setopt.avy-keys = lib.map (key: "'?${key}") config.keybinds.avy.avyKeys;
     };
 
     evil-easymotion = lib.mkIf keybinds.evil.enable {
