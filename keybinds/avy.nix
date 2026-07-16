@@ -93,7 +93,7 @@ in
             ${if completions.smallExtras.embark then "(?o . nix-emacs-avy-action-embark)" else ""})
         ''
       );
-      setopt.avy-keys = lib.map (key: "'?${key}") config.keybinds.avy.avyKeys;
+      setopt.avy-keys = lib.map (key: "'?${key}") keybinds.avy.avyKeys;
     };
 
     evil-easymotion = lib.mkIf keybinds.evil.enable {
