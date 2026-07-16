@@ -31,9 +31,9 @@ in
       "p" = lib.mkDefault (if init.keybinds.avy.enable then "'citre-ace-peek" else "'citre-peek");
       "u" = lib.mkDefault "'citre-update-this-tags-file";
     };
-    generalOneConfig.citre-peek-keymap = lib.mkIf keybinds.evil.enable {
-      "M-${keys.down}" = "'citre-peek-next-line";
-      "M-${keys.up}" = "'citre-peek-prev-line";
+    generalOneConfig.citre-peek-keymap = lib.mkIf init.keybinds.evil.enable {
+      "M-${init.keybinds.evil.keys.down}" = "'citre-peek-next-line";
+      "M-${init.keybinds.evil.keys.up}" = "'citre-peek-prev-line";
     };
   };
 }
