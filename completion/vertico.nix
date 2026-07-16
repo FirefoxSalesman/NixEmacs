@@ -35,6 +35,15 @@ in
           "${keybinds.avy.evilModifierKey}-${keybinds.evil.keys.up}" = "'vertico-quick-jump";
         };
         bindLocal.vertico-map."M-g f" = lib.mkIf (!keybinds.evil.enable) "vertico-quick-jump";
+        setopt =
+          let
+            keys = config.programs.emacs.init.keybinds.avy.avyKeys;
+            mkKeys = takeFn: ''"${lib.concatMapStrings (k: "${k}") (takeFn (lib.length keys / 2) keys)}"'';
+          in
+          {
+            vertico-quick1 = lib.mkDefault (mkKeys lib.take);
+            vertico-quick2 = lib.mkDefault (mkKeys lib.takeEnd);
+          };
       };
 
       vertico-prescient = lib.mkIf completions.prescient {
