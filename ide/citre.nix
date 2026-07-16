@@ -12,7 +12,7 @@ in
   options.programs.emacs.init.ide.citre.enable =
     lib.mkEnableOption "Enables citre. It provides a way to peek at symbol definitions, & an alternate backend to xref for when you can't use lsps. Borrowed from John Weigley's config.";
 
-  programs.emacs.init.usePackage.citre = lib.mkIf init.ide.citre.enable {
+  config.programs.emacs.init.usePackage.citre = lib.mkIf init.ide.citre.enable {
     enable = true;
     hook = [
       "(prog-mode . citre-mode)"
