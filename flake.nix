@@ -18,7 +18,7 @@
     };
 
     eglot-x = {
-      url = "github:nemethf/eglot-x";
+      url = "github:dylanwh/eglot-x/dylan/apply-workspace-edit-arity";
       flake = false;
     };
 
