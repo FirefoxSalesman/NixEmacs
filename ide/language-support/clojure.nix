@@ -34,7 +34,7 @@ in
         };
 
         cider = {
-          enable = ide.languages.java.clojure;
+          enable = true;
           hook = [ "(clojure-mode . cider-mode)" ];
           generalTwoConfig.local-leader.cider-mode-map."s" =
             lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable lib.mkDefault
