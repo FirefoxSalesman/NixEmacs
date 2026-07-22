@@ -27,7 +27,10 @@ in
       usePackage = {
         kotlin-ts-mode = {
           enable = true;
-          mode = [ ''"\\.kt\\'"'' ];
+          mode = [
+            ''"\\.kt\\'"''
+            ''"\\.kts\\'"''
+          ];
           extraPackages =
             if ide.eglot.enable || ide.lsp-bridge.enable || ide.lspce.enable || ide.lsp.enable then
               [ pkgs.kotlin-language-server ]
