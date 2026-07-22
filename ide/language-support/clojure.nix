@@ -37,8 +37,9 @@ in
           enable = true;
           hook = [ "(clojure-mode . cider-mode)" ];
           generalTwoConfig.local-leader.cider-mode-map."s" =
-            lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable lib.mkDefault
-              '''(cider-jack-in :which-key "start cider")'';
+            lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable (
+              lib.mkDefault '''(cider-jack-in :which-key "start cider")''
+            );
         };
       };
     };
