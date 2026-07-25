@@ -34,6 +34,7 @@ in
         description = "The file in your org-directory to put your journal entries in";
       };
     };
+    toc.enable = lib.mkEnableOption "Enables toc-org.";
   };
 
   config = lib.mkIf ide.languages.org.enable {
@@ -323,6 +324,15 @@ in
             "M-${keybinds.evil.keys.down}" = "'org-agenda-drag-line-forward";
             "M-${keybinds.evil.keys.up}" = "'org-agenda-drag-line-backward";
           };
+        };
+
+        toc-org = {
+          enable = true;
+          hook = [
+            "(org-mode . toc-org-mode)"
+            (if ide.languages.markdown.enable then "(markdown-mode . toc-org-mode)" else "")
+          ];
+          bindLocal.markdown-mode-map."C-c C-o" = lib.mkDefault "toc-org-markdown-follow-thing-at-point";
         };
       };
     };

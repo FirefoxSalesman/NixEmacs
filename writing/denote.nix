@@ -30,9 +30,9 @@ in
         denote-dired-directories = lib.mkDefault [ "denote-directory" ];
       };
       generalOne.global-leader = lib.mkIf keybinds.leader-key.enable {
-        "of" = "'denote-open-or-create";
-        "or" = '''(denote-rename-file :whick-key "denote rename")'';
-        "oi" = '''(denote-link :which-key "link to note")'';
+        "of" = lib.mkIf (!completions.smallExtras.enable) (lib.mkDefault "'denote-open-or-create");
+        "or" = lib.mkDefault '''(denote-rename-file :which-key "denote rename")'';
+        "oi" = lib.mkDefault '''(denote-link :which-key "link to note")'';
       };
       config = lib.mkIf completions.smallExtras.enable "(consult-denote-mode)";
     };
@@ -40,7 +40,10 @@ in
     consult-denote = lib.mkIf completions.smallExtras.enable {
       enable = true;
       command = [ "consult-denote-mode" ];
-      generalOne.global-leader."os" = lib.mkIf keybinds.leader-key.enable "'consult-denote-grep";
+      generalOne.global-leader = lib.mkIf keybinds.leader-key.enable {
+        "os" = lib.mkDefault "'consult-denote-grep";
+        "of" = lib.mkDefault "'consult-denote-find";
+      };
       setopt.consult-denote-grep-command = "'consult-ripgrep";
     };
 

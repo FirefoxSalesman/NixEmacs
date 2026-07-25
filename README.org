@@ -1091,7 +1091,7 @@ Local leader keys:
 + u: update the project's ctags file
 
 Evil support:
-+ You can travel up & down with M-[keybinds.evil.keys.up] & M-[keybinds.evil.keys.down] 
++ You can travel up & down with M-[keybinds.evil.keys.up] & M-[keybinds.evil.keys.down]
 
 **** Language Support
 Every option here can be found under =programs.emacs.init.ide.languages=
@@ -1287,8 +1287,11 @@ Enables doom's org capture templates
 ******* =org.captureTemplates.notesFile=
 The file in your org-directory to put your notes in. Defaults to ="notes.org"=
 
-******* =org.captureTemplates.journalFIle=
+******* =org.captureTemplates.journalFile=
 The file in your org-directory to put your journal entries in. Defaults to ="journal.org"=
+
+****** =org.toc.enable=
+Enables [[https://github.com/snosov1/toc-org][toc-org]] for table of contents. Supports markdown if its preset is enabled.
 
 ***** =plantuml.enable=
 Boolean that enables plantuml support.
