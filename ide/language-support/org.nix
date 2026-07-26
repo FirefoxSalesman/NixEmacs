@@ -332,7 +332,10 @@ in
             "(org-mode . toc-org-mode)"
             (if ide.languages.markdown.enable then "(markdown-mode . toc-org-mode)" else "")
           ];
-          config = ''(define-key markdown-mode-map (kbd "C-c C-o") 'toc-org-markdown-follow-thing-at-point)'';
+          config = ''
+            (with-eval-after-load 'markdown-mode
+                                  (define-key markdown-mode-map (kbd "C-c C-o") 'toc-org-markdown-follow-thing-at-point))
+          '';
         };
       };
     };
