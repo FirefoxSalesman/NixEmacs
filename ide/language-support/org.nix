@@ -332,7 +332,7 @@ in
             "(org-mode . toc-org-mode)"
             (if ide.languages.markdown.enable then "(markdown-mode . toc-org-mode)" else "")
           ];
-          bindLocal.markdown-mode-map."C-c C-o" = lib.mkDefault "toc-org-markdown-follow-thing-at-point";
+          config = ''(define-key markdown-mode-map (kbd "C-c C-o") 'toc-org-markdown-follow-thing-at-point)'';
         };
       };
     };
