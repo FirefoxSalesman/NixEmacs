@@ -96,9 +96,9 @@ in
 
         eglot-java = lib.mkIf ide.languages.java.moreEglot {
           enable = true;
-          after = [ "eglot" ];
+          hook = [ "(java-ts-mode . eglot-java-mode)" ];
+          # https://github.com/yveszoundi/eglot-java/pull/68/files
           config = ''
-            (eglot-java-mode)
             (defun eglot-java--jdt-uri-handler (_operation &rest args)
               "Support Eclipse jdtls `jdt://' uri scheme."
               (let* ((uri (car args))
