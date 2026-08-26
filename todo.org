@@ -3,6 +3,9 @@
 + [ ] Switch jupyter support to jupyter-ascending (not currently viable, since jupyter-ascending isn't in nixpkgs)
 ** TODO Mason
 + Can be used to get otherwise unobtainable language servers (purescript & julia)
+** TODO [ ] Update flycheck preset
+
+[[elfeed:planet.emacslife.com#https://emacsredux.com/blog/2026/07/29/flycheck-38/][Emacs Redux: Flycheck 38: Might & Magic]]
 * TODO Eshell should support global shell aliases
 * TODO Support for keybindings
 ** TODO Multi cursors
