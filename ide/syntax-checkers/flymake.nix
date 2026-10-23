@@ -20,7 +20,7 @@ in
                                                                                                                                                     elisp-eldoc-funcall
                                                                                                                                                     t)))))''
         ];
-        config = lib.mkIf config.programs.emacs.init.keybinds.evil.enable ''(evil-ex-define-cmd "trouble" 'flymake-show-buffer-diagnostics)'';
+        config = lib.mkIf config.programs.emacs.init.keybinds.evil.enable ''(evil-ex-define-cmd "trouble" 'flymake-show-project-diagnostics)'';
       };
 
       flymake-popon = lib.mkIf (ide.hoverDoc && !ide.flycheck.preset) {
