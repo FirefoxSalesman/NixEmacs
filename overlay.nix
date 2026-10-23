@@ -103,6 +103,7 @@ final: prev: inputs: {
             inherit (prev.emacs.pkgs) trivialBuild gptel macher;
           }
         );
+        markdown-ts-mode = null;
       }
     ));
 }
