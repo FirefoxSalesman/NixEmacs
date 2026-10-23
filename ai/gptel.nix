@@ -28,6 +28,7 @@ in
     };
 
     agent.enable = lib.mkEnableOption "Enables gptel-agent.";
+    enableMcpIntegration = lib.mkEnableOption "Enables mcp server integration.";
   };
 
   config.programs.emacs.init.usePackage = lib.mkIf ai.gptel.enable {
@@ -150,6 +151,44 @@ in
       config = "(gptel-agent-update)";
       generalOne.global-leader."ga" = lib.mkIf keybinds.leader-key.enable (
         lib.mkDefault '''("agent" . gptel-agent)''
+      );
+    };
+
+    mcp = lib.mkIf ai.gptel.enableMcpIntegration {
+      enable = true;
+      after = [ "gptel" ];
+      config = ''
+        (require 'mcp-hub)
+        (require 'gptel-integrations)
+      '';
+      setopt.mcp-hub-servers = lib.optionals (config.programs.mcp.servers != { }) (
+        lib.mapAttrsToList (
+          n: v:
+          if v.enabled != false || v.disabled != true then
+            let
+              name = ''"${n}"'';
+              test =
+                attr: pass: fail:
+                if v."${attr}" != null then pass else fail;
+              commandOrUrl = test "command" ''':command "${v.command}" ${
+                test "args" "':args '(${lib.concatMapStrings (x: ''"${x}" '') v.args}) " ""
+              }'' (test "url " ''':url "${v.url} "'' "");
+              env =
+                if v.env != { } then
+                  "':env '(${
+                    lib.concatStringsSep " " (lib.flatten (lib.mapAttrsToList (x: y: ''':${x} "${y}"'') v.env))
+                  })"
+                else
+                  "";
+            in
+            [
+              name
+              commandOrUrl
+              env
+            ]
+          else
+            ""
+        ) config.programs.mcp.servers
       );
     };
   };

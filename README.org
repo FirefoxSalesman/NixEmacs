@@ -1669,6 +1669,9 @@ If =programs.emacs.init.ide.magit.enable= is true, [[https://github.com/ragnard/
 
 If =programs.emacs.init.ide.languages.org.enable= is true, [[https://github.com/jwiegley/ob-gptel][ob-gptel]] will be installed.
 
+***** =programs.emacs.init.ai.gptel.enableMcpIntegration=
+With this option enabled, gptel will respect =programs.mcp.servers=
+
 ***** Macher
 ****** =programs.emacs.init.ai.gptel.macher.enable=
 Enables [[https://github.com/kmontag/macher][macher]], a lightweight set of agent-like tools.
