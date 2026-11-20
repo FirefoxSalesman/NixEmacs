@@ -230,6 +230,18 @@ let
           '';
         };
 
+        nhook = mkOption {
+          type = types.listOf (types.attrsOf (types.listOf types.str));
+          default = [ ];
+          description = ''
+            The entries for each kind of hook.
+            - names: A list of short hook names, with the "-hook" omitted. These will autoload the package. (can be blank)
+            - fullNames: A list of hook names. These will autoload the package. (can be blank)
+            - namesDeferred: A list of short hook names, with the "-hook" omitted. (can be blank)
+            - fullNamesDeferred: A list of hook names. (can be blank)
+          '';
+        };
+
         hook = mkOption {
           type = types.listOf types.str;
           default = [ ];
@@ -530,6 +542,31 @@ let
             mkBindKeyMap = mkBindHelper "bind-keymap" "";
             mkChords = mkBindHelper "chords" "";
             hookHelper = vs: keyword: optional (vs != [ ]) "${keyword} ${toString vs}";
+            mkNhook =
+              hooks:
+              let
+                listify =
+                  list: if (lib.length list) == 1 then "'${lib.head list}" else "'(${lib.concatStringsSep " " list})";
+                constructPair = names: actions: "(${listify names} ${listify actions})";
+                constructedHooks = lib.map (hook: {
+                  ghook = if hook ? fullNames then constructPair hook.fullNames hook.actions else "";
+                  ghookf = if hook ? names then constructPair hook.names hook.actions else "";
+                  gfhookf = if hook ? namesDeferred then constructPair hook.namesDeferred hook.actions else "";
+                  gfhook = if hook ? fullNamesDeferred then constructPair hook.fullNamesDeferred hook.actions else "";
+                }) hooks;
+                toString =
+                  name: fn:
+                  let
+                    result = lib.flatten (lib.map fn constructedHooks);
+                  in
+                  if result != [ "" ] then ":${name} ${lib.concatStringsSep " " result}" else "";
+              in
+              ''
+                ${toString "ghook" (hook: hook.ghook)}
+                ${toString "ghookf" (hook: hook.ghookf)}
+                ${toString "gfhook" (hook: hook.gfhook)}
+                ${toString "gfhookf" (hook: hook.gfhookf)}
+              '';
             mkHook = vs: hookHelper vs ":hook";
             mkGhook = vs: hookHelper vs ":ghook";
             mkGfhook = vs: hookHelper vs ":gfhook";
@@ -601,6 +638,7 @@ let
             ++ mkHook (config.hook ++ mkLsp name config.lsp)
             ++ mkGhook config.ghook
             ++ mkGhookf config.ghookf
+            ++ mkNhook config.nhook
             ++ mkGfhookf config.gfhookf
             ++ mkEglot name config.eglot
             ++ mkLspCe name config.lspce
@@ -749,7 +787,7 @@ let
     ;; For :diminish in (use-package).
       (require 'diminish)
   ''
-  + optionalString cfg.hasOn ''(require 'on)''
+  + optionalString cfg.hasOn "(require 'on)"
   + optionalString hasDoom ''
     ;; For :defer-incrementally in (use-package).
       (use-package doom-defer
