@@ -377,7 +377,7 @@ in
               if ide.languages.markdown.enable then
                 {
                   names = [ "markdown-mode" ];
-                  actions = [ "toc-org-mode" ];
+                  actions = [ "'toc-org-mode" ];
                 }
               else
                 { }
