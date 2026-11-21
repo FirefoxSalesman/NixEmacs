@@ -547,13 +547,23 @@ let
               let
                 listify =
                   list: if (lib.length list) == 1 then "'${lib.head list}" else "'(${lib.concatStringsSep " " list})";
-                constructPair = names: actions: "(${listify names} ${listify actions})";
-                constructedHooks = lib.map (hook: {
-                  ghook = if hook ? fullNames then constructPair hook.fullNames hook.actions else "";
-                  ghookf = if hook ? names then constructPair hook.names hook.actions else "";
-                  gfhookf = if hook ? namesDeferred then constructPair hook.namesDeferred hook.actions else "";
-                  gfhook = if hook ? fullNamesDeferred then constructPair hook.fullNamesDeferred hook.actions else "";
-                }) hooks;
+                constructPair = names: actions: "(${listify names} ${actions})";
+                constructedHooks = lib.map (
+                  hook:
+                  let
+                    actions =
+                      if (lib.length hook.actions) == 1 then
+                        "${lib.head hook.actions}"
+                      else
+                        "(list ${lib.concatStringsSep " " hook.actions})";
+                  in
+                  {
+                    ghook = if hook ? fullNames then constructPair hook.fullNames actions else "";
+                    ghookf = if hook ? names then constructPair hook.names actions else "";
+                    gfhookf = if hook ? namesDeferred then constructPair hook.namesDeferred actions else "";
+                    gfhook = if hook ? fullNamesDeferred then constructPair hook.fullNamesDeferred actions else "";
+                  }
+                ) hooks;
                 toString =
                   name: fn:
                   let
