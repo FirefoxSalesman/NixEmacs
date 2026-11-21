@@ -76,7 +76,12 @@ in
       vertico-posframe = lib.mkIf completions.vertico.posframe {
         enable = true;
         defer = true;
-        hook = [ "(vertico-mode . vertico-posframe-mode)" ];
+        nhook = [
+          {
+            names = [ "vertico-mode" ];
+            actions = [ "'vertico-posframe-mode" ];
+          }
+        ];
       };
     };
   };

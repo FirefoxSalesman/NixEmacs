@@ -16,7 +16,12 @@ in
     denote = {
       enable = true;
       defer = true;
-      hook = [ "(dired-mode . denote-dired-mode-in-directories)" ];
+      nhook = [
+        {
+          names = [ "dired-mode" ];
+          actions = [ "denote-dired-mode-in-directories" ];
+        }
+      ];
       setopt = {
         denote-directory = lib.mkDefault ''(expand-file-name "denote" org-directory)'';
         denote-file-type = lib.mkDefault (

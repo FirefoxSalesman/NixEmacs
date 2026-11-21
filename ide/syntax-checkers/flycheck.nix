@@ -15,7 +15,12 @@ in
         usePackage = {
           flycheck = {
             enable = true;
-            hook = [ "(on-first-buffer . global-flycheck-mode)" ];
+            nhook = [
+              {
+                names = [ "on-first-buffer" ];
+                actions = [ "'global-flycheck-mode" ];
+              }
+            ];
             setopt = {
               flycheck-idle-change-delay = 1.0;
               flycheck-buffer-switch-check-intermediate-buffers = true;
@@ -25,7 +30,12 @@ in
 
           flycheck-posframe = lib.mkIf ide.hoverDoc {
             enable = true;
-            hook = [ "(flycheck-mode . flycheck-posframe-mode)" ];
+            nhook = [
+              {
+                names = [ "flycheck-mode" ];
+                actions = [ "'flycheck-posframe-mode" ];
+              }
+            ];
           };
 
           flycheck-eglot = lib.mkIf ide.eglot.preset {

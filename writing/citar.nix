@@ -5,7 +5,15 @@ let
   ide = config.programs.emacs.init.ide;
   keybinds = config.programs.emacs.init.keybinds;
   completions = config.programs.emacs.init.completions;
-  hookIf = condition: hook: if condition then "(${hook}-mode . citar-capf-setup)" else "";
+  hookIf =
+    condition: hook:
+    if condition then
+      {
+        names = [ "${hook}-mode" ];
+        actions = [ "citar-capf-setup" ];
+      }
+    else
+      { };
 in
 {
   options.programs.emacs.init.writing.citar =
@@ -17,7 +25,7 @@ in
         ${if writing.denote.enable then "(citar-denote-mode)" else ""}
         ${if writing.orgRoam then "(citar-org-roam-mode)" else ""}
       '';
-      hook = [
+      nhook = [
         (hookIf ide.languages.latex.enable "LaTeX")
         (hookIf ide.languages.markdown.enable "gfm")
         (hookIf ide.languages.org.enable "org")

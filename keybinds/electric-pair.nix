@@ -28,9 +28,9 @@ in
         # Courtesy of DT. https://gitlab.com/dwt1/configuring-emacs/-/tree/main/07-the-final-touches?ref_type=heads
         electric-pair-inhibit-predicate = lib.mkDefault ''
           `(lambda (c)
-                    	  (if (or (char-equal c ?<) (char-equal c ?>))
-                    	      t
-                    	      (,electric-pair-inhibit-predicate c)))
+                   (if (or (char-equal c ?<) (char-equal c ?>))
+                       t
+                       (,electric-pair-inhibit-predicate c)))
         '';
       };
     };

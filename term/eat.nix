@@ -12,10 +12,18 @@ in
     generalOne.global-leader."t" = lib.mkIf (
       config.programs.emacs.init.keybinds.leader-key.enable && !terminals.eshell
     ) "'eat";
-    hook = [ "(eshell-load . eat-eshell-mode)" ];
+    nhook = [
+      {
+        names = [ "eshell-load" ];
+        actions = [ "'eat-eshell-mode" ];
+      }
+    ];
     config = ''
       ${
-        if config.programs.emacs.init.keybinds.evil.enable then ''(evil-ex-define-cmd "term" 'eat)'' else ""
+        if config.programs.emacs.init.keybinds.evil.enable then
+          ''(with-eval-after-load 'evil (evil-ex-define-cmd "term" 'eat))''
+        else
+          ""
       }
       (defun eat-term-get-suitable-term-name (&optional display)
         "Return the most suitable value for `TERM' for DISPLAY.

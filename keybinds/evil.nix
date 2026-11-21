@@ -102,8 +102,16 @@ in
             names = [ "evil-mode" ];
             actions = [ "'evil-collection-init" ];
           }
+          (
+            if hasSwap then
+              {
+                names = [ "evil-collection-setup" ];
+                actions = [ "'nix-emacs-hjkl-rotation" ];
+              }
+            else
+              { }
+          )
         ];
-        gfhookf = lib.mkIf hasSwap [ "('evil-collection-setup 'nix-emacs-hjkl-rotation)" ];
         preface = lib.mkIf hasSwap ''
           (defun nix-emacs-hjkl-rotation (_mode mode-keymaps &rest _rest)
             (evil-collection-translate-key '(normal motion) mode-keymaps

@@ -13,7 +13,7 @@ in
       nhook = [
         {
           names = [ "on-first-input" ];
-          actions = [ "golden-ratio-mode" ];
+          actions = [ "'golden-ratio-mode" ];
         }
       ];
       config = lib.mkIf tools.exwm.wantMouseWarping "(advice-add 'golden-ratio :after 'exwm-mff-warp-to-selected)";

@@ -32,7 +32,12 @@ in
 
       super-save = {
         enable = true;
-        hook = [ "(on-first-file . super-save-mode)" ];
+        nhook = [
+          {
+            names = [ "on-first-file" ];
+            actions = [ "'super-save-mode" ];
+          }
+        ];
         setopt = {
           super-save-auto-save-when-idle = lib.mkDefault true;
           auto-save-default = lib.mkDefault false;

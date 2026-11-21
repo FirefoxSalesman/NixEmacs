@@ -8,7 +8,12 @@ in
   options.programs.emacs.init.ai.minuet.enable = lib.mkEnableOption "Enables minuet completions.";
   config.programs.emacs.init.usePackage.minuet = lib.mkIf ai.minuet.enable {
     enable = true;
-    hook = [ "(prog-mode . minuet-auto-suggestion-mode)" ];
+    nhook = [
+      {
+        names = [ "prog-mode" ];
+        actions = [ "minuet-auto-suggestion-mode" ];
+      }
+    ];
     bindLocal.minuet-active-mode-map = {
       "M-${if evil.enable then evil.keys.down else "n"}" = lib.mkDefault "minuet-next-suggestion";
       "M-${if evil.enable then evil.keys.up else "p"}" = lib.mkDefault "minuet-previous-suggestion";

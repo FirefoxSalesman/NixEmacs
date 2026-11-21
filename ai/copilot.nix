@@ -19,17 +19,21 @@ in
 
   config.programs.emacs.init.usePackage.copilot = lib.mkIf ai.copilot.enable {
     enable = true;
-    hook = [
-      ''
-                (prog-mode . (lambda ()
-                	             (when (and (length= (-filter 'major-mode? '(${
-                                lib.concatMapStrings (k: "${k} ") ai.copilot.keepOutOf
-                              })) 0)
-        					(not (s-contains? "*code-converting-work*" (buffer-name)))
-        					(not (s-contains? "*markdown-code-fontification:java-ts-mode*" (buffer-name)))
-                                                (not (s-contains? "org-src-fontification" (buffer-name))))
-                	                   (copilot-mode))))
-      ''
+    nhook = [
+      {
+        names = [ "prog-mode" ];
+        actions = [
+          ''
+            (lambda ()
+                       (when (and (length= (-filter 'major-mode? '(${
+                         lib.concatMapStrings (k: "${k} ") ai.copilot.keepOutOf
+                       })) 0)
+                    	(not (s-contains? "*code-converting-work*" (buffer-name)))
+                    	(not (s-contains? "*markdown-code-fontification:java-ts-mode*" (buffer-name)))
+                                      (not (s-contains? "org-src-fontification" (buffer-name))))
+                             (copilot-mode)))''
+        ];
+      }
     ];
     preface = ''
         (defun nix-emacs/kill-copilot ()
