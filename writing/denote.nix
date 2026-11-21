@@ -19,7 +19,7 @@ in
       nhook = [
         {
           names = [ "dired-mode" ];
-          actions = [ "denote-dired-mode-in-directories" ];
+          actions = [ "'denote-dired-mode-in-directories" ];
         }
       ];
       setopt = {

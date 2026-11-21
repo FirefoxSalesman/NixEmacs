@@ -11,7 +11,7 @@ in
     nhook = [
       {
         names = [ "prog-mode" ];
-        actions = [ "minuet-auto-suggestion-mode" ];
+        actions = [ "'minuet-auto-suggestion-mode" ];
       }
     ];
     bindLocal.minuet-active-mode-map = {

@@ -10,7 +10,7 @@ let
     if condition then
       {
         names = [ "${hook}-mode" ];
-        actions = [ "citar-capf-setup" ];
+        actions = [ "'citar-capf-setup" ];
       }
     else
       { };
