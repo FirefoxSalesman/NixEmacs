@@ -65,7 +65,7 @@ in
         nhook = [
           {
             names = [ "eshell-mode" ];
-            actions = [ "eshell-syntax-highlighting-global-mode" ];
+            actions = [ "'eshell-syntax-highlighting-global-mode" ];
           }
         ];
       };
