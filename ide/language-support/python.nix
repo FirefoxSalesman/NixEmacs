@@ -117,12 +117,22 @@ in
 
       python-docstring = {
         enable = true;
-        hook = [ "(python-ts-mode . python-docstring-mode)" ];
+        nhook = [
+          {
+            names = [ "python-ts-mode" ];
+            actions = [ "'python-docstring-mode" ];
+          }
+        ];
       };
 
       pet = {
         enable = true;
-        hook = [ "(python-ts-mode . pet-mode)" ];
+        nhook = [
+          {
+            names = [ "python-ts-mode" ];
+            actions = [ "'pet-mode" ];
+          }
+        ];
       };
 
       snakemake-mode = lib.mkIf ide.languages.python.snakemake {
@@ -151,7 +161,12 @@ in
         after = [ "org" ];
         babel = "jupyter";
         extraPackages = [ pkgs.jupyter ];
-        hook = [ "(org-after-execute . org-redisplay-inline-images)" ];
+        nhook = [
+          {
+            names = [ "org-after-execute" ];
+            actions = [ "'org-redisplay-inline-images" ];
+          }
+        ];
         preface = ''
           (defun nix-emacs/jupyter-refresh-kernelspecs ()
                  "Refresh Jupyter kernelspecs"

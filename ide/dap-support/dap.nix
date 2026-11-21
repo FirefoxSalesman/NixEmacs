@@ -8,9 +8,15 @@ in
 
   config.programs.emacs.init.usePackage.dap-mode = lib.mkIf ide.dap.enable {
     enable = true;
-    hook = [
-      "(lsp-mode . dap-mode)"
-      "(dap-mode . (lambda () (dap-ui-mode) (dap-tooltip-mode) (dap-ui-controls-mode)))"
+    nhook = [
+      {
+        names = [ "lsp-mode" ];
+        actions = [ "'dap-mode" ];
+      }
+      {
+        names = [ "dap-mode" ];
+        actions = [ "(lambda () (dap-ui-mode) (dap-tooltip-mode) (dap-ui-controls-mode))" ];
+      }
     ];
     bindLocal.ctl-x-map."C-a" = lib.mkDefault "dap-debug";
   };

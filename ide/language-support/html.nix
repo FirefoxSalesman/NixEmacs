@@ -41,7 +41,12 @@ in
 
         emmet-mode = {
           enable = ide.languages.html.emmet;
-          hook = [ "(html-ts-mode . emmet-mode)" ];
+          nhook = [
+            {
+              names = [ "html-ts-mode" ];
+              actions = [ "'emmet-mode" ];
+            }
+          ];
           setopt.emmet-move-cursor-between-quotes = lib.mkDefault true;
         };
       };

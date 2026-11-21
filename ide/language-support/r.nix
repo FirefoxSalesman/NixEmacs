@@ -31,7 +31,12 @@ in
         else
           [ ];
       mode = [ ''"\\.R\\'"'' ];
-      gfhookf = lib.mkIf ide.symex [ "('ess-r-mode (treesit! 'r))" ];
+      nhook = lib.mkIf ide.symex [
+        {
+          names = [ "ess-r-mode" ];
+          actions = [ "(treesit! 'r)" ];
+        }
+      ];
       eglot = ide.eglot.enable;
       lsp = ide.lsp.enable;
       setopt.ess-ask-for-ess-directory = lib.mkDefault false;

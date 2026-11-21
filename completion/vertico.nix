@@ -53,7 +53,12 @@ in
 
       vertico-prescient = lib.mkIf completions.prescient {
         enable = true;
-        hook = [ "(minibuffer-mode . vertico-prescient-mode)" ];
+        nhook = [
+          {
+            names = [ "minibuffer-mode" ];
+            actions = [ "'vertico-prescient-mode" ];
+          }
+        ];
         setopt = {
           vertico-prescient-enable-filtering = false;
           vertico-prescient-completion-styles = lib.mkDefault (

@@ -38,7 +38,12 @@ in
 
   config.programs.emacs.init.usePackage.apheleia = lib.mkIf tools.apheleia.enable {
     enable = true;
-    ghookf = lib.mkIf tools.apheleia.autoFormat [ "('on-first-file 'apheleia-global-mode)" ];
+    nhook = lib.mkIf tools.apheleia.autoFormat [
+      {
+        names = [ "on-first-file" ];
+        actions = [ "'apheleia-global-mode" ];
+      }
+    ];
     config = ''
       (defmacro make-apheleia-formatter (name &rest body)
         "Return a function that can be used as an apheleia formatter.

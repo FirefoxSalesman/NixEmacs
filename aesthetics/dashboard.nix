@@ -11,7 +11,15 @@ in
     hasOn = true;
     usePackage.dashboard = lib.mkIf aesthetics.dashboard.enable {
       enable = true;
-      ghookf = [ "('on-init-ui '(dashboard-insert-startupify-lists dashboard-initialize))" ];
+      nhook = [
+        {
+          names = [ "on-init-ui" ];
+          actions = [
+            "'dashboard-insert-startupify-lists"
+            "'dashboard-initialize"
+          ];
+        }
+      ];
       config = ''
                 (dashboard-setup-startup-hook)
                 (dashboard-open)

@@ -32,14 +32,22 @@ in
 
       julia-repl = {
         enable = true;
-        hook = [ "(julia-ts-mode . julia-repl-mode)" ];
+        nhook = [
+          {
+            names = [ "julia-ts-mode" ];
+            actions = [ "'julia-repl-mode" ];
+          }
+        ];
       };
 
       eglot-jl = lib.mkIf ide.eglot.enable {
         enable = true;
         after = [ "eglot" ];
-        hook = [
-          "(julia-ts-mode . (lambda () (setq-local eglot-connect-timeout (max eglot-connect-timeout 60))))"
+        nhook = [
+          {
+            names = [ "julia-ts-mode" ];
+            actions = [ "(lambda () (setq-local eglot-connect-timeout (max eglot-connect-timeout 60)))" ];
+          }
         ];
         config = "(eglot-jl-init)";
       };

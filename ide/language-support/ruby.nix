@@ -41,7 +41,12 @@ in
 
       yard-mode = {
         enable = true;
-        hook = [ "(ruby-ts-mode . yard-mode)" ];
+        nhook = [
+          {
+            names = [ "ruby-ts-mode" ];
+            actions = [ "'yard-mode" ];
+          }
+        ];
       };
     };
   };

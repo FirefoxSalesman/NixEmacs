@@ -16,13 +16,23 @@ in
     programs.emacs.init.usePackage = {
       coffee-mode = {
         enable = true;
-        hook = [ "(coffee-mode . coffee-cos-mode)" ];
+        nhook = [
+          {
+            names = [ "coffee-mode" ];
+            actions = [ "'coffee-cos-mode" ];
+          }
+        ];
       };
 
       flymake-coffee = lib.mkIf ide.flymake.enable {
         enable = true;
         extraPackages = [ pkgs.coffeescript ];
-        hook = [ "(coffee-mode . flymake-coffee-load)" ];
+        nhook = [
+          {
+            names = [ "coffee-mode" ];
+            actions = [ "'flymake-coffee-load" ];
+          }
+        ];
       };
 
       ob-coffeescript = lib.mkIf ide.languages.org.enable {

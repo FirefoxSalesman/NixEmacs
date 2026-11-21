@@ -166,8 +166,21 @@ in
             "i" = lib.mkDefault '''(org-toggle-inline-images :which-key "show images")'';
             "b" = lib.mkDefault '''(org-edit-special :which-key "edit block")'';
           };
-          hook = [ "(org-mode . org-indent-mode)" ];
-          gfhookf = lib.mkIf ide.symex [ "('org-mode (treesit! 'org))" ];
+          nhook = [
+            {
+              names = [ "org-mode" ];
+              actions = [ "'org-indent-mode" ];
+            }
+            (
+              if ide.symex then
+                {
+                  namesDeferred = [ "org-mode" ];
+                  actions = [ "(treesit! 'org)" ];
+                }
+              else
+                { }
+            )
+          ];
           init = ''
             (defun nix-emacs-project-file (file)
               "Retrieves file from the root of the current project."
@@ -193,7 +206,12 @@ in
 
         org-appear = lib.mkIf ide.languages.org.aesthetics.enable {
           enable = true;
-          hook = [ "(org-mode . org-appear-mode)" ];
+          nhook = [
+            {
+              names = [ "org-mode" ];
+              actions = [ "'org-appear-mode" ];
+            }
+          ];
         };
 
         org-contrib = lib.mkIf ide.hoverDoc {
@@ -204,8 +222,17 @@ in
 
         org-modern = lib.mkIf ide.languages.org.aesthetics.enable {
           enable = true;
-          ghookf = [
-            "('org-mode '(org-modern-mode org-toggle-pretty-entities variable-pitch-mode visual-line-mode nix-emacs-org-font-setup))"
+          nhook = [
+            {
+              names = [ "org-mode" ];
+              actions = [
+                "'org-modern-mode"
+                "'org-toggle-pretty-entities"
+                "'variable-pitch-mode"
+                "'visual-line-mode"
+                "'nix-emacs-org-font-setup"
+              ];
+            }
           ];
           setopt = {
             org-modern-star = "'replace";
@@ -238,7 +265,12 @@ in
 
         eldoc-box = lib.mkIf ide.hoverDoc {
           enable = true;
-          hook = [ "(org-mode . eldoc-box-hover-mode)" ];
+          nhook = [
+            {
+              names = [ "org-mode" ];
+              actions = [ "'eldoc-box-hover-mode" ];
+            }
+          ];
         };
 
         org-modern-indent = lib.mkIf ide.languages.org.aesthetics.enable {
@@ -255,8 +287,16 @@ in
             '''(left . "${keybinds.evil.keys.backward}")''
             '''(right . "${keybinds.evil.keys.forward}")''
           ];
-          ghookf = [ "('org-mode 'evil-org-mode)" ];
-          gfhookf = [ "('org-capture-mode 'evil-insert-state)" ];
+          nhook = [
+            {
+              names = [ "org-mode" ];
+              actions = [ "'evil-org-mode" ];
+            }
+            {
+              namesDeferred = [ "org-capture-mode" ];
+              actions = [ "'evil-insert-state" ];
+            }
+          ];
           # stolen from doom
           generalTwoConfig.":n".org-mode-map = {
             "]h" = '''(org-forward-heading-same-level :which-key "next heading")'';
@@ -328,9 +368,20 @@ in
 
         toc-org = {
           enable = true;
-          hook = [
-            "(org-mode . toc-org-mode)"
-            (if ide.languages.markdown.enable then "(markdown-mode . toc-org-mode)" else "")
+          nhook = [
+            {
+              names = [ "org-mode" ];
+              actions = [ "'toc-org-mode" ];
+            }
+            (
+              if ide.languages.markdown.enable then
+                {
+                  names = [ "markdown-mode" ];
+                  actions = [ "toc-org-mode" ];
+                }
+              else
+                { }
+            )
           ];
           config = ''
             (with-eval-after-load 'markdown-mode

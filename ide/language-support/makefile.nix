@@ -14,7 +14,12 @@ in
     usePackage.make-mode = {
       enable = true;
       symex = ide.symex;
-      ghookf = lib.mkIf ide.symex [ "('makefile-mode (treesit! 'make))" ];
+      nhook = lib.mkIf ide.symex [
+        {
+          names = [ "makefile-mode" ];
+          actions = [ "(treesit! 'make)" ];
+        }
+      ];
     };
   };
 }

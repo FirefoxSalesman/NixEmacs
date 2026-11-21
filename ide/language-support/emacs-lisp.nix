@@ -31,10 +31,16 @@ in
         babel = lib.mkIf ide.languages.org.enable "emacs-lisp";
         symex = ide.symex;
         mode = [ ''("\\.Cask\\'" . emacs-lisp-mode)'' ];
-        hook = lib.mkIf ide.flymake.enable [
-          "(emacs-lisp-mode . flymake-mode)"
+        nhook = lib.mkIf ide.flymake.enable [
+          {
+            names = [ "emacs-lisp-mode" ];
+            actions = [ "'flymake-mode" ];
+          }
+          {
+            namesDeferred = [ "emacs-lisp-mode" ];
+            actions = [ "(treesit! 'elisp)" ];
+          }
         ];
-        gfhookf = lib.mkIf ide.symex [ "('emacs-lisp-mode (treesit! 'elisp))" ];
       };
 
       elisp-demos = {
@@ -47,22 +53,42 @@ in
 
       highlight-quoted = {
         enable = true;
-        hook = [ "(emacs-lisp-mode . highlight-quoted-mode)" ];
+        nhook = [
+          {
+            names = [ "emacs-lisp-mode" ];
+            actions = [ "'highlight-quoted-mode" ];
+          }
+        ];
       };
 
       eldoc-box = lib.mkIf ide.hoverDoc {
         enable = true;
-        hook = [ "(emacs-lisp-mode . eldoc-box-hover-at-point-mode)" ];
+        nhook = [
+          {
+            names = [ "emacs-lisp-mode" ];
+            actions = [ "'eldoc-box-hover-at-point-mode" ];
+          }
+        ];
       };
 
       breadcrumb = lib.mkIf ide.breadcrumb {
         enable = true;
-        hook = [ "(emacs-lisp-mode . breadcrumb-local-mode)" ];
+        nhook = [
+          {
+            names = [ "emacs-lisp-mode" ];
+            actions = [ "'breadcrumb-local-mode" ];
+          }
+        ];
       };
 
       semel = {
         enable = true;
-        hook = [ "(emacs-lisp-mode . semel-mode)" ];
+        nhook = [
+          {
+            names = [ "emacs-lisp-mode" ];
+            actions = [ "'semel-mode" ];
+          }
+        ];
       };
 
       elisp-autofmt = lib.mkIf apheleia {

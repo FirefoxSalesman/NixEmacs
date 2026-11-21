@@ -96,7 +96,12 @@ in
 
         eglot-java = lib.mkIf ide.languages.java.moreEglot {
           enable = true;
-          hook = [ "(java-ts-mode . eglot-java-mode)" ];
+          nhook = [
+            {
+              names = [ "java-ts-mode" ];
+              actions = [ "'eglot-java-mode" ];
+            }
+          ];
           # https://github.com/yveszoundi/eglot-java/pull/68/files
           config = ''
             (defun eglot-java--jdt-uri-handler (_operation &rest args)

@@ -752,6 +752,7 @@ let
     || p.gfhook != [ ]
     || p.ghookf != [ ]
     || p.gfhookf != [ ]
+    || p.nhook != [ ]
     || p.generalOneConfig != { }
     || p.generalTwoConfig != { }
     || p.generalConfig != { }

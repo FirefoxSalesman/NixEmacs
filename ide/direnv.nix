@@ -11,7 +11,12 @@
 
     emacs.init.usePackage.envrc = {
       enable = true;
-      hook = [ "(after-init . envrc-global-mode)" ];
+      nhook = [
+        {
+          names = [ "after-init" ];
+          actions = [ "'envrc-global-mode" ];
+        }
+      ];
       generalOneConfig.global-leader = lib.mkIf config.programs.emacs.init.keybinds.leader-key.enable {
         "e" = lib.mkDefault '''(:ignore t :which-key "direnv")'';
         "ea" = lib.mkDefault "'envrc-allow";

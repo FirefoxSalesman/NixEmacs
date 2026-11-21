@@ -15,8 +15,21 @@ in
   config.programs.emacs.init.usePackage.purescript-mode = lib.mkIf ide.languages.purescript.enable {
     enable = true;
     # borrowed from doom
-    hook = [ "(purescript-mode . purescript-indentation-mode)" ];
-    gfhookf = lib.mkIf ide.symex [ "('purescript-mode (treesit! 'purescript))" ];
+    nhook = [
+      {
+        names = [ "purescript-mode" ];
+        actions = [ "'purescript-indentation-mode" ];
+      }
+      (
+        if ide.symex then
+          {
+            namesDeferred = [ "purescript-mode" ];
+            actions = [ "(treesit! 'purescript)" ];
+          }
+        else
+          { }
+      )
+    ];
     # extraPackages =
     #   if ide.eglot.enable || ide.lspce.enable || ide.lsp.enable then
     #     [ pkgs.nodePackages.purescript-language-server ]

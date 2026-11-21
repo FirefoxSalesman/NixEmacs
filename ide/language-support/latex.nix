@@ -90,14 +90,25 @@ in
 
         magic-latex-buffer = {
           enable = ide.languages.latex.magicLatexBuffer;
-          hook = [ "(LaTeX-mode . magic-latex-buffer)" ];
+          nhook = [
+            {
+              names = [ "LaTeX-mode" ];
+              actions = [ "'magic-latex-buffer" ];
+            }
+          ];
         };
 
         cdlatex = {
           enable = ide.languages.latex.cdlatex;
-          hook = [
-            "('LaTeX-mode . turn-on-cdlatex)"
-            "('org-mode . org-cdlatex-mode)"
+          nhook = [
+            {
+              names = [ "LaTeX-mode" ];
+              actions = [ "'turn-on-cdlatex" ];
+            }
+            {
+              names = [ "org-mode" ];
+              actions = [ "'org-cdlatex-mode" ];
+            }
           ];
         };
 
@@ -107,7 +118,12 @@ in
 
         evil-tex = lib.mkIf config.programs.emacs.init.keybinds.evil.enable {
           enable = true;
-          hook = [ "(LaTeX-mode . evil-tex-mode)" ];
+          nhook = [
+            {
+              names = [ "LaTeX-mode" ];
+              actions = [ "'evil-tex-mode" ];
+            }
+          ];
         };
       };
     };
