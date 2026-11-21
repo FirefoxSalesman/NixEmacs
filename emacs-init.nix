@@ -537,7 +537,6 @@ let
                 (toString "gfhook" (hook: hook.gfhook))
                 (toString "gfhookf" (hook: hook.gfhookf))
               ];
-            mkHook = vs: hookHelper vs ":hook";
             mkMode = vs: hookHelper vs ":mode";
             mkMagic = vs: hookHelper vs ":magic";
             transformName =
@@ -554,9 +553,9 @@ let
                 "${name}-mode";
             mkLsp =
               name: vs:
-              optional vs [
-                "(${transformName name} . (lambda () (require 'lsp-mode) (lsp-mode)))"
-              ];
+              optional vs (
+                hookHelper [ "(${transformName name} . (lambda () (require 'lsp-mode) (lsp-mode)))" ] ":hook"
+              );
             mkEglot =
               name: vs:
               optional (vs != false) ''
@@ -601,7 +600,7 @@ let
             ++ mkFunctions config.functions
             ++ mkDemand config.demand
             ++ mkDiminish config.diminish
-            ++ mkHook (mkLsp name config.lsp)
+            ++ mkLsp name config.lsp
             ++ mkHook config.hook
             ++ mkEglot name config.eglot
             ++ mkLspCe name config.lspce
