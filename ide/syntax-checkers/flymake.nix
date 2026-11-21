@@ -39,12 +39,16 @@ in
       };
 
       eglot.nhook = lib.mkIf ide.eglot.preset [
-	{names = ["eglot-managed-mode "]}
-        ''
-          (. (lambda () (setq-local eldoc-documentation-functions '(eglot-signature-eldoc-function
-                                                                                                                                       eglot-hover-eldoc-function
-                                                                                                                                       t
-                                                                                                                                       eglot-x-hover-eldoc-function))))''
+        {
+          names = [ "eglot-managed-mode" ];
+          actions = [
+            ''
+              (lambda () (setq-local eldoc-documentation-functions '(eglot-signature-eldoc-function
+                                                                       eglot-hover-eldoc-function
+                                                                       t
+                                                                       eglot-x-hover-eldoc-function)))''
+          ];
+        }
       ];
     };
   };
