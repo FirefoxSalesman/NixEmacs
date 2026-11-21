@@ -638,7 +638,10 @@ let
             ++ mkHook (config.hook ++ mkLsp name config.lsp)
             ++ mkGhook config.ghook
             ++ mkGhookf config.ghookf
-            ++ mkNhook config.nhook
+            ++ [
+              mkNhook
+              config.nhook
+            ]
             ++ mkGfhookf config.gfhookf
             ++ mkEglot name config.eglot
             ++ mkLspCe name config.lspce
