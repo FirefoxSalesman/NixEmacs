@@ -242,14 +242,6 @@ let
           '';
         };
 
-        hook = mkOption {
-          type = types.listOf types.str;
-          default = [ ];
-          description = ''
-            The entries to use for <option>:hook</option>.
-          '';
-        };
-
         defines = mkOption {
           type = types.listOf types.str;
           default = [ ];
@@ -609,7 +601,7 @@ let
             ++ mkFunctions config.functions
             ++ mkDemand config.demand
             ++ mkDiminish config.diminish
-            ++ mkHook (config.hook ++ mkLsp name config.lsp)
+            ++ mkHook (mkLsp name config.lsp)
             ++ mkNhook config.nhook
             ++ mkEglot name config.eglot
             ++ mkLspCe name config.lspce
