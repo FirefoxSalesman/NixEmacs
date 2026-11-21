@@ -17,14 +17,24 @@ in
     usePackage = {
       which-key = {
         enable = true;
-        nhook = [ {name}"(on-first-input . which-key-mode)" ];
+        nhook = [
+          {
+            names = [ "on-first-input" ];
+            actions = [ "'which-key-mode" ];
+          }
+        ];
         setopt.which-key-idle-delay = lib.mkDefault 1.0;
       };
 
       which-key-posframe = lib.mkIf keybinds.whichKey.posframe.enable {
         enable = true;
         defer = true;
-        hook = [ "(which-key-mode . which-key-posframe-mode)" ];
+        nhook = [
+          {
+            names = [ "which-key-mode" ];
+            actions = [ "'which-key-posframe-mode" ];
+          }
+        ];
         setopt.which-key-posframe-poshandler = "'posframe-poshandler-frame-bottom-center";
         config = lib.mkIf keybinds.whichKey.posframe.unparent ''
                     (defun which-key-posframe--show-buffer (act-popup-dim)
