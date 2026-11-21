@@ -40,19 +40,23 @@ in
         ]
         ++ (
           if config.programs.emacs.init.keybinds.evil.enable then
-            [ "(exwm-mode . evil-motion-state)" ]
+            {
+              names = [ "exwm-mode" ];
+              actions = [ "'evil-motion-state" ];
+            }
           else
-            [ ]
+            { }
         )
         ++ (
           if tools.exwm.titleAlterations != { } then
-            [
-              ''
-                (exwm-update-title . (lambda ()
-                                                  (pcase exwm-class-name
-                                                         ${makeRenames tools.exwm.titleAlterations})))
-              ''
-            ]
+            {
+              names = [ "exwm-update-title" ];
+              actions = [
+                ''
+                  (lambda ()
+                          (pcase exwm-class-name ${makeRenames tools.exwm.titleAlterations}))''
+              ];
+            }
           else
             [ ]
         );
