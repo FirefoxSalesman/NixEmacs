@@ -38,7 +38,7 @@ in
       evil-god-state = lib.mkIf keybinds.evil.enable {
         enable = true;
         command = [ "evil-god-state" ];
-        hook = lib.mkIf keybinds.doomEscape.enable [
+        nhook = lib.mkIf keybinds.doomEscape.enable [
           {
             namesDeferred = [ "doom-escape" ];
             actions = [ "(lambda () (when (featurep 'evil-god-state) (evil-god-state-bail)))" ];
