@@ -44,8 +44,8 @@ in
             names = [ "eshell-first-time-mode" ];
             actions = [
               ''
-                (eshell-first-time-mode . (lambda () (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
-                            	    (setenv "TERM" "xterm")))''
+                (lambda () (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+                           (setenv "TERM" "xterm"))''
             ];
           }
         ];
