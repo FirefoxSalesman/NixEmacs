@@ -40,23 +40,27 @@ in
         ]
         ++ (
           if config.programs.emacs.init.keybinds.evil.enable then
-            {
-              names = [ "exwm-mode" ];
-              actions = [ "'evil-motion-state" ];
-            }
+            [
+              {
+                names = [ "exwm-mode" ];
+                actions = [ "'evil-motion-state" ];
+              }
+            ]
           else
-            { }
+            [ ]
         )
         ++ (
           if tools.exwm.titleAlterations != { } then
-            {
-              names = [ "exwm-update-title" ];
-              actions = [
-                ''
-                  (lambda ()
-                          (pcase exwm-class-name ${makeRenames tools.exwm.titleAlterations}))''
-              ];
-            }
+            [
+              {
+                names = [ "exwm-update-title" ];
+                actions = [
+                  ''
+                    (lambda ()
+                            (pcase exwm-class-name ${makeRenames tools.exwm.titleAlterations}))''
+                ];
+              }
+            ]
           else
             [ ]
         );
