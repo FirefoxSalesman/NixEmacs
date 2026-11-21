@@ -250,38 +250,6 @@ let
           '';
         };
 
-        ghook = mkOption {
-          type = types.listOf types.str;
-          default = [ ];
-          description = ''
-            The entries to use for <option>:ghook</option>.
-          '';
-        };
-
-        ghookf = mkOption {
-          type = types.listOf types.str;
-          default = [ ];
-          description = ''
-            The entries to use for <option>:ghookf</option>. Functions like ghook, but automatically appends -hook to every hook symbol.
-          '';
-        };
-
-        gfhook = mkOption {
-          type = types.listOf types.str;
-          default = [ ];
-          description = ''
-            The entries to use for <option>:gfhook</option>.
-          '';
-        };
-
-        gfhookf = mkOption {
-          type = types.listOf types.str;
-          default = [ ];
-          description = ''
-            The entries to use for <option>:gfhookf</option>. Functions like gfhook, but automatically appends -hook to every hook symbol.
-          '';
-        };
-
         defines = mkOption {
           type = types.listOf types.str;
           default = [ ];
@@ -578,10 +546,6 @@ let
                 (toString "gfhookf" (hook: hook.gfhookf))
               ];
             mkHook = vs: hookHelper vs ":hook";
-            mkGhook = vs: hookHelper vs ":ghook";
-            mkGfhook = vs: hookHelper vs ":gfhook";
-            mkGhookf = vs: hookHelper vs ":ghookf";
-            mkGfhookf = vs: hookHelper vs ":gfhookf";
             mkMode = vs: hookHelper vs ":mode";
             mkMagic = vs: hookHelper vs ":magic";
             transformName =
@@ -646,13 +610,9 @@ let
             ++ mkDemand config.demand
             ++ mkDiminish config.diminish
             ++ mkHook (config.hook ++ mkLsp name config.lsp)
-            ++ mkGhook config.ghook
-            ++ mkGhookf config.ghookf
             ++ mkNhook config.nhook
-            ++ mkGfhookf config.gfhookf
             ++ mkEglot name config.eglot
             ++ mkLspCe name config.lspce
-            ++ mkGfhook config.gfhook
             ++ mkCustom config.custom
             ++ mkSetopt config.setopt
             ++ buildGeneral config.general config.generalOne config.generalTwo
@@ -748,10 +708,6 @@ let
   hasGeneral = any (
     p:
     p.symex != false
-    || p.ghook != [ ]
-    || p.gfhook != [ ]
-    || p.ghookf != [ ]
-    || p.gfhookf != [ ]
     || p.nhook != [ ]
     || p.generalOneConfig != { }
     || p.generalTwoConfig != { }

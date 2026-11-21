@@ -406,50 +406,6 @@ Example usage:
   };
 #+end_src
 
-***** =ghook=
-The =:ghook= option from general.el
-
-Example usage:
-#+begin_src nix-ts
-  programs.emacs.init.usePackage.envrc = {
-    enable = true;
-    ghook = ["('after-init-hook 'envrc-global-mode)"];
-  };
-#+end_src
-
-***** =ghookf=
-The =:ghook= option from general.el, but it automatically appends "-hook" to every hook symbol
-
-Example usage:
-#+begin_src nix-ts
-  programs.emacs.init.usePackage.envrc = {
-    enable = true;
-    ghookf = ["('after-init 'envrc-global-mode)"];
-  };
-#+end_src
-
-***** =gfhook=
-The =:gfhook= option from general.el
-
-Example usage:
-#+begin_src nix-ts
-  programs.emacs.init.usePackage.racket-mode = {
-      enable = true;
-      gfhook = ["('racket-mode-hook 'hs-minor-mode)"];
-  };
-#+end_src
-
-***** =gfhookf=
-The =:gfhook= option from general.el, but it automatically appends "-hook" to every hook symbol
-
-Example usage:
-#+begin_src nix-ts
-programs.emacs.init.usePackage.racket-mode = {
-enable = true;
-gfhookf = ["('racket-mode 'hs-minor-mode)"];
-};
-#+end_src
-
 ***** =nhook=
 Allows the user to compose large numbers of hooks together.
 
@@ -465,14 +421,15 @@ Example usage:
 #+begin_src nix-ts
 {
   programs.emacs.init.usePackage.helm-icons.nhook = [
-      {
-        names = [ "helm-mode" ];
-        actions = [ "'helm-icons-mode" ];
-      }
-    ];
-  };
+    {
+      names = [ "helm-mode" ];
+      actions = [ "'helm-icons-mode" ];
+    }
+  ];
+};
 }
 #+end_src
+
 **** =defines=
 The =:defines= option from use-package.
 
@@ -1028,13 +985,13 @@ Dape's global map is bound to =C-x C-a=
 Set this option to true to enable the treesitter module.
 
 When this option is used it adds the elisp macro =treesit!=, which generates a lambda that activates the treesitter grammar for the given language (see the macro documentation for more details).
-It doesn't seem to work with the hook keyword, but ghook, gfhook, & elisp's add-hook all work fine.
+It doesn't seem to work with the hook keyword, but nhook, & elisp's add-hook all work fine.
 
 **** =programs.emacs.init.ide.treesitter.treesitterGrammars=
 An attribute set of language names & links to their grammars.
 
 When this option is used, it implicitly enables the treesitter module & adds the elisp macro =treesit!=, which generates a lambda that activates the treesitter grammar for the given language (see the macro documentation for more details).
-It doesn't seem to work with the hook keyword, but ghook, gfhook, & elisp's add-hook all work fine.
+It doesn't seem to work with the hook keyword, but nhook, & elisp's add-hook all work fine.
 
 **** =programs.emacs.init.ide.symex=
 A boolean that will enable symex for all languages in the language support presets
