@@ -16,7 +16,7 @@ in
     setopt.display-line-numbers-width = 3;
     config = "(global-display-line-numbers-mode)";
     #Disable line numbers for some modes
-    nhook = [
+    hook = [
       {
         names = [
           "org-mode"

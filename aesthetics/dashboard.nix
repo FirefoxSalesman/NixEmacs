@@ -11,7 +11,7 @@ in
     hasOn = true;
     usePackage.dashboard = lib.mkIf aesthetics.dashboard.enable {
       enable = true;
-      nhook = [
+      hook = [
         {
           names = [ "on-init-ui" ];
           actions = [

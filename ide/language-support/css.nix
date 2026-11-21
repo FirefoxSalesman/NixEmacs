@@ -28,7 +28,7 @@ in
       usePackage = {
         emmet-mode = {
           enable = ide.languages.css.emmet;
-          nhook = [
+          hook = [
             {
               names = [ "css-ts-mode" ];
               actions = [ "'emmet-mode" ];

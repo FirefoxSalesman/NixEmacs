@@ -10,7 +10,7 @@ in
     hasOn = true;
     usePackage.golden-ratio = {
       enable = true;
-      nhook = [
+      hook = [
         {
           names = [ "on-first-input" ];
           actions = [ "'golden-ratio-mode" ];

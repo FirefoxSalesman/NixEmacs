@@ -12,7 +12,7 @@ in
     generalOne.global-leader."t" = lib.mkIf (
       config.programs.emacs.init.keybinds.leader-key.enable && !terminals.eshell
     ) "'eat";
-    nhook = [
+    hook = [
       {
         names = [ "eshell-load" ];
         actions = [ "'eat-eshell-mode" ];

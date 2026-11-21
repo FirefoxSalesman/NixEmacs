@@ -15,7 +15,7 @@ in
     usePackage = {
       company = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "on-first-input" ];
             actions = [ "'global-company-mode" ];
@@ -82,7 +82,7 @@ in
 
       company-box = lib.mkIf completions.company.posframe {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "company-mode" ];
             actions = [ "'company-box-mode" ];
@@ -96,7 +96,7 @@ in
 
       company-prescient = lib.mkIf completions.prescient {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "global-company-mode" ];
             actions = [ "'company-prescient-mode" ];

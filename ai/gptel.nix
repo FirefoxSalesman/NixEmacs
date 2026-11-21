@@ -65,7 +65,7 @@ in
               (add-hook 'completion-at-point-functions
                 'ob-gptel-capf nil t))
       '';
-      nhook = [
+      hook = [
         {
           names = [ "org-mode" ];
           actions = [ "'ob-gptel-setup-completions" ];
@@ -77,7 +77,7 @@ in
     gptel-magit = lib.mkIf ide.magit.enable {
       enable = true;
       after = [ "magit" ];
-      nhook = [
+      hook = [
         {
           names = [ "magit-mode" ];
           actions = [ "'gptel-magit-install" ];

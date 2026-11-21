@@ -32,7 +32,7 @@ in
 
       super-save = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "on-first-file" ];
             actions = [ "'super-save-mode" ];

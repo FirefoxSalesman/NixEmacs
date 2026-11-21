@@ -26,7 +26,7 @@ in
     usePackage = {
       dired = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "dired-mode" ];
             actions = [
@@ -68,7 +68,7 @@ in
 
       diredfl = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "dired-mode" ];
             actions = [ "'diredfl-mode" ];
@@ -98,7 +98,7 @@ in
 
       dired-hide-dotfiles = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "dired-mode" ];
             actions = [ "'dired-hide-dotfiles-mode" ];

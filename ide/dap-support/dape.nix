@@ -9,7 +9,7 @@ in
   config.programs.emacs.init.usePackage = lib.mkIf ide.dape.enable {
     dape = {
       enable = true;
-      nhook = [
+      hook = [
         {
           names = [ "dape-on-stopped" ];
           actions = [ "(lambda () (dape-info) (dape-repl))" ];

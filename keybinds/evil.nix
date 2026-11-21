@@ -53,7 +53,7 @@ in
       evil = {
         enable = true;
         demand = true;
-        nhook = [
+        hook = [
           {
             namesDeferred = [ "on-init-ui" ];
             actions = [ "'evil-mode" ];
@@ -97,7 +97,7 @@ in
 
       evil-collection = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "evil-mode" ];
             actions = [ "'evil-collection-init" ];

@@ -14,7 +14,7 @@ in
       multi-term-dedicated-window-height = lib.mkDefault 20;
       multi-term-switch-after-close = lib.mkDefault "'PREVIOUS";
     };
-    nhook = [
+    hook = [
       {
         names = [ "term-mode" ];
         actions = [ "(lambda () (setq-local hscroll-margin 0))" ];

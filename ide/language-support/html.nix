@@ -41,7 +41,7 @@ in
 
         emmet-mode = {
           enable = ide.languages.html.emmet;
-          nhook = [
+          hook = [
             {
               names = [ "html-ts-mode" ];
               actions = [ "'emmet-mode" ];

@@ -20,7 +20,7 @@ in
       flymake-swi-prolog = lib.mkIf ide.flymake.enable {
         enable = true;
         after = [ "prolog-mode" ];
-        nhook = [
+        hook = [
           {
             names = [ "prolog-mode" ];
             actions = [ "'flymake-mode" ];

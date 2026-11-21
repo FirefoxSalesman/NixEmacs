@@ -117,7 +117,7 @@ in
 
       python-docstring = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "python-ts-mode" ];
             actions = [ "'python-docstring-mode" ];
@@ -127,7 +127,7 @@ in
 
       pet = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "python-ts-mode" ];
             actions = [ "'pet-mode" ];
@@ -161,7 +161,7 @@ in
         after = [ "org" ];
         babel = "jupyter";
         extraPackages = [ pkgs.jupyter ];
-        nhook = [
+        hook = [
           {
             names = [ "org-after-execute" ];
             actions = [ "'org-redisplay-inline-images" ];

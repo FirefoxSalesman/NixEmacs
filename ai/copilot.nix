@@ -19,7 +19,7 @@ in
 
   config.programs.emacs.init.usePackage.copilot = lib.mkIf ai.copilot.enable {
     enable = true;
-    nhook = [
+    hook = [
       {
         names = [ "prog-mode" ];
         actions = [

@@ -31,7 +31,7 @@ in
         else
           [ ];
       mode = [ ''"\\.R\\'"'' ];
-      nhook = lib.mkIf ide.symex [
+      hook = lib.mkIf ide.symex [
         {
           names = [ "ess-r-mode" ];
           actions = [ "(treesit! 'r)" ];

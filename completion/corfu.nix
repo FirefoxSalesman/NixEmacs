@@ -25,7 +25,7 @@ in
     usePackage = {
       corfu = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "on-first-buffer" ];
             actions = [ "'global-corfu-mode" ];
@@ -69,7 +69,7 @@ in
 
       corfu-popupinfo = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "corfu-mode" ];
             actions = [ "'corfu-popupinfo-mode" ];
@@ -80,7 +80,7 @@ in
       corfu-prescient = lib.mkIf completions.prescient {
         enable = true;
         defer = true;
-        nhook = [
+        hook = [
           {
             names = [ "corfu-mode" ];
             actions = [ "'corfu-prescient-mode" ];

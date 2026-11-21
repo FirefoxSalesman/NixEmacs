@@ -19,7 +19,7 @@ in
     usePackage = {
       vertico = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "on-first-input" ];
             actions = [ "'vertico-mode" ];
@@ -53,7 +53,7 @@ in
 
       vertico-prescient = lib.mkIf completions.prescient {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "minibuffer-mode" ];
             actions = [ "'vertico-prescient-mode" ];
@@ -81,7 +81,7 @@ in
       vertico-posframe = lib.mkIf completions.vertico.posframe {
         enable = true;
         defer = true;
-        nhook = [
+        hook = [
           {
             names = [ "vertico-mode" ];
             actions = [ "'vertico-posframe-mode" ];

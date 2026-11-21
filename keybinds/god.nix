@@ -12,7 +12,7 @@ in
     usePackage = {
       god-mode = {
         enable = true;
-        nhook = lib.mkIf (!keybinds.evil.enable) [
+        hook = lib.mkIf (!keybinds.evil.enable) [
           {
             names = [ "on-init-ui-hook" ];
             actions = [ "'god-mode-all" ];
@@ -38,7 +38,7 @@ in
       evil-god-state = lib.mkIf keybinds.evil.enable {
         enable = true;
         command = [ "evil-god-state" ];
-        nhook = lib.mkIf keybinds.doomEscape.enable [
+        hook = lib.mkIf keybinds.doomEscape.enable [
           {
             namesDeferred = [ "doom-escape" ];
             actions = [ "(lambda () (when (featurep 'evil-god-state) (evil-god-state-bail)))" ];

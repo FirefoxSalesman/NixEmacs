@@ -31,7 +31,7 @@ in
         babel = lib.mkIf ide.languages.org.enable "emacs-lisp";
         symex = ide.symex;
         mode = [ ''("\\.Cask\\'" . emacs-lisp-mode)'' ];
-        nhook = lib.mkIf ide.flymake.enable [
+        hook = lib.mkIf ide.flymake.enable [
           {
             names = [ "emacs-lisp-mode" ];
             actions = [ "'flymake-mode" ];
@@ -53,7 +53,7 @@ in
 
       highlight-quoted = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "emacs-lisp-mode" ];
             actions = [ "'highlight-quoted-mode" ];
@@ -63,7 +63,7 @@ in
 
       eldoc-box = lib.mkIf ide.hoverDoc {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "emacs-lisp-mode" ];
             actions = [ "'eldoc-box-hover-at-point-mode" ];
@@ -73,7 +73,7 @@ in
 
       breadcrumb = lib.mkIf ide.breadcrumb {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "emacs-lisp-mode" ];
             actions = [ "'breadcrumb-local-mode" ];
@@ -83,7 +83,7 @@ in
 
       semel = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "emacs-lisp-mode" ];
             actions = [ "'semel-mode" ];

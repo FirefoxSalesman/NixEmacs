@@ -32,7 +32,7 @@ in
       exwm = {
         enable = true;
         afterCall = [ "on-init-ui-hook" ];
-        nhook = [
+        hook = [
           {
             names = [ "exwm-init" ];
             actions = [ "(lambda () (exwm-workspace-switch-create 0))" ];
@@ -87,7 +87,7 @@ in
         enable = true;
         defer = true;
         command = lib.mkIf tools.goldenRatio [ "exwm-mff-warp-to-selected" ];
-        nhook = lib.mkIf (!tools.goldenRatio) [
+        hook = lib.mkIf (!tools.goldenRatio) [
           {
             names = [ "exwm-wm-mode" ];
             actions = [ "'exwm-mff-mode" ];

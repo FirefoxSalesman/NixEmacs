@@ -22,7 +22,7 @@ in
 
       sly = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "lisp-mode-local-vars" ];
             actions = [ "'sly-editing-mode" ];

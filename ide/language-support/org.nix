@@ -166,7 +166,7 @@ in
             "i" = lib.mkDefault '''(org-toggle-inline-images :which-key "show images")'';
             "b" = lib.mkDefault '''(org-edit-special :which-key "edit block")'';
           };
-          nhook = [
+          hook = [
             {
               names = [ "org-mode" ];
               actions = [ "'org-indent-mode" ];
@@ -206,7 +206,7 @@ in
 
         org-appear = lib.mkIf ide.languages.org.aesthetics.enable {
           enable = true;
-          nhook = [
+          hook = [
             {
               names = [ "org-mode" ];
               actions = [ "'org-appear-mode" ];
@@ -222,7 +222,7 @@ in
 
         org-modern = lib.mkIf ide.languages.org.aesthetics.enable {
           enable = true;
-          nhook = [
+          hook = [
             {
               names = [ "org-mode" ];
               actions = [
@@ -265,7 +265,7 @@ in
 
         eldoc-box = lib.mkIf ide.hoverDoc {
           enable = true;
-          nhook = [
+          hook = [
             {
               names = [ "org-mode" ];
               actions = [ "'eldoc-box-hover-mode" ];
@@ -287,7 +287,7 @@ in
             '''(left . "${keybinds.evil.keys.backward}")''
             '''(right . "${keybinds.evil.keys.forward}")''
           ];
-          nhook = [
+          hook = [
             {
               names = [ "org-mode" ];
               actions = [ "'evil-org-mode" ];
@@ -368,7 +368,7 @@ in
 
         toc-org = {
           enable = true;
-          nhook = [
+          hook = [
             {
               names = [ "org-mode" ];
               actions = [ "'toc-org-mode" ];

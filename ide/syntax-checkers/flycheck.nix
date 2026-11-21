@@ -15,7 +15,7 @@ in
         usePackage = {
           flycheck = {
             enable = true;
-            nhook = [
+            hook = [
               {
                 names = [ "on-first-buffer" ];
                 actions = [ "'global-flycheck-mode" ];
@@ -30,7 +30,7 @@ in
 
           flycheck-posframe = lib.mkIf ide.hoverDoc {
             enable = true;
-            nhook = [
+            hook = [
               {
                 names = [ "flycheck-mode" ];
                 actions = [ "'flycheck-posframe-mode" ];

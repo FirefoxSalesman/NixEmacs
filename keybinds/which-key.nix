@@ -17,7 +17,7 @@ in
     usePackage = {
       which-key = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "on-first-input" ];
             actions = [ "'which-key-mode" ];
@@ -29,7 +29,7 @@ in
       which-key-posframe = lib.mkIf keybinds.whichKey.posframe.enable {
         enable = true;
         defer = true;
-        nhook = [
+        hook = [
           {
             names = [ "which-key-mode" ];
             actions = [ "'which-key-posframe-mode" ];

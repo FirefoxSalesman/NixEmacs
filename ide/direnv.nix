@@ -11,7 +11,7 @@
 
     emacs.init.usePackage.envrc = {
       enable = true;
-      nhook = [
+      hook = [
         {
           names = [ "after-init" ];
           actions = [ "'envrc-global-mode" ];

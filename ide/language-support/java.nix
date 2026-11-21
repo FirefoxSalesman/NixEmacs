@@ -96,7 +96,7 @@ in
 
         eglot-java = lib.mkIf ide.languages.java.moreEglot {
           enable = true;
-          nhook = [
+          hook = [
             {
               names = [ "java-ts-mode" ];
               actions = [ "'eglot-java-mode" ];

@@ -18,7 +18,7 @@ in
   };
   config.programs.emacs.init.usePackage.treesit-fold = lib.mkIf ide.treesit-fold.enable {
     enable = true;
-    nhook = [
+    hook = [
       {
         names = ide.treesit-fold.enabledModes;
         actions = [ "'treesit-fold-mode" ];

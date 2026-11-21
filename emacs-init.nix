@@ -230,7 +230,7 @@ let
           '';
         };
 
-        nhook = mkOption {
+        hook = mkOption {
           type = types.listOf (types.attrsOf (types.listOf types.str));
           default = [ ];
           description = ''
@@ -502,7 +502,7 @@ let
             mkBindKeyMap = mkBindHelper "bind-keymap" "";
             mkChords = mkBindHelper "chords" "";
             hookHelper = vs: keyword: optional (vs != [ ]) "${keyword} ${toString vs}";
-            mkNhook =
+            mkHook =
               hooks:
               let
                 listify =
@@ -602,7 +602,7 @@ let
             ++ mkDemand config.demand
             ++ mkDiminish config.diminish
             ++ mkHook (mkLsp name config.lsp)
-            ++ mkNhook config.nhook
+            ++ mkHook config.hook
             ++ mkEglot name config.eglot
             ++ mkLspCe name config.lspce
             ++ mkCustom config.custom
@@ -700,7 +700,7 @@ let
   hasGeneral = any (
     p:
     p.symex != false
-    || p.nhook != [ ]
+    || p.hook != [ ]
     || p.generalOneConfig != { }
     || p.generalTwoConfig != { }
     || p.generalConfig != { }

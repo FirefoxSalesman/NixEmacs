@@ -13,7 +13,7 @@ in
         enable = true;
         defer = true;
         setopt.flymake-indicator-position = "'right-fringe";
-        nhook = lib.mkIf ide.languages.emacs-lisp.enable [
+        hook = lib.mkIf ide.languages.emacs-lisp.enable [
           {
             names = [ "flymake-mode" ];
             actions = [
@@ -30,7 +30,7 @@ in
       flymake-popon = lib.mkIf (ide.hoverDoc && !ide.flycheck.preset) {
         enable = true;
         setopt.flymake-popon-method = "'posframe";
-        nhook = [
+        hook = [
           {
             names = [ "flymake-mode" ];
             actions = [ "'flymake-popon-mode" ];
@@ -38,7 +38,7 @@ in
         ];
       };
 
-      eglot.nhook = lib.mkIf ide.eglot.preset [
+      eglot.hook = lib.mkIf ide.eglot.preset [
         {
           names = [ "eglot-managed-mode" ];
           actions = [

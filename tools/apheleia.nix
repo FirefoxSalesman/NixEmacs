@@ -38,7 +38,7 @@ in
 
   config.programs.emacs.init.usePackage.apheleia = lib.mkIf tools.apheleia.enable {
     enable = true;
-    nhook = lib.mkIf tools.apheleia.autoFormat [
+    hook = lib.mkIf tools.apheleia.autoFormat [
       {
         names = [ "on-first-file" ];
         actions = [ "'apheleia-global-mode" ];

@@ -16,7 +16,7 @@ in
     programs.emacs.init.usePackage = {
       coffee-mode = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "coffee-mode" ];
             actions = [ "'coffee-cos-mode" ];
@@ -27,7 +27,7 @@ in
       flymake-coffee = lib.mkIf ide.flymake.enable {
         enable = true;
         extraPackages = [ pkgs.coffeescript ];
-        nhook = [
+        hook = [
           {
             names = [ "coffee-mode" ];
             actions = [ "'flymake-coffee-load" ];

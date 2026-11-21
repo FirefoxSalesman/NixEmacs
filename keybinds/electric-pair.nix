@@ -11,7 +11,7 @@ in
     hasOn = true;
     usePackage.elec-pair = {
       enable = true;
-      nhook = [
+      hook = [
         {
           names = [ "on-first-buffer" ];
           actions = [ "'electric-pair-mode" ];

@@ -14,7 +14,7 @@ in
 
   config.programs.emacs.init.usePackage.citre = lib.mkIf init.ide.citre.enable {
     enable = true;
-    nhook = [
+    hook = [
       {
         names = [ "prog-mode" ];
         actions = [ "'citre-mode" ];

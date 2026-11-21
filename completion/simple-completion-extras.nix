@@ -22,7 +22,7 @@ in
     usePackage = {
       marginalia = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "on-first-input" ];
             actions = [ "'marginalia-mode" ];
@@ -225,7 +225,7 @@ in
           "embark"
           "consult"
         ];
-        nhook = [
+        hook = [
           {
             names = [ "embark-collect-mode" ];
             actions = [ "'consult-preview-at-point-mode" ];

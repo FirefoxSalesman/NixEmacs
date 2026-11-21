@@ -35,7 +35,7 @@ in
 
         cider = {
           enable = true;
-          nhook = [
+          hook = [
             {
               names = [ "clojure-mode" ];
               actions = [ "'cider-mode" ];

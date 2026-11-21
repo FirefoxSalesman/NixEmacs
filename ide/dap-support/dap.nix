@@ -8,7 +8,7 @@ in
 
   config.programs.emacs.init.usePackage.dap-mode = lib.mkIf ide.dap.enable {
     enable = true;
-    nhook = [
+    hook = [
       {
         names = [ "lsp-mode" ];
         actions = [ "'dap-mode" ];

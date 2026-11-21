@@ -17,7 +17,7 @@ in
     usePackage = {
       ivy = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "on-first-input" ];
             actions = [ "'ivy-mode" ];
@@ -151,7 +151,7 @@ in
 
       ivy-prescient = lib.mkIf completions.prescient {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "ivy-mode" ];
             actions = [ "'ivy-prescient-mode" ];
@@ -161,7 +161,7 @@ in
 
       ivy-posframe = lib.mkIf completions.ivy.posframe {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "ivy-mode" ];
             actions = [ "'ivy-posframe-mode" ];

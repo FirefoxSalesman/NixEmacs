@@ -27,7 +27,7 @@ in
           eshell-scroll-to-bottom-on-input = lib.mkDefault "'this";
           eshell-destroy-buffer-when-process-dies = lib.mkDefault true;
         };
-        nhook = [
+        hook = [
           #Save command history when commands are entered
           {
             names = [ "eshell-precommand" ];
@@ -62,7 +62,7 @@ in
 
       eshell-syntax-highlighting = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "eshell-mode" ];
             actions = [ "'eshell-syntax-highlighting-global-mode" ];
@@ -72,7 +72,7 @@ in
 
       fish-completion = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "eshell-mode" ];
             actions = [ "'fish-completion-mode" ];

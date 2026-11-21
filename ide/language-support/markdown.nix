@@ -49,7 +49,7 @@ in
     markdown-ts-appear = {
       enable = true;
       defer = true;
-      nhook = [
+      hook = [
         {
           names = [ "markdown-ts-mode" ];
           actions = [ "'markdown-ts-appear-mode" ];

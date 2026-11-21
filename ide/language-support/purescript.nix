@@ -15,7 +15,7 @@ in
   config.programs.emacs.init.usePackage.purescript-mode = lib.mkIf ide.languages.purescript.enable {
     enable = true;
     # borrowed from doom
-    nhook = [
+    hook = [
       {
         names = [ "purescript-mode" ];
         actions = [ "'purescript-indentation-mode" ];

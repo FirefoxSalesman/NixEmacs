@@ -12,7 +12,7 @@ in
     hasOn = true;
     usePackage.mct = {
       enable = true;
-      nhook = [
+      hook = [
         {
           names = [ "on-first-input " ];
           actions = [ "'mct-mode" ];

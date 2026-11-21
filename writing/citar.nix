@@ -25,7 +25,7 @@ in
         ${if writing.denote.enable then "(citar-denote-mode)" else ""}
         ${if writing.orgRoam then "(citar-org-roam-mode)" else ""}
       '';
-      nhook = [
+      hook = [
         (hookIf ide.languages.latex.enable "LaTeX")
         (hookIf ide.languages.markdown.enable "gfm")
         (hookIf ide.languages.org.enable "org")

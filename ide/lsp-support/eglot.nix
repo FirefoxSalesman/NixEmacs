@@ -60,7 +60,7 @@ in
 
         eldoc-box = {
           enable = ide.hoverDoc;
-          nhook = [
+          hook = [
             {
               names = [ "eglot-managed-mode" ];
               actions = [ "'eldoc-box-hover-at-point-mode" ];
@@ -70,7 +70,7 @@ in
 
         breadcrumb = lib.mkIf ide.breadcrumb {
           enable = true;
-          nhook = [
+          hook = [
             {
               names = [ "eglot-managed-mode" ];
               actions = [ "'breadcrumb-local-mode" ];

@@ -58,7 +58,7 @@ in
 
         lsp-ui = lib.mkIf ide.hoverDoc {
           enable = true;
-          nhook = [
+          hook = [
             {
               names = [ "lsp-mode" ];
               actions = [ "'lsp-ui-mode" ];

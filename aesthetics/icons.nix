@@ -46,7 +46,7 @@ in
 
     nerd-icons-completion = lib.mkIf completions.smallExtras.enable {
       enable = true;
-      nhook = [
+      hook = [
         {
           names = [ "marginalia-mode" ];
           actions = [ "'nerd-icons-completion-marginalia-setup" ];
@@ -56,7 +56,7 @@ in
 
     nerd-icons-dired = lib.mkIf (tools.dired.enable && !tools.dired.dirvish.enable) {
       enable = true;
-      nhook = [
+      hook = [
         {
           names = [ "dired-mode" ];
           actions = [ "'nerd-icons-dired-mode" ];
@@ -72,7 +72,7 @@ in
 
     helm-icons = lib.mkIf completions.helm.enable {
       enable = true;
-      nhook = [
+      hook = [
         {
           names = [ "helm-mode" ];
           actions = [ "'helm-icons-mode" ];

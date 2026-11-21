@@ -22,7 +22,7 @@ in
     usePackage = {
       helm-mode = {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "on-first-input" ];
             actions = [ "'helm-mode" ];
@@ -103,7 +103,7 @@ in
 
       helm-flx = lib.mkIf completions.helm.fuzzy {
         enable = true;
-        nhook = [
+        hook = [
           {
             names = [ "helm-mode" ];
             actions = [ "'helm-flx-mode" ];

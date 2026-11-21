@@ -16,7 +16,7 @@ in
     denote = {
       enable = true;
       defer = true;
-      nhook = [
+      hook = [
         {
           names = [ "dired-mode" ];
           actions = [ "'denote-dired-mode-in-directories" ];

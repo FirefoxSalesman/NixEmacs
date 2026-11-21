@@ -395,7 +395,7 @@ programs.emacs.init.usePackage.vundo = {
 };
 #+end_src
 
-***** =nhook=
+***** =hook=
 Allows the user to compose large numbers of hooks together.
 
 Fields:
@@ -409,7 +409,7 @@ Fields:
 Example usage:
 #+begin_src nix-ts
 {
-  programs.emacs.init.usePackage.helm-icons.nhook = [
+  programs.emacs.init.usePackage.helm-icons.hook = [
     {
       names = [ "helm-mode" ];
       actions = [ "'helm-icons-mode" ];
@@ -974,13 +974,13 @@ Dape's global map is bound to =C-x C-a=
 Set this option to true to enable the treesitter module.
 
 When this option is used it adds the elisp macro =treesit!=, which generates a lambda that activates the treesitter grammar for the given language (see the macro documentation for more details).
-It doesn't seem to work with the hook keyword, but nhook, & elisp's add-hook all work fine.
+It doesn't seem to work with the hook keyword, but hook, & elisp's add-hook all work fine.
 
 **** =programs.emacs.init.ide.treesitter.treesitterGrammars=
 An attribute set of language names & links to their grammars.
 
 When this option is used, it implicitly enables the treesitter module & adds the elisp macro =treesit!=, which generates a lambda that activates the treesitter grammar for the given language (see the macro documentation for more details).
-It doesn't seem to work with the hook keyword, but nhook, & elisp's add-hook all work fine.
+It doesn't seem to work with the hook keyword, but hook, & elisp's add-hook all work fine.
 
 **** =programs.emacs.init.ide.symex=
 A boolean that will enable symex for all languages in the language support presets
