@@ -561,12 +561,12 @@ let
                   in
                   if result != [ "" ] then ":${name} ${lib.concatStringsSep " " result}" else "";
               in
-              ''
-                ${toString "ghook" (hook: hook.ghook)}
-                ${toString "ghookf" (hook: hook.ghookf)}
-                ${toString "gfhook" (hook: hook.gfhook)}
-                ${toString "gfhookf" (hook: hook.gfhookf)}
-              '';
+              [
+                (toString "ghook" (hook: hook.ghook))
+                (toString "ghookf" (hook: hook.ghookf))
+                (toString "gfhook" (hook: hook.gfhook))
+                (toString "gfhookf" (hook: hook.gfhookf))
+              ];
             mkHook = vs: hookHelper vs ":hook";
             mkGhook = vs: hookHelper vs ":ghook";
             mkGfhook = vs: hookHelper vs ":gfhook";
@@ -638,10 +638,7 @@ let
             ++ mkHook (config.hook ++ mkLsp name config.lsp)
             ++ mkGhook config.ghook
             ++ mkGhookf config.ghookf
-            ++ [
-              mkNhook
-              config.nhook
-            ]
+            ++ mkNhook config.nhook
             ++ mkGfhookf config.gfhookf
             ++ mkEglot name config.eglot
             ++ mkLspCe name config.lspce
