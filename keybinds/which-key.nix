@@ -17,7 +17,7 @@ in
     usePackage = {
       which-key = {
         enable = true;
-        hook = [ "(on-first-input . which-key-mode)" ];
+        nhook = [ {name}"(on-first-input . which-key-mode)" ];
         setopt.which-key-idle-delay = lib.mkDefault 1.0;
       };
 

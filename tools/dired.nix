@@ -26,10 +26,22 @@ in
     usePackage = {
       dired = {
         enable = true;
-        hook = [
-          "(dired-mode . (lambda () (dired-omit-mode) ${
-            if tools.dired.dirvish.enable then "" else "(hl-line-mode) (setq-local visible-cursor nil)"
-          }))"
+        nhook = [
+          {
+            names = [ "dired-mode" ];
+            actions = [
+              "'dired-omit-mode"
+            ]
+            ++ (
+              if tools.dired.dirvish.enable then
+                [ ]
+              else
+                [
+                  "'hl-line-mode"
+                  "(lambda () (setq-local visible-cursor nil))"
+                ]
+            );
+          }
         ];
         # These options are all borrowed from Prot.
         setopt = {
@@ -56,7 +68,12 @@ in
 
       diredfl = {
         enable = true;
-        hook = [ "(dired-mode . diredfl-mode)" ];
+        nhook = [
+          {
+            names = [ "dired-mode" ];
+            actions = [ "'diredfl-mode" ];
+          }
+        ];
       };
 
       dired-narrow = lib.mkIf (tools.dired.narrow && !tools.dired.dirvish.enable) {
@@ -81,7 +98,12 @@ in
 
       dired-hide-dotfiles = {
         enable = true;
-        hook = [ "(dired-mode . dired-hide-dotfiles-mode)" ];
+        nhook = [
+          {
+            names = [ "dired-mode" ];
+            actions = [ "'dired-hide-dotfiles-mode" ];
+          }
+        ];
         generalTwoConfig.":n".dired-mode-map."H" = lib.mkIf keybinds.evil.enable (
           lib.mkDefault "'dired-hide-dotfiles-mode"
         );

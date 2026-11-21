@@ -15,7 +15,19 @@ in
     usePackage = {
       company = {
         enable = true;
-        hook = [ "(on-first-input . global-company-mode)" ];
+        nhook = [
+          {
+            names = [ "on-first-input" ];
+            actions = [ "'global-company-mode" ];
+          }
+          {
+            namesDeferred = [
+              "evil-insert-state-exit"
+              "evil-emacs-state-exit-hook"
+            ];
+            actions = [ "'company-abort" ];
+          }
+        ];
         setopt = {
           company-minimum-prefix-length = lib.mkDefault 2;
           company-tooltip-limit = lib.mkDefault 14;
@@ -41,9 +53,6 @@ in
           company-dabbrev-ignore-case = lib.mkDefault false;
           company-dabbrev-downcase = lib.mkDefault false;
         };
-        gfhookf = lib.mkIf keybinds.evil.enable [
-          "('(evil-insert-state-exit evil-emacs-state-exit-hook) 'company-abort)"
-        ];
         config = ''
           (with-eval-after-load 'eldoc
                                                    (eldoc-add-command 'company-complete-selection
@@ -73,7 +82,12 @@ in
 
       company-box = lib.mkIf completions.company.posframe {
         enable = true;
-        hook = [ "(company-mode . company-box-mode)" ];
+        nhook = [
+          {
+            names = [ "company-mode" ];
+            actions = [ "'company-box-mode" ];
+          }
+        ];
       };
 
       evil-collection.setopt.evil-collection-want-company-extended-keybinds = lib.mkIf keybinds.evil.enable (
@@ -82,7 +96,12 @@ in
 
       company-prescient = lib.mkIf completions.prescient {
         enable = true;
-        hook = [ "(global-company-mode . company-prescient-mode)" ];
+        nhook = [
+          {
+            names = [ "global-company-mode" ];
+            actions = [ "'company-prescient-mode" ];
+          }
+        ];
       };
     };
   };

@@ -450,6 +450,29 @@ gfhookf = ["('racket-mode 'hs-minor-mode)"];
 };
 #+end_src
 
+***** =nhook=
+Allows the user to compose large numbers of hooks together.
+
+Fields:
++ =actions=- The functions to run on the hook. They're either quoted symbols or lisp expressions that evaluate to functions
++ name fields: (You may combine as many of these as you want.)
+  - =names=: A list of hook names, with the "-hook" omitted. These will autoload the package
+  - =namesDeferred=: A list of hook names, with the "-hook" omitted. These won't autoload the package
+  - =fullNames=: A list of hook names. These will autoload the package
+  - =fullNamesDeferred=: A list of hook names. These won't autoload the package
+
+Example usage:
+#+begin_src nix-ts
+{
+  programs.emacs.init.usePackage.helm-icons.nhook = [
+      {
+        names = [ "helm-mode" ];
+        actions = [ "'helm-icons-mode" ];
+      }
+    ];
+  };
+}
+#+end_src
 **** =defines=
 The =:defines= option from use-package.
 

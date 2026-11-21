@@ -22,7 +22,12 @@ in
     usePackage = {
       helm-mode = {
         enable = true;
-        hook = [ "(on-first-input . helm-mode)" ];
+        nhook = [
+          {
+            names = [ "on-first-input" ];
+            actions = [ "'helm-mode" ];
+          }
+        ];
         config = "(add-to-list 'helm-completing-read-handlers-alist (cons #'find-file-at-point nil))";
       };
 
@@ -74,9 +79,7 @@ in
           "M-y" = lib.mkDefault "helm-show-kill-ring";
           "M-x" = lib.mkDefault "helm-M-x";
         };
-        config = ''(add-to-list 'completion-styles ${
-          if completions.helm.fuzzy then "'flex" else "'helm"
-        })'';
+        config = "(add-to-list 'completion-styles ${if completions.helm.fuzzy then "'flex" else "'helm"})";
         generalTwoConfig.":nm".helm-map = lib.mkIf keybinds.evil.enable {
           "${keybinds.evil.keys.up}" = "'helm-previous-line";
           "${keybinds.evil.keys.down}" = "'helm-next-line";
@@ -100,7 +103,12 @@ in
 
       helm-flx = lib.mkIf completions.helm.fuzzy {
         enable = true;
-        hook = [ "(helm-mode . helm-flx-mode)" ];
+        nhook = [
+          {
+            names = [ "helm-mode" ];
+            actions = [ "'helm-flx-mode" ];
+          }
+        ];
       };
 
       swiper-helm = lib.mkIf completions.helm.swiperReplaceSearch {

@@ -19,7 +19,12 @@ in
     usePackage = {
       vertico = {
         enable = true;
-        hook = [ "(on-first-input . vertico-mode)" ];
+        nhook = [
+          {
+            names = [ "on-first-input" ];
+            actions = [ "'vertico-mode" ];
+          }
+        ];
         setopt.vertico-cycle = true;
         generalTwoConfig.":n".vertico-map = lib.mkIf keybinds.evil.enable {
           "RET" = "'vertico-exit";

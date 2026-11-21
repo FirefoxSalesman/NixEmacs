@@ -11,7 +11,12 @@ in
     hasOn = true;
     usePackage.elec-pair = {
       enable = true;
-      hook = [ "(on-first-buffer . electric-pair-mode)" ];
+      nhook = [
+        {
+          names = [ "on-first-buffer" ];
+          actions = [ "'electric-pair-mode" ];
+        }
+      ];
       setopt = {
         electric-pair-pairs = lib.mkDefault [
           '''(?\" . ?\")''

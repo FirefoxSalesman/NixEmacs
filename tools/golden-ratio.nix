@@ -10,7 +10,12 @@ in
     hasOn = true;
     usePackage.golden-ratio = {
       enable = true;
-      hook = [ "(on-first-input . golden-ratio-mode)" ];
+      nhook = [
+        {
+          names = [ "on-first-input" ];
+          actions = [ "golden-ratio-mode" ];
+        }
+      ];
       config = lib.mkIf tools.exwm.wantMouseWarping "(advice-add 'golden-ratio :after 'exwm-mff-warp-to-selected)";
     };
   };

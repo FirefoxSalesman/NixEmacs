@@ -32,8 +32,11 @@ in
       exwm = {
         enable = true;
         afterCall = [ "on-init-ui-hook" ];
-        hook = [
-          "(exwm-init . (lambda () (exwm-workspace-switch-create 0)))"
+        nhook = [
+          {
+            names = [ "exwm-init" ];
+            actions = [ "(lambda () (exwm-workspace-switch-create 0))" ];
+          }
         ]
         ++ (
           if config.programs.emacs.init.keybinds.evil.enable then
@@ -76,7 +79,12 @@ in
         enable = true;
         defer = true;
         command = lib.mkIf tools.goldenRatio [ "exwm-mff-warp-to-selected" ];
-        hook = lib.mkIf (!tools.goldenRatio) [ "(exwm-wm-mode . exwm-mff-mode)" ];
+        nhook = lib.mkIf (!tools.goldenRatio) [
+          {
+            names = [ "exwm-wm-mode" ];
+            actions = [ "'exwm-mff-mode" ];
+          }
+        ];
       };
 
       exwm-outer-gaps = lib.mkIf tools.exwm.useGaps {

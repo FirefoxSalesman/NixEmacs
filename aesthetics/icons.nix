@@ -46,12 +46,22 @@ in
 
     nerd-icons-completion = lib.mkIf completions.smallExtras.enable {
       enable = true;
-      hook = [ "(marginalia-mode . nerd-icons-completion-marginalia-setup)" ];
+      nhook = [
+        {
+          names = [ "marginalia-mode" ];
+          actions = [ "'nerd-icons-completion-marginalia-setup" ];
+        }
+      ];
     };
 
     nerd-icons-dired = lib.mkIf (tools.dired.enable && !tools.dired.dirvish.enable) {
       enable = true;
-      hook = [ "(dired-mode . nerd-icons-dired-mode)" ];
+      nhook = [
+        {
+          names = [ "dired-mode" ];
+          actions = [ "'nerd-icons-dired-mode" ];
+        }
+      ];
     };
 
     nerd-icons-corfu = lib.mkIf completions.corfu.enable {
@@ -62,7 +72,12 @@ in
 
     helm-icons = lib.mkIf completions.helm.enable {
       enable = true;
-      hook = [ "(helm-mode . helm-icons-mode)" ];
+      nhook = [
+        {
+          names = [ "helm-mode" ];
+          actions = [ "'helm-icons-mode" ];
+        }
+      ];
       custom.helm-icons-provider = "'nerd-icons";
     };
 

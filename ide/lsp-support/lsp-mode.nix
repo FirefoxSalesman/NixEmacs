@@ -58,7 +58,12 @@ in
 
         lsp-ui = lib.mkIf ide.hoverDoc {
           enable = true;
-          hook = [ "(lsp-mode . lsp-ui-mode)" ];
+          nhook = [
+            {
+              names = [ "lsp-mode" ];
+              actions = [ "'lsp-ui-mode" ];
+            }
+          ];
           setopt = {
             lsp-ui-doc-show-with-mouse = lib.mkDefault false;
             lsp-ui-doc-position = lib.mkDefault "'at-point";

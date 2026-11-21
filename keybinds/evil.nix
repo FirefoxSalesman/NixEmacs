@@ -53,7 +53,12 @@ in
       evil = {
         enable = true;
         demand = true;
-        gfhookf = [ "('on-init-ui 'evil-mode)" ];
+        nhook = [
+          {
+            namesDeferred = [ "on-init-ui" ];
+            actions = [ "'evil-mode" ];
+          }
+        ];
         custom.evil-want-keybinding = false;
         setopt = {
           # Various settings to make it more like vim
@@ -92,7 +97,12 @@ in
 
       evil-collection = {
         enable = true;
-        ghookf = [ "('evil-mode 'evil-collection-init)" ];
+        nhook = [
+          {
+            names = [ "evil-mode" ];
+            actions = [ "'evil-collection-init" ];
+          }
+        ];
         gfhookf = lib.mkIf hasSwap [ "('evil-collection-setup 'nix-emacs-hjkl-rotation)" ];
         preface = lib.mkIf hasSwap ''
           (defun nix-emacs-hjkl-rotation (_mode mode-keymaps &rest _rest)

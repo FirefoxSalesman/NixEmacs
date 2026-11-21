@@ -22,7 +22,12 @@ in
     usePackage = {
       marginalia = {
         enable = true;
-        hook = [ "(on-first-input . marginalia-mode)" ];
+        nhook = [
+          {
+            names = [ "on-first-input" ];
+            actions = [ "'marginalia-mode" ];
+          }
+        ];
       };
 
       consult = {
@@ -124,7 +129,7 @@ in
                     (setq evil-ex-search-direction 'forward)
                     (when evil-ex-search-persistent-highlight
                       (evil-ex-search-activate-highlight evil-ex-search-pattern)))
-                  
+
                   (defun noct-consult-line-evil-history (&rest _)
                     "Add latest `consult-line' search pattern to the evil search history ring.
                     This only works with orderless and for the first component of the search."
@@ -132,7 +137,7 @@ in
                                (eq evil-search-module 'isearch))
                       (nix-emacs-save-search-history (cadr (orderless-compile
           				              (car consult--line-history))))))
-                  
+
                   (general-add-advice #'consult-line :after #'noct-consult-line-evil-history)
         '';
       };
@@ -220,7 +225,12 @@ in
           "embark"
           "consult"
         ];
-        hook = [ "(embark-collect-mode . consult-preview-at-point-mode)" ];
+        nhook = [
+          {
+            names = [ "embark-collect-mode" ];
+            actions = [ "'consult-preview-at-point-mode" ];
+          }
+        ];
       };
     };
   };

@@ -22,12 +22,22 @@ in
 
       eldoc-box = lib.mkIf ide.hoverDoc {
         enable = true;
-        hook = [ "(lspce-mode . eldoc-box-hover-at-point-mode)" ];
+        nhook = [
+          {
+            names = [ "lspce-mode" ];
+            actions = [ "'eldoc-box-hover-at-point-mode" ];
+          }
+        ];
       };
 
       breadcrumb = lib.mkIf ide.breadcrumb {
         enable = true;
-        hook = [ "(lspce-mode . breadcrumb-local-mode)" ];
+        nhook = [
+          {
+            names = [ "lspce-mode" ];
+            actions = [ "'breadcrumb-local-mode" ];
+          }
+        ];
       };
     };
   };

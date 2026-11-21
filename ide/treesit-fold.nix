@@ -18,6 +18,6 @@ in
   };
   config.programs.emacs.init.usePackage.treesit-fold = lib.mkIf ide.treesit-fold.enable {
     enable = true;
-    hook = lib.map (mode: "(${mode} . treesit-fold-mode)") ide.treesit-fold.enabledModes;
+    nhook = lib.map (mode: "(${mode} . treesit-fold-mode)") ide.treesit-fold.enabledModes;
   };
 }

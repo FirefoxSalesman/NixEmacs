@@ -12,7 +12,12 @@ in
     hasOn = true;
     usePackage.mct = {
       enable = true;
-      hook = [ "(on-first-input . mct-mode)" ];
+      nhook = [
+        {
+          names = [ "on-first-input " ];
+          actions = [ "'mct-mode" ];
+        }
+      ];
       setopt = {
         mct-hide-completion-mode-line = lib.mkDefault true;
         mct-completing-read-multiple-indicator = lib.mkDefault true;

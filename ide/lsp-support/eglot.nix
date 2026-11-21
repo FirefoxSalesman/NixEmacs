@@ -60,12 +60,22 @@ in
 
         eldoc-box = {
           enable = ide.hoverDoc;
-          hook = [ "(eglot-managed-mode . eldoc-box-hover-at-point-mode)" ];
+          nhook = [
+            {
+              names = [ "eglot-managed-mode" ];
+              actions = [ "'eldoc-box-hover-at-point-mode" ];
+            }
+          ];
         };
 
         breadcrumb = lib.mkIf ide.breadcrumb {
           enable = true;
-          hook = [ "(eglot-managed-mode . breadcrumb-local-mode)" ];
+          nhook = [
+            {
+              names = [ "eglot-managed-mode" ];
+              actions = [ "'breadcrumb-local-mode" ];
+            }
+          ];
         };
 
         consult-eglot = lib.mkIf config.programs.emacs.init.completions.smallExtras.enable {

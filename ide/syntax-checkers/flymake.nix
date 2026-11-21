@@ -13,12 +13,16 @@ in
         enable = true;
         defer = true;
         setopt.flymake-indicator-position = "'right-fringe";
-        hook = lib.mkIf ide.languages.emacs-lisp.enable [
-          ''
-            (flymake-mode . (lambda () (when (major-mode? 'emacs-lisp-mode)
-                                                                                                        (setq-local eldoc-documentation-functions '(elisp-eldoc-var-docstring
-                                                                                                                                                    elisp-eldoc-funcall
-                                                                                                                                                    t)))))''
+        nhook = lib.mkIf ide.languages.emacs-lisp.enable [
+          {
+            names = [ "flymake-mode" ];
+            actions = [
+              ''
+                (lambda () (when (major-mode? 'emacs-lisp-mode)
+                            (setq-local eldoc-documentation-functions
+                	                '(elisp-eldoc-var-docstring elisp-eldoc-funcall t))))''
+            ];
+          }
         ];
         config = lib.mkIf config.programs.emacs.init.keybinds.evil.enable ''(evil-ex-define-cmd "trouble" 'flymake-show-project-diagnostics)'';
       };
@@ -26,12 +30,18 @@ in
       flymake-popon = lib.mkIf (ide.hoverDoc && !ide.flycheck.preset) {
         enable = true;
         setopt.flymake-popon-method = "'posframe";
-        hook = [ "(flymake-mode . flymake-popon-mode)" ];
+        nhook = [
+          {
+            names = [ "flymake-mode" ];
+            actions = [ "'flymake-popon-mode" ];
+          }
+        ];
       };
 
-      eglot.hook = lib.mkIf ide.eglot.preset [
+      eglot.nhook = lib.mkIf ide.eglot.preset [
+	{names = ["eglot-managed-mode "]}
         ''
-          (eglot-managed-mode . (lambda () (setq-local eldoc-documentation-functions '(eglot-signature-eldoc-function
+          (. (lambda () (setq-local eldoc-documentation-functions '(eglot-signature-eldoc-function
                                                                                                                                        eglot-hover-eldoc-function
                                                                                                                                        t
                                                                                                                                        eglot-x-hover-eldoc-function))))''

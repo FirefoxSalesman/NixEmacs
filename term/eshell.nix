@@ -27,14 +27,27 @@ in
           eshell-scroll-to-bottom-on-input = lib.mkDefault "'this";
           eshell-destroy-buffer-when-process-dies = lib.mkDefault true;
         };
-        hook = [
+        nhook = [
           #Save command history when commands are entered
-          "(eshell-precommand . eshell-save-some-history)"
+          {
+            names = [ "eshell-precommand" ];
+            actions = [ "'eshell-save-some-history" ];
+          }
           #pfetch
-          ''(eshell-banner-load . (lambda () (setopt eshell-banner-message (shell-command-to-string "${pkgs.pfetch}/bin/pfetch"))))''
-          ''
-              (eshell-first-time-mode . (lambda () (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
-            	    (setenv "TERM" "xterm")))''
+          {
+            names = [ "eshell-banner-load" ];
+            actions = [
+              ''(lambda () (setopt eshell-banner-message (shell-command-to-string "${pkgs.pfetch}/bin/pfetch")))''
+            ];
+          }
+          {
+            names = [ "eshell-first-time-mode" ];
+            actions = [
+              ''
+                (eshell-first-time-mode . (lambda () (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+                            	    (setenv "TERM" "xterm")))''
+            ];
+          }
         ];
         generalOne.global-leader."t" = lib.mkIf keybinds.leader-key.enable "'eshell";
         generalOneConfig.eshell-mode-map = lib.mkIf keybinds.evil.enable {
@@ -49,12 +62,22 @@ in
 
       eshell-syntax-highlighting = {
         enable = true;
-        hook = [ "(eshell-mode . eshell-syntax-highlighting-global-mode)" ];
+        nhook = [
+          {
+            names = [ "eshell-mode" ];
+            actions = [ "eshell-syntax-highlighting-global-mode" ];
+          }
+        ];
       };
 
       fish-completion = {
         enable = true;
-        hook = [ "(eshell-mode . fish-completion-mode)" ];
+        nhook = [
+          {
+            names = [ "eshell-mode" ];
+            actions = [ "'fish-completion-mode" ];
+          }
+        ];
       };
 
       eshell-git-prompt = {

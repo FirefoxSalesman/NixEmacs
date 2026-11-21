@@ -14,9 +14,20 @@ in
 
   config.programs.emacs.init.usePackage.citre = lib.mkIf init.ide.citre.enable {
     enable = true;
-    hook = [
-      "(prog-mode . citre-mode)"
-      (if init.keybinds.doomEscape.enable then "(doom-escape . citre-peek-abort)" else "")
+    nhook = [
+      {
+        names = [ "prog-mode" ];
+        actions = [ "'citre-mode" ];
+      }
+      (
+        if init.keybinds.doomEscape.enable then
+          {
+            names = [ "doom-escape" ];
+            actions = [ "'citre-peek-abort" ];
+          }
+        else
+          ""
+      )
     ];
     setopt = {
       citre-prompt-language-for-ctags-command = lib.mkDefault true;

@@ -11,8 +11,11 @@ in
     enable = true;
     package = epkgs: epkgs.doom-utils;
     bind."C-g" = "doom/escape";
-    ghookf = lib.mkIf keybinds.evil.enable [
-      ''('evil-mode (lambda () (general-def 'normal "<escape>" 'doom/escape)))''
+    nhook = lib.mkIf keybinds.evil.enable [
+      {
+        names = [ "evil-mode" ];
+        actions = [ ''(lambda () (general-def 'normal "<escape>" 'doom/escape))'' ];
+      }
     ];
   };
 }

@@ -25,9 +25,15 @@ in
     usePackage = {
       corfu = {
         enable = true;
-        hook = [
-          "(on-first-buffer . global-corfu-mode)"
-          (lib.mkIf completions.corfu.wantMinibuffer "(minibuffer-setup . corfu-enable-in-minibuffer)")
+        nhook = [
+          {
+            names = [ "on-first-buffer" ];
+            actions = [ "'global-corfu-mode" ];
+          }
+          (lib.mkIf completions.corfu.wantMinibuffer {
+            names = [ "minibuffer-setup" ];
+            actions = [ "'corfu-enable-in-minibuffer" ];
+          })
         ];
         setopt = {
           corfu-cycle = true;
@@ -63,13 +69,23 @@ in
 
       corfu-popupinfo = {
         enable = true;
-        hook = [ "(corfu-mode . corfu-popupinfo-mode)" ];
+        nhook = [
+          {
+            names = [ "corfu-mode" ];
+            actions = [ "'corfu-popupinfo-mode" ];
+          }
+        ];
       };
 
       corfu-prescient = lib.mkIf completions.prescient {
         enable = true;
         defer = true;
-        hook = [ "(corfu-mode . corfu-prescient-mode)" ];
+        nhook = [
+          {
+            names = [ "corfu-mode" ];
+            actions = [ "'corfu-prescient-mode" ];
+          }
+        ];
         setopt.corfu-prescient-completion-styles = lib.mkDefault (
           if completions.orderless then
             [

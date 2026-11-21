@@ -17,7 +17,12 @@ in
     usePackage = {
       ivy = {
         enable = true;
-        hook = [ "(on-first-input . ivy-mode)" ];
+        nhook = [
+          {
+            names = [ "on-first-input" ];
+            actions = [ "'ivy-mode" ];
+          }
+        ];
         setopt = {
           ivy-sort-max-size = lib.mkDefault 7500;
           ivy-height = lib.mkDefault 17;
@@ -146,12 +151,22 @@ in
 
       ivy-prescient = lib.mkIf completions.prescient {
         enable = true;
-        hook = [ "(ivy-mode . ivy-prescient-mode)" ];
+        nhook = [
+          {
+            names = [ "ivy-mode" ];
+            actions = [ "'ivy-prescient-mode" ];
+          }
+        ];
       };
 
       ivy-posframe = lib.mkIf completions.ivy.posframe {
         enable = true;
-        hook = [ "(ivy-mode . ivy-posframe-mode)" ];
+        nhook = [
+          {
+            names = [ "ivy-mode" ];
+            actions = [ "'ivy-posframe-mode" ];
+          }
+        ];
         setopt = {
           ivy-posframe-border-width = lib.mkDefault 10;
           ivy-posframe-parameters = lib.mkDefault [

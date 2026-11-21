@@ -12,7 +12,12 @@ in
     usePackage = {
       god-mode = {
         enable = true;
-        hook = lib.mkIf (!keybinds.evil.enable) [ "(on-init-ui-hook . god-mode-all)" ];
+        nhook = lib.mkIf (!keybinds.evil.enable) [
+          {
+            names = [ "on-init-ui-hook" ];
+            actions = [ "'god-mode-all" ];
+          }
+        ];
         setopt = {
           god-exempt-major-modes = false;
           god-exempt-predicates = false;
